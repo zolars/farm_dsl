@@ -1,0 +1,50 @@
+/* XPECT_SETUP uk.ac.kcl.farm.xpect.XPectTests  END_SETUP */
+/*
+XPECT generated file text.farm.xt.txt ---
+Program contains:
+
+- 2 turn commands
+- 2 move commands
+- 1 top-level loops
+- 2 variable declarations
+---
+
+XPECT generated file TextFarm.java ---
+import uk.ac.kcl.farm.library.*
+
+public class TextFarm {
+
+	public static void main (String[] args) {
+		FarmFrame tf = new FarmFrame();
+		
+		Farm t = new Farm(tf) {
+			@Override
+			protected void run() {
+				for (int i0 = 0; i0 < (10 + 3) * 7; i0++) {
+					moveForward(10);
+					rotate(-90.0);
+					moveBackward(10);
+					rotate(20.0);					
+				}
+			}
+		};
+		
+		t.run();
+	}
+}
+---
+*/
+var loopCounter = 10
+
+// XPECT scope at loopCounter --> !stepCount, loopCounter, ... 
+(loopCounter + 3) * 7 times do
+	var stepCount = 10
+
+	// XPECT scope at stepCount --> stepCount, loopCounter, ... 
+	forward (stepCount)
+	turn left by 90.0 degrees
+	// XPECT scope at stepCount --> stepCount, loopCounter, ... 
+	backward (stepCount)
+	turn right by 20.0 degrees
+end
+

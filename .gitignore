@@ -1,0 +1,6 @@
+# xtext generated files
+bin
+test-bin
+
+# MacOS system files
+.DS_Store
