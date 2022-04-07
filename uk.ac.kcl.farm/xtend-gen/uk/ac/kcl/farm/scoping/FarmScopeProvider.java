@@ -11,9 +11,9 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import uk.ac.kcl.farm.farm.FarmProgram;
-import uk.ac.kcl.farm.farm.IntExpression;
-import uk.ac.kcl.farm.farm.IntVarExpression;
 import uk.ac.kcl.farm.farm.LoopStatement;
+import uk.ac.kcl.farm.farm.RealExpression;
+import uk.ac.kcl.farm.farm.RealVarExpression;
 import uk.ac.kcl.farm.farm.VariableDeclaration;
 
 /**
@@ -24,11 +24,11 @@ import uk.ac.kcl.farm.farm.VariableDeclaration;
  */
 @SuppressWarnings("all")
 public class FarmScopeProvider extends AbstractDeclarativeScopeProvider {
-  public IScope scope_IntVarExpression_var(final IntVarExpression context, final EReference ref) {
+  public IScope scope_IntVarExpression_var(final RealVarExpression context, final EReference ref) {
     return this.visibleVariablesScope(context);
   }
   
-  protected IScope _visibleVariablesScope(final IntExpression ip) {
+  protected IScope _visibleVariablesScope(final RealExpression ip) {
     return this.visibleVariablesScope(ip.eContainer());
   }
   
@@ -51,10 +51,10 @@ public class FarmScopeProvider extends AbstractDeclarativeScopeProvider {
   public IScope visibleVariablesScope(final EObject ls) {
     if (ls instanceof LoopStatement) {
       return _visibleVariablesScope((LoopStatement)ls);
+    } else if (ls instanceof RealExpression) {
+      return _visibleVariablesScope((RealExpression)ls);
     } else if (ls instanceof FarmProgram) {
       return _visibleVariablesScope((FarmProgram)ls);
-    } else if (ls instanceof IntExpression) {
-      return _visibleVariablesScope((IntExpression)ls);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(ls).toString());

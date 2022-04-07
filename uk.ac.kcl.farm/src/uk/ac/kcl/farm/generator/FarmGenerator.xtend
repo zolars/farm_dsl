@@ -8,17 +8,17 @@ import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
 import uk.ac.kcl.farm.farm.LoopStatement
-import uk.ac.kcl.farm.farm.MoveStatement
-import uk.ac.kcl.farm.farm.TurnStatement
+// import uk.ac.kcl.farm.farm.MoveStatement
+// import uk.ac.kcl.farm.farm.TurnStatement
 import uk.ac.kcl.farm.farm.FarmProgram
 import uk.ac.kcl.farm.farm.VariableDeclaration
 import uk.ac.kcl.farm.farm.Statement
-import uk.ac.kcl.farm.farm.TurnCommand
-import uk.ac.kcl.farm.farm.IntExpression
+// import uk.ac.kcl.farm.farm.TurnCommand
+import uk.ac.kcl.farm.farm.RealExpression
 import uk.ac.kcl.farm.farm.Addition
 import uk.ac.kcl.farm.farm.Multiplication
-import uk.ac.kcl.farm.farm.IntLiteral
-import uk.ac.kcl.farm.farm.IntVarExpression
+import uk.ac.kcl.farm.farm.RealLiteral
+import uk.ac.kcl.farm.farm.RealVarExpression
 
 /**
  * Generates code from your model files on save.
@@ -48,8 +48,6 @@ class FarmGenerator extends AbstractGenerator {
 	def String doGenerateStats(FarmProgram program) '''
 		Program contains:
 		
-		- «program.eAllContents.filter(TurnStatement).size» turn commands
-		- «program.eAllContents.filter(MoveStatement).size» move commands
 		- «program.statements.filter(LoopStatement).size» top-level loops
 		- «program.eAllContents.filter(VariableDeclaration).size» variable declarations
 	'''
@@ -83,14 +81,17 @@ class FarmGenerator extends AbstractGenerator {
 	}
 	
 	dispatch def String generateJavaStatement(Statement stmt, Environment env) ''''''
+	
+	/* 
 	dispatch def String generateJavaStatement(MoveStatement stmt, Environment env) '''move«stmt.command.getName.toFirstUpper»(«stmt.steps.generateJavaExpression»);'''
 	dispatch def String generateJavaStatement(TurnStatement stmt, Environment env) '''rotate(«if (stmt.command === TurnCommand.LEFT) {'''-'''}»«stmt.degrees»);'''
+
 	dispatch def String generateJavaStatement(LoopStatement stmt, Environment env) {
 		val freshVarName = env.getFreshVarName
 		
 		val result = 
 		'''
-			for (int «freshVarName» = 0; «freshVarName» < «stmt.count.generateJavaExpression»; «freshVarName»++) {
+			while ( «freshVarName» ) {
 				«stmt.statements.map[generateJavaStatement(env)].join('\n')»
 			}
 		'''
@@ -99,12 +100,14 @@ class FarmGenerator extends AbstractGenerator {
 		
 		result
 	}
+
+	*/
 	
-	dispatch def String generateJavaExpression(IntExpression exp) ''''''
+	dispatch def String generateJavaExpression(RealExpression exp) ''''''
 	dispatch def String generateJavaExpression(Addition exp) '''
 		(«exp.left.generateJavaExpression»«FOR idx: (0..exp.operator.size-1)» «exp.operator.get(idx)» «exp.right.get(idx).generateJavaExpression»«ENDFOR»)'''
 	dispatch def String generateJavaExpression(Multiplication exp) '''
 		«exp.left.generateJavaExpression»«FOR idx: (0..exp.operator.size-1)» «exp.operator.get(idx)» «exp.right.get(idx).generateJavaExpression»«ENDFOR»'''
-	dispatch def String generateJavaExpression(IntLiteral exp) '''«exp.^val»'''
-	dispatch def String generateJavaExpression(IntVarExpression exp) '''«exp.^var.value»'''
+	dispatch def String generateJavaExpression(RealLiteral exp) '''«exp.^val»'''
+	dispatch def String generateJavaExpression(RealVarExpression exp) '''«exp.^var.value»'''
 }

@@ -3,8 +3,7 @@
 XPECT generated file text.farm.xt.txt ---
 Program contains:
 
-- 2 turn commands
-- 2 move commands
+
 - 1 top-level loops
 - 2 variable declarations
 ---
@@ -20,10 +19,10 @@ public class TextFarm {
 		Farm t = new Farm(tf) {
 			@Override
 			protected void run() {
-				for (int i0 = 0; i0 < (10 + 3) * 7; i0++) {
-					moveForward(10);
+				for (int i0 = 0; i0 < (10.0 + 3.0) * 7.0; i0++) {
+					moveForward(10.0);
 					rotate(-90.0);
-					moveBackward(10);
+					moveBackward(10.0);
 					rotate(20.0);					
 				}
 			}
@@ -34,11 +33,13 @@ public class TextFarm {
 }
 ---
 */
-var loopCounter = 10
+var loopCounter = 10.0
+
+define Humidity
 
 // XPECT scope at loopCounter --> !stepCount, loopCounter, ... 
-(loopCounter + 3) * 7 times do
-	var stepCount = 10
+(loopCounter + 3.0) * 7.0 times do
+	var stepCount = 10.0
 
 	// XPECT scope at stepCount --> stepCount, loopCounter, ... 
 	forward (stepCount)

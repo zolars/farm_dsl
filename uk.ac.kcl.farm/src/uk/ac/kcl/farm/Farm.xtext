@@ -5,64 +5,191 @@ generate farm "http://www.ac.uk/kcl/farm/Farm"
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 FarmProgram:
-	statements += Statement*
+	statements += (Class | AttributeDeclaration)*
 ;
-	
+
+// General statement
+
+Class:
+	Crop |
+	Machine |
+	Field |
+	Mission
+;
+
+Param:
+	"crop" param=ID |
+	"machine" param=ID |
+	"field" param=ID |
+	"mission" param=ID |
+	"real" param=ID |
+	"string" param=ID
+;
+
+TypeName:
+	"null" | "real" | "boolean" | "string"
+;
+
 Statement:
-	MoveStatement |
-	TurnStatement |
-	LoopStatement |
-	VariableDeclaration
+	VariableDeclaration |
+	LoopStatement
 ;
 
 VariableDeclaration:
-	"var" name=ID "=" value=INT
+	"var" name=ID "=" value=VariableExpression
+;
+
+VariableExpression:
+	RealExpression | ConditionExpression
 ;
 
 LoopStatement:
-	count = Addition "times" "do"
-	  statements += Statement+
-	"end"
+	"while" "(" condition=ConditionExpression ")" "{"
+		statements += Statement+
+	"}"
 ;
 
-MoveStatement:
-	command = MoveCommand "(" steps = Addition ")"
+//ReturnStatement:
+//	"return" "(" value=(VariableExpression | [VariableDeclaration]) ")" 
+//;
+
+// MoveStatement:
+// 	command = MoveCommand "(" steps = Addition ")"
+// ;
+
+// enum MoveCommand:
+// 	forward | backward
+// ;
+
+// TurnStatement:
+// 	"turn" command = TurnCommand "by" degrees = REAL "degrees"
+// ;
+
+// enum TurnCommand:
+// 	left | right
+// ;
+
+RealExpression:
+	Addition
 ;
 
-enum MoveCommand:
-	forward | backward
-;
-
-TurnStatement:
-	"turn" command = TurnCommand "by" degrees = REAL "degrees"
-;
-
-enum TurnCommand:
-	left | right
-;
-
-Addition returns IntExpression:
+Addition returns RealExpression:
 	Multiplication ({Addition.left = current} operator+=("+"|"-") right+=Multiplication)*
 ;
 
-Multiplication returns IntExpression:
-	Primary ({Multiplication.left = current} operator+=("*"|"/") right+=Primary)*
+Multiplication returns RealExpression:
+	RealPrimary ({Multiplication.left = current} operator+=("*"|"/") right+=RealPrimary)*
 ;
 
-Primary returns IntExpression:
-	IntLiteral |
-	IntVarExpression |
+RealPrimary returns RealExpression:
+	RealLiteral |
+	RealVarExpression |
 	"(" Addition ")"
 ;
 
-IntLiteral:
-	val = INT
+RealLiteral:
+	val = REAL
 ;
 
-IntVarExpression:
+RealVarExpression:
 	var = [VariableDeclaration]
 ;
 
 REAL returns ecore::EFloat hidden():
 	INT? "." INT
-; 
+;
+
+ConditionExpression:
+	OrExpression
+;
+
+OrExpression returns ConditionExpression:
+	AndExpression ({OrExpression.left = current} operator+=("||") right+=AndExpression)*
+;
+
+AndExpression returns ConditionExpression:
+	ComparisonExpression ({AndExpression.left = current} operator+=("&&") right+=ComparisonExpression)*
+;
+
+ComparisonExpression returns ConditionExpression:
+    BooleanPrimary ({ComparisonExpression.left=current} operator=("<"|"<="|"=="|">="|">") right=BooleanPrimary)*
+;
+
+BooleanPrimary returns ConditionExpression:
+	BooleanLiteral | "[" OrExpression "]"  | BooleanVarExpression
+;
+
+BooleanLiteral:
+	val="true" | "false"
+;
+
+BooleanVarExpression:
+ 	var = [VariableDeclaration]
+;
+
+// Define codes
+AttributeDeclaration:
+	"define" name=ID
+;
+
+// Crop code block
+Crop:
+	"crop" crop=ID "{"
+		"name" ":" cropName=STRING
+		"stage" ":" "["
+			statements += CropStages
+		"]"
+	"}"
+;
+
+CropStages:
+	elements += CropStage ("," elements += CropStage)* 
+;
+
+CropStage:
+	"{"	
+		"name" ":" name=STRING
+		"timeConsumed" ":" timeConsumend=RealExpression
+		elements += CropAttributes*
+	"}"
+;
+
+CropAttributes:
+	type=[AttributeDeclaration] ":" value=RealExpression
+;
+
+// Machine code block
+Machine:
+	"machine" name=ID "{"
+		"name" ":" machineName=STRING
+		"ip" ":" ip=IP
+		statements += Task+
+	"}"
+;
+
+IP:
+	(INT '.' (INT '.' (INT '.' (INT))))
+;
+
+
+// Field code block
+Field:
+	"field" name=ID "{"
+		"field"
+	"}"
+;
+
+// Main code block
+Mission:
+	"mission" name=ID "{"
+		statements += (Statement | Task)+
+	"}"
+;
+
+// Task code block
+Task:
+	"task" name=ID "(" (parmas+=Param ("," parmas+=Param)*)? ")" ":" typeName=TypeName "{"
+		statements += Statement*
+	"}"
+;
+

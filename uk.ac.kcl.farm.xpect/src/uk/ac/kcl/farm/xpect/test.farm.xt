@@ -1,7 +1,87 @@
 /* XPECT_SETUP uk.ac.kcl.farm.xpect.XPectTests  END_SETUP */
-10 times do
-	forward (9)
-	turn left by 90.0 degrees
-	backward (10)
-	turn right by 20.0 degrees
-end
+
+define humidity
+define temperature
+
+crop crop_A {
+	name : "tomato"
+	stage : [
+ 		{
+            name : "Sprout"
+            timeConsumed : 20.0
+
+            temperature : 20.0
+            humidity : 90.0
+        },
+        {
+            name : "Seedling"
+            timeConsumed : 20.0
+
+            temperature : 21.0
+            humidity : 80.0
+        },
+        {
+            name : "Vegetative"
+            timeConsumed : 20.0
+
+            temperature : 26.0
+            humidity : 12.0
+        },
+        {
+            name : "Budding"
+            timeConsumed : 5.0
+            
+            temperature : 26.0
+            humidity : 60.0
+        },
+        {
+            name : "Flowering"
+            timeConsumed : 5.0
+            
+            temperature : 26.0
+            humidity : 60.0
+        },
+        {
+            name : "Ripening"
+            timeConsumed : 10.0
+            
+            temperature : 20.0
+            humidity : 30.0 + 67.1
+        }
+	]
+}
+
+machine humidityController_1 {
+	name : "Humidity Controller"
+	ip : 192.168.sasdasd1.10
+	
+    task getHumidity() : real{
+        // var humidityAmount = communication("get", 0)
+        // return(humidityAmount)
+    }
+
+    task setHumidity(real humidityAmount) :real {
+        // var timeConsumed = communication("add", humidityAmount)
+        // return(timeConsumed)
+    }
+
+}
+
+mission qwe {
+	task testParams(real number, crop cropOne) : null {
+		
+	}
+	
+	var loopCounter = 10.0
+	
+	var condition = false
+	
+	while ([false && true] || true) {
+		var a = 1.0
+		var b = 2.0
+		var c = false
+		var d = (11.0 + 13.0) * 23.0
+		var e = [false || true] && [true && c]
+	}
+	
+}
