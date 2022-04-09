@@ -9,24 +9,24 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Task</b></em>'.
+ * A representation of the model object '<em><b>Task Statement</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.farm.farm.Task#getName <em>Name</em>}</li>
- *   <li>{@link uk.ac.kcl.farm.farm.Task#getParmas <em>Parmas</em>}</li>
- *   <li>{@link uk.ac.kcl.farm.farm.Task#getTypeName <em>Type Name</em>}</li>
- *   <li>{@link uk.ac.kcl.farm.farm.Task#getStatements <em>Statements</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.TaskStatement#getName <em>Name</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.TaskStatement#getParmas <em>Parmas</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.TaskStatement#getTypeName <em>Type Name</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.TaskStatement#getStatements <em>Statements</em>}</li>
  * </ul>
  *
- * @see uk.ac.kcl.farm.farm.FarmPackage#getTask()
+ * @see uk.ac.kcl.farm.farm.FarmPackage#getTaskStatement()
  * @model
  * @generated
  */
-public interface Task extends EObject
+public interface TaskStatement extends EObject
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -34,14 +34,14 @@ public interface Task extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
-   * @see uk.ac.kcl.farm.farm.FarmPackage#getTask_Name()
+   * @see uk.ac.kcl.farm.farm.FarmPackage#getTaskStatement_Name()
    * @model
    * @generated
    */
   String getName();
 
   /**
-   * Sets the value of the '{@link uk.ac.kcl.farm.farm.Task#getName <em>Name</em>}' attribute.
+   * Sets the value of the '{@link uk.ac.kcl.farm.farm.TaskStatement#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Name</em>' attribute.
@@ -56,7 +56,7 @@ public interface Task extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Parmas</em>' containment reference list.
-   * @see uk.ac.kcl.farm.farm.FarmPackage#getTask_Parmas()
+   * @see uk.ac.kcl.farm.farm.FarmPackage#getTaskStatement_Parmas()
    * @model containment="true"
    * @generated
    */
@@ -68,14 +68,14 @@ public interface Task extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Type Name</em>' attribute.
    * @see #setTypeName(String)
-   * @see uk.ac.kcl.farm.farm.FarmPackage#getTask_TypeName()
+   * @see uk.ac.kcl.farm.farm.FarmPackage#getTaskStatement_TypeName()
    * @model
    * @generated
    */
   String getTypeName();
 
   /**
-   * Sets the value of the '{@link uk.ac.kcl.farm.farm.Task#getTypeName <em>Type Name</em>}' attribute.
+   * Sets the value of the '{@link uk.ac.kcl.farm.farm.TaskStatement#getTypeName <em>Type Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Type Name</em>' attribute.
@@ -90,10 +90,10 @@ public interface Task extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Statements</em>' containment reference list.
-   * @see uk.ac.kcl.farm.farm.FarmPackage#getTask_Statements()
+   * @see uk.ac.kcl.farm.farm.FarmPackage#getTaskStatement_Statements()
    * @model containment="true"
    * @generated
    */
   EList<EObject> getStatements();
 
-} // Task
+} // TaskStatement

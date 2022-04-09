@@ -23,6 +23,7 @@ import uk.ac.kcl.farm.farm.CropStage;
 import uk.ac.kcl.farm.farm.CropStages;
 import uk.ac.kcl.farm.farm.Divide;
 import uk.ac.kcl.farm.farm.ElseJudgeStatement;
+import uk.ac.kcl.farm.farm.Entity;
 import uk.ac.kcl.farm.farm.Equal;
 import uk.ac.kcl.farm.farm.ExecuteStatement;
 import uk.ac.kcl.farm.farm.Expression;
@@ -30,9 +31,8 @@ import uk.ac.kcl.farm.farm.FarmPackage;
 import uk.ac.kcl.farm.farm.FarmProgram;
 import uk.ac.kcl.farm.farm.Field;
 import uk.ac.kcl.farm.farm.FieldMonitor;
-import uk.ac.kcl.farm.farm.GetCropValueFunction;
-import uk.ac.kcl.farm.farm.GetFieldValueFunction;
 import uk.ac.kcl.farm.farm.GetStageFunction;
+import uk.ac.kcl.farm.farm.GetValueFunction;
 import uk.ac.kcl.farm.farm.GreaterThan;
 import uk.ac.kcl.farm.farm.GreaterThanOrEqual;
 import uk.ac.kcl.farm.farm.JudgeStatement;
@@ -53,7 +53,7 @@ import uk.ac.kcl.farm.farm.ReportFunction;
 import uk.ac.kcl.farm.farm.ReturnStatement;
 import uk.ac.kcl.farm.farm.SetFieldValueFunction;
 import uk.ac.kcl.farm.farm.Statement;
-import uk.ac.kcl.farm.farm.Task;
+import uk.ac.kcl.farm.farm.TaskStatement;
 import uk.ac.kcl.farm.farm.UnaryExpression;
 import uk.ac.kcl.farm.farm.Variable;
 import uk.ac.kcl.farm.farm.WaitFunction;
@@ -167,6 +167,11 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
         return createBuiltinFunctionAdapter();
       }
       @Override
+      public Adapter caseEntity(Entity object)
+      {
+        return createEntityAdapter();
+      }
+      @Override
       public Adapter caseReportFunction(ReportFunction object)
       {
         return createReportFunctionAdapter();
@@ -182,14 +187,9 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
         return createCountStageFunctionAdapter();
       }
       @Override
-      public Adapter caseGetCropValueFunction(GetCropValueFunction object)
+      public Adapter caseGetValueFunction(GetValueFunction object)
       {
-        return createGetCropValueFunctionAdapter();
-      }
-      @Override
-      public Adapter caseGetFieldValueFunction(GetFieldValueFunction object)
-      {
-        return createGetFieldValueFunctionAdapter();
+        return createGetValueFunctionAdapter();
       }
       @Override
       public Adapter caseSetFieldValueFunction(SetFieldValueFunction object)
@@ -272,9 +272,9 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
         return createMissionAdapter();
       }
       @Override
-      public Adapter caseTask(Task object)
+      public Adapter caseTaskStatement(TaskStatement object)
       {
-        return createTaskAdapter();
+        return createTaskStatementAdapter();
       }
       @Override
       public Adapter caseReturnStatement(ReturnStatement object)
@@ -514,6 +514,21 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.Entity <em>Entity</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see uk.ac.kcl.farm.farm.Entity
+   * @generated
+   */
+  public Adapter createEntityAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.ReportFunction <em>Report Function</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -559,31 +574,16 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.GetCropValueFunction <em>Get Crop Value Function</em>}'.
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.GetValueFunction <em>Get Value Function</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see uk.ac.kcl.farm.farm.GetCropValueFunction
+   * @see uk.ac.kcl.farm.farm.GetValueFunction
    * @generated
    */
-  public Adapter createGetCropValueFunctionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.GetFieldValueFunction <em>Get Field Value Function</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see uk.ac.kcl.farm.farm.GetFieldValueFunction
-   * @generated
-   */
-  public Adapter createGetFieldValueFunctionAdapter()
+  public Adapter createGetValueFunctionAdapter()
   {
     return null;
   }
@@ -829,16 +829,16 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.Task <em>Task</em>}'.
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.TaskStatement <em>Task Statement</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see uk.ac.kcl.farm.farm.Task
+   * @see uk.ac.kcl.farm.farm.TaskStatement
    * @generated
    */
-  public Adapter createTaskAdapter()
+  public Adapter createTaskStatementAdapter()
   {
     return null;
   }

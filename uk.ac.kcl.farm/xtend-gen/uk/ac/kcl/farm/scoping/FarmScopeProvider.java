@@ -10,9 +10,11 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import uk.ac.kcl.farm.farm.ExecuteStatement;
 import uk.ac.kcl.farm.farm.Expression;
 import uk.ac.kcl.farm.farm.FarmProgram;
 import uk.ac.kcl.farm.farm.LoopStatement;
+import uk.ac.kcl.farm.farm.TaskStatement;
 import uk.ac.kcl.farm.farm.Variable;
 
 /**
@@ -35,10 +37,6 @@ public class FarmScopeProvider extends AbstractDeclarativeScopeProvider {
     return Scopes.scopeFor(Iterables.<Variable>filter(tp.getStatements(), Variable.class));
   }
   
-  protected IScope _visibleVariablesScope(final LoopStatement ls) {
-    return this.internalVisibleVariablesScope(ls.eContainer());
-  }
-  
   protected IScope _internalVisibleVariablesScope(final FarmProgram tp) {
     return Scopes.scopeFor(Iterables.<Variable>filter(tp.getStatements(), Variable.class));
   }
@@ -47,24 +45,34 @@ public class FarmScopeProvider extends AbstractDeclarativeScopeProvider {
     return Scopes.scopeFor(Iterables.<Variable>filter(ls.getStatements(), Variable.class), this.internalVisibleVariablesScope(ls.eContainer()));
   }
   
-  public IScope visibleVariablesScope(final EObject ls) {
-    if (ls instanceof LoopStatement) {
-      return _visibleVariablesScope((LoopStatement)ls);
-    } else if (ls instanceof Expression) {
-      return _visibleVariablesScope((Expression)ls);
-    } else if (ls instanceof FarmProgram) {
-      return _visibleVariablesScope((FarmProgram)ls);
+  protected IScope _internalVisibleVariablesScope(final TaskStatement ls) {
+    return Scopes.scopeFor(Iterables.<Variable>filter(ls.getStatements(), Variable.class), this.internalVisibleVariablesScope(ls.eContainer()));
+  }
+  
+  protected IScope _internalVisibleVariablesScope(final ExecuteStatement ls) {
+    return Scopes.scopeFor(Iterables.<Variable>filter(ls.getStatements(), Variable.class), this.internalVisibleVariablesScope(ls.eContainer()));
+  }
+  
+  public IScope visibleVariablesScope(final EObject ip) {
+    if (ip instanceof Expression) {
+      return _visibleVariablesScope((Expression)ip);
+    } else if (ip instanceof FarmProgram) {
+      return _visibleVariablesScope((FarmProgram)ip);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(ls).toString());
+        Arrays.<Object>asList(ip).toString());
     }
   }
   
   public IScope internalVisibleVariablesScope(final EObject ls) {
     if (ls instanceof LoopStatement) {
       return _internalVisibleVariablesScope((LoopStatement)ls);
+    } else if (ls instanceof ExecuteStatement) {
+      return _internalVisibleVariablesScope((ExecuteStatement)ls);
     } else if (ls instanceof FarmProgram) {
       return _internalVisibleVariablesScope((FarmProgram)ls);
+    } else if (ls instanceof TaskStatement) {
+      return _internalVisibleVariablesScope((TaskStatement)ls);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(ls).toString());

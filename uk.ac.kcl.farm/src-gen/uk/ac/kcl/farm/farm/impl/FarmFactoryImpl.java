@@ -24,6 +24,7 @@ import uk.ac.kcl.farm.farm.CropStage;
 import uk.ac.kcl.farm.farm.CropStages;
 import uk.ac.kcl.farm.farm.Divide;
 import uk.ac.kcl.farm.farm.ElseJudgeStatement;
+import uk.ac.kcl.farm.farm.Entity;
 import uk.ac.kcl.farm.farm.Equal;
 import uk.ac.kcl.farm.farm.ExecuteStatement;
 import uk.ac.kcl.farm.farm.Expression;
@@ -32,9 +33,8 @@ import uk.ac.kcl.farm.farm.FarmPackage;
 import uk.ac.kcl.farm.farm.FarmProgram;
 import uk.ac.kcl.farm.farm.Field;
 import uk.ac.kcl.farm.farm.FieldMonitor;
-import uk.ac.kcl.farm.farm.GetCropValueFunction;
-import uk.ac.kcl.farm.farm.GetFieldValueFunction;
 import uk.ac.kcl.farm.farm.GetStageFunction;
+import uk.ac.kcl.farm.farm.GetValueFunction;
 import uk.ac.kcl.farm.farm.GreaterThan;
 import uk.ac.kcl.farm.farm.GreaterThanOrEqual;
 import uk.ac.kcl.farm.farm.JudgeStatement;
@@ -55,7 +55,7 @@ import uk.ac.kcl.farm.farm.ReportFunction;
 import uk.ac.kcl.farm.farm.ReturnStatement;
 import uk.ac.kcl.farm.farm.SetFieldValueFunction;
 import uk.ac.kcl.farm.farm.Statement;
-import uk.ac.kcl.farm.farm.Task;
+import uk.ac.kcl.farm.farm.TaskStatement;
 import uk.ac.kcl.farm.farm.UnaryExpression;
 import uk.ac.kcl.farm.farm.Variable;
 import uk.ac.kcl.farm.farm.WaitFunction;
@@ -121,11 +121,11 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
       case FarmPackage.JUDGE_STATEMENT: return createJudgeStatement();
       case FarmPackage.ELSE_JUDGE_STATEMENT: return createElseJudgeStatement();
       case FarmPackage.BUILTIN_FUNCTION: return createBuiltinFunction();
+      case FarmPackage.ENTITY: return createEntity();
       case FarmPackage.REPORT_FUNCTION: return createReportFunction();
       case FarmPackage.GET_STAGE_FUNCTION: return createGetStageFunction();
       case FarmPackage.COUNT_STAGE_FUNCTION: return createCountStageFunction();
-      case FarmPackage.GET_CROP_VALUE_FUNCTION: return createGetCropValueFunction();
-      case FarmPackage.GET_FIELD_VALUE_FUNCTION: return createGetFieldValueFunction();
+      case FarmPackage.GET_VALUE_FUNCTION: return createGetValueFunction();
       case FarmPackage.SET_FIELD_VALUE_FUNCTION: return createSetFieldValueFunction();
       case FarmPackage.PLANT_FUNCTION: return createPlantFunction();
       case FarmPackage.MOVE_FUNCTION: return createMoveFunction();
@@ -142,7 +142,7 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
       case FarmPackage.FIELD: return createField();
       case FarmPackage.FIELD_MONITOR: return createFieldMonitor();
       case FarmPackage.MISSION: return createMission();
-      case FarmPackage.TASK: return createTask();
+      case FarmPackage.TASK_STATEMENT: return createTaskStatement();
       case FarmPackage.RETURN_STATEMENT: return createReturnStatement();
       case FarmPackage.EXECUTE_STATEMENT: return createExecuteStatement();
       case FarmPackage.CONDITION_OR_EXPRESSION: return createConditionOrExpression();
@@ -278,6 +278,18 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
    * @generated
    */
   @Override
+  public Entity createEntity()
+  {
+    EntityImpl entity = new EntityImpl();
+    return entity;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public ReportFunction createReportFunction()
   {
     ReportFunctionImpl reportFunction = new ReportFunctionImpl();
@@ -314,22 +326,10 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
    * @generated
    */
   @Override
-  public GetCropValueFunction createGetCropValueFunction()
+  public GetValueFunction createGetValueFunction()
   {
-    GetCropValueFunctionImpl getCropValueFunction = new GetCropValueFunctionImpl();
-    return getCropValueFunction;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public GetFieldValueFunction createGetFieldValueFunction()
-  {
-    GetFieldValueFunctionImpl getFieldValueFunction = new GetFieldValueFunctionImpl();
-    return getFieldValueFunction;
+    GetValueFunctionImpl getValueFunction = new GetValueFunctionImpl();
+    return getValueFunction;
   }
 
   /**
@@ -530,10 +530,10 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
    * @generated
    */
   @Override
-  public Task createTask()
+  public TaskStatement createTaskStatement()
   {
-    TaskImpl task = new TaskImpl();
-    return task;
+    TaskStatementImpl taskStatement = new TaskStatementImpl();
+    return taskStatement;
   }
 
   /**

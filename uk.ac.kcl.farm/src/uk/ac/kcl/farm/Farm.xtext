@@ -62,16 +62,20 @@ BuiltinFunction:
 	ReportFunction | 
 	GetStageFunction |
 	CountStageFunction |
-	GetCropValueFunction |
-	GetFieldValueFunction |
+	GetValueFunction |
 	SetFieldValueFunction |
 	PlantFunction | 
 	MoveFunction |
 	WaitFunction
 ;
 
+
+Entity:
+	Crop | Field | Variable 
+;
+
 ReportFunction hidden():
-	reportCrop=[Crop | ID] | reportField=[Field | ID] ".report(" ")"
+	entity=[Entity]  ".report(" ")"
 ;
 
 GetStageFunction hidden():
@@ -82,12 +86,8 @@ CountStageFunction hidden():
 	countStageCrop=[Crop | ID] ".countStage(" ")"
 ;
 
-GetCropValueFunction hidden():
-	getValueCrop=[Crop | ID] ".getCropValue(" getCropAttribute=STRING ")"
-;
-
-GetFieldValueFunction hidden():
-	getValueField=[Field | ID] ".getFieldValue(" getFieldAttribute=STRING ")"
+GetValueFunction hidden():
+	entity=[Entity] ".getValue(" attribute=STRING ")"
 ;
 
 SetFieldValueFunction hidden():
@@ -211,7 +211,7 @@ Attribute:
 
 // Crop code block
 Crop:
-	"crop" crop=ID "{"
+	"crop" name=ID "{"
 		"name" ":" cropName=STRING
 		"stage" ":" "["
 			statements += CropStages
@@ -257,12 +257,12 @@ FieldMonitor:
 // Main code block
 Mission:
 	"mission" name=ID "{"
-		statements += (Task | ExecuteStatement)+
+		statements += (TaskStatement | ExecuteStatement)+
 	"}"
 ;
 
 // Task code block
-Task:
+TaskStatement:
 	"task" name=ID "(" (parmas+=Param ("," parmas+=Param)*)? ")" ":" typeName=TypeName "{"
 		statements += (Statement | ReturnStatement)*
 	"}"

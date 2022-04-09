@@ -13,8 +13,7 @@ package uk.ac.kcl.farm.farm;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.farm.farm.ReportFunction#getReportCrop <em>Report Crop</em>}</li>
- *   <li>{@link uk.ac.kcl.farm.farm.ReportFunction#getReportField <em>Report Field</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.ReportFunction#getEntity <em>Entity</em>}</li>
  * </ul>
  *
  * @see uk.ac.kcl.farm.farm.FarmPackage#getReportFunction()
@@ -24,47 +23,25 @@ package uk.ac.kcl.farm.farm;
 public interface ReportFunction extends BuiltinFunction
 {
   /**
-   * Returns the value of the '<em><b>Report Crop</b></em>' reference.
+   * Returns the value of the '<em><b>Entity</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Report Crop</em>' reference.
-   * @see #setReportCrop(Crop)
-   * @see uk.ac.kcl.farm.farm.FarmPackage#getReportFunction_ReportCrop()
+   * @return the value of the '<em>Entity</em>' reference.
+   * @see #setEntity(Entity)
+   * @see uk.ac.kcl.farm.farm.FarmPackage#getReportFunction_Entity()
    * @model
    * @generated
    */
-  Crop getReportCrop();
+  Entity getEntity();
 
   /**
-   * Sets the value of the '{@link uk.ac.kcl.farm.farm.ReportFunction#getReportCrop <em>Report Crop</em>}' reference.
+   * Sets the value of the '{@link uk.ac.kcl.farm.farm.ReportFunction#getEntity <em>Entity</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Report Crop</em>' reference.
-   * @see #getReportCrop()
+   * @param value the new value of the '<em>Entity</em>' reference.
+   * @see #getEntity()
    * @generated
    */
-  void setReportCrop(Crop value);
-
-  /**
-   * Returns the value of the '<em><b>Report Field</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Report Field</em>' reference.
-   * @see #setReportField(Field)
-   * @see uk.ac.kcl.farm.farm.FarmPackage#getReportFunction_ReportField()
-   * @model
-   * @generated
-   */
-  Field getReportField();
-
-  /**
-   * Sets the value of the '{@link uk.ac.kcl.farm.farm.ReportFunction#getReportField <em>Report Field</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Report Field</em>' reference.
-   * @see #getReportField()
-   * @generated
-   */
-  void setReportField(Field value);
+  void setEntity(Entity value);
 
 } // ReportFunction

@@ -22,25 +22,25 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import uk.ac.kcl.farm.farm.FarmPackage;
 import uk.ac.kcl.farm.farm.Param;
-import uk.ac.kcl.farm.farm.Task;
+import uk.ac.kcl.farm.farm.TaskStatement;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Task</b></em>'.
+ * An implementation of the model object '<em><b>Task Statement</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.farm.farm.impl.TaskImpl#getName <em>Name</em>}</li>
- *   <li>{@link uk.ac.kcl.farm.farm.impl.TaskImpl#getParmas <em>Parmas</em>}</li>
- *   <li>{@link uk.ac.kcl.farm.farm.impl.TaskImpl#getTypeName <em>Type Name</em>}</li>
- *   <li>{@link uk.ac.kcl.farm.farm.impl.TaskImpl#getStatements <em>Statements</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.impl.TaskStatementImpl#getName <em>Name</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.impl.TaskStatementImpl#getParmas <em>Parmas</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.impl.TaskStatementImpl#getTypeName <em>Type Name</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.impl.TaskStatementImpl#getStatements <em>Statements</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class TaskImpl extends MinimalEObjectImpl.Container implements Task
+public class TaskStatementImpl extends MinimalEObjectImpl.Container implements TaskStatement
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -107,7 +107,7 @@ public class TaskImpl extends MinimalEObjectImpl.Container implements Task
    * <!-- end-user-doc -->
    * @generated
    */
-  protected TaskImpl()
+  protected TaskStatementImpl()
   {
     super();
   }
@@ -120,7 +120,7 @@ public class TaskImpl extends MinimalEObjectImpl.Container implements Task
   @Override
   protected EClass eStaticClass()
   {
-    return FarmPackage.Literals.TASK;
+    return FarmPackage.Literals.TASK_STATEMENT;
   }
 
   /**
@@ -145,7 +145,7 @@ public class TaskImpl extends MinimalEObjectImpl.Container implements Task
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.TASK__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.TASK_STATEMENT__NAME, oldName, name));
   }
 
   /**
@@ -158,7 +158,7 @@ public class TaskImpl extends MinimalEObjectImpl.Container implements Task
   {
     if (parmas == null)
     {
-      parmas = new EObjectContainmentEList<Param>(Param.class, this, FarmPackage.TASK__PARMAS);
+      parmas = new EObjectContainmentEList<Param>(Param.class, this, FarmPackage.TASK_STATEMENT__PARMAS);
     }
     return parmas;
   }
@@ -185,7 +185,7 @@ public class TaskImpl extends MinimalEObjectImpl.Container implements Task
     String oldTypeName = typeName;
     typeName = newTypeName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.TASK__TYPE_NAME, oldTypeName, typeName));
+      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.TASK_STATEMENT__TYPE_NAME, oldTypeName, typeName));
   }
 
   /**
@@ -198,7 +198,7 @@ public class TaskImpl extends MinimalEObjectImpl.Container implements Task
   {
     if (statements == null)
     {
-      statements = new EObjectContainmentEList<EObject>(EObject.class, this, FarmPackage.TASK__STATEMENTS);
+      statements = new EObjectContainmentEList<EObject>(EObject.class, this, FarmPackage.TASK_STATEMENT__STATEMENTS);
     }
     return statements;
   }
@@ -213,9 +213,9 @@ public class TaskImpl extends MinimalEObjectImpl.Container implements Task
   {
     switch (featureID)
     {
-      case FarmPackage.TASK__PARMAS:
+      case FarmPackage.TASK_STATEMENT__PARMAS:
         return ((InternalEList<?>)getParmas()).basicRemove(otherEnd, msgs);
-      case FarmPackage.TASK__STATEMENTS:
+      case FarmPackage.TASK_STATEMENT__STATEMENTS:
         return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -231,13 +231,13 @@ public class TaskImpl extends MinimalEObjectImpl.Container implements Task
   {
     switch (featureID)
     {
-      case FarmPackage.TASK__NAME:
+      case FarmPackage.TASK_STATEMENT__NAME:
         return getName();
-      case FarmPackage.TASK__PARMAS:
+      case FarmPackage.TASK_STATEMENT__PARMAS:
         return getParmas();
-      case FarmPackage.TASK__TYPE_NAME:
+      case FarmPackage.TASK_STATEMENT__TYPE_NAME:
         return getTypeName();
-      case FarmPackage.TASK__STATEMENTS:
+      case FarmPackage.TASK_STATEMENT__STATEMENTS:
         return getStatements();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -254,17 +254,17 @@ public class TaskImpl extends MinimalEObjectImpl.Container implements Task
   {
     switch (featureID)
     {
-      case FarmPackage.TASK__NAME:
+      case FarmPackage.TASK_STATEMENT__NAME:
         setName((String)newValue);
         return;
-      case FarmPackage.TASK__PARMAS:
+      case FarmPackage.TASK_STATEMENT__PARMAS:
         getParmas().clear();
         getParmas().addAll((Collection<? extends Param>)newValue);
         return;
-      case FarmPackage.TASK__TYPE_NAME:
+      case FarmPackage.TASK_STATEMENT__TYPE_NAME:
         setTypeName((String)newValue);
         return;
-      case FarmPackage.TASK__STATEMENTS:
+      case FarmPackage.TASK_STATEMENT__STATEMENTS:
         getStatements().clear();
         getStatements().addAll((Collection<? extends EObject>)newValue);
         return;
@@ -282,16 +282,16 @@ public class TaskImpl extends MinimalEObjectImpl.Container implements Task
   {
     switch (featureID)
     {
-      case FarmPackage.TASK__NAME:
+      case FarmPackage.TASK_STATEMENT__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case FarmPackage.TASK__PARMAS:
+      case FarmPackage.TASK_STATEMENT__PARMAS:
         getParmas().clear();
         return;
-      case FarmPackage.TASK__TYPE_NAME:
+      case FarmPackage.TASK_STATEMENT__TYPE_NAME:
         setTypeName(TYPE_NAME_EDEFAULT);
         return;
-      case FarmPackage.TASK__STATEMENTS:
+      case FarmPackage.TASK_STATEMENT__STATEMENTS:
         getStatements().clear();
         return;
     }
@@ -308,13 +308,13 @@ public class TaskImpl extends MinimalEObjectImpl.Container implements Task
   {
     switch (featureID)
     {
-      case FarmPackage.TASK__NAME:
+      case FarmPackage.TASK_STATEMENT__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case FarmPackage.TASK__PARMAS:
+      case FarmPackage.TASK_STATEMENT__PARMAS:
         return parmas != null && !parmas.isEmpty();
-      case FarmPackage.TASK__TYPE_NAME:
+      case FarmPackage.TASK_STATEMENT__TYPE_NAME:
         return TYPE_NAME_EDEFAULT == null ? typeName != null : !TYPE_NAME_EDEFAULT.equals(typeName);
-      case FarmPackage.TASK__STATEMENTS:
+      case FarmPackage.TASK_STATEMENT__STATEMENTS:
         return statements != null && !statements.isEmpty();
     }
     return super.eIsSet(featureID);
@@ -339,4 +339,4 @@ public class TaskImpl extends MinimalEObjectImpl.Container implements Task
     return result.toString();
   }
 
-} //TaskImpl
+} //TaskStatementImpl

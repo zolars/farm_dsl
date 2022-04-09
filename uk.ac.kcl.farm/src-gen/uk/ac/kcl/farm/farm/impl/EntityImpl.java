@@ -6,45 +6,54 @@ package uk.ac.kcl.farm.farm.impl;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import uk.ac.kcl.farm.farm.Entity;
 import uk.ac.kcl.farm.farm.FarmPackage;
-import uk.ac.kcl.farm.farm.ReportFunction;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Report Function</b></em>'.
+ * An implementation of the model object '<em><b>Entity</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.farm.farm.impl.ReportFunctionImpl#getEntity <em>Entity</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.impl.EntityImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ReportFunctionImpl extends BuiltinFunctionImpl implements ReportFunction
+public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
 {
   /**
-   * The cached value of the '{@link #getEntity() <em>Entity</em>}' reference.
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getEntity()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected Entity entity;
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ReportFunctionImpl()
+  protected EntityImpl()
   {
     super();
   }
@@ -57,7 +66,7 @@ public class ReportFunctionImpl extends BuiltinFunctionImpl implements ReportFun
   @Override
   protected EClass eStaticClass()
   {
-    return FarmPackage.Literals.REPORT_FUNCTION;
+    return FarmPackage.Literals.ENTITY;
   }
 
   /**
@@ -66,29 +75,9 @@ public class ReportFunctionImpl extends BuiltinFunctionImpl implements ReportFun
    * @generated
    */
   @Override
-  public Entity getEntity()
+  public String getName()
   {
-    if (entity != null && entity.eIsProxy())
-    {
-      InternalEObject oldEntity = (InternalEObject)entity;
-      entity = (Entity)eResolveProxy(oldEntity);
-      if (entity != oldEntity)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, FarmPackage.REPORT_FUNCTION__ENTITY, oldEntity, entity));
-      }
-    }
-    return entity;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Entity basicGetEntity()
-  {
-    return entity;
+    return name;
   }
 
   /**
@@ -97,12 +86,12 @@ public class ReportFunctionImpl extends BuiltinFunctionImpl implements ReportFun
    * @generated
    */
   @Override
-  public void setEntity(Entity newEntity)
+  public void setName(String newName)
   {
-    Entity oldEntity = entity;
-    entity = newEntity;
+    String oldName = name;
+    name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.REPORT_FUNCTION__ENTITY, oldEntity, entity));
+      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.ENTITY__NAME, oldName, name));
   }
 
   /**
@@ -115,9 +104,8 @@ public class ReportFunctionImpl extends BuiltinFunctionImpl implements ReportFun
   {
     switch (featureID)
     {
-      case FarmPackage.REPORT_FUNCTION__ENTITY:
-        if (resolve) return getEntity();
-        return basicGetEntity();
+      case FarmPackage.ENTITY__NAME:
+        return getName();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -132,8 +120,8 @@ public class ReportFunctionImpl extends BuiltinFunctionImpl implements ReportFun
   {
     switch (featureID)
     {
-      case FarmPackage.REPORT_FUNCTION__ENTITY:
-        setEntity((Entity)newValue);
+      case FarmPackage.ENTITY__NAME:
+        setName((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -149,8 +137,8 @@ public class ReportFunctionImpl extends BuiltinFunctionImpl implements ReportFun
   {
     switch (featureID)
     {
-      case FarmPackage.REPORT_FUNCTION__ENTITY:
-        setEntity((Entity)null);
+      case FarmPackage.ENTITY__NAME:
+        setName(NAME_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -166,10 +154,27 @@ public class ReportFunctionImpl extends BuiltinFunctionImpl implements ReportFun
   {
     switch (featureID)
     {
-      case FarmPackage.REPORT_FUNCTION__ENTITY:
-        return entity != null;
+      case FarmPackage.ENTITY__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
     }
     return super.eIsSet(featureID);
   }
 
-} //ReportFunctionImpl
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (name: ");
+    result.append(name);
+    result.append(')');
+    return result.toString();
+  }
+
+} //EntityImpl

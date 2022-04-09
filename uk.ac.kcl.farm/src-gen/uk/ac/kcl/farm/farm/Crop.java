@@ -14,7 +14,6 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.farm.farm.Crop#getCrop <em>Crop</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.Crop#getCropName <em>Crop Name</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.Crop#getStatements <em>Statements</em>}</li>
  * </ul>
@@ -23,30 +22,8 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Crop extends uk.ac.kcl.farm.farm.Class
+public interface Crop extends uk.ac.kcl.farm.farm.Class, Entity
 {
-  /**
-   * Returns the value of the '<em><b>Crop</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Crop</em>' attribute.
-   * @see #setCrop(String)
-   * @see uk.ac.kcl.farm.farm.FarmPackage#getCrop_Crop()
-   * @model
-   * @generated
-   */
-  String getCrop();
-
-  /**
-   * Sets the value of the '{@link uk.ac.kcl.farm.farm.Crop#getCrop <em>Crop</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Crop</em>' attribute.
-   * @see #getCrop()
-   * @generated
-   */
-  void setCrop(String value);
-
   /**
    * Returns the value of the '<em><b>Crop Name</b></em>' attribute.
    * <!-- begin-user-doc -->

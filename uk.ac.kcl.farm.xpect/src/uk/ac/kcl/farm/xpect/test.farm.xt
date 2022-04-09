@@ -75,6 +75,7 @@ mission qwe {
 		var qwe = 12.23
 }
 	execute {
+		
 		var loopCounter = 10.0
 	
 		var condition = false

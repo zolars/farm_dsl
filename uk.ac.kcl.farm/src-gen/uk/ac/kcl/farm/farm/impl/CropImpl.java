@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import uk.ac.kcl.farm.farm.Crop;
 import uk.ac.kcl.farm.farm.CropStages;
+import uk.ac.kcl.farm.farm.Entity;
 import uk.ac.kcl.farm.farm.FarmPackage;
 
 /**
@@ -30,7 +31,7 @@ import uk.ac.kcl.farm.farm.FarmPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.farm.farm.impl.CropImpl#getCrop <em>Crop</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.impl.CropImpl#getName <em>Name</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.impl.CropImpl#getCropName <em>Crop Name</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.impl.CropImpl#getStatements <em>Statements</em>}</li>
  * </ul>
@@ -40,24 +41,24 @@ import uk.ac.kcl.farm.farm.FarmPackage;
 public class CropImpl extends ClassImpl implements Crop
 {
   /**
-   * The default value of the '{@link #getCrop() <em>Crop</em>}' attribute.
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getCrop()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected static final String CROP_EDEFAULT = null;
+  protected static final String NAME_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getCrop() <em>Crop</em>}' attribute.
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getCrop()
+   * @see #getName()
    * @generated
    * @ordered
    */
-  protected String crop = CROP_EDEFAULT;
+  protected String name = NAME_EDEFAULT;
 
   /**
    * The default value of the '{@link #getCropName() <em>Crop Name</em>}' attribute.
@@ -116,9 +117,9 @@ public class CropImpl extends ClassImpl implements Crop
    * @generated
    */
   @Override
-  public String getCrop()
+  public String getName()
   {
-    return crop;
+    return name;
   }
 
   /**
@@ -127,12 +128,12 @@ public class CropImpl extends ClassImpl implements Crop
    * @generated
    */
   @Override
-  public void setCrop(String newCrop)
+  public void setName(String newName)
   {
-    String oldCrop = crop;
-    crop = newCrop;
+    String oldName = name;
+    name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.CROP__CROP, oldCrop, crop));
+      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.CROP__NAME, oldName, name));
   }
 
   /**
@@ -201,8 +202,8 @@ public class CropImpl extends ClassImpl implements Crop
   {
     switch (featureID)
     {
-      case FarmPackage.CROP__CROP:
-        return getCrop();
+      case FarmPackage.CROP__NAME:
+        return getName();
       case FarmPackage.CROP__CROP_NAME:
         return getCropName();
       case FarmPackage.CROP__STATEMENTS:
@@ -222,8 +223,8 @@ public class CropImpl extends ClassImpl implements Crop
   {
     switch (featureID)
     {
-      case FarmPackage.CROP__CROP:
-        setCrop((String)newValue);
+      case FarmPackage.CROP__NAME:
+        setName((String)newValue);
         return;
       case FarmPackage.CROP__CROP_NAME:
         setCropName((String)newValue);
@@ -246,8 +247,8 @@ public class CropImpl extends ClassImpl implements Crop
   {
     switch (featureID)
     {
-      case FarmPackage.CROP__CROP:
-        setCrop(CROP_EDEFAULT);
+      case FarmPackage.CROP__NAME:
+        setName(NAME_EDEFAULT);
         return;
       case FarmPackage.CROP__CROP_NAME:
         setCropName(CROP_NAME_EDEFAULT);
@@ -269,8 +270,8 @@ public class CropImpl extends ClassImpl implements Crop
   {
     switch (featureID)
     {
-      case FarmPackage.CROP__CROP:
-        return CROP_EDEFAULT == null ? crop != null : !CROP_EDEFAULT.equals(crop);
+      case FarmPackage.CROP__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case FarmPackage.CROP__CROP_NAME:
         return CROP_NAME_EDEFAULT == null ? cropName != null : !CROP_NAME_EDEFAULT.equals(cropName);
       case FarmPackage.CROP__STATEMENTS:
@@ -285,13 +286,51 @@ public class CropImpl extends ClassImpl implements Crop
    * @generated
    */
   @Override
+  public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
+  {
+    if (baseClass == Entity.class)
+    {
+      switch (derivedFeatureID)
+      {
+        case FarmPackage.CROP__NAME: return FarmPackage.ENTITY__NAME;
+        default: return -1;
+      }
+    }
+    return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
+  {
+    if (baseClass == Entity.class)
+    {
+      switch (baseFeatureID)
+      {
+        case FarmPackage.ENTITY__NAME: return FarmPackage.CROP__NAME;
+        default: return -1;
+      }
+    }
+    return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public String toString()
   {
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (crop: ");
-    result.append(crop);
+    result.append(" (name: ");
+    result.append(name);
     result.append(", cropName: ");
     result.append(cropName);
     result.append(')');

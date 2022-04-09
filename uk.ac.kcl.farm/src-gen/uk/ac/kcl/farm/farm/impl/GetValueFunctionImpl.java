@@ -12,22 +12,23 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import uk.ac.kcl.farm.farm.Entity;
 import uk.ac.kcl.farm.farm.FarmPackage;
-import uk.ac.kcl.farm.farm.ReportFunction;
+import uk.ac.kcl.farm.farm.GetValueFunction;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Report Function</b></em>'.
+ * An implementation of the model object '<em><b>Get Value Function</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.farm.farm.impl.ReportFunctionImpl#getEntity <em>Entity</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.impl.GetValueFunctionImpl#getEntity <em>Entity</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.impl.GetValueFunctionImpl#getAttribute <em>Attribute</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ReportFunctionImpl extends BuiltinFunctionImpl implements ReportFunction
+public class GetValueFunctionImpl extends BuiltinFunctionImpl implements GetValueFunction
 {
   /**
    * The cached value of the '{@link #getEntity() <em>Entity</em>}' reference.
@@ -40,11 +41,31 @@ public class ReportFunctionImpl extends BuiltinFunctionImpl implements ReportFun
   protected Entity entity;
 
   /**
+   * The default value of the '{@link #getAttribute() <em>Attribute</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAttribute()
+   * @generated
+   * @ordered
+   */
+  protected static final String ATTRIBUTE_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAttribute()
+   * @generated
+   * @ordered
+   */
+  protected String attribute = ATTRIBUTE_EDEFAULT;
+
+  /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ReportFunctionImpl()
+  protected GetValueFunctionImpl()
   {
     super();
   }
@@ -57,7 +78,7 @@ public class ReportFunctionImpl extends BuiltinFunctionImpl implements ReportFun
   @Override
   protected EClass eStaticClass()
   {
-    return FarmPackage.Literals.REPORT_FUNCTION;
+    return FarmPackage.Literals.GET_VALUE_FUNCTION;
   }
 
   /**
@@ -75,7 +96,7 @@ public class ReportFunctionImpl extends BuiltinFunctionImpl implements ReportFun
       if (entity != oldEntity)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, FarmPackage.REPORT_FUNCTION__ENTITY, oldEntity, entity));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, FarmPackage.GET_VALUE_FUNCTION__ENTITY, oldEntity, entity));
       }
     }
     return entity;
@@ -102,7 +123,32 @@ public class ReportFunctionImpl extends BuiltinFunctionImpl implements ReportFun
     Entity oldEntity = entity;
     entity = newEntity;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.REPORT_FUNCTION__ENTITY, oldEntity, entity));
+      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.GET_VALUE_FUNCTION__ENTITY, oldEntity, entity));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String getAttribute()
+  {
+    return attribute;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setAttribute(String newAttribute)
+  {
+    String oldAttribute = attribute;
+    attribute = newAttribute;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.GET_VALUE_FUNCTION__ATTRIBUTE, oldAttribute, attribute));
   }
 
   /**
@@ -115,9 +161,11 @@ public class ReportFunctionImpl extends BuiltinFunctionImpl implements ReportFun
   {
     switch (featureID)
     {
-      case FarmPackage.REPORT_FUNCTION__ENTITY:
+      case FarmPackage.GET_VALUE_FUNCTION__ENTITY:
         if (resolve) return getEntity();
         return basicGetEntity();
+      case FarmPackage.GET_VALUE_FUNCTION__ATTRIBUTE:
+        return getAttribute();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -132,8 +180,11 @@ public class ReportFunctionImpl extends BuiltinFunctionImpl implements ReportFun
   {
     switch (featureID)
     {
-      case FarmPackage.REPORT_FUNCTION__ENTITY:
+      case FarmPackage.GET_VALUE_FUNCTION__ENTITY:
         setEntity((Entity)newValue);
+        return;
+      case FarmPackage.GET_VALUE_FUNCTION__ATTRIBUTE:
+        setAttribute((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -149,8 +200,11 @@ public class ReportFunctionImpl extends BuiltinFunctionImpl implements ReportFun
   {
     switch (featureID)
     {
-      case FarmPackage.REPORT_FUNCTION__ENTITY:
+      case FarmPackage.GET_VALUE_FUNCTION__ENTITY:
         setEntity((Entity)null);
+        return;
+      case FarmPackage.GET_VALUE_FUNCTION__ATTRIBUTE:
+        setAttribute(ATTRIBUTE_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -166,10 +220,29 @@ public class ReportFunctionImpl extends BuiltinFunctionImpl implements ReportFun
   {
     switch (featureID)
     {
-      case FarmPackage.REPORT_FUNCTION__ENTITY:
+      case FarmPackage.GET_VALUE_FUNCTION__ENTITY:
         return entity != null;
+      case FarmPackage.GET_VALUE_FUNCTION__ATTRIBUTE:
+        return ATTRIBUTE_EDEFAULT == null ? attribute != null : !ATTRIBUTE_EDEFAULT.equals(attribute);
     }
     return super.eIsSet(featureID);
   }
 
-} //ReportFunctionImpl
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuilder result = new StringBuilder(super.toString());
+    result.append(" (attribute: ");
+    result.append(attribute);
+    result.append(')');
+    return result.toString();
+  }
+
+} //GetValueFunctionImpl

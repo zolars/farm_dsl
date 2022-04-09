@@ -105,6 +105,15 @@ public interface FarmFactory extends EFactory
   BuiltinFunction createBuiltinFunction();
 
   /**
+   * Returns a new object of class '<em>Entity</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Entity</em>'.
+   * @generated
+   */
+  Entity createEntity();
+
+  /**
    * Returns a new object of class '<em>Report Function</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -132,22 +141,13 @@ public interface FarmFactory extends EFactory
   CountStageFunction createCountStageFunction();
 
   /**
-   * Returns a new object of class '<em>Get Crop Value Function</em>'.
+   * Returns a new object of class '<em>Get Value Function</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Get Crop Value Function</em>'.
+   * @return a new object of class '<em>Get Value Function</em>'.
    * @generated
    */
-  GetCropValueFunction createGetCropValueFunction();
-
-  /**
-   * Returns a new object of class '<em>Get Field Value Function</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Get Field Value Function</em>'.
-   * @generated
-   */
-  GetFieldValueFunction createGetFieldValueFunction();
+  GetValueFunction createGetValueFunction();
 
   /**
    * Returns a new object of class '<em>Set Field Value Function</em>'.
@@ -294,13 +294,13 @@ public interface FarmFactory extends EFactory
   Mission createMission();
 
   /**
-   * Returns a new object of class '<em>Task</em>'.
+   * Returns a new object of class '<em>Task Statement</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Task</em>'.
+   * @return a new object of class '<em>Task Statement</em>'.
    * @generated
    */
-  Task createTask();
+  TaskStatement createTaskStatement();
 
   /**
    * Returns a new object of class '<em>Return Statement</em>'.

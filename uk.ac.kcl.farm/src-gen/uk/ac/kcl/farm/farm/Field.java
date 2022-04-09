@@ -14,7 +14,6 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.farm.farm.Field#getName <em>Name</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.Field#getFieldName <em>Field Name</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.Field#getIp <em>Ip</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.Field#getFieldType <em>Field Type</em>}</li>
@@ -26,30 +25,8 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Field extends uk.ac.kcl.farm.farm.Class
+public interface Field extends uk.ac.kcl.farm.farm.Class, Entity
 {
-  /**
-   * Returns the value of the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' attribute.
-   * @see #setName(String)
-   * @see uk.ac.kcl.farm.farm.FarmPackage#getField_Name()
-   * @model
-   * @generated
-   */
-  String getName();
-
-  /**
-   * Sets the value of the '{@link uk.ac.kcl.farm.farm.Field#getName <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' attribute.
-   * @see #getName()
-   * @generated
-   */
-  void setName(String value);
-
   /**
    * Returns the value of the '<em><b>Field Name</b></em>' attribute.
    * <!-- begin-user-doc -->

@@ -23,6 +23,7 @@ import uk.ac.kcl.farm.farm.CropStage;
 import uk.ac.kcl.farm.farm.CropStages;
 import uk.ac.kcl.farm.farm.Divide;
 import uk.ac.kcl.farm.farm.ElseJudgeStatement;
+import uk.ac.kcl.farm.farm.Entity;
 import uk.ac.kcl.farm.farm.Equal;
 import uk.ac.kcl.farm.farm.ExecuteStatement;
 import uk.ac.kcl.farm.farm.Expression;
@@ -31,9 +32,8 @@ import uk.ac.kcl.farm.farm.FarmPackage;
 import uk.ac.kcl.farm.farm.FarmProgram;
 import uk.ac.kcl.farm.farm.Field;
 import uk.ac.kcl.farm.farm.FieldMonitor;
-import uk.ac.kcl.farm.farm.GetCropValueFunction;
-import uk.ac.kcl.farm.farm.GetFieldValueFunction;
 import uk.ac.kcl.farm.farm.GetStageFunction;
+import uk.ac.kcl.farm.farm.GetValueFunction;
 import uk.ac.kcl.farm.farm.GreaterThan;
 import uk.ac.kcl.farm.farm.GreaterThanOrEqual;
 import uk.ac.kcl.farm.farm.JudgeStatement;
@@ -54,7 +54,7 @@ import uk.ac.kcl.farm.farm.ReportFunction;
 import uk.ac.kcl.farm.farm.ReturnStatement;
 import uk.ac.kcl.farm.farm.SetFieldValueFunction;
 import uk.ac.kcl.farm.farm.Statement;
-import uk.ac.kcl.farm.farm.Task;
+import uk.ac.kcl.farm.farm.TaskStatement;
 import uk.ac.kcl.farm.farm.UnaryExpression;
 import uk.ac.kcl.farm.farm.Variable;
 import uk.ac.kcl.farm.farm.WaitFunction;
@@ -135,6 +135,13 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass entityEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass reportFunctionEClass = null;
 
   /**
@@ -156,14 +163,7 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass getCropValueFunctionEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass getFieldValueFunctionEClass = null;
+  private EClass getValueFunctionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -282,7 +282,7 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass taskEClass = null;
+  private EClass taskStatementEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -542,20 +542,9 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
-  public EAttribute getVariable_Name()
-  {
-    return (EAttribute)variableEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EReference getVariable_Value()
   {
-    return (EReference)variableEClass.getEStructuralFeatures().get(1);
+    return (EReference)variableEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -696,6 +685,28 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
+  public EClass getEntity()
+  {
+    return entityEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEntity_Name()
+  {
+    return (EAttribute)entityEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getReportFunction()
   {
     return reportFunctionEClass;
@@ -707,20 +718,9 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
-  public EReference getReportFunction_ReportCrop()
+  public EReference getReportFunction_Entity()
   {
     return (EReference)reportFunctionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getReportFunction_ReportField()
-  {
-    return (EReference)reportFunctionEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -784,9 +784,9 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
-  public EClass getGetCropValueFunction()
+  public EClass getGetValueFunction()
   {
-    return getCropValueFunctionEClass;
+    return getValueFunctionEClass;
   }
 
   /**
@@ -795,9 +795,9 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
-  public EReference getGetCropValueFunction_GetValueCrop()
+  public EReference getGetValueFunction_Entity()
   {
-    return (EReference)getCropValueFunctionEClass.getEStructuralFeatures().get(0);
+    return (EReference)getValueFunctionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -806,42 +806,9 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
-  public EAttribute getGetCropValueFunction_GetCropAttribute()
+  public EAttribute getGetValueFunction_Attribute()
   {
-    return (EAttribute)getCropValueFunctionEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getGetFieldValueFunction()
-  {
-    return getFieldValueFunctionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getGetFieldValueFunction_GetValueField()
-  {
-    return (EReference)getFieldValueFunctionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getGetFieldValueFunction_GetFieldAttribute()
-  {
-    return (EAttribute)getFieldValueFunctionEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)getValueFunctionEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1092,7 +1059,7 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
-  public EAttribute getCrop_Crop()
+  public EAttribute getCrop_CropName()
   {
     return (EAttribute)cropEClass.getEStructuralFeatures().get(0);
   }
@@ -1103,20 +1070,9 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
-  public EAttribute getCrop_CropName()
-  {
-    return (EAttribute)cropEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EReference getCrop_Statements()
   {
-    return (EReference)cropEClass.getEStructuralFeatures().get(2);
+    return (EReference)cropEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1235,7 +1191,7 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
-  public EAttribute getField_Name()
+  public EAttribute getField_FieldName()
   {
     return (EAttribute)fieldEClass.getEStructuralFeatures().get(0);
   }
@@ -1246,7 +1202,7 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
-  public EAttribute getField_FieldName()
+  public EAttribute getField_Ip()
   {
     return (EAttribute)fieldEClass.getEStructuralFeatures().get(1);
   }
@@ -1257,7 +1213,7 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
-  public EAttribute getField_Ip()
+  public EAttribute getField_FieldType()
   {
     return (EAttribute)fieldEClass.getEStructuralFeatures().get(2);
   }
@@ -1268,7 +1224,7 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
-  public EAttribute getField_FieldType()
+  public EAttribute getField_FieldLight()
   {
     return (EAttribute)fieldEClass.getEStructuralFeatures().get(3);
   }
@@ -1279,20 +1235,9 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
-  public EAttribute getField_FieldLight()
-  {
-    return (EAttribute)fieldEClass.getEStructuralFeatures().get(4);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EReference getField_FieldMonitors()
   {
-    return (EReference)fieldEClass.getEStructuralFeatures().get(5);
+    return (EReference)fieldEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -1356,9 +1301,9 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
-  public EClass getTask()
+  public EClass getTaskStatement()
   {
-    return taskEClass;
+    return taskStatementEClass;
   }
 
   /**
@@ -1367,9 +1312,9 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
-  public EAttribute getTask_Name()
+  public EAttribute getTaskStatement_Name()
   {
-    return (EAttribute)taskEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)taskStatementEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1378,9 +1323,9 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
-  public EReference getTask_Parmas()
+  public EReference getTaskStatement_Parmas()
   {
-    return (EReference)taskEClass.getEStructuralFeatures().get(1);
+    return (EReference)taskStatementEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1389,9 +1334,9 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
-  public EAttribute getTask_TypeName()
+  public EAttribute getTaskStatement_TypeName()
   {
-    return (EAttribute)taskEClass.getEStructuralFeatures().get(2);
+    return (EAttribute)taskStatementEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -1400,9 +1345,9 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
-  public EReference getTask_Statements()
+  public EReference getTaskStatement_Statements()
   {
-    return (EReference)taskEClass.getEStructuralFeatures().get(3);
+    return (EReference)taskStatementEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -1920,7 +1865,6 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
     statementEClass = createEClass(STATEMENT);
 
     variableEClass = createEClass(VARIABLE);
-    createEAttribute(variableEClass, VARIABLE__NAME);
     createEReference(variableEClass, VARIABLE__VALUE);
 
     loopStatementEClass = createEClass(LOOP_STATEMENT);
@@ -1939,9 +1883,11 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
 
     builtinFunctionEClass = createEClass(BUILTIN_FUNCTION);
 
+    entityEClass = createEClass(ENTITY);
+    createEAttribute(entityEClass, ENTITY__NAME);
+
     reportFunctionEClass = createEClass(REPORT_FUNCTION);
-    createEReference(reportFunctionEClass, REPORT_FUNCTION__REPORT_CROP);
-    createEReference(reportFunctionEClass, REPORT_FUNCTION__REPORT_FIELD);
+    createEReference(reportFunctionEClass, REPORT_FUNCTION__ENTITY);
 
     getStageFunctionEClass = createEClass(GET_STAGE_FUNCTION);
     createEReference(getStageFunctionEClass, GET_STAGE_FUNCTION__GET_STAGE_CROP);
@@ -1950,13 +1896,9 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
     countStageFunctionEClass = createEClass(COUNT_STAGE_FUNCTION);
     createEReference(countStageFunctionEClass, COUNT_STAGE_FUNCTION__COUNT_STAGE_CROP);
 
-    getCropValueFunctionEClass = createEClass(GET_CROP_VALUE_FUNCTION);
-    createEReference(getCropValueFunctionEClass, GET_CROP_VALUE_FUNCTION__GET_VALUE_CROP);
-    createEAttribute(getCropValueFunctionEClass, GET_CROP_VALUE_FUNCTION__GET_CROP_ATTRIBUTE);
-
-    getFieldValueFunctionEClass = createEClass(GET_FIELD_VALUE_FUNCTION);
-    createEReference(getFieldValueFunctionEClass, GET_FIELD_VALUE_FUNCTION__GET_VALUE_FIELD);
-    createEAttribute(getFieldValueFunctionEClass, GET_FIELD_VALUE_FUNCTION__GET_FIELD_ATTRIBUTE);
+    getValueFunctionEClass = createEClass(GET_VALUE_FUNCTION);
+    createEReference(getValueFunctionEClass, GET_VALUE_FUNCTION__ENTITY);
+    createEAttribute(getValueFunctionEClass, GET_VALUE_FUNCTION__ATTRIBUTE);
 
     setFieldValueFunctionEClass = createEClass(SET_FIELD_VALUE_FUNCTION);
     createEReference(setFieldValueFunctionEClass, SET_FIELD_VALUE_FUNCTION__SET_VALUE_FIELD);
@@ -1989,7 +1931,6 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
     createEAttribute(attributeEClass, ATTRIBUTE__NAME);
 
     cropEClass = createEClass(CROP);
-    createEAttribute(cropEClass, CROP__CROP);
     createEAttribute(cropEClass, CROP__CROP_NAME);
     createEReference(cropEClass, CROP__STATEMENTS);
 
@@ -2006,7 +1947,6 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
     createEReference(cropAttributesEClass, CROP_ATTRIBUTES__VALUE);
 
     fieldEClass = createEClass(FIELD);
-    createEAttribute(fieldEClass, FIELD__NAME);
     createEAttribute(fieldEClass, FIELD__FIELD_NAME);
     createEAttribute(fieldEClass, FIELD__IP);
     createEAttribute(fieldEClass, FIELD__FIELD_TYPE);
@@ -2020,11 +1960,11 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
     createEAttribute(missionEClass, MISSION__NAME);
     createEReference(missionEClass, MISSION__STATEMENTS);
 
-    taskEClass = createEClass(TASK);
-    createEAttribute(taskEClass, TASK__NAME);
-    createEReference(taskEClass, TASK__PARMAS);
-    createEAttribute(taskEClass, TASK__TYPE_NAME);
-    createEReference(taskEClass, TASK__STATEMENTS);
+    taskStatementEClass = createEClass(TASK_STATEMENT);
+    createEAttribute(taskStatementEClass, TASK_STATEMENT__NAME);
+    createEReference(taskStatementEClass, TASK_STATEMENT__PARMAS);
+    createEAttribute(taskStatementEClass, TASK_STATEMENT__TYPE_NAME);
+    createEReference(taskStatementEClass, TASK_STATEMENT__STATEMENTS);
 
     returnStatementEClass = createEClass(RETURN_STATEMENT);
     createEReference(returnStatementEClass, RETURN_STATEMENT__VALUE);
@@ -2116,14 +2056,14 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
 
     // Add supertypes to classes
     variableEClass.getESuperTypes().add(this.getStatement());
+    variableEClass.getESuperTypes().add(this.getEntity());
     loopStatementEClass.getESuperTypes().add(this.getStatement());
     judgeStatementEClass.getESuperTypes().add(this.getStatement());
     builtinFunctionEClass.getESuperTypes().add(this.getStatement());
     reportFunctionEClass.getESuperTypes().add(this.getBuiltinFunction());
     getStageFunctionEClass.getESuperTypes().add(this.getBuiltinFunction());
     countStageFunctionEClass.getESuperTypes().add(this.getBuiltinFunction());
-    getCropValueFunctionEClass.getESuperTypes().add(this.getBuiltinFunction());
-    getFieldValueFunctionEClass.getESuperTypes().add(this.getBuiltinFunction());
+    getValueFunctionEClass.getESuperTypes().add(this.getBuiltinFunction());
     setFieldValueFunctionEClass.getESuperTypes().add(this.getBuiltinFunction());
     plantFunctionEClass.getESuperTypes().add(this.getBuiltinFunction());
     moveFunctionEClass.getESuperTypes().add(this.getBuiltinFunction());
@@ -2132,7 +2072,9 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
     booleanLiteralEClass.getESuperTypes().add(this.getLiteral());
     realLiteralEClass.getESuperTypes().add(this.getLiteral());
     cropEClass.getESuperTypes().add(this.getClass_());
+    cropEClass.getESuperTypes().add(this.getEntity());
     fieldEClass.getESuperTypes().add(this.getClass_());
+    fieldEClass.getESuperTypes().add(this.getEntity());
     missionEClass.getESuperTypes().add(this.getClass_());
     conditionOrExpressionEClass.getESuperTypes().add(this.getExpression());
     conditionAndExpressionEClass.getESuperTypes().add(this.getExpression());
@@ -2161,7 +2103,6 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
     initEClass(statementEClass, Statement.class, "Statement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(variableEClass, Variable.class, "Variable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getVariable_Name(), ecorePackage.getEString(), "name", null, 0, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getVariable_Value(), this.getExpression(), null, "value", null, 0, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(loopStatementEClass, LoopStatement.class, "LoopStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2180,9 +2121,11 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
 
     initEClass(builtinFunctionEClass, BuiltinFunction.class, "BuiltinFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+    initEClass(entityEClass, Entity.class, "Entity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEntity_Name(), ecorePackage.getEString(), "name", null, 0, 1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(reportFunctionEClass, ReportFunction.class, "ReportFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getReportFunction_ReportCrop(), this.getCrop(), null, "reportCrop", null, 0, 1, ReportFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getReportFunction_ReportField(), this.getField(), null, "reportField", null, 0, 1, ReportFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getReportFunction_Entity(), this.getEntity(), null, "entity", null, 0, 1, ReportFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(getStageFunctionEClass, GetStageFunction.class, "GetStageFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getGetStageFunction_GetStageCrop(), this.getCrop(), null, "getStageCrop", null, 0, 1, GetStageFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2191,13 +2134,9 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
     initEClass(countStageFunctionEClass, CountStageFunction.class, "CountStageFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getCountStageFunction_CountStageCrop(), this.getCrop(), null, "countStageCrop", null, 0, 1, CountStageFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(getCropValueFunctionEClass, GetCropValueFunction.class, "GetCropValueFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getGetCropValueFunction_GetValueCrop(), this.getCrop(), null, "getValueCrop", null, 0, 1, GetCropValueFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getGetCropValueFunction_GetCropAttribute(), ecorePackage.getEString(), "getCropAttribute", null, 0, 1, GetCropValueFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(getFieldValueFunctionEClass, GetFieldValueFunction.class, "GetFieldValueFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getGetFieldValueFunction_GetValueField(), this.getField(), null, "getValueField", null, 0, 1, GetFieldValueFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getGetFieldValueFunction_GetFieldAttribute(), ecorePackage.getEString(), "getFieldAttribute", null, 0, 1, GetFieldValueFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(getValueFunctionEClass, GetValueFunction.class, "GetValueFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getGetValueFunction_Entity(), this.getEntity(), null, "entity", null, 0, 1, GetValueFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getGetValueFunction_Attribute(), ecorePackage.getEString(), "attribute", null, 0, 1, GetValueFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(setFieldValueFunctionEClass, SetFieldValueFunction.class, "SetFieldValueFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getSetFieldValueFunction_SetValueField(), this.getField(), null, "setValueField", null, 0, 1, SetFieldValueFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2230,7 +2169,6 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
     initEAttribute(getAttribute_Name(), ecorePackage.getEString(), "name", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(cropEClass, Crop.class, "Crop", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getCrop_Crop(), ecorePackage.getEString(), "crop", null, 0, 1, Crop.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getCrop_CropName(), ecorePackage.getEString(), "cropName", null, 0, 1, Crop.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getCrop_Statements(), this.getCropStages(), null, "statements", null, 0, -1, Crop.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -2247,7 +2185,6 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
     initEReference(getCropAttributes_Value(), this.getExpression(), null, "value", null, 0, 1, CropAttributes.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(fieldEClass, Field.class, "Field", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getField_Name(), ecorePackage.getEString(), "name", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getField_FieldName(), ecorePackage.getEString(), "fieldName", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getField_Ip(), ecorePackage.getEString(), "ip", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getField_FieldType(), ecorePackage.getEString(), "fieldType", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2261,11 +2198,11 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
     initEAttribute(getMission_Name(), ecorePackage.getEString(), "name", null, 0, 1, Mission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getMission_Statements(), ecorePackage.getEObject(), null, "statements", null, 0, -1, Mission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(taskEClass, Task.class, "Task", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getTask_Name(), ecorePackage.getEString(), "name", null, 0, 1, Task.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getTask_Parmas(), this.getParam(), null, "parmas", null, 0, -1, Task.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getTask_TypeName(), ecorePackage.getEString(), "typeName", null, 0, 1, Task.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getTask_Statements(), ecorePackage.getEObject(), null, "statements", null, 0, -1, Task.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(taskStatementEClass, TaskStatement.class, "TaskStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getTaskStatement_Name(), ecorePackage.getEString(), "name", null, 0, 1, TaskStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTaskStatement_Parmas(), this.getParam(), null, "parmas", null, 0, -1, TaskStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTaskStatement_TypeName(), ecorePackage.getEString(), "typeName", null, 0, 1, TaskStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTaskStatement_Statements(), ecorePackage.getEObject(), null, "statements", null, 0, -1, TaskStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(returnStatementEClass, ReturnStatement.class, "ReturnStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getReturnStatement_Value(), this.getExpression(), null, "value", null, 0, 1, ReturnStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

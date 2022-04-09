@@ -13,7 +13,6 @@ package uk.ac.kcl.farm.farm;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.farm.farm.Variable#getName <em>Name</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.Variable#getValue <em>Value</em>}</li>
  * </ul>
  *
@@ -21,30 +20,8 @@ package uk.ac.kcl.farm.farm;
  * @model
  * @generated
  */
-public interface Variable extends Statement
+public interface Variable extends Statement, Entity
 {
-  /**
-   * Returns the value of the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' attribute.
-   * @see #setName(String)
-   * @see uk.ac.kcl.farm.farm.FarmPackage#getVariable_Name()
-   * @model
-   * @generated
-   */
-  String getName();
-
-  /**
-   * Sets the value of the '{@link uk.ac.kcl.farm.farm.Variable#getName <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' attribute.
-   * @see #getName()
-   * @generated
-   */
-  void setName(String value);
-
   /**
    * Returns the value of the '<em><b>Value</b></em>' containment reference.
    * <!-- begin-user-doc -->
