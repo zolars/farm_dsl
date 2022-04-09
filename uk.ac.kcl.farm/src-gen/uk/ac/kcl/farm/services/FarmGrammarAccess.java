@@ -531,11 +531,15 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final RuleCall cVariableParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//Entity:
-		//    Crop | Field | Variable
+		//    Crop |
+		//    Field |
+		//    Variable
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//Crop | Field | Variable
+		//Crop |
+		//Field |
+		//Variable
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//Crop
@@ -550,31 +554,31 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	public class ReportFunctionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.ReportFunction");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cEntityAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final CrossReference cEntityEntityCrossReference_0_0 = (CrossReference)cEntityAssignment_0.eContents().get(0);
-		private final RuleCall cEntityEntityIDTerminalRuleCall_0_0_1 = (RuleCall)cEntityEntityCrossReference_0_0.eContents().get(1);
-		private final Keyword cReportKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cReportKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cEntityAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cEntityEntityCrossReference_1_0 = (CrossReference)cEntityAssignment_1.eContents().get(0);
+		private final RuleCall cEntityEntityIDTerminalRuleCall_1_0_1 = (RuleCall)cEntityEntityCrossReference_1_0.eContents().get(1);
 		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//ReportFunction hidden():
-		//    entity=[Entity]  ".report(" ")"
+		//    "report(" entity=[Entity] ")"
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//entity=[Entity]  ".report(" ")"
+		//"report(" entity=[Entity] ")"
 		public Group getGroup() { return cGroup; }
 		
+		//"report("
+		public Keyword getReportKeyword_0() { return cReportKeyword_0; }
+		
 		//entity=[Entity]
-		public Assignment getEntityAssignment_0() { return cEntityAssignment_0; }
+		public Assignment getEntityAssignment_1() { return cEntityAssignment_1; }
 		
 		//[Entity]
-		public CrossReference getEntityEntityCrossReference_0_0() { return cEntityEntityCrossReference_0_0; }
+		public CrossReference getEntityEntityCrossReference_1_0() { return cEntityEntityCrossReference_1_0; }
 		
 		//ID
-		public RuleCall getEntityEntityIDTerminalRuleCall_0_0_1() { return cEntityEntityIDTerminalRuleCall_0_0_1; }
-		
-		//".report("
-		public Keyword getReportKeyword_1() { return cReportKeyword_1; }
+		public RuleCall getEntityEntityIDTerminalRuleCall_1_0_1() { return cEntityEntityIDTerminalRuleCall_1_0_1; }
 		
 		//")"
 		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
@@ -867,18 +871,6 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.Expression");
 		private final RuleCall cConditionOrExpressionParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
-		//// MoveStatement:
-		////     command=MoveCommand "(" steps=Addition ")"
-		//// ;
-		//// enum MoveCommand:
-		////     forward | backward
-		//// ;
-		//// TurnStatement:
-		////     "turn" command=TurnCommand "by" degrees=REAL "degrees"
-		//// ;
-		//// enum TurnCommand:
-		////     left | right
-		//// ;
 		////Expressions
 		//Expression:
 		//    ConditionOrExpression
@@ -2460,7 +2452,9 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	}
 	
 	//Entity:
-	//    Crop | Field | Variable
+	//    Crop |
+	//    Field |
+	//    Variable
 	//;
 	public EntityElements getEntityAccess() {
 		return pEntity;
@@ -2471,7 +2465,7 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	}
 	
 	//ReportFunction hidden():
-	//    entity=[Entity]  ".report(" ")"
+	//    "report(" entity=[Entity] ")"
 	//;
 	public ReportFunctionElements getReportFunctionAccess() {
 		return pReportFunction;
@@ -2558,18 +2552,6 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		return getWaitFunctionAccess().getRule();
 	}
 	
-	//// MoveStatement:
-	////     command=MoveCommand "(" steps=Addition ")"
-	//// ;
-	//// enum MoveCommand:
-	////     forward | backward
-	//// ;
-	//// TurnStatement:
-	////     "turn" command=TurnCommand "by" degrees=REAL "degrees"
-	//// ;
-	//// enum TurnCommand:
-	////     left | right
-	//// ;
 	////Expressions
 	//Expression:
 	//    ConditionOrExpression

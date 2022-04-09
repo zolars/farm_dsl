@@ -1216,7 +1216,7 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.REPORT_FUNCTION__ENTITY));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getReportFunctionAccess().getEntityEntityIDTerminalRuleCall_0_0_1(), semanticObject.eGet(FarmPackage.Literals.REPORT_FUNCTION__ENTITY, false));
+		feeder.accept(grammarAccess.getReportFunctionAccess().getEntityEntityIDTerminalRuleCall_1_0_1(), semanticObject.eGet(FarmPackage.Literals.REPORT_FUNCTION__ENTITY, false));
 		feeder.finish();
 	}
 	

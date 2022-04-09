@@ -857,6 +857,10 @@ ruleReportFunction returns [EObject current=null]
 	leaveRule();
 }:
 	(
+		otherlv_0='report('
+		{
+			newLeafNode(otherlv_0, grammarAccess.getReportFunctionAccess().getReportKeyword_0());
+		}
 		(
 			(
 				{
@@ -864,16 +868,12 @@ ruleReportFunction returns [EObject current=null]
 						$current = createModelElement(grammarAccess.getReportFunctionRule());
 					}
 				}
-				otherlv_0=RULE_ID
+				otherlv_1=RULE_ID
 				{
-					newLeafNode(otherlv_0, grammarAccess.getReportFunctionAccess().getEntityEntityCrossReference_0_0());
+					newLeafNode(otherlv_1, grammarAccess.getReportFunctionAccess().getEntityEntityCrossReference_1_0());
 				}
 			)
 		)
-		otherlv_1='.report('
-		{
-			newLeafNode(otherlv_1, grammarAccess.getReportFunctionAccess().getReportKeyword_1());
-		}
 		otherlv_2=')'
 		{
 			newLeafNode(otherlv_2, grammarAccess.getReportFunctionAccess().getRightParenthesisKeyword_2());

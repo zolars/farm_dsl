@@ -71,11 +71,13 @@ BuiltinFunction:
 
 
 Entity:
-	Crop | Field | Variable 
+	Crop | 
+	Field | 
+	Variable
 ;
 
 ReportFunction hidden():
-	entity=[Entity]  ".report(" ")"
+	"report(" entity=[Entity] ")"
 ;
 
 GetStageFunction hidden():
@@ -105,22 +107,6 @@ MoveFunction hidden():
 WaitFunction hidden():
 	"wait(" value=AdditionExpression ")"
 ;
-
-// MoveStatement:
-// 	command=MoveCommand "(" steps=Addition ")"
-// ;
-
-// enum MoveCommand:
-// 	forward | backward
-// ;
-
-// TurnStatement:
-// 	"turn" command=TurnCommand "by" degrees=REAL "degrees"
-// ;
-
-// enum TurnCommand:
-// 	left | right
-// ;
 
 //Expressions
 

@@ -80,6 +80,10 @@ mission qwe {
 	
 		var condition = false
 		
+		report(greenhouse_2)
+		report(loopCounter)
+		report((10.0)
+		
 		if (false) {
 			
 		} elseif (true) {

@@ -2833,9 +2833,9 @@ rule__ReportFunction__Group__0__Impl
 	}
 :
 (
-	{ before(grammarAccess.getReportFunctionAccess().getEntityAssignment_0()); }
-	(rule__ReportFunction__EntityAssignment_0)
-	{ after(grammarAccess.getReportFunctionAccess().getEntityAssignment_0()); }
+	{ before(grammarAccess.getReportFunctionAccess().getReportKeyword_0()); }
+	'report('
+	{ after(grammarAccess.getReportFunctionAccess().getReportKeyword_0()); }
 )
 ;
 finally {
@@ -2860,9 +2860,9 @@ rule__ReportFunction__Group__1__Impl
 	}
 :
 (
-	{ before(grammarAccess.getReportFunctionAccess().getReportKeyword_1()); }
-	'.report('
-	{ after(grammarAccess.getReportFunctionAccess().getReportKeyword_1()); }
+	{ before(grammarAccess.getReportFunctionAccess().getEntityAssignment_1()); }
+	(rule__ReportFunction__EntityAssignment_1)
+	{ after(grammarAccess.getReportFunctionAccess().getEntityAssignment_1()); }
 )
 ;
 finally {
@@ -8030,19 +8030,19 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ReportFunction__EntityAssignment_0
+rule__ReportFunction__EntityAssignment_1
 	@init {
 		int stackSize = keepStackSize();
 	}
 :
 	(
-		{ before(grammarAccess.getReportFunctionAccess().getEntityEntityCrossReference_0_0()); }
+		{ before(grammarAccess.getReportFunctionAccess().getEntityEntityCrossReference_1_0()); }
 		(
-			{ before(grammarAccess.getReportFunctionAccess().getEntityEntityIDTerminalRuleCall_0_0_1()); }
+			{ before(grammarAccess.getReportFunctionAccess().getEntityEntityIDTerminalRuleCall_1_0_1()); }
 			RULE_ID
-			{ after(grammarAccess.getReportFunctionAccess().getEntityEntityIDTerminalRuleCall_0_0_1()); }
+			{ after(grammarAccess.getReportFunctionAccess().getEntityEntityIDTerminalRuleCall_1_0_1()); }
 		)
-		{ after(grammarAccess.getReportFunctionAccess().getEntityEntityCrossReference_0_0()); }
+		{ after(grammarAccess.getReportFunctionAccess().getEntityEntityCrossReference_1_0()); }
 	)
 ;
 finally {

@@ -131,7 +131,7 @@ public class FarmParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getJudgeStatementAccess().getElseStatementAssignment_8_2(), "rule__JudgeStatement__ElseStatementAssignment_8_2");
 			builder.put(grammarAccess.getElseJudgeStatementAccess().getConditionAssignment_2(), "rule__ElseJudgeStatement__ConditionAssignment_2");
 			builder.put(grammarAccess.getElseJudgeStatementAccess().getStatementsAssignment_5(), "rule__ElseJudgeStatement__StatementsAssignment_5");
-			builder.put(grammarAccess.getReportFunctionAccess().getEntityAssignment_0(), "rule__ReportFunction__EntityAssignment_0");
+			builder.put(grammarAccess.getReportFunctionAccess().getEntityAssignment_1(), "rule__ReportFunction__EntityAssignment_1");
 			builder.put(grammarAccess.getGetStageFunctionAccess().getGetStageCropAssignment_0(), "rule__GetStageFunction__GetStageCropAssignment_0");
 			builder.put(grammarAccess.getGetStageFunctionAccess().getStageNumberAssignment_2(), "rule__GetStageFunction__StageNumberAssignment_2");
 			builder.put(grammarAccess.getCountStageFunctionAccess().getCountStageCropAssignment_0(), "rule__CountStageFunction__CountStageCropAssignment_0");
