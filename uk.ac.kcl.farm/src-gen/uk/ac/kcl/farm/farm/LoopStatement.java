@@ -29,12 +29,12 @@ public interface LoopStatement extends Statement
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Condition</em>' containment reference.
-   * @see #setCondition(ConditionExpression)
+   * @see #setCondition(Expression)
    * @see uk.ac.kcl.farm.farm.FarmPackage#getLoopStatement_Condition()
    * @model containment="true"
    * @generated
    */
-  ConditionExpression getCondition();
+  Expression getCondition();
 
   /**
    * Sets the value of the '{@link uk.ac.kcl.farm.farm.LoopStatement#getCondition <em>Condition</em>}' containment reference.
@@ -44,7 +44,7 @@ public interface LoopStatement extends Statement
    * @see #getCondition()
    * @generated
    */
-  void setCondition(ConditionExpression value);
+  void setCondition(Expression value);
 
   /**
    * Returns the value of the '<em><b>Statements</b></em>' containment reference list.

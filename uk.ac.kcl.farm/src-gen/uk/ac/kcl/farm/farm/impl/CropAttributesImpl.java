@@ -12,10 +12,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import uk.ac.kcl.farm.farm.AttributeDeclaration;
+import uk.ac.kcl.farm.farm.Attribute;
 import uk.ac.kcl.farm.farm.CropAttributes;
+import uk.ac.kcl.farm.farm.Expression;
 import uk.ac.kcl.farm.farm.FarmPackage;
-import uk.ac.kcl.farm.farm.RealExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,7 +41,7 @@ public class CropAttributesImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    * @ordered
    */
-  protected AttributeDeclaration type;
+  protected Attribute type;
 
   /**
    * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
@@ -51,7 +51,7 @@ public class CropAttributesImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    * @ordered
    */
-  protected RealExpression value;
+  protected Expression value;
 
   /**
    * <!-- begin-user-doc -->
@@ -80,12 +80,12 @@ public class CropAttributesImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
-  public AttributeDeclaration getType()
+  public Attribute getType()
   {
     if (type != null && type.eIsProxy())
     {
       InternalEObject oldType = (InternalEObject)type;
-      type = (AttributeDeclaration)eResolveProxy(oldType);
+      type = (Attribute)eResolveProxy(oldType);
       if (type != oldType)
       {
         if (eNotificationRequired())
@@ -100,7 +100,7 @@ public class CropAttributesImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public AttributeDeclaration basicGetType()
+  public Attribute basicGetType()
   {
     return type;
   }
@@ -111,9 +111,9 @@ public class CropAttributesImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
-  public void setType(AttributeDeclaration newType)
+  public void setType(Attribute newType)
   {
-    AttributeDeclaration oldType = type;
+    Attribute oldType = type;
     type = newType;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.CROP_ATTRIBUTES__TYPE, oldType, type));
@@ -125,7 +125,7 @@ public class CropAttributesImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
-  public RealExpression getValue()
+  public Expression getValue()
   {
     return value;
   }
@@ -135,9 +135,9 @@ public class CropAttributesImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetValue(RealExpression newValue, NotificationChain msgs)
+  public NotificationChain basicSetValue(Expression newValue, NotificationChain msgs)
   {
-    RealExpression oldValue = value;
+    Expression oldValue = value;
     value = newValue;
     if (eNotificationRequired())
     {
@@ -153,7 +153,7 @@ public class CropAttributesImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
-  public void setValue(RealExpression newValue)
+  public void setValue(Expression newValue)
   {
     if (newValue != value)
     {
@@ -215,10 +215,10 @@ public class CropAttributesImpl extends MinimalEObjectImpl.Container implements 
     switch (featureID)
     {
       case FarmPackage.CROP_ATTRIBUTES__TYPE:
-        setType((AttributeDeclaration)newValue);
+        setType((Attribute)newValue);
         return;
       case FarmPackage.CROP_ATTRIBUTES__VALUE:
-        setValue((RealExpression)newValue);
+        setValue((Expression)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -235,10 +235,10 @@ public class CropAttributesImpl extends MinimalEObjectImpl.Container implements 
     switch (featureID)
     {
       case FarmPackage.CROP_ATTRIBUTES__TYPE:
-        setType((AttributeDeclaration)null);
+        setType((Attribute)null);
         return;
       case FarmPackage.CROP_ATTRIBUTES__VALUE:
-        setValue((RealExpression)null);
+        setValue((Expression)null);
         return;
     }
     super.eUnset(featureID);

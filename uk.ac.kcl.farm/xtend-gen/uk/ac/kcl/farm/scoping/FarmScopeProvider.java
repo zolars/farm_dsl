@@ -10,11 +10,10 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import uk.ac.kcl.farm.farm.Expression;
 import uk.ac.kcl.farm.farm.FarmProgram;
 import uk.ac.kcl.farm.farm.LoopStatement;
-import uk.ac.kcl.farm.farm.RealExpression;
-import uk.ac.kcl.farm.farm.RealVarExpression;
-import uk.ac.kcl.farm.farm.VariableDeclaration;
+import uk.ac.kcl.farm.farm.Variable;
 
 /**
  * This class contains custom scoping description.
@@ -24,16 +23,16 @@ import uk.ac.kcl.farm.farm.VariableDeclaration;
  */
 @SuppressWarnings("all")
 public class FarmScopeProvider extends AbstractDeclarativeScopeProvider {
-  public IScope scope_IntVarExpression_var(final RealVarExpression context, final EReference ref) {
+  public IScope scope_IntVarExpression_var(final Expression context, final EReference ref) {
     return this.visibleVariablesScope(context);
   }
   
-  protected IScope _visibleVariablesScope(final RealExpression ip) {
+  protected IScope _visibleVariablesScope(final Expression ip) {
     return this.visibleVariablesScope(ip.eContainer());
   }
   
   protected IScope _visibleVariablesScope(final FarmProgram tp) {
-    return Scopes.scopeFor(Iterables.<VariableDeclaration>filter(tp.getStatements(), VariableDeclaration.class));
+    return Scopes.scopeFor(Iterables.<Variable>filter(tp.getStatements(), Variable.class));
   }
   
   protected IScope _visibleVariablesScope(final LoopStatement ls) {
@@ -41,18 +40,18 @@ public class FarmScopeProvider extends AbstractDeclarativeScopeProvider {
   }
   
   protected IScope _internalVisibleVariablesScope(final FarmProgram tp) {
-    return Scopes.scopeFor(Iterables.<VariableDeclaration>filter(tp.getStatements(), VariableDeclaration.class));
+    return Scopes.scopeFor(Iterables.<Variable>filter(tp.getStatements(), Variable.class));
   }
   
   protected IScope _internalVisibleVariablesScope(final LoopStatement ls) {
-    return Scopes.scopeFor(Iterables.<VariableDeclaration>filter(ls.getStatements(), VariableDeclaration.class), this.internalVisibleVariablesScope(ls.eContainer()));
+    return Scopes.scopeFor(Iterables.<Variable>filter(ls.getStatements(), Variable.class), this.internalVisibleVariablesScope(ls.eContainer()));
   }
   
   public IScope visibleVariablesScope(final EObject ls) {
     if (ls instanceof LoopStatement) {
       return _visibleVariablesScope((LoopStatement)ls);
-    } else if (ls instanceof RealExpression) {
-      return _visibleVariablesScope((RealExpression)ls);
+    } else if (ls instanceof Expression) {
+      return _visibleVariablesScope((Expression)ls);
     } else if (ls instanceof FarmProgram) {
       return _visibleVariablesScope((FarmProgram)ls);
     } else {

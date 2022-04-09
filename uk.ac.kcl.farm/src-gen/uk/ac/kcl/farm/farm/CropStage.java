@@ -54,12 +54,12 @@ public interface CropStage extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Time Consumend</em>' containment reference.
-   * @see #setTimeConsumend(RealExpression)
+   * @see #setTimeConsumend(Expression)
    * @see uk.ac.kcl.farm.farm.FarmPackage#getCropStage_TimeConsumend()
    * @model containment="true"
    * @generated
    */
-  RealExpression getTimeConsumend();
+  Expression getTimeConsumend();
 
   /**
    * Sets the value of the '{@link uk.ac.kcl.farm.farm.CropStage#getTimeConsumend <em>Time Consumend</em>}' containment reference.
@@ -69,7 +69,7 @@ public interface CropStage extends EObject
    * @see #getTimeConsumend()
    * @generated
    */
-  void setTimeConsumend(RealExpression value);
+  void setTimeConsumend(Expression value);
 
   /**
    * Returns the value of the '<em><b>Elements</b></em>' containment reference list.

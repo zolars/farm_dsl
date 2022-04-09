@@ -8,33 +8,53 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
-import uk.ac.kcl.farm.farm.Addition;
-import uk.ac.kcl.farm.farm.AndExpression;
-import uk.ac.kcl.farm.farm.AttributeDeclaration;
+import uk.ac.kcl.farm.farm.Attribute;
+import uk.ac.kcl.farm.farm.BoolLiteral;
 import uk.ac.kcl.farm.farm.BooleanLiteral;
-import uk.ac.kcl.farm.farm.BooleanVarExpression;
-import uk.ac.kcl.farm.farm.ComparisonExpression;
-import uk.ac.kcl.farm.farm.ConditionExpression;
+import uk.ac.kcl.farm.farm.BuiltinFunction;
+import uk.ac.kcl.farm.farm.ConditionAndExpression;
+import uk.ac.kcl.farm.farm.ConditionOrExpression;
+import uk.ac.kcl.farm.farm.CountStageFunction;
 import uk.ac.kcl.farm.farm.Crop;
 import uk.ac.kcl.farm.farm.CropAttributes;
 import uk.ac.kcl.farm.farm.CropStage;
 import uk.ac.kcl.farm.farm.CropStages;
+import uk.ac.kcl.farm.farm.Divide;
+import uk.ac.kcl.farm.farm.ElseJudgeStatement;
+import uk.ac.kcl.farm.farm.Equal;
+import uk.ac.kcl.farm.farm.ExecuteStatement;
+import uk.ac.kcl.farm.farm.Expression;
 import uk.ac.kcl.farm.farm.FarmPackage;
 import uk.ac.kcl.farm.farm.FarmProgram;
 import uk.ac.kcl.farm.farm.Field;
+import uk.ac.kcl.farm.farm.FieldMonitor;
+import uk.ac.kcl.farm.farm.GetCropValueFunction;
+import uk.ac.kcl.farm.farm.GetFieldValueFunction;
+import uk.ac.kcl.farm.farm.GetStageFunction;
+import uk.ac.kcl.farm.farm.GreaterThan;
+import uk.ac.kcl.farm.farm.GreaterThanOrEqual;
+import uk.ac.kcl.farm.farm.JudgeStatement;
+import uk.ac.kcl.farm.farm.LessThan;
+import uk.ac.kcl.farm.farm.LessThanOrEqual;
+import uk.ac.kcl.farm.farm.Literal;
 import uk.ac.kcl.farm.farm.LoopStatement;
-import uk.ac.kcl.farm.farm.Machine;
+import uk.ac.kcl.farm.farm.Minus;
 import uk.ac.kcl.farm.farm.Mission;
-import uk.ac.kcl.farm.farm.Multiplication;
-import uk.ac.kcl.farm.farm.OrExpression;
+import uk.ac.kcl.farm.farm.MoveFunction;
+import uk.ac.kcl.farm.farm.Multiply;
+import uk.ac.kcl.farm.farm.NotEqual;
 import uk.ac.kcl.farm.farm.Param;
-import uk.ac.kcl.farm.farm.RealExpression;
+import uk.ac.kcl.farm.farm.PlantFunction;
+import uk.ac.kcl.farm.farm.Plus;
 import uk.ac.kcl.farm.farm.RealLiteral;
-import uk.ac.kcl.farm.farm.RealVarExpression;
+import uk.ac.kcl.farm.farm.ReportFunction;
+import uk.ac.kcl.farm.farm.ReturnStatement;
+import uk.ac.kcl.farm.farm.SetFieldValueFunction;
 import uk.ac.kcl.farm.farm.Statement;
 import uk.ac.kcl.farm.farm.Task;
-import uk.ac.kcl.farm.farm.VariableDeclaration;
-import uk.ac.kcl.farm.farm.VariableExpression;
+import uk.ac.kcl.farm.farm.UnaryExpression;
+import uk.ac.kcl.farm.farm.Variable;
+import uk.ac.kcl.farm.farm.WaitFunction;
 
 /**
  * <!-- begin-user-doc -->
@@ -127,18 +147,11 @@ public class FarmSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FarmPackage.VARIABLE_DECLARATION:
+      case FarmPackage.VARIABLE:
       {
-        VariableDeclaration variableDeclaration = (VariableDeclaration)theEObject;
-        T result = caseVariableDeclaration(variableDeclaration);
-        if (result == null) result = caseStatement(variableDeclaration);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case FarmPackage.VARIABLE_EXPRESSION:
-      {
-        VariableExpression variableExpression = (VariableExpression)theEObject;
-        T result = caseVariableExpression(variableExpression);
+        Variable variable = (Variable)theEObject;
+        T result = caseVariable(variable);
+        if (result == null) result = caseStatement(variable);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -150,37 +163,122 @@ public class FarmSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FarmPackage.REAL_EXPRESSION:
+      case FarmPackage.JUDGE_STATEMENT:
       {
-        RealExpression realExpression = (RealExpression)theEObject;
-        T result = caseRealExpression(realExpression);
-        if (result == null) result = caseVariableExpression(realExpression);
+        JudgeStatement judgeStatement = (JudgeStatement)theEObject;
+        T result = caseJudgeStatement(judgeStatement);
+        if (result == null) result = caseStatement(judgeStatement);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FarmPackage.REAL_LITERAL:
+      case FarmPackage.ELSE_JUDGE_STATEMENT:
       {
-        RealLiteral realLiteral = (RealLiteral)theEObject;
-        T result = caseRealLiteral(realLiteral);
-        if (result == null) result = caseRealExpression(realLiteral);
-        if (result == null) result = caseVariableExpression(realLiteral);
+        ElseJudgeStatement elseJudgeStatement = (ElseJudgeStatement)theEObject;
+        T result = caseElseJudgeStatement(elseJudgeStatement);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FarmPackage.REAL_VAR_EXPRESSION:
+      case FarmPackage.BUILTIN_FUNCTION:
       {
-        RealVarExpression realVarExpression = (RealVarExpression)theEObject;
-        T result = caseRealVarExpression(realVarExpression);
-        if (result == null) result = caseRealExpression(realVarExpression);
-        if (result == null) result = caseVariableExpression(realVarExpression);
+        BuiltinFunction builtinFunction = (BuiltinFunction)theEObject;
+        T result = caseBuiltinFunction(builtinFunction);
+        if (result == null) result = caseStatement(builtinFunction);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FarmPackage.CONDITION_EXPRESSION:
+      case FarmPackage.REPORT_FUNCTION:
       {
-        ConditionExpression conditionExpression = (ConditionExpression)theEObject;
-        T result = caseConditionExpression(conditionExpression);
-        if (result == null) result = caseVariableExpression(conditionExpression);
+        ReportFunction reportFunction = (ReportFunction)theEObject;
+        T result = caseReportFunction(reportFunction);
+        if (result == null) result = caseBuiltinFunction(reportFunction);
+        if (result == null) result = caseStatement(reportFunction);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FarmPackage.GET_STAGE_FUNCTION:
+      {
+        GetStageFunction getStageFunction = (GetStageFunction)theEObject;
+        T result = caseGetStageFunction(getStageFunction);
+        if (result == null) result = caseBuiltinFunction(getStageFunction);
+        if (result == null) result = caseStatement(getStageFunction);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FarmPackage.COUNT_STAGE_FUNCTION:
+      {
+        CountStageFunction countStageFunction = (CountStageFunction)theEObject;
+        T result = caseCountStageFunction(countStageFunction);
+        if (result == null) result = caseBuiltinFunction(countStageFunction);
+        if (result == null) result = caseStatement(countStageFunction);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FarmPackage.GET_CROP_VALUE_FUNCTION:
+      {
+        GetCropValueFunction getCropValueFunction = (GetCropValueFunction)theEObject;
+        T result = caseGetCropValueFunction(getCropValueFunction);
+        if (result == null) result = caseBuiltinFunction(getCropValueFunction);
+        if (result == null) result = caseStatement(getCropValueFunction);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FarmPackage.GET_FIELD_VALUE_FUNCTION:
+      {
+        GetFieldValueFunction getFieldValueFunction = (GetFieldValueFunction)theEObject;
+        T result = caseGetFieldValueFunction(getFieldValueFunction);
+        if (result == null) result = caseBuiltinFunction(getFieldValueFunction);
+        if (result == null) result = caseStatement(getFieldValueFunction);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FarmPackage.SET_FIELD_VALUE_FUNCTION:
+      {
+        SetFieldValueFunction setFieldValueFunction = (SetFieldValueFunction)theEObject;
+        T result = caseSetFieldValueFunction(setFieldValueFunction);
+        if (result == null) result = caseBuiltinFunction(setFieldValueFunction);
+        if (result == null) result = caseStatement(setFieldValueFunction);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FarmPackage.PLANT_FUNCTION:
+      {
+        PlantFunction plantFunction = (PlantFunction)theEObject;
+        T result = casePlantFunction(plantFunction);
+        if (result == null) result = caseBuiltinFunction(plantFunction);
+        if (result == null) result = caseStatement(plantFunction);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FarmPackage.MOVE_FUNCTION:
+      {
+        MoveFunction moveFunction = (MoveFunction)theEObject;
+        T result = caseMoveFunction(moveFunction);
+        if (result == null) result = caseBuiltinFunction(moveFunction);
+        if (result == null) result = caseStatement(moveFunction);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FarmPackage.WAIT_FUNCTION:
+      {
+        WaitFunction waitFunction = (WaitFunction)theEObject;
+        T result = caseWaitFunction(waitFunction);
+        if (result == null) result = caseBuiltinFunction(waitFunction);
+        if (result == null) result = caseStatement(waitFunction);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FarmPackage.EXPRESSION:
+      {
+        Expression expression = (Expression)theEObject;
+        T result = caseExpression(expression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FarmPackage.LITERAL:
+      {
+        Literal literal = (Literal)theEObject;
+        T result = caseLiteral(literal);
+        if (result == null) result = caseExpression(literal);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -188,24 +286,24 @@ public class FarmSwitch<T> extends Switch<T>
       {
         BooleanLiteral booleanLiteral = (BooleanLiteral)theEObject;
         T result = caseBooleanLiteral(booleanLiteral);
-        if (result == null) result = caseConditionExpression(booleanLiteral);
-        if (result == null) result = caseVariableExpression(booleanLiteral);
+        if (result == null) result = caseLiteral(booleanLiteral);
+        if (result == null) result = caseExpression(booleanLiteral);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FarmPackage.BOOLEAN_VAR_EXPRESSION:
+      case FarmPackage.REAL_LITERAL:
       {
-        BooleanVarExpression booleanVarExpression = (BooleanVarExpression)theEObject;
-        T result = caseBooleanVarExpression(booleanVarExpression);
-        if (result == null) result = caseConditionExpression(booleanVarExpression);
-        if (result == null) result = caseVariableExpression(booleanVarExpression);
+        RealLiteral realLiteral = (RealLiteral)theEObject;
+        T result = caseRealLiteral(realLiteral);
+        if (result == null) result = caseLiteral(realLiteral);
+        if (result == null) result = caseExpression(realLiteral);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FarmPackage.ATTRIBUTE_DECLARATION:
+      case FarmPackage.ATTRIBUTE:
       {
-        AttributeDeclaration attributeDeclaration = (AttributeDeclaration)theEObject;
-        T result = caseAttributeDeclaration(attributeDeclaration);
+        Attribute attribute = (Attribute)theEObject;
+        T result = caseAttribute(attribute);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -238,19 +336,18 @@ public class FarmSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FarmPackage.MACHINE:
-      {
-        Machine machine = (Machine)theEObject;
-        T result = caseMachine(machine);
-        if (result == null) result = caseClass(machine);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case FarmPackage.FIELD:
       {
         Field field = (Field)theEObject;
         T result = caseField(field);
         if (result == null) result = caseClass(field);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FarmPackage.FIELD_MONITOR:
+      {
+        FieldMonitor fieldMonitor = (FieldMonitor)theEObject;
+        T result = caseFieldMonitor(fieldMonitor);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -269,48 +366,131 @@ public class FarmSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FarmPackage.ADDITION:
+      case FarmPackage.RETURN_STATEMENT:
       {
-        Addition addition = (Addition)theEObject;
-        T result = caseAddition(addition);
-        if (result == null) result = caseRealExpression(addition);
-        if (result == null) result = caseVariableExpression(addition);
+        ReturnStatement returnStatement = (ReturnStatement)theEObject;
+        T result = caseReturnStatement(returnStatement);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FarmPackage.MULTIPLICATION:
+      case FarmPackage.EXECUTE_STATEMENT:
       {
-        Multiplication multiplication = (Multiplication)theEObject;
-        T result = caseMultiplication(multiplication);
-        if (result == null) result = caseRealExpression(multiplication);
-        if (result == null) result = caseVariableExpression(multiplication);
+        ExecuteStatement executeStatement = (ExecuteStatement)theEObject;
+        T result = caseExecuteStatement(executeStatement);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FarmPackage.OR_EXPRESSION:
+      case FarmPackage.CONDITION_OR_EXPRESSION:
       {
-        OrExpression orExpression = (OrExpression)theEObject;
-        T result = caseOrExpression(orExpression);
-        if (result == null) result = caseConditionExpression(orExpression);
-        if (result == null) result = caseVariableExpression(orExpression);
+        ConditionOrExpression conditionOrExpression = (ConditionOrExpression)theEObject;
+        T result = caseConditionOrExpression(conditionOrExpression);
+        if (result == null) result = caseExpression(conditionOrExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FarmPackage.AND_EXPRESSION:
+      case FarmPackage.CONDITION_AND_EXPRESSION:
       {
-        AndExpression andExpression = (AndExpression)theEObject;
-        T result = caseAndExpression(andExpression);
-        if (result == null) result = caseConditionExpression(andExpression);
-        if (result == null) result = caseVariableExpression(andExpression);
+        ConditionAndExpression conditionAndExpression = (ConditionAndExpression)theEObject;
+        T result = caseConditionAndExpression(conditionAndExpression);
+        if (result == null) result = caseExpression(conditionAndExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FarmPackage.COMPARISON_EXPRESSION:
+      case FarmPackage.LESS_THAN_OR_EQUAL:
       {
-        ComparisonExpression comparisonExpression = (ComparisonExpression)theEObject;
-        T result = caseComparisonExpression(comparisonExpression);
-        if (result == null) result = caseConditionExpression(comparisonExpression);
-        if (result == null) result = caseVariableExpression(comparisonExpression);
+        LessThanOrEqual lessThanOrEqual = (LessThanOrEqual)theEObject;
+        T result = caseLessThanOrEqual(lessThanOrEqual);
+        if (result == null) result = caseExpression(lessThanOrEqual);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FarmPackage.LESS_THAN:
+      {
+        LessThan lessThan = (LessThan)theEObject;
+        T result = caseLessThan(lessThan);
+        if (result == null) result = caseExpression(lessThan);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FarmPackage.GREATER_THAN_OR_EQUAL:
+      {
+        GreaterThanOrEqual greaterThanOrEqual = (GreaterThanOrEqual)theEObject;
+        T result = caseGreaterThanOrEqual(greaterThanOrEqual);
+        if (result == null) result = caseExpression(greaterThanOrEqual);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FarmPackage.GREATER_THAN:
+      {
+        GreaterThan greaterThan = (GreaterThan)theEObject;
+        T result = caseGreaterThan(greaterThan);
+        if (result == null) result = caseExpression(greaterThan);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FarmPackage.EQUAL:
+      {
+        Equal equal = (Equal)theEObject;
+        T result = caseEqual(equal);
+        if (result == null) result = caseExpression(equal);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FarmPackage.NOT_EQUAL:
+      {
+        NotEqual notEqual = (NotEqual)theEObject;
+        T result = caseNotEqual(notEqual);
+        if (result == null) result = caseExpression(notEqual);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FarmPackage.PLUS:
+      {
+        Plus plus = (Plus)theEObject;
+        T result = casePlus(plus);
+        if (result == null) result = caseExpression(plus);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FarmPackage.MINUS:
+      {
+        Minus minus = (Minus)theEObject;
+        T result = caseMinus(minus);
+        if (result == null) result = caseExpression(minus);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FarmPackage.MULTIPLY:
+      {
+        Multiply multiply = (Multiply)theEObject;
+        T result = caseMultiply(multiply);
+        if (result == null) result = caseExpression(multiply);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FarmPackage.DIVIDE:
+      {
+        Divide divide = (Divide)theEObject;
+        T result = caseDivide(divide);
+        if (result == null) result = caseExpression(divide);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FarmPackage.UNARY_EXPRESSION:
+      {
+        UnaryExpression unaryExpression = (UnaryExpression)theEObject;
+        T result = caseUnaryExpression(unaryExpression);
+        if (result == null) result = caseExpression(unaryExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FarmPackage.BOOL_LITERAL:
+      {
+        BoolLiteral boolLiteral = (BoolLiteral)theEObject;
+        T result = caseBoolLiteral(boolLiteral);
+        if (result == null) result = caseBooleanLiteral(boolLiteral);
+        if (result == null) result = caseLiteral(boolLiteral);
+        if (result == null) result = caseExpression(boolLiteral);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -383,33 +563,17 @@ public class FarmSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Variable Declaration</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Variable</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Variable Declaration</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Variable</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseVariableDeclaration(VariableDeclaration object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Variable Expression</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Variable Expression</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseVariableExpression(VariableExpression object)
+  public T caseVariable(Variable object)
   {
     return null;
   }
@@ -431,65 +595,225 @@ public class FarmSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Real Expression</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Judge Statement</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Real Expression</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Judge Statement</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseRealExpression(RealExpression object)
+  public T caseJudgeStatement(JudgeStatement object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Real Literal</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Else Judge Statement</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Real Literal</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Else Judge Statement</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseRealLiteral(RealLiteral object)
+  public T caseElseJudgeStatement(ElseJudgeStatement object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Real Var Expression</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Builtin Function</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Real Var Expression</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Builtin Function</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseRealVarExpression(RealVarExpression object)
+  public T caseBuiltinFunction(BuiltinFunction object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Condition Expression</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Report Function</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Condition Expression</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Report Function</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseConditionExpression(ConditionExpression object)
+  public T caseReportFunction(ReportFunction object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Get Stage Function</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Get Stage Function</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseGetStageFunction(GetStageFunction object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Count Stage Function</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Count Stage Function</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseCountStageFunction(CountStageFunction object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Get Crop Value Function</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Get Crop Value Function</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseGetCropValueFunction(GetCropValueFunction object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Get Field Value Function</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Get Field Value Function</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseGetFieldValueFunction(GetFieldValueFunction object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Set Field Value Function</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Set Field Value Function</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSetFieldValueFunction(SetFieldValueFunction object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Plant Function</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Plant Function</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casePlantFunction(PlantFunction object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Move Function</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Move Function</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMoveFunction(MoveFunction object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Wait Function</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Wait Function</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseWaitFunction(WaitFunction object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseExpression(Expression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Literal</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Literal</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseLiteral(Literal object)
   {
     return null;
   }
@@ -511,33 +835,33 @@ public class FarmSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Boolean Var Expression</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Real Literal</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Boolean Var Expression</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Real Literal</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseBooleanVarExpression(BooleanVarExpression object)
+  public T caseRealLiteral(RealLiteral object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Attribute Declaration</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Attribute</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Attribute Declaration</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Attribute</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseAttributeDeclaration(AttributeDeclaration object)
+  public T caseAttribute(Attribute object)
   {
     return null;
   }
@@ -607,22 +931,6 @@ public class FarmSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Machine</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Machine</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseMachine(Machine object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Field</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -634,6 +942,22 @@ public class FarmSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseField(Field object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Field Monitor</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Field Monitor</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseFieldMonitor(FieldMonitor object)
   {
     return null;
   }
@@ -671,81 +995,257 @@ public class FarmSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Addition</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Return Statement</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Addition</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Return Statement</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseAddition(Addition object)
+  public T caseReturnStatement(ReturnStatement object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Multiplication</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Execute Statement</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Multiplication</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Execute Statement</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseMultiplication(Multiplication object)
+  public T caseExecuteStatement(ExecuteStatement object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Or Expression</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Condition Or Expression</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Or Expression</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Condition Or Expression</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseOrExpression(OrExpression object)
+  public T caseConditionOrExpression(ConditionOrExpression object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>And Expression</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Condition And Expression</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>And Expression</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Condition And Expression</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseAndExpression(AndExpression object)
+  public T caseConditionAndExpression(ConditionAndExpression object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Comparison Expression</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Less Than Or Equal</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Comparison Expression</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Less Than Or Equal</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseComparisonExpression(ComparisonExpression object)
+  public T caseLessThanOrEqual(LessThanOrEqual object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Less Than</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Less Than</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseLessThan(LessThan object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Greater Than Or Equal</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Greater Than Or Equal</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseGreaterThanOrEqual(GreaterThanOrEqual object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Greater Than</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Greater Than</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseGreaterThan(GreaterThan object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Equal</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Equal</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEqual(Equal object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Not Equal</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Not Equal</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseNotEqual(NotEqual object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Plus</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Plus</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casePlus(Plus object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Minus</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Minus</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMinus(Minus object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Multiply</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Multiply</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMultiply(Multiply object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Divide</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Divide</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDivide(Divide object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Unary Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Unary Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseUnaryExpression(UnaryExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Bool Literal</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Bool Literal</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseBoolLiteral(BoolLiteral object)
   {
     return null;
   }

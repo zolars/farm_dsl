@@ -60,22 +60,13 @@ public interface FarmFactory extends EFactory
   Statement createStatement();
 
   /**
-   * Returns a new object of class '<em>Variable Declaration</em>'.
+   * Returns a new object of class '<em>Variable</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Variable Declaration</em>'.
+   * @return a new object of class '<em>Variable</em>'.
    * @generated
    */
-  VariableDeclaration createVariableDeclaration();
-
-  /**
-   * Returns a new object of class '<em>Variable Expression</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Variable Expression</em>'.
-   * @generated
-   */
-  VariableExpression createVariableExpression();
+  Variable createVariable();
 
   /**
    * Returns a new object of class '<em>Loop Statement</em>'.
@@ -87,40 +78,130 @@ public interface FarmFactory extends EFactory
   LoopStatement createLoopStatement();
 
   /**
-   * Returns a new object of class '<em>Real Expression</em>'.
+   * Returns a new object of class '<em>Judge Statement</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Real Expression</em>'.
+   * @return a new object of class '<em>Judge Statement</em>'.
    * @generated
    */
-  RealExpression createRealExpression();
+  JudgeStatement createJudgeStatement();
 
   /**
-   * Returns a new object of class '<em>Real Literal</em>'.
+   * Returns a new object of class '<em>Else Judge Statement</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Real Literal</em>'.
+   * @return a new object of class '<em>Else Judge Statement</em>'.
    * @generated
    */
-  RealLiteral createRealLiteral();
+  ElseJudgeStatement createElseJudgeStatement();
 
   /**
-   * Returns a new object of class '<em>Real Var Expression</em>'.
+   * Returns a new object of class '<em>Builtin Function</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Real Var Expression</em>'.
+   * @return a new object of class '<em>Builtin Function</em>'.
    * @generated
    */
-  RealVarExpression createRealVarExpression();
+  BuiltinFunction createBuiltinFunction();
 
   /**
-   * Returns a new object of class '<em>Condition Expression</em>'.
+   * Returns a new object of class '<em>Report Function</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Condition Expression</em>'.
+   * @return a new object of class '<em>Report Function</em>'.
    * @generated
    */
-  ConditionExpression createConditionExpression();
+  ReportFunction createReportFunction();
+
+  /**
+   * Returns a new object of class '<em>Get Stage Function</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Get Stage Function</em>'.
+   * @generated
+   */
+  GetStageFunction createGetStageFunction();
+
+  /**
+   * Returns a new object of class '<em>Count Stage Function</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Count Stage Function</em>'.
+   * @generated
+   */
+  CountStageFunction createCountStageFunction();
+
+  /**
+   * Returns a new object of class '<em>Get Crop Value Function</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Get Crop Value Function</em>'.
+   * @generated
+   */
+  GetCropValueFunction createGetCropValueFunction();
+
+  /**
+   * Returns a new object of class '<em>Get Field Value Function</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Get Field Value Function</em>'.
+   * @generated
+   */
+  GetFieldValueFunction createGetFieldValueFunction();
+
+  /**
+   * Returns a new object of class '<em>Set Field Value Function</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Set Field Value Function</em>'.
+   * @generated
+   */
+  SetFieldValueFunction createSetFieldValueFunction();
+
+  /**
+   * Returns a new object of class '<em>Plant Function</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Plant Function</em>'.
+   * @generated
+   */
+  PlantFunction createPlantFunction();
+
+  /**
+   * Returns a new object of class '<em>Move Function</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Move Function</em>'.
+   * @generated
+   */
+  MoveFunction createMoveFunction();
+
+  /**
+   * Returns a new object of class '<em>Wait Function</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Wait Function</em>'.
+   * @generated
+   */
+  WaitFunction createWaitFunction();
+
+  /**
+   * Returns a new object of class '<em>Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Expression</em>'.
+   * @generated
+   */
+  Expression createExpression();
+
+  /**
+   * Returns a new object of class '<em>Literal</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Literal</em>'.
+   * @generated
+   */
+  Literal createLiteral();
 
   /**
    * Returns a new object of class '<em>Boolean Literal</em>'.
@@ -132,22 +213,22 @@ public interface FarmFactory extends EFactory
   BooleanLiteral createBooleanLiteral();
 
   /**
-   * Returns a new object of class '<em>Boolean Var Expression</em>'.
+   * Returns a new object of class '<em>Real Literal</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Boolean Var Expression</em>'.
+   * @return a new object of class '<em>Real Literal</em>'.
    * @generated
    */
-  BooleanVarExpression createBooleanVarExpression();
+  RealLiteral createRealLiteral();
 
   /**
-   * Returns a new object of class '<em>Attribute Declaration</em>'.
+   * Returns a new object of class '<em>Attribute</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Attribute Declaration</em>'.
+   * @return a new object of class '<em>Attribute</em>'.
    * @generated
    */
-  AttributeDeclaration createAttributeDeclaration();
+  Attribute createAttribute();
 
   /**
    * Returns a new object of class '<em>Crop</em>'.
@@ -186,15 +267,6 @@ public interface FarmFactory extends EFactory
   CropAttributes createCropAttributes();
 
   /**
-   * Returns a new object of class '<em>Machine</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Machine</em>'.
-   * @generated
-   */
-  Machine createMachine();
-
-  /**
    * Returns a new object of class '<em>Field</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -202,6 +274,15 @@ public interface FarmFactory extends EFactory
    * @generated
    */
   Field createField();
+
+  /**
+   * Returns a new object of class '<em>Field Monitor</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Field Monitor</em>'.
+   * @generated
+   */
+  FieldMonitor createFieldMonitor();
 
   /**
    * Returns a new object of class '<em>Mission</em>'.
@@ -222,49 +303,148 @@ public interface FarmFactory extends EFactory
   Task createTask();
 
   /**
-   * Returns a new object of class '<em>Addition</em>'.
+   * Returns a new object of class '<em>Return Statement</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Addition</em>'.
+   * @return a new object of class '<em>Return Statement</em>'.
    * @generated
    */
-  Addition createAddition();
+  ReturnStatement createReturnStatement();
 
   /**
-   * Returns a new object of class '<em>Multiplication</em>'.
+   * Returns a new object of class '<em>Execute Statement</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Multiplication</em>'.
+   * @return a new object of class '<em>Execute Statement</em>'.
    * @generated
    */
-  Multiplication createMultiplication();
+  ExecuteStatement createExecuteStatement();
 
   /**
-   * Returns a new object of class '<em>Or Expression</em>'.
+   * Returns a new object of class '<em>Condition Or Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Or Expression</em>'.
+   * @return a new object of class '<em>Condition Or Expression</em>'.
    * @generated
    */
-  OrExpression createOrExpression();
+  ConditionOrExpression createConditionOrExpression();
 
   /**
-   * Returns a new object of class '<em>And Expression</em>'.
+   * Returns a new object of class '<em>Condition And Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>And Expression</em>'.
+   * @return a new object of class '<em>Condition And Expression</em>'.
    * @generated
    */
-  AndExpression createAndExpression();
+  ConditionAndExpression createConditionAndExpression();
 
   /**
-   * Returns a new object of class '<em>Comparison Expression</em>'.
+   * Returns a new object of class '<em>Less Than Or Equal</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Comparison Expression</em>'.
+   * @return a new object of class '<em>Less Than Or Equal</em>'.
    * @generated
    */
-  ComparisonExpression createComparisonExpression();
+  LessThanOrEqual createLessThanOrEqual();
+
+  /**
+   * Returns a new object of class '<em>Less Than</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Less Than</em>'.
+   * @generated
+   */
+  LessThan createLessThan();
+
+  /**
+   * Returns a new object of class '<em>Greater Than Or Equal</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Greater Than Or Equal</em>'.
+   * @generated
+   */
+  GreaterThanOrEqual createGreaterThanOrEqual();
+
+  /**
+   * Returns a new object of class '<em>Greater Than</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Greater Than</em>'.
+   * @generated
+   */
+  GreaterThan createGreaterThan();
+
+  /**
+   * Returns a new object of class '<em>Equal</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Equal</em>'.
+   * @generated
+   */
+  Equal createEqual();
+
+  /**
+   * Returns a new object of class '<em>Not Equal</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Not Equal</em>'.
+   * @generated
+   */
+  NotEqual createNotEqual();
+
+  /**
+   * Returns a new object of class '<em>Plus</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Plus</em>'.
+   * @generated
+   */
+  Plus createPlus();
+
+  /**
+   * Returns a new object of class '<em>Minus</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Minus</em>'.
+   * @generated
+   */
+  Minus createMinus();
+
+  /**
+   * Returns a new object of class '<em>Multiply</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Multiply</em>'.
+   * @generated
+   */
+  Multiply createMultiply();
+
+  /**
+   * Returns a new object of class '<em>Divide</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Divide</em>'.
+   * @generated
+   */
+  Divide createDivide();
+
+  /**
+   * Returns a new object of class '<em>Unary Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Unary Expression</em>'.
+   * @generated
+   */
+  UnaryExpression createUnaryExpression();
+
+  /**
+   * Returns a new object of class '<em>Bool Literal</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Bool Literal</em>'.
+   * @generated
+   */
+  BoolLiteral createBoolLiteral();
 
   /**
    * Returns the package supported by this factory.

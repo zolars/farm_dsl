@@ -10,33 +10,53 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
-import uk.ac.kcl.farm.farm.Addition;
-import uk.ac.kcl.farm.farm.AndExpression;
-import uk.ac.kcl.farm.farm.AttributeDeclaration;
+import uk.ac.kcl.farm.farm.Attribute;
+import uk.ac.kcl.farm.farm.BoolLiteral;
 import uk.ac.kcl.farm.farm.BooleanLiteral;
-import uk.ac.kcl.farm.farm.BooleanVarExpression;
-import uk.ac.kcl.farm.farm.ComparisonExpression;
-import uk.ac.kcl.farm.farm.ConditionExpression;
+import uk.ac.kcl.farm.farm.BuiltinFunction;
+import uk.ac.kcl.farm.farm.ConditionAndExpression;
+import uk.ac.kcl.farm.farm.ConditionOrExpression;
+import uk.ac.kcl.farm.farm.CountStageFunction;
 import uk.ac.kcl.farm.farm.Crop;
 import uk.ac.kcl.farm.farm.CropAttributes;
 import uk.ac.kcl.farm.farm.CropStage;
 import uk.ac.kcl.farm.farm.CropStages;
+import uk.ac.kcl.farm.farm.Divide;
+import uk.ac.kcl.farm.farm.ElseJudgeStatement;
+import uk.ac.kcl.farm.farm.Equal;
+import uk.ac.kcl.farm.farm.ExecuteStatement;
+import uk.ac.kcl.farm.farm.Expression;
 import uk.ac.kcl.farm.farm.FarmPackage;
 import uk.ac.kcl.farm.farm.FarmProgram;
 import uk.ac.kcl.farm.farm.Field;
+import uk.ac.kcl.farm.farm.FieldMonitor;
+import uk.ac.kcl.farm.farm.GetCropValueFunction;
+import uk.ac.kcl.farm.farm.GetFieldValueFunction;
+import uk.ac.kcl.farm.farm.GetStageFunction;
+import uk.ac.kcl.farm.farm.GreaterThan;
+import uk.ac.kcl.farm.farm.GreaterThanOrEqual;
+import uk.ac.kcl.farm.farm.JudgeStatement;
+import uk.ac.kcl.farm.farm.LessThan;
+import uk.ac.kcl.farm.farm.LessThanOrEqual;
+import uk.ac.kcl.farm.farm.Literal;
 import uk.ac.kcl.farm.farm.LoopStatement;
-import uk.ac.kcl.farm.farm.Machine;
+import uk.ac.kcl.farm.farm.Minus;
 import uk.ac.kcl.farm.farm.Mission;
-import uk.ac.kcl.farm.farm.Multiplication;
-import uk.ac.kcl.farm.farm.OrExpression;
+import uk.ac.kcl.farm.farm.MoveFunction;
+import uk.ac.kcl.farm.farm.Multiply;
+import uk.ac.kcl.farm.farm.NotEqual;
 import uk.ac.kcl.farm.farm.Param;
-import uk.ac.kcl.farm.farm.RealExpression;
+import uk.ac.kcl.farm.farm.PlantFunction;
+import uk.ac.kcl.farm.farm.Plus;
 import uk.ac.kcl.farm.farm.RealLiteral;
-import uk.ac.kcl.farm.farm.RealVarExpression;
+import uk.ac.kcl.farm.farm.ReportFunction;
+import uk.ac.kcl.farm.farm.ReturnStatement;
+import uk.ac.kcl.farm.farm.SetFieldValueFunction;
 import uk.ac.kcl.farm.farm.Statement;
 import uk.ac.kcl.farm.farm.Task;
-import uk.ac.kcl.farm.farm.VariableDeclaration;
-import uk.ac.kcl.farm.farm.VariableExpression;
+import uk.ac.kcl.farm.farm.UnaryExpression;
+import uk.ac.kcl.farm.farm.Variable;
+import uk.ac.kcl.farm.farm.WaitFunction;
 
 /**
  * <!-- begin-user-doc -->
@@ -122,14 +142,9 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
         return createStatementAdapter();
       }
       @Override
-      public Adapter caseVariableDeclaration(VariableDeclaration object)
+      public Adapter caseVariable(Variable object)
       {
-        return createVariableDeclarationAdapter();
-      }
-      @Override
-      public Adapter caseVariableExpression(VariableExpression object)
-      {
-        return createVariableExpressionAdapter();
+        return createVariableAdapter();
       }
       @Override
       public Adapter caseLoopStatement(LoopStatement object)
@@ -137,24 +152,74 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
         return createLoopStatementAdapter();
       }
       @Override
-      public Adapter caseRealExpression(RealExpression object)
+      public Adapter caseJudgeStatement(JudgeStatement object)
       {
-        return createRealExpressionAdapter();
+        return createJudgeStatementAdapter();
       }
       @Override
-      public Adapter caseRealLiteral(RealLiteral object)
+      public Adapter caseElseJudgeStatement(ElseJudgeStatement object)
       {
-        return createRealLiteralAdapter();
+        return createElseJudgeStatementAdapter();
       }
       @Override
-      public Adapter caseRealVarExpression(RealVarExpression object)
+      public Adapter caseBuiltinFunction(BuiltinFunction object)
       {
-        return createRealVarExpressionAdapter();
+        return createBuiltinFunctionAdapter();
       }
       @Override
-      public Adapter caseConditionExpression(ConditionExpression object)
+      public Adapter caseReportFunction(ReportFunction object)
       {
-        return createConditionExpressionAdapter();
+        return createReportFunctionAdapter();
+      }
+      @Override
+      public Adapter caseGetStageFunction(GetStageFunction object)
+      {
+        return createGetStageFunctionAdapter();
+      }
+      @Override
+      public Adapter caseCountStageFunction(CountStageFunction object)
+      {
+        return createCountStageFunctionAdapter();
+      }
+      @Override
+      public Adapter caseGetCropValueFunction(GetCropValueFunction object)
+      {
+        return createGetCropValueFunctionAdapter();
+      }
+      @Override
+      public Adapter caseGetFieldValueFunction(GetFieldValueFunction object)
+      {
+        return createGetFieldValueFunctionAdapter();
+      }
+      @Override
+      public Adapter caseSetFieldValueFunction(SetFieldValueFunction object)
+      {
+        return createSetFieldValueFunctionAdapter();
+      }
+      @Override
+      public Adapter casePlantFunction(PlantFunction object)
+      {
+        return createPlantFunctionAdapter();
+      }
+      @Override
+      public Adapter caseMoveFunction(MoveFunction object)
+      {
+        return createMoveFunctionAdapter();
+      }
+      @Override
+      public Adapter caseWaitFunction(WaitFunction object)
+      {
+        return createWaitFunctionAdapter();
+      }
+      @Override
+      public Adapter caseExpression(Expression object)
+      {
+        return createExpressionAdapter();
+      }
+      @Override
+      public Adapter caseLiteral(Literal object)
+      {
+        return createLiteralAdapter();
       }
       @Override
       public Adapter caseBooleanLiteral(BooleanLiteral object)
@@ -162,14 +227,14 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
         return createBooleanLiteralAdapter();
       }
       @Override
-      public Adapter caseBooleanVarExpression(BooleanVarExpression object)
+      public Adapter caseRealLiteral(RealLiteral object)
       {
-        return createBooleanVarExpressionAdapter();
+        return createRealLiteralAdapter();
       }
       @Override
-      public Adapter caseAttributeDeclaration(AttributeDeclaration object)
+      public Adapter caseAttribute(Attribute object)
       {
-        return createAttributeDeclarationAdapter();
+        return createAttributeAdapter();
       }
       @Override
       public Adapter caseCrop(Crop object)
@@ -192,14 +257,14 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
         return createCropAttributesAdapter();
       }
       @Override
-      public Adapter caseMachine(Machine object)
-      {
-        return createMachineAdapter();
-      }
-      @Override
       public Adapter caseField(Field object)
       {
         return createFieldAdapter();
+      }
+      @Override
+      public Adapter caseFieldMonitor(FieldMonitor object)
+      {
+        return createFieldMonitorAdapter();
       }
       @Override
       public Adapter caseMission(Mission object)
@@ -212,29 +277,84 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
         return createTaskAdapter();
       }
       @Override
-      public Adapter caseAddition(Addition object)
+      public Adapter caseReturnStatement(ReturnStatement object)
       {
-        return createAdditionAdapter();
+        return createReturnStatementAdapter();
       }
       @Override
-      public Adapter caseMultiplication(Multiplication object)
+      public Adapter caseExecuteStatement(ExecuteStatement object)
       {
-        return createMultiplicationAdapter();
+        return createExecuteStatementAdapter();
       }
       @Override
-      public Adapter caseOrExpression(OrExpression object)
+      public Adapter caseConditionOrExpression(ConditionOrExpression object)
       {
-        return createOrExpressionAdapter();
+        return createConditionOrExpressionAdapter();
       }
       @Override
-      public Adapter caseAndExpression(AndExpression object)
+      public Adapter caseConditionAndExpression(ConditionAndExpression object)
       {
-        return createAndExpressionAdapter();
+        return createConditionAndExpressionAdapter();
       }
       @Override
-      public Adapter caseComparisonExpression(ComparisonExpression object)
+      public Adapter caseLessThanOrEqual(LessThanOrEqual object)
       {
-        return createComparisonExpressionAdapter();
+        return createLessThanOrEqualAdapter();
+      }
+      @Override
+      public Adapter caseLessThan(LessThan object)
+      {
+        return createLessThanAdapter();
+      }
+      @Override
+      public Adapter caseGreaterThanOrEqual(GreaterThanOrEqual object)
+      {
+        return createGreaterThanOrEqualAdapter();
+      }
+      @Override
+      public Adapter caseGreaterThan(GreaterThan object)
+      {
+        return createGreaterThanAdapter();
+      }
+      @Override
+      public Adapter caseEqual(Equal object)
+      {
+        return createEqualAdapter();
+      }
+      @Override
+      public Adapter caseNotEqual(NotEqual object)
+      {
+        return createNotEqualAdapter();
+      }
+      @Override
+      public Adapter casePlus(Plus object)
+      {
+        return createPlusAdapter();
+      }
+      @Override
+      public Adapter caseMinus(Minus object)
+      {
+        return createMinusAdapter();
+      }
+      @Override
+      public Adapter caseMultiply(Multiply object)
+      {
+        return createMultiplyAdapter();
+      }
+      @Override
+      public Adapter caseDivide(Divide object)
+      {
+        return createDivideAdapter();
+      }
+      @Override
+      public Adapter caseUnaryExpression(UnaryExpression object)
+      {
+        return createUnaryExpressionAdapter();
+      }
+      @Override
+      public Adapter caseBoolLiteral(BoolLiteral object)
+      {
+        return createBoolLiteralAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -319,31 +439,16 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.VariableDeclaration <em>Variable Declaration</em>}'.
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.Variable <em>Variable</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see uk.ac.kcl.farm.farm.VariableDeclaration
+   * @see uk.ac.kcl.farm.farm.Variable
    * @generated
    */
-  public Adapter createVariableDeclarationAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.VariableExpression <em>Variable Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see uk.ac.kcl.farm.farm.VariableExpression
-   * @generated
-   */
-  public Adapter createVariableExpressionAdapter()
+  public Adapter createVariableAdapter()
   {
     return null;
   }
@@ -364,61 +469,211 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.RealExpression <em>Real Expression</em>}'.
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.JudgeStatement <em>Judge Statement</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see uk.ac.kcl.farm.farm.RealExpression
+   * @see uk.ac.kcl.farm.farm.JudgeStatement
    * @generated
    */
-  public Adapter createRealExpressionAdapter()
+  public Adapter createJudgeStatementAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.RealLiteral <em>Real Literal</em>}'.
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.ElseJudgeStatement <em>Else Judge Statement</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see uk.ac.kcl.farm.farm.RealLiteral
+   * @see uk.ac.kcl.farm.farm.ElseJudgeStatement
    * @generated
    */
-  public Adapter createRealLiteralAdapter()
+  public Adapter createElseJudgeStatementAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.RealVarExpression <em>Real Var Expression</em>}'.
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.BuiltinFunction <em>Builtin Function</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see uk.ac.kcl.farm.farm.RealVarExpression
+   * @see uk.ac.kcl.farm.farm.BuiltinFunction
    * @generated
    */
-  public Adapter createRealVarExpressionAdapter()
+  public Adapter createBuiltinFunctionAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.ConditionExpression <em>Condition Expression</em>}'.
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.ReportFunction <em>Report Function</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see uk.ac.kcl.farm.farm.ConditionExpression
+   * @see uk.ac.kcl.farm.farm.ReportFunction
    * @generated
    */
-  public Adapter createConditionExpressionAdapter()
+  public Adapter createReportFunctionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.GetStageFunction <em>Get Stage Function</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see uk.ac.kcl.farm.farm.GetStageFunction
+   * @generated
+   */
+  public Adapter createGetStageFunctionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.CountStageFunction <em>Count Stage Function</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see uk.ac.kcl.farm.farm.CountStageFunction
+   * @generated
+   */
+  public Adapter createCountStageFunctionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.GetCropValueFunction <em>Get Crop Value Function</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see uk.ac.kcl.farm.farm.GetCropValueFunction
+   * @generated
+   */
+  public Adapter createGetCropValueFunctionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.GetFieldValueFunction <em>Get Field Value Function</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see uk.ac.kcl.farm.farm.GetFieldValueFunction
+   * @generated
+   */
+  public Adapter createGetFieldValueFunctionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.SetFieldValueFunction <em>Set Field Value Function</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see uk.ac.kcl.farm.farm.SetFieldValueFunction
+   * @generated
+   */
+  public Adapter createSetFieldValueFunctionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.PlantFunction <em>Plant Function</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see uk.ac.kcl.farm.farm.PlantFunction
+   * @generated
+   */
+  public Adapter createPlantFunctionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.MoveFunction <em>Move Function</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see uk.ac.kcl.farm.farm.MoveFunction
+   * @generated
+   */
+  public Adapter createMoveFunctionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.WaitFunction <em>Wait Function</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see uk.ac.kcl.farm.farm.WaitFunction
+   * @generated
+   */
+  public Adapter createWaitFunctionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.Expression <em>Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see uk.ac.kcl.farm.farm.Expression
+   * @generated
+   */
+  public Adapter createExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.Literal <em>Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see uk.ac.kcl.farm.farm.Literal
+   * @generated
+   */
+  public Adapter createLiteralAdapter()
   {
     return null;
   }
@@ -439,31 +694,31 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.BooleanVarExpression <em>Boolean Var Expression</em>}'.
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.RealLiteral <em>Real Literal</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see uk.ac.kcl.farm.farm.BooleanVarExpression
+   * @see uk.ac.kcl.farm.farm.RealLiteral
    * @generated
    */
-  public Adapter createBooleanVarExpressionAdapter()
+  public Adapter createRealLiteralAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.AttributeDeclaration <em>Attribute Declaration</em>}'.
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.Attribute <em>Attribute</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see uk.ac.kcl.farm.farm.AttributeDeclaration
+   * @see uk.ac.kcl.farm.farm.Attribute
    * @generated
    */
-  public Adapter createAttributeDeclarationAdapter()
+  public Adapter createAttributeAdapter()
   {
     return null;
   }
@@ -529,21 +784,6 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.Machine <em>Machine</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see uk.ac.kcl.farm.farm.Machine
-   * @generated
-   */
-  public Adapter createMachineAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.Field <em>Field</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -554,6 +794,21 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createFieldAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.FieldMonitor <em>Field Monitor</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see uk.ac.kcl.farm.farm.FieldMonitor
+   * @generated
+   */
+  public Adapter createFieldMonitorAdapter()
   {
     return null;
   }
@@ -589,76 +844,241 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.Addition <em>Addition</em>}'.
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.ReturnStatement <em>Return Statement</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see uk.ac.kcl.farm.farm.Addition
+   * @see uk.ac.kcl.farm.farm.ReturnStatement
    * @generated
    */
-  public Adapter createAdditionAdapter()
+  public Adapter createReturnStatementAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.Multiplication <em>Multiplication</em>}'.
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.ExecuteStatement <em>Execute Statement</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see uk.ac.kcl.farm.farm.Multiplication
+   * @see uk.ac.kcl.farm.farm.ExecuteStatement
    * @generated
    */
-  public Adapter createMultiplicationAdapter()
+  public Adapter createExecuteStatementAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.OrExpression <em>Or Expression</em>}'.
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.ConditionOrExpression <em>Condition Or Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see uk.ac.kcl.farm.farm.OrExpression
+   * @see uk.ac.kcl.farm.farm.ConditionOrExpression
    * @generated
    */
-  public Adapter createOrExpressionAdapter()
+  public Adapter createConditionOrExpressionAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.AndExpression <em>And Expression</em>}'.
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.ConditionAndExpression <em>Condition And Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see uk.ac.kcl.farm.farm.AndExpression
+   * @see uk.ac.kcl.farm.farm.ConditionAndExpression
    * @generated
    */
-  public Adapter createAndExpressionAdapter()
+  public Adapter createConditionAndExpressionAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.ComparisonExpression <em>Comparison Expression</em>}'.
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.LessThanOrEqual <em>Less Than Or Equal</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see uk.ac.kcl.farm.farm.ComparisonExpression
+   * @see uk.ac.kcl.farm.farm.LessThanOrEqual
    * @generated
    */
-  public Adapter createComparisonExpressionAdapter()
+  public Adapter createLessThanOrEqualAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.LessThan <em>Less Than</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see uk.ac.kcl.farm.farm.LessThan
+   * @generated
+   */
+  public Adapter createLessThanAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.GreaterThanOrEqual <em>Greater Than Or Equal</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see uk.ac.kcl.farm.farm.GreaterThanOrEqual
+   * @generated
+   */
+  public Adapter createGreaterThanOrEqualAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.GreaterThan <em>Greater Than</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see uk.ac.kcl.farm.farm.GreaterThan
+   * @generated
+   */
+  public Adapter createGreaterThanAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.Equal <em>Equal</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see uk.ac.kcl.farm.farm.Equal
+   * @generated
+   */
+  public Adapter createEqualAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.NotEqual <em>Not Equal</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see uk.ac.kcl.farm.farm.NotEqual
+   * @generated
+   */
+  public Adapter createNotEqualAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.Plus <em>Plus</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see uk.ac.kcl.farm.farm.Plus
+   * @generated
+   */
+  public Adapter createPlusAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.Minus <em>Minus</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see uk.ac.kcl.farm.farm.Minus
+   * @generated
+   */
+  public Adapter createMinusAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.Multiply <em>Multiply</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see uk.ac.kcl.farm.farm.Multiply
+   * @generated
+   */
+  public Adapter createMultiplyAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.Divide <em>Divide</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see uk.ac.kcl.farm.farm.Divide
+   * @generated
+   */
+  public Adapter createDivideAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.UnaryExpression <em>Unary Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see uk.ac.kcl.farm.farm.UnaryExpression
+   * @generated
+   */
+  public Adapter createUnaryExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.BoolLiteral <em>Bool Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see uk.ac.kcl.farm.farm.BoolLiteral
+   * @generated
+   */
+  public Adapter createBoolLiteralAdapter()
   {
     return null;
   }

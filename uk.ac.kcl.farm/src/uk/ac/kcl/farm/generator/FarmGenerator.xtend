@@ -11,14 +11,12 @@ import uk.ac.kcl.farm.farm.LoopStatement
 // import uk.ac.kcl.farm.farm.MoveStatement
 // import uk.ac.kcl.farm.farm.TurnStatement
 import uk.ac.kcl.farm.farm.FarmProgram
-import uk.ac.kcl.farm.farm.VariableDeclaration
+import uk.ac.kcl.farm.farm.Variable
 import uk.ac.kcl.farm.farm.Statement
 // import uk.ac.kcl.farm.farm.TurnCommand
-import uk.ac.kcl.farm.farm.RealExpression
-import uk.ac.kcl.farm.farm.Addition
-import uk.ac.kcl.farm.farm.Multiplication
-import uk.ac.kcl.farm.farm.RealLiteral
-import uk.ac.kcl.farm.farm.RealVarExpression
+import uk.ac.kcl.farm.farm.Expression
+//import uk.ac.kcl.farm.farm.AdditionExpression
+//import uk.ac.kcl.farm.farm.MultiplicationExpression
 
 /**
  * Generates code from your model files on save.
@@ -49,7 +47,7 @@ class FarmGenerator extends AbstractGenerator {
 		Program contains:
 		
 		- «program.statements.filter(LoopStatement).size» top-level loops
-		- «program.eAllContents.filter(VariableDeclaration).size» variable declarations
+		- «program.eAllContents.filter(Variable).size» variable declarations
 	'''
 	
 	def String doGenerateClass(FarmProgram program, String className) '''
@@ -63,7 +61,7 @@ class FarmGenerator extends AbstractGenerator {
 				Farm t = new Farm(tf) {
 					@Override
 					protected void run() {
-						«program.statements.map[generateJavaStatement(new Environment)].join('\n')»
+«««						«program.statements.map[generateJavaStatement(new Environment)].join('\n')»
 					}
 				};
 				
@@ -103,11 +101,10 @@ class FarmGenerator extends AbstractGenerator {
 
 	*/
 	
-	dispatch def String generateJavaExpression(RealExpression exp) ''''''
-	dispatch def String generateJavaExpression(Addition exp) '''
-		(«exp.left.generateJavaExpression»«FOR idx: (0..exp.operator.size-1)» «exp.operator.get(idx)» «exp.right.get(idx).generateJavaExpression»«ENDFOR»)'''
-	dispatch def String generateJavaExpression(Multiplication exp) '''
-		«exp.left.generateJavaExpression»«FOR idx: (0..exp.operator.size-1)» «exp.operator.get(idx)» «exp.right.get(idx).generateJavaExpression»«ENDFOR»'''
-	dispatch def String generateJavaExpression(RealLiteral exp) '''«exp.^val»'''
-	dispatch def String generateJavaExpression(RealVarExpression exp) '''«exp.^var.value»'''
+	dispatch def String generateJavaExpression(Expression exp) ''''''
+//	dispatch def String generateJavaExpression(AdditionExpression exp) '''
+//		(«exp.left.generateJavaExpression»«FOR idx: (0..exp.operator.size-1)» «exp.operator.get(idx)» «exp.right.get(idx).generateJavaExpression»«ENDFOR»)'''
+//	dispatch def String generateJavaExpression(MultiplicationExpression exp) '''
+//		«exp.left.generateJavaExpression»«FOR idx: (0..exp.operator.size-1)» «exp.operator.get(idx)» «exp.right.get(idx).generateJavaExpression»«ENDFOR»'''
+//	dispatch def String generateJavaExpression(IntLiteral exp) '''«exp.^val»'''
 }

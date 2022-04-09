@@ -5,6 +5,7 @@ define temperature
 
 crop crop_A {
 	name : "tomato"
+	
 	stage : [
  		{
             name : "Sprout"
@@ -51,37 +52,51 @@ crop crop_A {
 	]
 }
 
-machine humidityController_1 {
-	name : "Humidity Controller"
-	ip : 192.168.sasdasd1.10
-	
-    task getHumidity() : real{
-        // var humidityAmount = communication("get", 0)
-        // return(humidityAmount)
-    }
+field greenhouse_1 {
+    name : "Large Greenhouse No.1"
+    ip: 10.2.3.455
+    type : outside
+    light : sunlight
+    monitor: [humidity]
+}
 
-    task setHumidity(real humidityAmount) :real {
-        // var timeConsumed = communication("add", humidityAmount)
-        // return(timeConsumed)
-    }
-
+field greenhouse_2 {
+    name : "Large Greenhouse No.2"
+    ip: 10.2.3.456
+    type : inside
+    light : sunlight
+    monitor : [temperature, humidity]
 }
 
 mission qwe {
 	task testParams(real number, crop cropOne) : null {
+		var ok = 123.3 
+		var intasd = 123.323
+		var qwe = 12.23
+}
+	execute {
+		var loopCounter = 10.0
+	
+		var condition = false
 		
+		if (false) {
+			
+		} elseif (true) {
+			
+		} 
+		
+		if (true) {} elseif (false && true) {
+			
+		} else {
+			
+		}
+		
+		while (false && true || true) {
+			var a = 1.0
+			var b = 2.0
+			var c = false
+			var d = (11.0 + 13.0) * 23.0
+			var e = (false || true) && (true && c)
+		}
 	}
-	
-	var loopCounter = 10.0
-	
-	var condition = false
-	
-	while ([false && true] || true) {
-		var a = 1.0
-		var b = 2.0
-		var c = false
-		var d = (11.0 + 13.0) * 23.0
-		var e = [false || true] && [true && c]
-	}
-	
 }

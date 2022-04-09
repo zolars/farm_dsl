@@ -5,27 +5,20 @@ package uk.ac.kcl.farm.generator;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
-import java.util.Arrays;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
-import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
-import uk.ac.kcl.farm.farm.Addition;
+import uk.ac.kcl.farm.farm.Expression;
 import uk.ac.kcl.farm.farm.FarmProgram;
 import uk.ac.kcl.farm.farm.LoopStatement;
-import uk.ac.kcl.farm.farm.Multiplication;
-import uk.ac.kcl.farm.farm.RealExpression;
-import uk.ac.kcl.farm.farm.RealLiteral;
-import uk.ac.kcl.farm.farm.RealVarExpression;
 import uk.ac.kcl.farm.farm.Statement;
-import uk.ac.kcl.farm.farm.VariableDeclaration;
-import uk.ac.kcl.farm.farm.VariableExpression;
+import uk.ac.kcl.farm.farm.Variable;
 
 /**
  * Generates code from your model files on save.
@@ -84,7 +77,7 @@ public class FarmGenerator extends AbstractGenerator {
     _builder.append(" top-level loops");
     _builder.newLineIfNotEmpty();
     _builder.append("- ");
-    int _size_1 = IteratorExtensions.size(Iterators.<VariableDeclaration>filter(program.eAllContents(), VariableDeclaration.class));
+    int _size_1 = IteratorExtensions.size(Iterators.<Variable>filter(program.eAllContents(), Variable.class));
     _builder.append(_size_1);
     _builder.append(" variable declarations");
     _builder.newLineIfNotEmpty();
@@ -92,8 +85,49 @@ public class FarmGenerator extends AbstractGenerator {
   }
   
   public String doGenerateClass(final FarmProgram program, final String className) {
-    throw new Error("Unresolved compilation problems:"
-      + "\nType mismatch: cannot convert implicit first argument from EObject to Statement");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import uk.ac.kcl.farm.library.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("public class ");
+    _builder.append(className);
+    _builder.append(" {");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public static void main (String[] args) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("FarmFrame tf = new FarmFrame();");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("Farm t = new Farm(tf) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("@Override");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("protected void run() {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("};");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("t.run();");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    return _builder.toString();
   }
   
   protected String _generateJavaStatement(final Statement stmt, final FarmGenerator.Environment env) {
@@ -120,64 +154,8 @@ public class FarmGenerator extends AbstractGenerator {
    * result
    * }
    */
-  protected String _generateJavaExpression(final RealExpression exp) {
+  protected String _generateJavaExpression(final Expression exp) {
     StringConcatenation _builder = new StringConcatenation();
-    return _builder.toString();
-  }
-  
-  protected String _generateJavaExpression(final Addition exp) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("(");
-    String _generateJavaExpression = this.generateJavaExpression(exp.getLeft());
-    _builder.append(_generateJavaExpression);
-    {
-      int _size = exp.getOperator().size();
-      int _minus = (_size - 1);
-      IntegerRange _upTo = new IntegerRange(0, _minus);
-      for(final Integer idx : _upTo) {
-        _builder.append(" ");
-        String _get = exp.getOperator().get((idx).intValue());
-        _builder.append(_get);
-        _builder.append(" ");
-        String _generateJavaExpression_1 = this.generateJavaExpression(exp.getRight().get((idx).intValue()));
-        _builder.append(_generateJavaExpression_1);
-      }
-    }
-    _builder.append(")");
-    return _builder.toString();
-  }
-  
-  protected String _generateJavaExpression(final Multiplication exp) {
-    StringConcatenation _builder = new StringConcatenation();
-    String _generateJavaExpression = this.generateJavaExpression(exp.getLeft());
-    _builder.append(_generateJavaExpression);
-    {
-      int _size = exp.getOperator().size();
-      int _minus = (_size - 1);
-      IntegerRange _upTo = new IntegerRange(0, _minus);
-      for(final Integer idx : _upTo) {
-        _builder.append(" ");
-        String _get = exp.getOperator().get((idx).intValue());
-        _builder.append(_get);
-        _builder.append(" ");
-        String _generateJavaExpression_1 = this.generateJavaExpression(exp.getRight().get((idx).intValue()));
-        _builder.append(_generateJavaExpression_1);
-      }
-    }
-    return _builder.toString();
-  }
-  
-  protected String _generateJavaExpression(final RealLiteral exp) {
-    StringConcatenation _builder = new StringConcatenation();
-    float _val = exp.getVal();
-    _builder.append(_val);
-    return _builder.toString();
-  }
-  
-  protected String _generateJavaExpression(final RealVarExpression exp) {
-    StringConcatenation _builder = new StringConcatenation();
-    VariableExpression _value = exp.getVar().getValue();
-    _builder.append(_value);
     return _builder.toString();
   }
   
@@ -185,20 +163,7 @@ public class FarmGenerator extends AbstractGenerator {
     return _generateJavaStatement(stmt, env);
   }
   
-  public String generateJavaExpression(final RealExpression exp) {
-    if (exp instanceof Addition) {
-      return _generateJavaExpression((Addition)exp);
-    } else if (exp instanceof Multiplication) {
-      return _generateJavaExpression((Multiplication)exp);
-    } else if (exp instanceof RealLiteral) {
-      return _generateJavaExpression((RealLiteral)exp);
-    } else if (exp instanceof RealVarExpression) {
-      return _generateJavaExpression((RealVarExpression)exp);
-    } else if (exp != null) {
-      return _generateJavaExpression(exp);
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(exp).toString());
-    }
+  public String generateJavaExpression(final Expression exp) {
+    return _generateJavaExpression(exp);
   }
 }

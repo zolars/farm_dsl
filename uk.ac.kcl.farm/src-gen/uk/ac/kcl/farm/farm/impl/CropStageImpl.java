@@ -21,8 +21,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import uk.ac.kcl.farm.farm.CropAttributes;
 import uk.ac.kcl.farm.farm.CropStage;
+import uk.ac.kcl.farm.farm.Expression;
 import uk.ac.kcl.farm.farm.FarmPackage;
-import uk.ac.kcl.farm.farm.RealExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -69,7 +69,7 @@ public class CropStageImpl extends MinimalEObjectImpl.Container implements CropS
    * @generated
    * @ordered
    */
-  protected RealExpression timeConsumend;
+  protected Expression timeConsumend;
 
   /**
    * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
@@ -133,7 +133,7 @@ public class CropStageImpl extends MinimalEObjectImpl.Container implements CropS
    * @generated
    */
   @Override
-  public RealExpression getTimeConsumend()
+  public Expression getTimeConsumend()
   {
     return timeConsumend;
   }
@@ -143,9 +143,9 @@ public class CropStageImpl extends MinimalEObjectImpl.Container implements CropS
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetTimeConsumend(RealExpression newTimeConsumend, NotificationChain msgs)
+  public NotificationChain basicSetTimeConsumend(Expression newTimeConsumend, NotificationChain msgs)
   {
-    RealExpression oldTimeConsumend = timeConsumend;
+    Expression oldTimeConsumend = timeConsumend;
     timeConsumend = newTimeConsumend;
     if (eNotificationRequired())
     {
@@ -161,7 +161,7 @@ public class CropStageImpl extends MinimalEObjectImpl.Container implements CropS
    * @generated
    */
   @Override
-  public void setTimeConsumend(RealExpression newTimeConsumend)
+  public void setTimeConsumend(Expression newTimeConsumend)
   {
     if (newTimeConsumend != timeConsumend)
     {
@@ -245,7 +245,7 @@ public class CropStageImpl extends MinimalEObjectImpl.Container implements CropS
         setName((String)newValue);
         return;
       case FarmPackage.CROP_STAGE__TIME_CONSUMEND:
-        setTimeConsumend((RealExpression)newValue);
+        setTimeConsumend((Expression)newValue);
         return;
       case FarmPackage.CROP_STAGE__ELEMENTS:
         getElements().clear();
@@ -269,7 +269,7 @@ public class CropStageImpl extends MinimalEObjectImpl.Container implements CropS
         setName(NAME_EDEFAULT);
         return;
       case FarmPackage.CROP_STAGE__TIME_CONSUMEND:
-        setTimeConsumend((RealExpression)null);
+        setTimeConsumend((Expression)null);
         return;
       case FarmPackage.CROP_STAGE__ELEMENTS:
         getElements().clear();

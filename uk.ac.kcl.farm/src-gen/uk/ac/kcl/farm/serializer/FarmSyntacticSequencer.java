@@ -10,6 +10,7 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.GroupAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynTransition;
@@ -20,18 +21,16 @@ import uk.ac.kcl.farm.services.FarmGrammarAccess;
 public class FarmSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected FarmGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_BooleanPrimary_LeftSquareBracketKeyword_1_0_a;
-	protected AbstractElementAlias match_BooleanPrimary_LeftSquareBracketKeyword_1_0_p;
-	protected AbstractElementAlias match_RealPrimary_LeftParenthesisKeyword_2_0_a;
-	protected AbstractElementAlias match_RealPrimary_LeftParenthesisKeyword_2_0_p;
+	protected AbstractElementAlias match_JudgeStatement___ElseKeyword_8_0_LeftCurlyBracketKeyword_8_1_RightCurlyBracketKeyword_8_3__q;
+	protected AbstractElementAlias match_PrimaryExpression_LeftParenthesisKeyword_2_0_a;
+	protected AbstractElementAlias match_PrimaryExpression_LeftParenthesisKeyword_2_0_p;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (FarmGrammarAccess) access;
-		match_BooleanPrimary_LeftSquareBracketKeyword_1_0_a = new TokenAlias(true, true, grammarAccess.getBooleanPrimaryAccess().getLeftSquareBracketKeyword_1_0());
-		match_BooleanPrimary_LeftSquareBracketKeyword_1_0_p = new TokenAlias(true, false, grammarAccess.getBooleanPrimaryAccess().getLeftSquareBracketKeyword_1_0());
-		match_RealPrimary_LeftParenthesisKeyword_2_0_a = new TokenAlias(true, true, grammarAccess.getRealPrimaryAccess().getLeftParenthesisKeyword_2_0());
-		match_RealPrimary_LeftParenthesisKeyword_2_0_p = new TokenAlias(true, false, grammarAccess.getRealPrimaryAccess().getLeftParenthesisKeyword_2_0());
+		match_JudgeStatement___ElseKeyword_8_0_LeftCurlyBracketKeyword_8_1_RightCurlyBracketKeyword_8_3__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getJudgeStatementAccess().getElseKeyword_8_0()), new TokenAlias(false, false, grammarAccess.getJudgeStatementAccess().getLeftCurlyBracketKeyword_8_1()), new TokenAlias(false, false, grammarAccess.getJudgeStatementAccess().getRightCurlyBracketKeyword_8_3()));
+		match_PrimaryExpression_LeftParenthesisKeyword_2_0_a = new TokenAlias(true, true, grammarAccess.getPrimaryExpressionAccess().getLeftParenthesisKeyword_2_0());
+		match_PrimaryExpression_LeftParenthesisKeyword_2_0_p = new TokenAlias(true, false, grammarAccess.getPrimaryExpressionAccess().getLeftParenthesisKeyword_2_0());
 	}
 	
 	@Override
@@ -46,14 +45,12 @@ public class FarmSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_BooleanPrimary_LeftSquareBracketKeyword_1_0_a.equals(syntax))
-				emit_BooleanPrimary_LeftSquareBracketKeyword_1_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_BooleanPrimary_LeftSquareBracketKeyword_1_0_p.equals(syntax))
-				emit_BooleanPrimary_LeftSquareBracketKeyword_1_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_RealPrimary_LeftParenthesisKeyword_2_0_a.equals(syntax))
-				emit_RealPrimary_LeftParenthesisKeyword_2_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if (match_RealPrimary_LeftParenthesisKeyword_2_0_p.equals(syntax))
-				emit_RealPrimary_LeftParenthesisKeyword_2_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
+			if (match_JudgeStatement___ElseKeyword_8_0_LeftCurlyBracketKeyword_8_1_RightCurlyBracketKeyword_8_3__q.equals(syntax))
+				emit_JudgeStatement___ElseKeyword_8_0_LeftCurlyBracketKeyword_8_1_RightCurlyBracketKeyword_8_3__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_PrimaryExpression_LeftParenthesisKeyword_2_0_a.equals(syntax))
+				emit_PrimaryExpression_LeftParenthesisKeyword_2_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_PrimaryExpression_LeftParenthesisKeyword_2_0_p.equals(syntax))
+				emit_PrimaryExpression_LeftParenthesisKeyword_2_0_p(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
@@ -61,35 +58,16 @@ public class FarmSyntacticSequencer extends AbstractSyntacticSequencer {
 	/**
 	 * <pre>
 	 * Ambiguous syntax:
-	 *     '['*
+	 *     ('else' '{' '}')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) 'false' (rule start)
-	 *     (rule start) (ambiguity) val='true'
-	 *     (rule start) (ambiguity) var=[VariableDeclaration|ID]
-	 *     (rule start) (ambiguity) {AndExpression.left=}
-	 *     (rule start) (ambiguity) {ComparisonExpression.left=}
-	 *     (rule start) (ambiguity) {OrExpression.left=}
+	 *     condition=Expression ')' '{' '}' (ambiguity) (rule end)
+	 *     elseif+=ElseJudgeStatement (ambiguity) (rule end)
+	 *     statements+=Statement '}' (ambiguity) (rule end)
 	 
 	 * </pre>
 	 */
-	protected void emit_BooleanPrimary_LeftSquareBracketKeyword_1_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * <pre>
-	 * Ambiguous syntax:
-	 *     '['+
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) {AndExpression.left=}
-	 *     (rule start) (ambiguity) {ComparisonExpression.left=}
-	 *     (rule start) (ambiguity) {OrExpression.left=}
-	 
-	 * </pre>
-	 */
-	protected void emit_BooleanPrimary_LeftSquareBracketKeyword_1_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_JudgeStatement___ElseKeyword_8_0_LeftCurlyBracketKeyword_8_1_RightCurlyBracketKeyword_8_3__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -99,14 +77,27 @@ public class FarmSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     '('*
 	 *
 	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) '!' exp=UnaryExpression
+	 *     (rule start) (ambiguity) '-' exp=UnaryExpression
+	 *     (rule start) (ambiguity) val=BOOLEAN
 	 *     (rule start) (ambiguity) val=REAL
-	 *     (rule start) (ambiguity) var=[VariableDeclaration|ID]
-	 *     (rule start) (ambiguity) {Addition.left=}
-	 *     (rule start) (ambiguity) {Multiplication.left=}
+	 *     (rule start) (ambiguity) var=[Variable|ID]
+	 *     (rule start) (ambiguity) {ConditionAndExpression.left=}
+	 *     (rule start) (ambiguity) {ConditionOrExpression.left=}
+	 *     (rule start) (ambiguity) {Divide.left=}
+	 *     (rule start) (ambiguity) {Equal.left=}
+	 *     (rule start) (ambiguity) {GreaterThan.left=}
+	 *     (rule start) (ambiguity) {GreaterThanOrEqual.left=}
+	 *     (rule start) (ambiguity) {LessThan.left=}
+	 *     (rule start) (ambiguity) {LessThanOrEqual.left=}
+	 *     (rule start) (ambiguity) {Minus.left=}
+	 *     (rule start) (ambiguity) {Multiply.left=}
+	 *     (rule start) (ambiguity) {NotEqual.left=}
+	 *     (rule start) (ambiguity) {Plus.left=}
 	 
 	 * </pre>
 	 */
-	protected void emit_RealPrimary_LeftParenthesisKeyword_2_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_PrimaryExpression_LeftParenthesisKeyword_2_0_a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -116,12 +107,24 @@ public class FarmSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     '('+
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     (rule start) (ambiguity) {Addition.left=}
-	 *     (rule start) (ambiguity) {Multiplication.left=}
+	 *     (rule start) (ambiguity) '!' exp=UnaryExpression
+	 *     (rule start) (ambiguity) '-' exp=UnaryExpression
+	 *     (rule start) (ambiguity) {ConditionAndExpression.left=}
+	 *     (rule start) (ambiguity) {ConditionOrExpression.left=}
+	 *     (rule start) (ambiguity) {Divide.left=}
+	 *     (rule start) (ambiguity) {Equal.left=}
+	 *     (rule start) (ambiguity) {GreaterThan.left=}
+	 *     (rule start) (ambiguity) {GreaterThanOrEqual.left=}
+	 *     (rule start) (ambiguity) {LessThan.left=}
+	 *     (rule start) (ambiguity) {LessThanOrEqual.left=}
+	 *     (rule start) (ambiguity) {Minus.left=}
+	 *     (rule start) (ambiguity) {Multiply.left=}
+	 *     (rule start) (ambiguity) {NotEqual.left=}
+	 *     (rule start) (ambiguity) {Plus.left=}
 	 
 	 * </pre>
 	 */
-	protected void emit_RealPrimary_LeftParenthesisKeyword_2_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_PrimaryExpression_LeftParenthesisKeyword_2_0_p(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

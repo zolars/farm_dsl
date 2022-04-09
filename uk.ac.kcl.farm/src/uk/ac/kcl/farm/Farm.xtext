@@ -5,21 +5,19 @@ generate farm "http://www.ac.uk/kcl/farm/Farm"
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 FarmProgram:
-	statements += (Class | AttributeDeclaration)*
+	statements += (Class | Attribute)+
 ;
 
 // General statement
 
 Class:
 	Crop |
-	Machine |
 	Field |
 	Mission
 ;
 
 Param:
 	"crop" param=ID |
-	"machine" param=ID |
 	"field" param=ID |
 	"mission" param=ID |
 	"real" param=ID |
@@ -31,30 +29,85 @@ TypeName:
 ;
 
 Statement:
-	VariableDeclaration |
-	LoopStatement
+	Variable |
+	LoopStatement |
+	JudgeStatement |
+	BuiltinFunction
 ;
 
-VariableDeclaration:
-	"var" name=ID "=" value=VariableExpression
-;
-
-VariableExpression:
-	RealExpression | ConditionExpression
+Variable:
+	"var" name=ID "=" value=Expression
 ;
 
 LoopStatement:
-	"while" "(" condition=ConditionExpression ")" "{"
-		statements += Statement+
+	"while" "(" condition=Expression ")" "{"
+		statements += Statement*
 	"}"
 ;
 
-//ReturnStatement:
-//	"return" "(" value=(VariableExpression | [VariableDeclaration]) ")" 
-//;
+JudgeStatement:
+	"if" "(" condition=Expression ")" "{"
+		statements += Statement*
+	"}" elseif += ElseJudgeStatement*
+	("else" "{" elseStatement += Statement* "}")?
+;
+
+ElseJudgeStatement:
+	"elseif" "(" condition=Expression ")" "{"
+		statements += Statement*
+	"}"
+;
+
+BuiltinFunction:
+	ReportFunction | 
+	GetStageFunction |
+	CountStageFunction |
+	GetCropValueFunction |
+	GetFieldValueFunction |
+	SetFieldValueFunction |
+	PlantFunction | 
+	MoveFunction |
+	WaitFunction
+;
+
+ReportFunction hidden():
+	reportCrop=[Crop | ID] | reportField=[Field | ID] ".report(" ")"
+;
+
+GetStageFunction hidden():
+	getStageCrop=[Crop | ID] ".getStage(" stageNumber=INT ")"
+;
+
+CountStageFunction hidden():
+	countStageCrop=[Crop | ID] ".countStage(" ")"
+;
+
+GetCropValueFunction hidden():
+	getValueCrop=[Crop | ID] ".getCropValue(" getCropAttribute=STRING ")"
+;
+
+GetFieldValueFunction hidden():
+	getValueField=[Field | ID] ".getFieldValue(" getFieldAttribute=STRING ")"
+;
+
+SetFieldValueFunction hidden():
+	setValueField=[Field | ID] ".setFieldValue(" setFieldAttribute=STRING "," setFieldValue=AdditionExpression ")"
+;
+
+PlantFunction hidden():
+	plantInField=[Field | ID] ".plant(" plantCrop=[Crop | ID] ")"
+;
+
+MoveFunction hidden():
+	"move(" moveFromField=[Field | ID] ","  moveToField=[Field | ID] ")"
+;
+
+WaitFunction hidden():
+	"wait(" value=AdditionExpression ")"
+;
 
 // MoveStatement:
-// 	command = MoveCommand "(" steps = Addition ")"
+// 	command=MoveCommand "(" steps=Addition ")"
 // ;
 
 // enum MoveCommand:
@@ -62,73 +115,97 @@ LoopStatement:
 // ;
 
 // TurnStatement:
-// 	"turn" command = TurnCommand "by" degrees = REAL "degrees"
+// 	"turn" command=TurnCommand "by" degrees=REAL "degrees"
 // ;
 
 // enum TurnCommand:
 // 	left | right
 // ;
 
-RealExpression:
-	Addition
+//Expressions
+
+Expression:
+	ConditionOrExpression
 ;
 
-Addition returns RealExpression:
-	Multiplication ({Addition.left = current} operator+=("+"|"-") right+=Multiplication)*
+ConditionOrExpression returns Expression:
+	ConditionAndExpression => (
+		{ConditionOrExpression.left=current} "||" right=ConditionAndExpression
+	)*
 ;
 
-Multiplication returns RealExpression:
-	RealPrimary ({Multiplication.left = current} operator+=("*"|"/") right+=RealPrimary)*
+ConditionAndExpression returns Expression:
+	RelationOrExpression => (
+		{ConditionAndExpression.left=current} "&&" right=RelationOrExpression
+	)*
 ;
 
-RealPrimary returns RealExpression:
-	RealLiteral |
-	RealVarExpression |
-	"(" Addition ")"
+RelationOrExpression returns Expression:
+	AdditionExpression ( => (
+		{LessThanOrEqual.left=current} "<=" |
+		{LessThan.left=current} "<" |
+		{GreaterThanOrEqual.left=current} ">=" |
+		{GreaterThan.left=current} ">" |
+		{Equal.left=current} "==" |
+		{NotEqual.left=current} "!="
+	) right=AdditionExpression )* 
+;
+
+AdditionExpression returns Expression:
+	MultiplicationExpression ( => (
+		{Plus.left=current} "+" |
+		{Minus.left=current} "-"
+	) right+=MultiplicationExpression )*
+;
+
+MultiplicationExpression returns Expression:
+	UnaryExpression ( => (
+		{Multiply.left=current} "*" | 
+		{Divide.left=current} "/" 
+	) right+=UnaryExpression)*
+;
+
+UnaryExpression returns Expression:
+	UnaryExpressionNotPlusMinus |
+	({UnaryExpression} "-" exp=UnaryExpression) 
+;
+
+UnaryExpressionNotPlusMinus returns Expression:
+	NotBooleanExpression | PrimaryExpression
+;
+
+NotBooleanExpression returns Expression:
+	"!" exp=UnaryExpression
+;
+
+PrimaryExpression returns Expression:
+	Literal |
+	var=[Variable | ID] |
+	"(" Expression ")"
+;
+
+Literal:
+	BooleanLiteral | RealLiteral
+;
+
+BooleanLiteral:
+	{BoolLiteral} val=BOOLEAN
+;
+
+terminal BOOLEAN returns ecore::EBoolean:
+	"true" | "false"
 ;
 
 RealLiteral:
-	val = REAL
-;
-
-RealVarExpression:
-	var = [VariableDeclaration]
+	{RealLiteral} val=REAL
 ;
 
 REAL returns ecore::EFloat hidden():
 	INT? "." INT
 ;
 
-ConditionExpression:
-	OrExpression
-;
-
-OrExpression returns ConditionExpression:
-	AndExpression ({OrExpression.left = current} operator+=("||") right+=AndExpression)*
-;
-
-AndExpression returns ConditionExpression:
-	ComparisonExpression ({AndExpression.left = current} operator+=("&&") right+=ComparisonExpression)*
-;
-
-ComparisonExpression returns ConditionExpression:
-    BooleanPrimary ({ComparisonExpression.left=current} operator=("<"|"<="|"=="|">="|">") right=BooleanPrimary)*
-;
-
-BooleanPrimary returns ConditionExpression:
-	BooleanLiteral | "[" OrExpression "]"  | BooleanVarExpression
-;
-
-BooleanLiteral:
-	val="true" | "false"
-;
-
-BooleanVarExpression:
- 	var = [VariableDeclaration]
-;
-
 // Define codes
-AttributeDeclaration:
+Attribute:
 	"define" name=ID
 ;
 
@@ -149,47 +226,54 @@ CropStages:
 CropStage:
 	"{"	
 		"name" ":" name=STRING
-		"timeConsumed" ":" timeConsumend=RealExpression
+		"timeConsumed" ":" timeConsumend=Expression
 		elements += CropAttributes*
 	"}"
 ;
 
 CropAttributes:
-	type=[AttributeDeclaration] ":" value=RealExpression
+	type=[Attribute | ID] ":" value=Expression
 ;
-
-// Machine code block
-Machine:
-	"machine" name=ID "{"
-		"name" ":" machineName=STRING
-		"ip" ":" ip=IP
-		statements += Task+
-	"}"
-;
-
-IP:
-	(INT '.' (INT '.' (INT '.' (INT))))
-;
-
 
 // Field code block
 Field:
 	"field" name=ID "{"
-		"field"
+		"name" ":" fieldName=STRING
+		"ip" ":" ip=IP
+		"type" ":" fieldType=("inside" | "outside")
+		"light" ":" fieldLight=("sunlight" | "LED")
+		"monitor" ":" "[" fieldMonitors+=FieldMonitor ("," fieldMonitors+=FieldMonitor)* "]"
 	"}"
+;
+
+IP hidden():
+	(INT '.' (INT '.' (INT '.' (INT))))
+;
+
+FieldMonitor:
+	monitor=[Attribute | ID]
 ;
 
 // Main code block
 Mission:
 	"mission" name=ID "{"
-		statements += (Statement | Task)+
+		statements += (Task | ExecuteStatement)+
 	"}"
 ;
 
 // Task code block
 Task:
 	"task" name=ID "(" (parmas+=Param ("," parmas+=Param)*)? ")" ":" typeName=TypeName "{"
-		statements += Statement*
+		statements += (Statement | ReturnStatement)*
 	"}"
 ;
 
+ReturnStatement:
+	"return" "(" value=Expression ")" 
+;
+
+ExecuteStatement:
+	"execute" "{"
+		statements += Statement*
+	"}"
+;

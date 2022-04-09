@@ -11,6 +11,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -21,7 +22,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import uk.ac.kcl.farm.farm.FarmPackage;
 import uk.ac.kcl.farm.farm.Param;
-import uk.ac.kcl.farm.farm.Statement;
 import uk.ac.kcl.farm.farm.Task;
 
 /**
@@ -100,7 +100,7 @@ public class TaskImpl extends MinimalEObjectImpl.Container implements Task
    * @generated
    * @ordered
    */
-  protected EList<Statement> statements;
+  protected EList<EObject> statements;
 
   /**
    * <!-- begin-user-doc -->
@@ -194,11 +194,11 @@ public class TaskImpl extends MinimalEObjectImpl.Container implements Task
    * @generated
    */
   @Override
-  public EList<Statement> getStatements()
+  public EList<EObject> getStatements()
   {
     if (statements == null)
     {
-      statements = new EObjectContainmentEList<Statement>(Statement.class, this, FarmPackage.TASK__STATEMENTS);
+      statements = new EObjectContainmentEList<EObject>(EObject.class, this, FarmPackage.TASK__STATEMENTS);
     }
     return statements;
   }
@@ -266,7 +266,7 @@ public class TaskImpl extends MinimalEObjectImpl.Container implements Task
         return;
       case FarmPackage.TASK__STATEMENTS:
         getStatements().clear();
-        getStatements().addAll((Collection<? extends Statement>)newValue);
+        getStatements().addAll((Collection<? extends EObject>)newValue);
         return;
     }
     super.eSet(featureID, newValue);

@@ -20,7 +20,7 @@ package uk.ac.kcl.farm.farm;
  * @model
  * @generated
  */
-public interface RealLiteral extends RealExpression
+public interface RealLiteral extends Literal
 {
   /**
    * Returns the value of the '<em><b>Val</b></em>' attribute.

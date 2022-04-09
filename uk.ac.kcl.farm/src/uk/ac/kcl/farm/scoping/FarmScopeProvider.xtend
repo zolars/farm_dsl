@@ -6,11 +6,10 @@ package uk.ac.kcl.farm.scoping
 import org.eclipse.emf.ecore.EReference
 import org.eclipse.xtext.scoping.IScope
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider
-import uk.ac.kcl.farm.farm.RealExpression
-import uk.ac.kcl.farm.farm.RealVarExpression
+import uk.ac.kcl.farm.farm.Expression
 import uk.ac.kcl.farm.farm.LoopStatement
 import uk.ac.kcl.farm.farm.FarmProgram
-import uk.ac.kcl.farm.farm.VariableDeclaration
+import uk.ac.kcl.farm.farm.Variable
 
 import static org.eclipse.xtext.scoping.Scopes.*
 
@@ -21,16 +20,16 @@ import static org.eclipse.xtext.scoping.Scopes.*
  * on how and when to use it.
  */
 class FarmScopeProvider extends AbstractDeclarativeScopeProvider {
-	def IScope scope_IntVarExpression_var(RealVarExpression context, EReference ref) {
+	def IScope scope_IntVarExpression_var(Expression context, EReference ref) {
 		context.visibleVariablesScope
 	}
 	
-	dispatch def IScope visibleVariablesScope(RealExpression ip) {
+	dispatch def IScope visibleVariablesScope(Expression ip) {
 		ip.eContainer.visibleVariablesScope
 	}
 	
 	dispatch def IScope visibleVariablesScope(FarmProgram tp) {
-		scopeFor(tp.statements.filter(VariableDeclaration))
+		scopeFor(tp.statements.filter(Variable))
 	}
 	
 	dispatch def IScope visibleVariablesScope(LoopStatement ls) {
@@ -38,10 +37,10 @@ class FarmScopeProvider extends AbstractDeclarativeScopeProvider {
 	}
 
 	dispatch def IScope internalVisibleVariablesScope(FarmProgram tp) {
-		scopeFor(tp.statements.filter(VariableDeclaration))
+		scopeFor(tp.statements.filter(Variable))
 	}
 	
 	dispatch def IScope internalVisibleVariablesScope(LoopStatement ls) {
-		scopeFor(ls.statements.filter(VariableDeclaration), ls.eContainer.internalVisibleVariablesScope)
+		scopeFor(ls.statements.filter(Variable), ls.eContainer.internalVisibleVariablesScope)
 	}
 }

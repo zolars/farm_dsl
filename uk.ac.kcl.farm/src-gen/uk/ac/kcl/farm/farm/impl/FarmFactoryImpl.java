@@ -11,34 +11,54 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import uk.ac.kcl.farm.farm.Addition;
-import uk.ac.kcl.farm.farm.AndExpression;
-import uk.ac.kcl.farm.farm.AttributeDeclaration;
+import uk.ac.kcl.farm.farm.Attribute;
+import uk.ac.kcl.farm.farm.BoolLiteral;
 import uk.ac.kcl.farm.farm.BooleanLiteral;
-import uk.ac.kcl.farm.farm.BooleanVarExpression;
-import uk.ac.kcl.farm.farm.ComparisonExpression;
-import uk.ac.kcl.farm.farm.ConditionExpression;
+import uk.ac.kcl.farm.farm.BuiltinFunction;
+import uk.ac.kcl.farm.farm.ConditionAndExpression;
+import uk.ac.kcl.farm.farm.ConditionOrExpression;
+import uk.ac.kcl.farm.farm.CountStageFunction;
 import uk.ac.kcl.farm.farm.Crop;
 import uk.ac.kcl.farm.farm.CropAttributes;
 import uk.ac.kcl.farm.farm.CropStage;
 import uk.ac.kcl.farm.farm.CropStages;
+import uk.ac.kcl.farm.farm.Divide;
+import uk.ac.kcl.farm.farm.ElseJudgeStatement;
+import uk.ac.kcl.farm.farm.Equal;
+import uk.ac.kcl.farm.farm.ExecuteStatement;
+import uk.ac.kcl.farm.farm.Expression;
 import uk.ac.kcl.farm.farm.FarmFactory;
 import uk.ac.kcl.farm.farm.FarmPackage;
 import uk.ac.kcl.farm.farm.FarmProgram;
 import uk.ac.kcl.farm.farm.Field;
+import uk.ac.kcl.farm.farm.FieldMonitor;
+import uk.ac.kcl.farm.farm.GetCropValueFunction;
+import uk.ac.kcl.farm.farm.GetFieldValueFunction;
+import uk.ac.kcl.farm.farm.GetStageFunction;
+import uk.ac.kcl.farm.farm.GreaterThan;
+import uk.ac.kcl.farm.farm.GreaterThanOrEqual;
+import uk.ac.kcl.farm.farm.JudgeStatement;
+import uk.ac.kcl.farm.farm.LessThan;
+import uk.ac.kcl.farm.farm.LessThanOrEqual;
+import uk.ac.kcl.farm.farm.Literal;
 import uk.ac.kcl.farm.farm.LoopStatement;
-import uk.ac.kcl.farm.farm.Machine;
+import uk.ac.kcl.farm.farm.Minus;
 import uk.ac.kcl.farm.farm.Mission;
-import uk.ac.kcl.farm.farm.Multiplication;
-import uk.ac.kcl.farm.farm.OrExpression;
+import uk.ac.kcl.farm.farm.MoveFunction;
+import uk.ac.kcl.farm.farm.Multiply;
+import uk.ac.kcl.farm.farm.NotEqual;
 import uk.ac.kcl.farm.farm.Param;
-import uk.ac.kcl.farm.farm.RealExpression;
+import uk.ac.kcl.farm.farm.PlantFunction;
+import uk.ac.kcl.farm.farm.Plus;
 import uk.ac.kcl.farm.farm.RealLiteral;
-import uk.ac.kcl.farm.farm.RealVarExpression;
+import uk.ac.kcl.farm.farm.ReportFunction;
+import uk.ac.kcl.farm.farm.ReturnStatement;
+import uk.ac.kcl.farm.farm.SetFieldValueFunction;
 import uk.ac.kcl.farm.farm.Statement;
 import uk.ac.kcl.farm.farm.Task;
-import uk.ac.kcl.farm.farm.VariableDeclaration;
-import uk.ac.kcl.farm.farm.VariableExpression;
+import uk.ac.kcl.farm.farm.UnaryExpression;
+import uk.ac.kcl.farm.farm.Variable;
+import uk.ac.kcl.farm.farm.WaitFunction;
 
 /**
  * <!-- begin-user-doc -->
@@ -96,29 +116,49 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
       case FarmPackage.CLASS: return createClass();
       case FarmPackage.PARAM: return createParam();
       case FarmPackage.STATEMENT: return createStatement();
-      case FarmPackage.VARIABLE_DECLARATION: return createVariableDeclaration();
-      case FarmPackage.VARIABLE_EXPRESSION: return createVariableExpression();
+      case FarmPackage.VARIABLE: return createVariable();
       case FarmPackage.LOOP_STATEMENT: return createLoopStatement();
-      case FarmPackage.REAL_EXPRESSION: return createRealExpression();
-      case FarmPackage.REAL_LITERAL: return createRealLiteral();
-      case FarmPackage.REAL_VAR_EXPRESSION: return createRealVarExpression();
-      case FarmPackage.CONDITION_EXPRESSION: return createConditionExpression();
+      case FarmPackage.JUDGE_STATEMENT: return createJudgeStatement();
+      case FarmPackage.ELSE_JUDGE_STATEMENT: return createElseJudgeStatement();
+      case FarmPackage.BUILTIN_FUNCTION: return createBuiltinFunction();
+      case FarmPackage.REPORT_FUNCTION: return createReportFunction();
+      case FarmPackage.GET_STAGE_FUNCTION: return createGetStageFunction();
+      case FarmPackage.COUNT_STAGE_FUNCTION: return createCountStageFunction();
+      case FarmPackage.GET_CROP_VALUE_FUNCTION: return createGetCropValueFunction();
+      case FarmPackage.GET_FIELD_VALUE_FUNCTION: return createGetFieldValueFunction();
+      case FarmPackage.SET_FIELD_VALUE_FUNCTION: return createSetFieldValueFunction();
+      case FarmPackage.PLANT_FUNCTION: return createPlantFunction();
+      case FarmPackage.MOVE_FUNCTION: return createMoveFunction();
+      case FarmPackage.WAIT_FUNCTION: return createWaitFunction();
+      case FarmPackage.EXPRESSION: return createExpression();
+      case FarmPackage.LITERAL: return createLiteral();
       case FarmPackage.BOOLEAN_LITERAL: return createBooleanLiteral();
-      case FarmPackage.BOOLEAN_VAR_EXPRESSION: return createBooleanVarExpression();
-      case FarmPackage.ATTRIBUTE_DECLARATION: return createAttributeDeclaration();
+      case FarmPackage.REAL_LITERAL: return createRealLiteral();
+      case FarmPackage.ATTRIBUTE: return createAttribute();
       case FarmPackage.CROP: return createCrop();
       case FarmPackage.CROP_STAGES: return createCropStages();
       case FarmPackage.CROP_STAGE: return createCropStage();
       case FarmPackage.CROP_ATTRIBUTES: return createCropAttributes();
-      case FarmPackage.MACHINE: return createMachine();
       case FarmPackage.FIELD: return createField();
+      case FarmPackage.FIELD_MONITOR: return createFieldMonitor();
       case FarmPackage.MISSION: return createMission();
       case FarmPackage.TASK: return createTask();
-      case FarmPackage.ADDITION: return createAddition();
-      case FarmPackage.MULTIPLICATION: return createMultiplication();
-      case FarmPackage.OR_EXPRESSION: return createOrExpression();
-      case FarmPackage.AND_EXPRESSION: return createAndExpression();
-      case FarmPackage.COMPARISON_EXPRESSION: return createComparisonExpression();
+      case FarmPackage.RETURN_STATEMENT: return createReturnStatement();
+      case FarmPackage.EXECUTE_STATEMENT: return createExecuteStatement();
+      case FarmPackage.CONDITION_OR_EXPRESSION: return createConditionOrExpression();
+      case FarmPackage.CONDITION_AND_EXPRESSION: return createConditionAndExpression();
+      case FarmPackage.LESS_THAN_OR_EQUAL: return createLessThanOrEqual();
+      case FarmPackage.LESS_THAN: return createLessThan();
+      case FarmPackage.GREATER_THAN_OR_EQUAL: return createGreaterThanOrEqual();
+      case FarmPackage.GREATER_THAN: return createGreaterThan();
+      case FarmPackage.EQUAL: return createEqual();
+      case FarmPackage.NOT_EQUAL: return createNotEqual();
+      case FarmPackage.PLUS: return createPlus();
+      case FarmPackage.MINUS: return createMinus();
+      case FarmPackage.MULTIPLY: return createMultiply();
+      case FarmPackage.DIVIDE: return createDivide();
+      case FarmPackage.UNARY_EXPRESSION: return createUnaryExpression();
+      case FarmPackage.BOOL_LITERAL: return createBoolLiteral();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -178,22 +218,10 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
    * @generated
    */
   @Override
-  public VariableDeclaration createVariableDeclaration()
+  public Variable createVariable()
   {
-    VariableDeclarationImpl variableDeclaration = new VariableDeclarationImpl();
-    return variableDeclaration;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public VariableExpression createVariableExpression()
-  {
-    VariableExpressionImpl variableExpression = new VariableExpressionImpl();
-    return variableExpression;
+    VariableImpl variable = new VariableImpl();
+    return variable;
   }
 
   /**
@@ -214,10 +242,10 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
    * @generated
    */
   @Override
-  public RealExpression createRealExpression()
+  public JudgeStatement createJudgeStatement()
   {
-    RealExpressionImpl realExpression = new RealExpressionImpl();
-    return realExpression;
+    JudgeStatementImpl judgeStatement = new JudgeStatementImpl();
+    return judgeStatement;
   }
 
   /**
@@ -226,10 +254,10 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
    * @generated
    */
   @Override
-  public RealLiteral createRealLiteral()
+  public ElseJudgeStatement createElseJudgeStatement()
   {
-    RealLiteralImpl realLiteral = new RealLiteralImpl();
-    return realLiteral;
+    ElseJudgeStatementImpl elseJudgeStatement = new ElseJudgeStatementImpl();
+    return elseJudgeStatement;
   }
 
   /**
@@ -238,10 +266,10 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
    * @generated
    */
   @Override
-  public RealVarExpression createRealVarExpression()
+  public BuiltinFunction createBuiltinFunction()
   {
-    RealVarExpressionImpl realVarExpression = new RealVarExpressionImpl();
-    return realVarExpression;
+    BuiltinFunctionImpl builtinFunction = new BuiltinFunctionImpl();
+    return builtinFunction;
   }
 
   /**
@@ -250,10 +278,130 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
    * @generated
    */
   @Override
-  public ConditionExpression createConditionExpression()
+  public ReportFunction createReportFunction()
   {
-    ConditionExpressionImpl conditionExpression = new ConditionExpressionImpl();
-    return conditionExpression;
+    ReportFunctionImpl reportFunction = new ReportFunctionImpl();
+    return reportFunction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public GetStageFunction createGetStageFunction()
+  {
+    GetStageFunctionImpl getStageFunction = new GetStageFunctionImpl();
+    return getStageFunction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public CountStageFunction createCountStageFunction()
+  {
+    CountStageFunctionImpl countStageFunction = new CountStageFunctionImpl();
+    return countStageFunction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public GetCropValueFunction createGetCropValueFunction()
+  {
+    GetCropValueFunctionImpl getCropValueFunction = new GetCropValueFunctionImpl();
+    return getCropValueFunction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public GetFieldValueFunction createGetFieldValueFunction()
+  {
+    GetFieldValueFunctionImpl getFieldValueFunction = new GetFieldValueFunctionImpl();
+    return getFieldValueFunction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public SetFieldValueFunction createSetFieldValueFunction()
+  {
+    SetFieldValueFunctionImpl setFieldValueFunction = new SetFieldValueFunctionImpl();
+    return setFieldValueFunction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public PlantFunction createPlantFunction()
+  {
+    PlantFunctionImpl plantFunction = new PlantFunctionImpl();
+    return plantFunction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public MoveFunction createMoveFunction()
+  {
+    MoveFunctionImpl moveFunction = new MoveFunctionImpl();
+    return moveFunction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public WaitFunction createWaitFunction()
+  {
+    WaitFunctionImpl waitFunction = new WaitFunctionImpl();
+    return waitFunction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Expression createExpression()
+  {
+    ExpressionImpl expression = new ExpressionImpl();
+    return expression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Literal createLiteral()
+  {
+    LiteralImpl literal = new LiteralImpl();
+    return literal;
   }
 
   /**
@@ -274,10 +422,10 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
    * @generated
    */
   @Override
-  public BooleanVarExpression createBooleanVarExpression()
+  public RealLiteral createRealLiteral()
   {
-    BooleanVarExpressionImpl booleanVarExpression = new BooleanVarExpressionImpl();
-    return booleanVarExpression;
+    RealLiteralImpl realLiteral = new RealLiteralImpl();
+    return realLiteral;
   }
 
   /**
@@ -286,10 +434,10 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
    * @generated
    */
   @Override
-  public AttributeDeclaration createAttributeDeclaration()
+  public Attribute createAttribute()
   {
-    AttributeDeclarationImpl attributeDeclaration = new AttributeDeclarationImpl();
-    return attributeDeclaration;
+    AttributeImpl attribute = new AttributeImpl();
+    return attribute;
   }
 
   /**
@@ -346,10 +494,10 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
    * @generated
    */
   @Override
-  public Machine createMachine()
+  public Field createField()
   {
-    MachineImpl machine = new MachineImpl();
-    return machine;
+    FieldImpl field = new FieldImpl();
+    return field;
   }
 
   /**
@@ -358,10 +506,10 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
    * @generated
    */
   @Override
-  public Field createField()
+  public FieldMonitor createFieldMonitor()
   {
-    FieldImpl field = new FieldImpl();
-    return field;
+    FieldMonitorImpl fieldMonitor = new FieldMonitorImpl();
+    return fieldMonitor;
   }
 
   /**
@@ -394,10 +542,10 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
    * @generated
    */
   @Override
-  public Addition createAddition()
+  public ReturnStatement createReturnStatement()
   {
-    AdditionImpl addition = new AdditionImpl();
-    return addition;
+    ReturnStatementImpl returnStatement = new ReturnStatementImpl();
+    return returnStatement;
   }
 
   /**
@@ -406,10 +554,10 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
    * @generated
    */
   @Override
-  public Multiplication createMultiplication()
+  public ExecuteStatement createExecuteStatement()
   {
-    MultiplicationImpl multiplication = new MultiplicationImpl();
-    return multiplication;
+    ExecuteStatementImpl executeStatement = new ExecuteStatementImpl();
+    return executeStatement;
   }
 
   /**
@@ -418,10 +566,10 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
    * @generated
    */
   @Override
-  public OrExpression createOrExpression()
+  public ConditionOrExpression createConditionOrExpression()
   {
-    OrExpressionImpl orExpression = new OrExpressionImpl();
-    return orExpression;
+    ConditionOrExpressionImpl conditionOrExpression = new ConditionOrExpressionImpl();
+    return conditionOrExpression;
   }
 
   /**
@@ -430,10 +578,10 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
    * @generated
    */
   @Override
-  public AndExpression createAndExpression()
+  public ConditionAndExpression createConditionAndExpression()
   {
-    AndExpressionImpl andExpression = new AndExpressionImpl();
-    return andExpression;
+    ConditionAndExpressionImpl conditionAndExpression = new ConditionAndExpressionImpl();
+    return conditionAndExpression;
   }
 
   /**
@@ -442,10 +590,142 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
    * @generated
    */
   @Override
-  public ComparisonExpression createComparisonExpression()
+  public LessThanOrEqual createLessThanOrEqual()
   {
-    ComparisonExpressionImpl comparisonExpression = new ComparisonExpressionImpl();
-    return comparisonExpression;
+    LessThanOrEqualImpl lessThanOrEqual = new LessThanOrEqualImpl();
+    return lessThanOrEqual;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public LessThan createLessThan()
+  {
+    LessThanImpl lessThan = new LessThanImpl();
+    return lessThan;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public GreaterThanOrEqual createGreaterThanOrEqual()
+  {
+    GreaterThanOrEqualImpl greaterThanOrEqual = new GreaterThanOrEqualImpl();
+    return greaterThanOrEqual;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public GreaterThan createGreaterThan()
+  {
+    GreaterThanImpl greaterThan = new GreaterThanImpl();
+    return greaterThan;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Equal createEqual()
+  {
+    EqualImpl equal = new EqualImpl();
+    return equal;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotEqual createNotEqual()
+  {
+    NotEqualImpl notEqual = new NotEqualImpl();
+    return notEqual;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Plus createPlus()
+  {
+    PlusImpl plus = new PlusImpl();
+    return plus;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Minus createMinus()
+  {
+    MinusImpl minus = new MinusImpl();
+    return minus;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Multiply createMultiply()
+  {
+    MultiplyImpl multiply = new MultiplyImpl();
+    return multiply;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Divide createDivide()
+  {
+    DivideImpl divide = new DivideImpl();
+    return divide;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public UnaryExpression createUnaryExpression()
+  {
+    UnaryExpressionImpl unaryExpression = new UnaryExpressionImpl();
+    return unaryExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public BoolLiteral createBoolLiteral()
+  {
+    BoolLiteralImpl boolLiteral = new BoolLiteralImpl();
+    return boolLiteral;
   }
 
   /**

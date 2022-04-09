@@ -3,6 +3,7 @@
  */
 package uk.ac.kcl.farm.farm;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -14,6 +15,11 @@ package uk.ac.kcl.farm.farm;
  * </p>
  * <ul>
  *   <li>{@link uk.ac.kcl.farm.farm.Field#getName <em>Name</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.Field#getFieldName <em>Field Name</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.Field#getIp <em>Ip</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.Field#getFieldType <em>Field Type</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.Field#getFieldLight <em>Field Light</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.Field#getFieldMonitors <em>Field Monitors</em>}</li>
  * </ul>
  *
  * @see uk.ac.kcl.farm.farm.FarmPackage#getField()
@@ -43,5 +49,105 @@ public interface Field extends uk.ac.kcl.farm.farm.Class
    * @generated
    */
   void setName(String value);
+
+  /**
+   * Returns the value of the '<em><b>Field Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Field Name</em>' attribute.
+   * @see #setFieldName(String)
+   * @see uk.ac.kcl.farm.farm.FarmPackage#getField_FieldName()
+   * @model
+   * @generated
+   */
+  String getFieldName();
+
+  /**
+   * Sets the value of the '{@link uk.ac.kcl.farm.farm.Field#getFieldName <em>Field Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Field Name</em>' attribute.
+   * @see #getFieldName()
+   * @generated
+   */
+  void setFieldName(String value);
+
+  /**
+   * Returns the value of the '<em><b>Ip</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Ip</em>' attribute.
+   * @see #setIp(String)
+   * @see uk.ac.kcl.farm.farm.FarmPackage#getField_Ip()
+   * @model
+   * @generated
+   */
+  String getIp();
+
+  /**
+   * Sets the value of the '{@link uk.ac.kcl.farm.farm.Field#getIp <em>Ip</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Ip</em>' attribute.
+   * @see #getIp()
+   * @generated
+   */
+  void setIp(String value);
+
+  /**
+   * Returns the value of the '<em><b>Field Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Field Type</em>' attribute.
+   * @see #setFieldType(String)
+   * @see uk.ac.kcl.farm.farm.FarmPackage#getField_FieldType()
+   * @model
+   * @generated
+   */
+  String getFieldType();
+
+  /**
+   * Sets the value of the '{@link uk.ac.kcl.farm.farm.Field#getFieldType <em>Field Type</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Field Type</em>' attribute.
+   * @see #getFieldType()
+   * @generated
+   */
+  void setFieldType(String value);
+
+  /**
+   * Returns the value of the '<em><b>Field Light</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Field Light</em>' attribute.
+   * @see #setFieldLight(String)
+   * @see uk.ac.kcl.farm.farm.FarmPackage#getField_FieldLight()
+   * @model
+   * @generated
+   */
+  String getFieldLight();
+
+  /**
+   * Sets the value of the '{@link uk.ac.kcl.farm.farm.Field#getFieldLight <em>Field Light</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Field Light</em>' attribute.
+   * @see #getFieldLight()
+   * @generated
+   */
+  void setFieldLight(String value);
+
+  /**
+   * Returns the value of the '<em><b>Field Monitors</b></em>' containment reference list.
+   * The list contents are of type {@link uk.ac.kcl.farm.farm.FieldMonitor}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Field Monitors</em>' containment reference list.
+   * @see uk.ac.kcl.farm.farm.FarmPackage#getField_FieldMonitors()
+   * @model containment="true"
+   * @generated
+   */
+  EList<FieldMonitor> getFieldMonitors();
 
 } // Field

@@ -29,12 +29,12 @@ public interface CropAttributes extends EObject
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Type</em>' reference.
-   * @see #setType(AttributeDeclaration)
+   * @see #setType(Attribute)
    * @see uk.ac.kcl.farm.farm.FarmPackage#getCropAttributes_Type()
    * @model
    * @generated
    */
-  AttributeDeclaration getType();
+  Attribute getType();
 
   /**
    * Sets the value of the '{@link uk.ac.kcl.farm.farm.CropAttributes#getType <em>Type</em>}' reference.
@@ -44,19 +44,19 @@ public interface CropAttributes extends EObject
    * @see #getType()
    * @generated
    */
-  void setType(AttributeDeclaration value);
+  void setType(Attribute value);
 
   /**
    * Returns the value of the '<em><b>Value</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Value</em>' containment reference.
-   * @see #setValue(RealExpression)
+   * @see #setValue(Expression)
    * @see uk.ac.kcl.farm.farm.FarmPackage#getCropAttributes_Value()
    * @model containment="true"
    * @generated
    */
-  RealExpression getValue();
+  Expression getValue();
 
   /**
    * Sets the value of the '{@link uk.ac.kcl.farm.farm.CropAttributes#getValue <em>Value</em>}' containment reference.
@@ -66,6 +66,6 @@ public interface CropAttributes extends EObject
    * @see #getValue()
    * @generated
    */
-  void setValue(RealExpression value);
+  void setValue(Expression value);
 
 } // CropAttributes

@@ -152,14 +152,14 @@ public interface FarmPackage extends EPackage
   int STATEMENT_FEATURE_COUNT = 0;
 
   /**
-   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.VariableDeclarationImpl <em>Variable Declaration</em>}' class.
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.VariableImpl <em>Variable</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see uk.ac.kcl.farm.farm.impl.VariableDeclarationImpl
-   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getVariableDeclaration()
+   * @see uk.ac.kcl.farm.farm.impl.VariableImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getVariable()
    * @generated
    */
-  int VARIABLE_DECLARATION = 4;
+  int VARIABLE = 4;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -168,7 +168,7 @@ public interface FarmPackage extends EPackage
    * @generated
    * @ordered
    */
-  int VARIABLE_DECLARATION__NAME = STATEMENT_FEATURE_COUNT + 0;
+  int VARIABLE__NAME = STATEMENT_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' containment reference.
@@ -177,35 +177,16 @@ public interface FarmPackage extends EPackage
    * @generated
    * @ordered
    */
-  int VARIABLE_DECLARATION__VALUE = STATEMENT_FEATURE_COUNT + 1;
+  int VARIABLE__VALUE = STATEMENT_FEATURE_COUNT + 1;
 
   /**
-   * The number of structural features of the '<em>Variable Declaration</em>' class.
+   * The number of structural features of the '<em>Variable</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int VARIABLE_DECLARATION_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 2;
-
-  /**
-   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.VariableExpressionImpl <em>Variable Expression</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see uk.ac.kcl.farm.farm.impl.VariableExpressionImpl
-   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getVariableExpression()
-   * @generated
-   */
-  int VARIABLE_EXPRESSION = 5;
-
-  /**
-   * The number of structural features of the '<em>Variable Expression</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int VARIABLE_EXPRESSION_FEATURE_COUNT = 0;
+  int VARIABLE_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.LoopStatementImpl <em>Loop Statement</em>}' class.
@@ -215,7 +196,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getLoopStatement()
    * @generated
    */
-  int LOOP_STATEMENT = 6;
+  int LOOP_STATEMENT = 5;
 
   /**
    * The feature id for the '<em><b>Condition</b></em>' containment reference.
@@ -245,61 +226,458 @@ public interface FarmPackage extends EPackage
   int LOOP_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 2;
 
   /**
-   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.RealExpressionImpl <em>Real Expression</em>}' class.
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.JudgeStatementImpl <em>Judge Statement</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see uk.ac.kcl.farm.farm.impl.RealExpressionImpl
-   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getRealExpression()
+   * @see uk.ac.kcl.farm.farm.impl.JudgeStatementImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getJudgeStatement()
    * @generated
    */
-  int REAL_EXPRESSION = 7;
+  int JUDGE_STATEMENT = 6;
 
   /**
-   * The number of structural features of the '<em>Real Expression</em>' class.
+   * The feature id for the '<em><b>Condition</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int REAL_EXPRESSION_FEATURE_COUNT = VARIABLE_EXPRESSION_FEATURE_COUNT + 0;
+  int JUDGE_STATEMENT__CONDITION = STATEMENT_FEATURE_COUNT + 0;
 
   /**
-   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.RealLiteralImpl <em>Real Literal</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see uk.ac.kcl.farm.farm.impl.RealLiteralImpl
-   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getRealLiteral()
-   * @generated
-   */
-  int REAL_LITERAL = 8;
-
-  /**
-   * The feature id for the '<em><b>Val</b></em>' attribute.
+   * The feature id for the '<em><b>Statements</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int REAL_LITERAL__VAL = REAL_EXPRESSION_FEATURE_COUNT + 0;
+  int JUDGE_STATEMENT__STATEMENTS = STATEMENT_FEATURE_COUNT + 1;
 
   /**
-   * The number of structural features of the '<em>Real Literal</em>' class.
+   * The feature id for the '<em><b>Elseif</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int REAL_LITERAL_FEATURE_COUNT = REAL_EXPRESSION_FEATURE_COUNT + 1;
+  int JUDGE_STATEMENT__ELSEIF = STATEMENT_FEATURE_COUNT + 2;
 
   /**
-   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.RealVarExpressionImpl <em>Real Var Expression</em>}' class.
+   * The feature id for the '<em><b>Else Statement</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see uk.ac.kcl.farm.farm.impl.RealVarExpressionImpl
-   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getRealVarExpression()
+   * @generated
+   * @ordered
+   */
+  int JUDGE_STATEMENT__ELSE_STATEMENT = STATEMENT_FEATURE_COUNT + 3;
+
+  /**
+   * The number of structural features of the '<em>Judge Statement</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int JUDGE_STATEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 4;
+
+  /**
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.ElseJudgeStatementImpl <em>Else Judge Statement</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see uk.ac.kcl.farm.farm.impl.ElseJudgeStatementImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getElseJudgeStatement()
    * @generated
    */
-  int REAL_VAR_EXPRESSION = 9;
+  int ELSE_JUDGE_STATEMENT = 7;
+
+  /**
+   * The feature id for the '<em><b>Condition</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ELSE_JUDGE_STATEMENT__CONDITION = 0;
+
+  /**
+   * The feature id for the '<em><b>Statements</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ELSE_JUDGE_STATEMENT__STATEMENTS = 1;
+
+  /**
+   * The number of structural features of the '<em>Else Judge Statement</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ELSE_JUDGE_STATEMENT_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.BuiltinFunctionImpl <em>Builtin Function</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see uk.ac.kcl.farm.farm.impl.BuiltinFunctionImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getBuiltinFunction()
+   * @generated
+   */
+  int BUILTIN_FUNCTION = 8;
+
+  /**
+   * The number of structural features of the '<em>Builtin Function</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUILTIN_FUNCTION_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.ReportFunctionImpl <em>Report Function</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see uk.ac.kcl.farm.farm.impl.ReportFunctionImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getReportFunction()
+   * @generated
+   */
+  int REPORT_FUNCTION = 9;
+
+  /**
+   * The feature id for the '<em><b>Report Crop</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REPORT_FUNCTION__REPORT_CROP = BUILTIN_FUNCTION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Report Field</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REPORT_FUNCTION__REPORT_FIELD = BUILTIN_FUNCTION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Report Function</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REPORT_FUNCTION_FEATURE_COUNT = BUILTIN_FUNCTION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.GetStageFunctionImpl <em>Get Stage Function</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see uk.ac.kcl.farm.farm.impl.GetStageFunctionImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getGetStageFunction()
+   * @generated
+   */
+  int GET_STAGE_FUNCTION = 10;
+
+  /**
+   * The feature id for the '<em><b>Get Stage Crop</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GET_STAGE_FUNCTION__GET_STAGE_CROP = BUILTIN_FUNCTION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Stage Number</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GET_STAGE_FUNCTION__STAGE_NUMBER = BUILTIN_FUNCTION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Get Stage Function</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GET_STAGE_FUNCTION_FEATURE_COUNT = BUILTIN_FUNCTION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.CountStageFunctionImpl <em>Count Stage Function</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see uk.ac.kcl.farm.farm.impl.CountStageFunctionImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getCountStageFunction()
+   * @generated
+   */
+  int COUNT_STAGE_FUNCTION = 11;
+
+  /**
+   * The feature id for the '<em><b>Count Stage Crop</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COUNT_STAGE_FUNCTION__COUNT_STAGE_CROP = BUILTIN_FUNCTION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Count Stage Function</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COUNT_STAGE_FUNCTION_FEATURE_COUNT = BUILTIN_FUNCTION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.GetCropValueFunctionImpl <em>Get Crop Value Function</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see uk.ac.kcl.farm.farm.impl.GetCropValueFunctionImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getGetCropValueFunction()
+   * @generated
+   */
+  int GET_CROP_VALUE_FUNCTION = 12;
+
+  /**
+   * The feature id for the '<em><b>Get Value Crop</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GET_CROP_VALUE_FUNCTION__GET_VALUE_CROP = BUILTIN_FUNCTION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Get Crop Attribute</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GET_CROP_VALUE_FUNCTION__GET_CROP_ATTRIBUTE = BUILTIN_FUNCTION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Get Crop Value Function</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GET_CROP_VALUE_FUNCTION_FEATURE_COUNT = BUILTIN_FUNCTION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.GetFieldValueFunctionImpl <em>Get Field Value Function</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see uk.ac.kcl.farm.farm.impl.GetFieldValueFunctionImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getGetFieldValueFunction()
+   * @generated
+   */
+  int GET_FIELD_VALUE_FUNCTION = 13;
+
+  /**
+   * The feature id for the '<em><b>Get Value Field</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GET_FIELD_VALUE_FUNCTION__GET_VALUE_FIELD = BUILTIN_FUNCTION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Get Field Attribute</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GET_FIELD_VALUE_FUNCTION__GET_FIELD_ATTRIBUTE = BUILTIN_FUNCTION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Get Field Value Function</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GET_FIELD_VALUE_FUNCTION_FEATURE_COUNT = BUILTIN_FUNCTION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.SetFieldValueFunctionImpl <em>Set Field Value Function</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see uk.ac.kcl.farm.farm.impl.SetFieldValueFunctionImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getSetFieldValueFunction()
+   * @generated
+   */
+  int SET_FIELD_VALUE_FUNCTION = 14;
+
+  /**
+   * The feature id for the '<em><b>Set Value Field</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SET_FIELD_VALUE_FUNCTION__SET_VALUE_FIELD = BUILTIN_FUNCTION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Set Field Attribute</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SET_FIELD_VALUE_FUNCTION__SET_FIELD_ATTRIBUTE = BUILTIN_FUNCTION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Set Field Value</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SET_FIELD_VALUE_FUNCTION__SET_FIELD_VALUE = BUILTIN_FUNCTION_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Set Field Value Function</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SET_FIELD_VALUE_FUNCTION_FEATURE_COUNT = BUILTIN_FUNCTION_FEATURE_COUNT + 3;
+
+  /**
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.PlantFunctionImpl <em>Plant Function</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see uk.ac.kcl.farm.farm.impl.PlantFunctionImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getPlantFunction()
+   * @generated
+   */
+  int PLANT_FUNCTION = 15;
+
+  /**
+   * The feature id for the '<em><b>Plant In Field</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PLANT_FUNCTION__PLANT_IN_FIELD = BUILTIN_FUNCTION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Plant Crop</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PLANT_FUNCTION__PLANT_CROP = BUILTIN_FUNCTION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Plant Function</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PLANT_FUNCTION_FEATURE_COUNT = BUILTIN_FUNCTION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.MoveFunctionImpl <em>Move Function</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see uk.ac.kcl.farm.farm.impl.MoveFunctionImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getMoveFunction()
+   * @generated
+   */
+  int MOVE_FUNCTION = 16;
+
+  /**
+   * The feature id for the '<em><b>Move From Field</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MOVE_FUNCTION__MOVE_FROM_FIELD = BUILTIN_FUNCTION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Move To Field</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MOVE_FUNCTION__MOVE_TO_FIELD = BUILTIN_FUNCTION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Move Function</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MOVE_FUNCTION_FEATURE_COUNT = BUILTIN_FUNCTION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.WaitFunctionImpl <em>Wait Function</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see uk.ac.kcl.farm.farm.impl.WaitFunctionImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getWaitFunction()
+   * @generated
+   */
+  int WAIT_FUNCTION = 17;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WAIT_FUNCTION__VALUE = BUILTIN_FUNCTION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Wait Function</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int WAIT_FUNCTION_FEATURE_COUNT = BUILTIN_FUNCTION_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.ExpressionImpl <em>Expression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see uk.ac.kcl.farm.farm.impl.ExpressionImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getExpression()
+   * @generated
+   */
+  int EXPRESSION = 18;
+
+  /**
+   * The feature id for the '<em><b>Exp</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXPRESSION__EXP = 0;
 
   /**
    * The feature id for the '<em><b>Var</b></em>' reference.
@@ -308,35 +686,53 @@ public interface FarmPackage extends EPackage
    * @generated
    * @ordered
    */
-  int REAL_VAR_EXPRESSION__VAR = REAL_EXPRESSION_FEATURE_COUNT + 0;
+  int EXPRESSION__VAR = 1;
 
   /**
-   * The number of structural features of the '<em>Real Var Expression</em>' class.
+   * The number of structural features of the '<em>Expression</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int REAL_VAR_EXPRESSION_FEATURE_COUNT = REAL_EXPRESSION_FEATURE_COUNT + 1;
+  int EXPRESSION_FEATURE_COUNT = 2;
 
   /**
-   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.ConditionExpressionImpl <em>Condition Expression</em>}' class.
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.LiteralImpl <em>Literal</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see uk.ac.kcl.farm.farm.impl.ConditionExpressionImpl
-   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getConditionExpression()
+   * @see uk.ac.kcl.farm.farm.impl.LiteralImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getLiteral()
    * @generated
    */
-  int CONDITION_EXPRESSION = 10;
+  int LITERAL = 19;
 
   /**
-   * The number of structural features of the '<em>Condition Expression</em>' class.
+   * The feature id for the '<em><b>Exp</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int CONDITION_EXPRESSION_FEATURE_COUNT = VARIABLE_EXPRESSION_FEATURE_COUNT + 0;
+  int LITERAL__EXP = EXPRESSION__EXP;
+
+  /**
+   * The feature id for the '<em><b>Var</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LITERAL__VAR = EXPRESSION__VAR;
+
+  /**
+   * The number of structural features of the '<em>Literal</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LITERAL_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.BooleanLiteralImpl <em>Boolean Literal</em>}' class.
@@ -346,35 +742,16 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getBooleanLiteral()
    * @generated
    */
-  int BOOLEAN_LITERAL = 11;
+  int BOOLEAN_LITERAL = 20;
 
   /**
-   * The feature id for the '<em><b>Val</b></em>' attribute.
+   * The feature id for the '<em><b>Exp</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int BOOLEAN_LITERAL__VAL = CONDITION_EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>Boolean Literal</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int BOOLEAN_LITERAL_FEATURE_COUNT = CONDITION_EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
-   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.BooleanVarExpressionImpl <em>Boolean Var Expression</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see uk.ac.kcl.farm.farm.impl.BooleanVarExpressionImpl
-   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getBooleanVarExpression()
-   * @generated
-   */
-  int BOOLEAN_VAR_EXPRESSION = 12;
+  int BOOLEAN_LITERAL__EXP = LITERAL__EXP;
 
   /**
    * The feature id for the '<em><b>Var</b></em>' reference.
@@ -383,26 +760,72 @@ public interface FarmPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BOOLEAN_VAR_EXPRESSION__VAR = CONDITION_EXPRESSION_FEATURE_COUNT + 0;
+  int BOOLEAN_LITERAL__VAR = LITERAL__VAR;
 
   /**
-   * The number of structural features of the '<em>Boolean Var Expression</em>' class.
+   * The number of structural features of the '<em>Boolean Literal</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int BOOLEAN_VAR_EXPRESSION_FEATURE_COUNT = CONDITION_EXPRESSION_FEATURE_COUNT + 1;
+  int BOOLEAN_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 0;
 
   /**
-   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.AttributeDeclarationImpl <em>Attribute Declaration</em>}' class.
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.RealLiteralImpl <em>Real Literal</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see uk.ac.kcl.farm.farm.impl.AttributeDeclarationImpl
-   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getAttributeDeclaration()
+   * @see uk.ac.kcl.farm.farm.impl.RealLiteralImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getRealLiteral()
    * @generated
    */
-  int ATTRIBUTE_DECLARATION = 13;
+  int REAL_LITERAL = 21;
+
+  /**
+   * The feature id for the '<em><b>Exp</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REAL_LITERAL__EXP = LITERAL__EXP;
+
+  /**
+   * The feature id for the '<em><b>Var</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REAL_LITERAL__VAR = LITERAL__VAR;
+
+  /**
+   * The feature id for the '<em><b>Val</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REAL_LITERAL__VAL = LITERAL_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Real Literal</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REAL_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.AttributeImpl <em>Attribute</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see uk.ac.kcl.farm.farm.impl.AttributeImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getAttribute()
+   * @generated
+   */
+  int ATTRIBUTE = 22;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -411,16 +834,16 @@ public interface FarmPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ATTRIBUTE_DECLARATION__NAME = 0;
+  int ATTRIBUTE__NAME = 0;
 
   /**
-   * The number of structural features of the '<em>Attribute Declaration</em>' class.
+   * The number of structural features of the '<em>Attribute</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ATTRIBUTE_DECLARATION_FEATURE_COUNT = 1;
+  int ATTRIBUTE_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.CropImpl <em>Crop</em>}' class.
@@ -430,7 +853,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getCrop()
    * @generated
    */
-  int CROP = 14;
+  int CROP = 23;
 
   /**
    * The feature id for the '<em><b>Crop</b></em>' attribute.
@@ -476,7 +899,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getCropStages()
    * @generated
    */
-  int CROP_STAGES = 15;
+  int CROP_STAGES = 24;
 
   /**
    * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -504,7 +927,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getCropStage()
    * @generated
    */
-  int CROP_STAGE = 16;
+  int CROP_STAGE = 25;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -550,7 +973,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getCropAttributes()
    * @generated
    */
-  int CROP_ATTRIBUTES = 17;
+  int CROP_ATTRIBUTES = 26;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' reference.
@@ -580,61 +1003,6 @@ public interface FarmPackage extends EPackage
   int CROP_ATTRIBUTES_FEATURE_COUNT = 2;
 
   /**
-   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.MachineImpl <em>Machine</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see uk.ac.kcl.farm.farm.impl.MachineImpl
-   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getMachine()
-   * @generated
-   */
-  int MACHINE = 18;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MACHINE__NAME = CLASS_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Machine Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MACHINE__MACHINE_NAME = CLASS_FEATURE_COUNT + 1;
-
-  /**
-   * The feature id for the '<em><b>Ip</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MACHINE__IP = CLASS_FEATURE_COUNT + 2;
-
-  /**
-   * The feature id for the '<em><b>Statements</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MACHINE__STATEMENTS = CLASS_FEATURE_COUNT + 3;
-
-  /**
-   * The number of structural features of the '<em>Machine</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MACHINE_FEATURE_COUNT = CLASS_FEATURE_COUNT + 4;
-
-  /**
    * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.FieldImpl <em>Field</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -642,7 +1010,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getField()
    * @generated
    */
-  int FIELD = 19;
+  int FIELD = 27;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -654,13 +1022,86 @@ public interface FarmPackage extends EPackage
   int FIELD__NAME = CLASS_FEATURE_COUNT + 0;
 
   /**
+   * The feature id for the '<em><b>Field Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FIELD__FIELD_NAME = CLASS_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Ip</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FIELD__IP = CLASS_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Field Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FIELD__FIELD_TYPE = CLASS_FEATURE_COUNT + 3;
+
+  /**
+   * The feature id for the '<em><b>Field Light</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FIELD__FIELD_LIGHT = CLASS_FEATURE_COUNT + 4;
+
+  /**
+   * The feature id for the '<em><b>Field Monitors</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FIELD__FIELD_MONITORS = CLASS_FEATURE_COUNT + 5;
+
+  /**
    * The number of structural features of the '<em>Field</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int FIELD_FEATURE_COUNT = CLASS_FEATURE_COUNT + 1;
+  int FIELD_FEATURE_COUNT = CLASS_FEATURE_COUNT + 6;
+
+  /**
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.FieldMonitorImpl <em>Field Monitor</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see uk.ac.kcl.farm.farm.impl.FieldMonitorImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getFieldMonitor()
+   * @generated
+   */
+  int FIELD_MONITOR = 28;
+
+  /**
+   * The feature id for the '<em><b>Monitor</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FIELD_MONITOR__MONITOR = 0;
+
+  /**
+   * The number of structural features of the '<em>Field Monitor</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int FIELD_MONITOR_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.MissionImpl <em>Mission</em>}' class.
@@ -670,7 +1111,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getMission()
    * @generated
    */
-  int MISSION = 20;
+  int MISSION = 29;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -707,7 +1148,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getTask()
    * @generated
    */
-  int TASK = 21;
+  int TASK = 30;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -755,14 +1196,88 @@ public interface FarmPackage extends EPackage
   int TASK_FEATURE_COUNT = 4;
 
   /**
-   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.AdditionImpl <em>Addition</em>}' class.
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.ReturnStatementImpl <em>Return Statement</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see uk.ac.kcl.farm.farm.impl.AdditionImpl
-   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getAddition()
+   * @see uk.ac.kcl.farm.farm.impl.ReturnStatementImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getReturnStatement()
    * @generated
    */
-  int ADDITION = 22;
+  int RETURN_STATEMENT = 31;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RETURN_STATEMENT__VALUE = 0;
+
+  /**
+   * The number of structural features of the '<em>Return Statement</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int RETURN_STATEMENT_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.ExecuteStatementImpl <em>Execute Statement</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see uk.ac.kcl.farm.farm.impl.ExecuteStatementImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getExecuteStatement()
+   * @generated
+   */
+  int EXECUTE_STATEMENT = 32;
+
+  /**
+   * The feature id for the '<em><b>Statements</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXECUTE_STATEMENT__STATEMENTS = 0;
+
+  /**
+   * The number of structural features of the '<em>Execute Statement</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXECUTE_STATEMENT_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.ConditionOrExpressionImpl <em>Condition Or Expression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see uk.ac.kcl.farm.farm.impl.ConditionOrExpressionImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getConditionOrExpression()
+   * @generated
+   */
+  int CONDITION_OR_EXPRESSION = 33;
+
+  /**
+   * The feature id for the '<em><b>Exp</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONDITION_OR_EXPRESSION__EXP = EXPRESSION__EXP;
+
+  /**
+   * The feature id for the '<em><b>Var</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONDITION_OR_EXPRESSION__VAR = EXPRESSION__VAR;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -771,200 +1286,7 @@ public interface FarmPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ADDITION__LEFT = REAL_EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Operator</b></em>' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ADDITION__OPERATOR = REAL_EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
-   * The feature id for the '<em><b>Right</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ADDITION__RIGHT = REAL_EXPRESSION_FEATURE_COUNT + 2;
-
-  /**
-   * The number of structural features of the '<em>Addition</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ADDITION_FEATURE_COUNT = REAL_EXPRESSION_FEATURE_COUNT + 3;
-
-  /**
-   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.MultiplicationImpl <em>Multiplication</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see uk.ac.kcl.farm.farm.impl.MultiplicationImpl
-   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getMultiplication()
-   * @generated
-   */
-  int MULTIPLICATION = 23;
-
-  /**
-   * The feature id for the '<em><b>Left</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MULTIPLICATION__LEFT = REAL_EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Operator</b></em>' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MULTIPLICATION__OPERATOR = REAL_EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
-   * The feature id for the '<em><b>Right</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MULTIPLICATION__RIGHT = REAL_EXPRESSION_FEATURE_COUNT + 2;
-
-  /**
-   * The number of structural features of the '<em>Multiplication</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MULTIPLICATION_FEATURE_COUNT = REAL_EXPRESSION_FEATURE_COUNT + 3;
-
-  /**
-   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.OrExpressionImpl <em>Or Expression</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see uk.ac.kcl.farm.farm.impl.OrExpressionImpl
-   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getOrExpression()
-   * @generated
-   */
-  int OR_EXPRESSION = 24;
-
-  /**
-   * The feature id for the '<em><b>Left</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int OR_EXPRESSION__LEFT = CONDITION_EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Operator</b></em>' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int OR_EXPRESSION__OPERATOR = CONDITION_EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
-   * The feature id for the '<em><b>Right</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int OR_EXPRESSION__RIGHT = CONDITION_EXPRESSION_FEATURE_COUNT + 2;
-
-  /**
-   * The number of structural features of the '<em>Or Expression</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int OR_EXPRESSION_FEATURE_COUNT = CONDITION_EXPRESSION_FEATURE_COUNT + 3;
-
-  /**
-   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.AndExpressionImpl <em>And Expression</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see uk.ac.kcl.farm.farm.impl.AndExpressionImpl
-   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getAndExpression()
-   * @generated
-   */
-  int AND_EXPRESSION = 25;
-
-  /**
-   * The feature id for the '<em><b>Left</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int AND_EXPRESSION__LEFT = CONDITION_EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Operator</b></em>' attribute list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int AND_EXPRESSION__OPERATOR = CONDITION_EXPRESSION_FEATURE_COUNT + 1;
-
-  /**
-   * The feature id for the '<em><b>Right</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int AND_EXPRESSION__RIGHT = CONDITION_EXPRESSION_FEATURE_COUNT + 2;
-
-  /**
-   * The number of structural features of the '<em>And Expression</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int AND_EXPRESSION_FEATURE_COUNT = CONDITION_EXPRESSION_FEATURE_COUNT + 3;
-
-  /**
-   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.ComparisonExpressionImpl <em>Comparison Expression</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see uk.ac.kcl.farm.farm.impl.ComparisonExpressionImpl
-   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getComparisonExpression()
-   * @generated
-   */
-  int COMPARISON_EXPRESSION = 26;
-
-  /**
-   * The feature id for the '<em><b>Left</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int COMPARISON_EXPRESSION__LEFT = CONDITION_EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
-   * The feature id for the '<em><b>Operator</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int COMPARISON_EXPRESSION__OPERATOR = CONDITION_EXPRESSION_FEATURE_COUNT + 1;
+  int CONDITION_OR_EXPRESSION__LEFT = EXPRESSION_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Right</b></em>' containment reference.
@@ -973,16 +1295,704 @@ public interface FarmPackage extends EPackage
    * @generated
    * @ordered
    */
-  int COMPARISON_EXPRESSION__RIGHT = CONDITION_EXPRESSION_FEATURE_COUNT + 2;
+  int CONDITION_OR_EXPRESSION__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
-   * The number of structural features of the '<em>Comparison Expression</em>' class.
+   * The number of structural features of the '<em>Condition Or Expression</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int COMPARISON_EXPRESSION_FEATURE_COUNT = CONDITION_EXPRESSION_FEATURE_COUNT + 3;
+  int CONDITION_OR_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.ConditionAndExpressionImpl <em>Condition And Expression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see uk.ac.kcl.farm.farm.impl.ConditionAndExpressionImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getConditionAndExpression()
+   * @generated
+   */
+  int CONDITION_AND_EXPRESSION = 34;
+
+  /**
+   * The feature id for the '<em><b>Exp</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONDITION_AND_EXPRESSION__EXP = EXPRESSION__EXP;
+
+  /**
+   * The feature id for the '<em><b>Var</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONDITION_AND_EXPRESSION__VAR = EXPRESSION__VAR;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONDITION_AND_EXPRESSION__LEFT = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONDITION_AND_EXPRESSION__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Condition And Expression</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONDITION_AND_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.LessThanOrEqualImpl <em>Less Than Or Equal</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see uk.ac.kcl.farm.farm.impl.LessThanOrEqualImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getLessThanOrEqual()
+   * @generated
+   */
+  int LESS_THAN_OR_EQUAL = 35;
+
+  /**
+   * The feature id for the '<em><b>Exp</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LESS_THAN_OR_EQUAL__EXP = EXPRESSION__EXP;
+
+  /**
+   * The feature id for the '<em><b>Var</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LESS_THAN_OR_EQUAL__VAR = EXPRESSION__VAR;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LESS_THAN_OR_EQUAL__LEFT = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LESS_THAN_OR_EQUAL__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Less Than Or Equal</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LESS_THAN_OR_EQUAL_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.LessThanImpl <em>Less Than</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see uk.ac.kcl.farm.farm.impl.LessThanImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getLessThan()
+   * @generated
+   */
+  int LESS_THAN = 36;
+
+  /**
+   * The feature id for the '<em><b>Exp</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LESS_THAN__EXP = EXPRESSION__EXP;
+
+  /**
+   * The feature id for the '<em><b>Var</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LESS_THAN__VAR = EXPRESSION__VAR;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LESS_THAN__LEFT = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LESS_THAN__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Less Than</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LESS_THAN_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.GreaterThanOrEqualImpl <em>Greater Than Or Equal</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see uk.ac.kcl.farm.farm.impl.GreaterThanOrEqualImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getGreaterThanOrEqual()
+   * @generated
+   */
+  int GREATER_THAN_OR_EQUAL = 37;
+
+  /**
+   * The feature id for the '<em><b>Exp</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GREATER_THAN_OR_EQUAL__EXP = EXPRESSION__EXP;
+
+  /**
+   * The feature id for the '<em><b>Var</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GREATER_THAN_OR_EQUAL__VAR = EXPRESSION__VAR;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GREATER_THAN_OR_EQUAL__LEFT = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GREATER_THAN_OR_EQUAL__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Greater Than Or Equal</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GREATER_THAN_OR_EQUAL_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.GreaterThanImpl <em>Greater Than</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see uk.ac.kcl.farm.farm.impl.GreaterThanImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getGreaterThan()
+   * @generated
+   */
+  int GREATER_THAN = 38;
+
+  /**
+   * The feature id for the '<em><b>Exp</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GREATER_THAN__EXP = EXPRESSION__EXP;
+
+  /**
+   * The feature id for the '<em><b>Var</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GREATER_THAN__VAR = EXPRESSION__VAR;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GREATER_THAN__LEFT = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GREATER_THAN__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Greater Than</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GREATER_THAN_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.EqualImpl <em>Equal</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see uk.ac.kcl.farm.farm.impl.EqualImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getEqual()
+   * @generated
+   */
+  int EQUAL = 39;
+
+  /**
+   * The feature id for the '<em><b>Exp</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EQUAL__EXP = EXPRESSION__EXP;
+
+  /**
+   * The feature id for the '<em><b>Var</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EQUAL__VAR = EXPRESSION__VAR;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EQUAL__LEFT = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EQUAL__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Equal</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EQUAL_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.NotEqualImpl <em>Not Equal</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see uk.ac.kcl.farm.farm.impl.NotEqualImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getNotEqual()
+   * @generated
+   */
+  int NOT_EQUAL = 40;
+
+  /**
+   * The feature id for the '<em><b>Exp</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NOT_EQUAL__EXP = EXPRESSION__EXP;
+
+  /**
+   * The feature id for the '<em><b>Var</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NOT_EQUAL__VAR = EXPRESSION__VAR;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NOT_EQUAL__LEFT = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NOT_EQUAL__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Not Equal</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NOT_EQUAL_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.PlusImpl <em>Plus</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see uk.ac.kcl.farm.farm.impl.PlusImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getPlus()
+   * @generated
+   */
+  int PLUS = 41;
+
+  /**
+   * The feature id for the '<em><b>Exp</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PLUS__EXP = EXPRESSION__EXP;
+
+  /**
+   * The feature id for the '<em><b>Var</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PLUS__VAR = EXPRESSION__VAR;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PLUS__LEFT = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PLUS__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Plus</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PLUS_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.MinusImpl <em>Minus</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see uk.ac.kcl.farm.farm.impl.MinusImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getMinus()
+   * @generated
+   */
+  int MINUS = 42;
+
+  /**
+   * The feature id for the '<em><b>Exp</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MINUS__EXP = EXPRESSION__EXP;
+
+  /**
+   * The feature id for the '<em><b>Var</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MINUS__VAR = EXPRESSION__VAR;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MINUS__LEFT = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MINUS__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Minus</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MINUS_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.MultiplyImpl <em>Multiply</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see uk.ac.kcl.farm.farm.impl.MultiplyImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getMultiply()
+   * @generated
+   */
+  int MULTIPLY = 43;
+
+  /**
+   * The feature id for the '<em><b>Exp</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MULTIPLY__EXP = EXPRESSION__EXP;
+
+  /**
+   * The feature id for the '<em><b>Var</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MULTIPLY__VAR = EXPRESSION__VAR;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MULTIPLY__LEFT = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MULTIPLY__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Multiply</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MULTIPLY_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.DivideImpl <em>Divide</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see uk.ac.kcl.farm.farm.impl.DivideImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getDivide()
+   * @generated
+   */
+  int DIVIDE = 44;
+
+  /**
+   * The feature id for the '<em><b>Exp</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DIVIDE__EXP = EXPRESSION__EXP;
+
+  /**
+   * The feature id for the '<em><b>Var</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DIVIDE__VAR = EXPRESSION__VAR;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DIVIDE__LEFT = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Right</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DIVIDE__RIGHT = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>Divide</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DIVIDE_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.UnaryExpressionImpl <em>Unary Expression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see uk.ac.kcl.farm.farm.impl.UnaryExpressionImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getUnaryExpression()
+   * @generated
+   */
+  int UNARY_EXPRESSION = 45;
+
+  /**
+   * The feature id for the '<em><b>Exp</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNARY_EXPRESSION__EXP = EXPRESSION__EXP;
+
+  /**
+   * The feature id for the '<em><b>Var</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNARY_EXPRESSION__VAR = EXPRESSION__VAR;
+
+  /**
+   * The number of structural features of the '<em>Unary Expression</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNARY_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.BoolLiteralImpl <em>Bool Literal</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see uk.ac.kcl.farm.farm.impl.BoolLiteralImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getBoolLiteral()
+   * @generated
+   */
+  int BOOL_LITERAL = 46;
+
+  /**
+   * The feature id for the '<em><b>Exp</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BOOL_LITERAL__EXP = BOOLEAN_LITERAL__EXP;
+
+  /**
+   * The feature id for the '<em><b>Var</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BOOL_LITERAL__VAR = BOOLEAN_LITERAL__VAR;
+
+  /**
+   * The feature id for the '<em><b>Val</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BOOL_LITERAL__VAL = BOOLEAN_LITERAL_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Bool Literal</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BOOL_LITERAL_FEATURE_COUNT = BOOLEAN_LITERAL_FEATURE_COUNT + 1;
 
 
   /**
@@ -1048,46 +2058,36 @@ public interface FarmPackage extends EPackage
   EClass getStatement();
 
   /**
-   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.VariableDeclaration <em>Variable Declaration</em>}'.
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.Variable <em>Variable</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Variable Declaration</em>'.
-   * @see uk.ac.kcl.farm.farm.VariableDeclaration
+   * @return the meta object for class '<em>Variable</em>'.
+   * @see uk.ac.kcl.farm.farm.Variable
    * @generated
    */
-  EClass getVariableDeclaration();
+  EClass getVariable();
 
   /**
-   * Returns the meta object for the attribute '{@link uk.ac.kcl.farm.farm.VariableDeclaration#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link uk.ac.kcl.farm.farm.Variable#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see uk.ac.kcl.farm.farm.VariableDeclaration#getName()
-   * @see #getVariableDeclaration()
+   * @see uk.ac.kcl.farm.farm.Variable#getName()
+   * @see #getVariable()
    * @generated
    */
-  EAttribute getVariableDeclaration_Name();
+  EAttribute getVariable_Name();
 
   /**
-   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.VariableDeclaration#getValue <em>Value</em>}'.
+   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.Variable#getValue <em>Value</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Value</em>'.
-   * @see uk.ac.kcl.farm.farm.VariableDeclaration#getValue()
-   * @see #getVariableDeclaration()
+   * @see uk.ac.kcl.farm.farm.Variable#getValue()
+   * @see #getVariable()
    * @generated
    */
-  EReference getVariableDeclaration_Value();
-
-  /**
-   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.VariableExpression <em>Variable Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Variable Expression</em>'.
-   * @see uk.ac.kcl.farm.farm.VariableExpression
-   * @generated
-   */
-  EClass getVariableExpression();
+  EReference getVariable_Value();
 
   /**
    * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.LoopStatement <em>Loop Statement</em>}'.
@@ -1122,14 +2122,429 @@ public interface FarmPackage extends EPackage
   EReference getLoopStatement_Statements();
 
   /**
-   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.RealExpression <em>Real Expression</em>}'.
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.JudgeStatement <em>Judge Statement</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Real Expression</em>'.
-   * @see uk.ac.kcl.farm.farm.RealExpression
+   * @return the meta object for class '<em>Judge Statement</em>'.
+   * @see uk.ac.kcl.farm.farm.JudgeStatement
    * @generated
    */
-  EClass getRealExpression();
+  EClass getJudgeStatement();
+
+  /**
+   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.JudgeStatement#getCondition <em>Condition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Condition</em>'.
+   * @see uk.ac.kcl.farm.farm.JudgeStatement#getCondition()
+   * @see #getJudgeStatement()
+   * @generated
+   */
+  EReference getJudgeStatement_Condition();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link uk.ac.kcl.farm.farm.JudgeStatement#getStatements <em>Statements</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Statements</em>'.
+   * @see uk.ac.kcl.farm.farm.JudgeStatement#getStatements()
+   * @see #getJudgeStatement()
+   * @generated
+   */
+  EReference getJudgeStatement_Statements();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link uk.ac.kcl.farm.farm.JudgeStatement#getElseif <em>Elseif</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Elseif</em>'.
+   * @see uk.ac.kcl.farm.farm.JudgeStatement#getElseif()
+   * @see #getJudgeStatement()
+   * @generated
+   */
+  EReference getJudgeStatement_Elseif();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link uk.ac.kcl.farm.farm.JudgeStatement#getElseStatement <em>Else Statement</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Else Statement</em>'.
+   * @see uk.ac.kcl.farm.farm.JudgeStatement#getElseStatement()
+   * @see #getJudgeStatement()
+   * @generated
+   */
+  EReference getJudgeStatement_ElseStatement();
+
+  /**
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.ElseJudgeStatement <em>Else Judge Statement</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Else Judge Statement</em>'.
+   * @see uk.ac.kcl.farm.farm.ElseJudgeStatement
+   * @generated
+   */
+  EClass getElseJudgeStatement();
+
+  /**
+   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.ElseJudgeStatement#getCondition <em>Condition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Condition</em>'.
+   * @see uk.ac.kcl.farm.farm.ElseJudgeStatement#getCondition()
+   * @see #getElseJudgeStatement()
+   * @generated
+   */
+  EReference getElseJudgeStatement_Condition();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link uk.ac.kcl.farm.farm.ElseJudgeStatement#getStatements <em>Statements</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Statements</em>'.
+   * @see uk.ac.kcl.farm.farm.ElseJudgeStatement#getStatements()
+   * @see #getElseJudgeStatement()
+   * @generated
+   */
+  EReference getElseJudgeStatement_Statements();
+
+  /**
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.BuiltinFunction <em>Builtin Function</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Builtin Function</em>'.
+   * @see uk.ac.kcl.farm.farm.BuiltinFunction
+   * @generated
+   */
+  EClass getBuiltinFunction();
+
+  /**
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.ReportFunction <em>Report Function</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Report Function</em>'.
+   * @see uk.ac.kcl.farm.farm.ReportFunction
+   * @generated
+   */
+  EClass getReportFunction();
+
+  /**
+   * Returns the meta object for the reference '{@link uk.ac.kcl.farm.farm.ReportFunction#getReportCrop <em>Report Crop</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Report Crop</em>'.
+   * @see uk.ac.kcl.farm.farm.ReportFunction#getReportCrop()
+   * @see #getReportFunction()
+   * @generated
+   */
+  EReference getReportFunction_ReportCrop();
+
+  /**
+   * Returns the meta object for the reference '{@link uk.ac.kcl.farm.farm.ReportFunction#getReportField <em>Report Field</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Report Field</em>'.
+   * @see uk.ac.kcl.farm.farm.ReportFunction#getReportField()
+   * @see #getReportFunction()
+   * @generated
+   */
+  EReference getReportFunction_ReportField();
+
+  /**
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.GetStageFunction <em>Get Stage Function</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Get Stage Function</em>'.
+   * @see uk.ac.kcl.farm.farm.GetStageFunction
+   * @generated
+   */
+  EClass getGetStageFunction();
+
+  /**
+   * Returns the meta object for the reference '{@link uk.ac.kcl.farm.farm.GetStageFunction#getGetStageCrop <em>Get Stage Crop</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Get Stage Crop</em>'.
+   * @see uk.ac.kcl.farm.farm.GetStageFunction#getGetStageCrop()
+   * @see #getGetStageFunction()
+   * @generated
+   */
+  EReference getGetStageFunction_GetStageCrop();
+
+  /**
+   * Returns the meta object for the attribute '{@link uk.ac.kcl.farm.farm.GetStageFunction#getStageNumber <em>Stage Number</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Stage Number</em>'.
+   * @see uk.ac.kcl.farm.farm.GetStageFunction#getStageNumber()
+   * @see #getGetStageFunction()
+   * @generated
+   */
+  EAttribute getGetStageFunction_StageNumber();
+
+  /**
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.CountStageFunction <em>Count Stage Function</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Count Stage Function</em>'.
+   * @see uk.ac.kcl.farm.farm.CountStageFunction
+   * @generated
+   */
+  EClass getCountStageFunction();
+
+  /**
+   * Returns the meta object for the reference '{@link uk.ac.kcl.farm.farm.CountStageFunction#getCountStageCrop <em>Count Stage Crop</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Count Stage Crop</em>'.
+   * @see uk.ac.kcl.farm.farm.CountStageFunction#getCountStageCrop()
+   * @see #getCountStageFunction()
+   * @generated
+   */
+  EReference getCountStageFunction_CountStageCrop();
+
+  /**
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.GetCropValueFunction <em>Get Crop Value Function</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Get Crop Value Function</em>'.
+   * @see uk.ac.kcl.farm.farm.GetCropValueFunction
+   * @generated
+   */
+  EClass getGetCropValueFunction();
+
+  /**
+   * Returns the meta object for the reference '{@link uk.ac.kcl.farm.farm.GetCropValueFunction#getGetValueCrop <em>Get Value Crop</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Get Value Crop</em>'.
+   * @see uk.ac.kcl.farm.farm.GetCropValueFunction#getGetValueCrop()
+   * @see #getGetCropValueFunction()
+   * @generated
+   */
+  EReference getGetCropValueFunction_GetValueCrop();
+
+  /**
+   * Returns the meta object for the attribute '{@link uk.ac.kcl.farm.farm.GetCropValueFunction#getGetCropAttribute <em>Get Crop Attribute</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Get Crop Attribute</em>'.
+   * @see uk.ac.kcl.farm.farm.GetCropValueFunction#getGetCropAttribute()
+   * @see #getGetCropValueFunction()
+   * @generated
+   */
+  EAttribute getGetCropValueFunction_GetCropAttribute();
+
+  /**
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.GetFieldValueFunction <em>Get Field Value Function</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Get Field Value Function</em>'.
+   * @see uk.ac.kcl.farm.farm.GetFieldValueFunction
+   * @generated
+   */
+  EClass getGetFieldValueFunction();
+
+  /**
+   * Returns the meta object for the reference '{@link uk.ac.kcl.farm.farm.GetFieldValueFunction#getGetValueField <em>Get Value Field</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Get Value Field</em>'.
+   * @see uk.ac.kcl.farm.farm.GetFieldValueFunction#getGetValueField()
+   * @see #getGetFieldValueFunction()
+   * @generated
+   */
+  EReference getGetFieldValueFunction_GetValueField();
+
+  /**
+   * Returns the meta object for the attribute '{@link uk.ac.kcl.farm.farm.GetFieldValueFunction#getGetFieldAttribute <em>Get Field Attribute</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Get Field Attribute</em>'.
+   * @see uk.ac.kcl.farm.farm.GetFieldValueFunction#getGetFieldAttribute()
+   * @see #getGetFieldValueFunction()
+   * @generated
+   */
+  EAttribute getGetFieldValueFunction_GetFieldAttribute();
+
+  /**
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.SetFieldValueFunction <em>Set Field Value Function</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Set Field Value Function</em>'.
+   * @see uk.ac.kcl.farm.farm.SetFieldValueFunction
+   * @generated
+   */
+  EClass getSetFieldValueFunction();
+
+  /**
+   * Returns the meta object for the reference '{@link uk.ac.kcl.farm.farm.SetFieldValueFunction#getSetValueField <em>Set Value Field</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Set Value Field</em>'.
+   * @see uk.ac.kcl.farm.farm.SetFieldValueFunction#getSetValueField()
+   * @see #getSetFieldValueFunction()
+   * @generated
+   */
+  EReference getSetFieldValueFunction_SetValueField();
+
+  /**
+   * Returns the meta object for the attribute '{@link uk.ac.kcl.farm.farm.SetFieldValueFunction#getSetFieldAttribute <em>Set Field Attribute</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Set Field Attribute</em>'.
+   * @see uk.ac.kcl.farm.farm.SetFieldValueFunction#getSetFieldAttribute()
+   * @see #getSetFieldValueFunction()
+   * @generated
+   */
+  EAttribute getSetFieldValueFunction_SetFieldAttribute();
+
+  /**
+   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.SetFieldValueFunction#getSetFieldValue <em>Set Field Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Set Field Value</em>'.
+   * @see uk.ac.kcl.farm.farm.SetFieldValueFunction#getSetFieldValue()
+   * @see #getSetFieldValueFunction()
+   * @generated
+   */
+  EReference getSetFieldValueFunction_SetFieldValue();
+
+  /**
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.PlantFunction <em>Plant Function</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Plant Function</em>'.
+   * @see uk.ac.kcl.farm.farm.PlantFunction
+   * @generated
+   */
+  EClass getPlantFunction();
+
+  /**
+   * Returns the meta object for the reference '{@link uk.ac.kcl.farm.farm.PlantFunction#getPlantInField <em>Plant In Field</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Plant In Field</em>'.
+   * @see uk.ac.kcl.farm.farm.PlantFunction#getPlantInField()
+   * @see #getPlantFunction()
+   * @generated
+   */
+  EReference getPlantFunction_PlantInField();
+
+  /**
+   * Returns the meta object for the reference '{@link uk.ac.kcl.farm.farm.PlantFunction#getPlantCrop <em>Plant Crop</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Plant Crop</em>'.
+   * @see uk.ac.kcl.farm.farm.PlantFunction#getPlantCrop()
+   * @see #getPlantFunction()
+   * @generated
+   */
+  EReference getPlantFunction_PlantCrop();
+
+  /**
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.MoveFunction <em>Move Function</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Move Function</em>'.
+   * @see uk.ac.kcl.farm.farm.MoveFunction
+   * @generated
+   */
+  EClass getMoveFunction();
+
+  /**
+   * Returns the meta object for the reference '{@link uk.ac.kcl.farm.farm.MoveFunction#getMoveFromField <em>Move From Field</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Move From Field</em>'.
+   * @see uk.ac.kcl.farm.farm.MoveFunction#getMoveFromField()
+   * @see #getMoveFunction()
+   * @generated
+   */
+  EReference getMoveFunction_MoveFromField();
+
+  /**
+   * Returns the meta object for the reference '{@link uk.ac.kcl.farm.farm.MoveFunction#getMoveToField <em>Move To Field</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Move To Field</em>'.
+   * @see uk.ac.kcl.farm.farm.MoveFunction#getMoveToField()
+   * @see #getMoveFunction()
+   * @generated
+   */
+  EReference getMoveFunction_MoveToField();
+
+  /**
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.WaitFunction <em>Wait Function</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Wait Function</em>'.
+   * @see uk.ac.kcl.farm.farm.WaitFunction
+   * @generated
+   */
+  EClass getWaitFunction();
+
+  /**
+   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.WaitFunction#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Value</em>'.
+   * @see uk.ac.kcl.farm.farm.WaitFunction#getValue()
+   * @see #getWaitFunction()
+   * @generated
+   */
+  EReference getWaitFunction_Value();
+
+  /**
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.Expression <em>Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Expression</em>'.
+   * @see uk.ac.kcl.farm.farm.Expression
+   * @generated
+   */
+  EClass getExpression();
+
+  /**
+   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.Expression#getExp <em>Exp</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Exp</em>'.
+   * @see uk.ac.kcl.farm.farm.Expression#getExp()
+   * @see #getExpression()
+   * @generated
+   */
+  EReference getExpression_Exp();
+
+  /**
+   * Returns the meta object for the reference '{@link uk.ac.kcl.farm.farm.Expression#getVar <em>Var</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Var</em>'.
+   * @see uk.ac.kcl.farm.farm.Expression#getVar()
+   * @see #getExpression()
+   * @generated
+   */
+  EReference getExpression_Var();
+
+  /**
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.Literal <em>Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Literal</em>'.
+   * @see uk.ac.kcl.farm.farm.Literal
+   * @generated
+   */
+  EClass getLiteral();
+
+  /**
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.BooleanLiteral <em>Boolean Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Boolean Literal</em>'.
+   * @see uk.ac.kcl.farm.farm.BooleanLiteral
+   * @generated
+   */
+  EClass getBooleanLiteral();
 
   /**
    * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.RealLiteral <em>Real Literal</em>}'.
@@ -1153,98 +2568,25 @@ public interface FarmPackage extends EPackage
   EAttribute getRealLiteral_Val();
 
   /**
-   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.RealVarExpression <em>Real Var Expression</em>}'.
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.Attribute <em>Attribute</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Real Var Expression</em>'.
-   * @see uk.ac.kcl.farm.farm.RealVarExpression
+   * @return the meta object for class '<em>Attribute</em>'.
+   * @see uk.ac.kcl.farm.farm.Attribute
    * @generated
    */
-  EClass getRealVarExpression();
+  EClass getAttribute();
 
   /**
-   * Returns the meta object for the reference '{@link uk.ac.kcl.farm.farm.RealVarExpression#getVar <em>Var</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Var</em>'.
-   * @see uk.ac.kcl.farm.farm.RealVarExpression#getVar()
-   * @see #getRealVarExpression()
-   * @generated
-   */
-  EReference getRealVarExpression_Var();
-
-  /**
-   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.ConditionExpression <em>Condition Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Condition Expression</em>'.
-   * @see uk.ac.kcl.farm.farm.ConditionExpression
-   * @generated
-   */
-  EClass getConditionExpression();
-
-  /**
-   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.BooleanLiteral <em>Boolean Literal</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Boolean Literal</em>'.
-   * @see uk.ac.kcl.farm.farm.BooleanLiteral
-   * @generated
-   */
-  EClass getBooleanLiteral();
-
-  /**
-   * Returns the meta object for the attribute '{@link uk.ac.kcl.farm.farm.BooleanLiteral#getVal <em>Val</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Val</em>'.
-   * @see uk.ac.kcl.farm.farm.BooleanLiteral#getVal()
-   * @see #getBooleanLiteral()
-   * @generated
-   */
-  EAttribute getBooleanLiteral_Val();
-
-  /**
-   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.BooleanVarExpression <em>Boolean Var Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Boolean Var Expression</em>'.
-   * @see uk.ac.kcl.farm.farm.BooleanVarExpression
-   * @generated
-   */
-  EClass getBooleanVarExpression();
-
-  /**
-   * Returns the meta object for the reference '{@link uk.ac.kcl.farm.farm.BooleanVarExpression#getVar <em>Var</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Var</em>'.
-   * @see uk.ac.kcl.farm.farm.BooleanVarExpression#getVar()
-   * @see #getBooleanVarExpression()
-   * @generated
-   */
-  EReference getBooleanVarExpression_Var();
-
-  /**
-   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.AttributeDeclaration <em>Attribute Declaration</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Attribute Declaration</em>'.
-   * @see uk.ac.kcl.farm.farm.AttributeDeclaration
-   * @generated
-   */
-  EClass getAttributeDeclaration();
-
-  /**
-   * Returns the meta object for the attribute '{@link uk.ac.kcl.farm.farm.AttributeDeclaration#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link uk.ac.kcl.farm.farm.Attribute#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see uk.ac.kcl.farm.farm.AttributeDeclaration#getName()
-   * @see #getAttributeDeclaration()
+   * @see uk.ac.kcl.farm.farm.Attribute#getName()
+   * @see #getAttribute()
    * @generated
    */
-  EAttribute getAttributeDeclaration_Name();
+  EAttribute getAttribute_Name();
 
   /**
    * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.Crop <em>Crop</em>}'.
@@ -1386,60 +2728,6 @@ public interface FarmPackage extends EPackage
   EReference getCropAttributes_Value();
 
   /**
-   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.Machine <em>Machine</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Machine</em>'.
-   * @see uk.ac.kcl.farm.farm.Machine
-   * @generated
-   */
-  EClass getMachine();
-
-  /**
-   * Returns the meta object for the attribute '{@link uk.ac.kcl.farm.farm.Machine#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see uk.ac.kcl.farm.farm.Machine#getName()
-   * @see #getMachine()
-   * @generated
-   */
-  EAttribute getMachine_Name();
-
-  /**
-   * Returns the meta object for the attribute '{@link uk.ac.kcl.farm.farm.Machine#getMachineName <em>Machine Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Machine Name</em>'.
-   * @see uk.ac.kcl.farm.farm.Machine#getMachineName()
-   * @see #getMachine()
-   * @generated
-   */
-  EAttribute getMachine_MachineName();
-
-  /**
-   * Returns the meta object for the attribute '{@link uk.ac.kcl.farm.farm.Machine#getIp <em>Ip</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Ip</em>'.
-   * @see uk.ac.kcl.farm.farm.Machine#getIp()
-   * @see #getMachine()
-   * @generated
-   */
-  EAttribute getMachine_Ip();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link uk.ac.kcl.farm.farm.Machine#getStatements <em>Statements</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Statements</em>'.
-   * @see uk.ac.kcl.farm.farm.Machine#getStatements()
-   * @see #getMachine()
-   * @generated
-   */
-  EReference getMachine_Statements();
-
-  /**
    * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.Field <em>Field</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1459,6 +2747,82 @@ public interface FarmPackage extends EPackage
    * @generated
    */
   EAttribute getField_Name();
+
+  /**
+   * Returns the meta object for the attribute '{@link uk.ac.kcl.farm.farm.Field#getFieldName <em>Field Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Field Name</em>'.
+   * @see uk.ac.kcl.farm.farm.Field#getFieldName()
+   * @see #getField()
+   * @generated
+   */
+  EAttribute getField_FieldName();
+
+  /**
+   * Returns the meta object for the attribute '{@link uk.ac.kcl.farm.farm.Field#getIp <em>Ip</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Ip</em>'.
+   * @see uk.ac.kcl.farm.farm.Field#getIp()
+   * @see #getField()
+   * @generated
+   */
+  EAttribute getField_Ip();
+
+  /**
+   * Returns the meta object for the attribute '{@link uk.ac.kcl.farm.farm.Field#getFieldType <em>Field Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Field Type</em>'.
+   * @see uk.ac.kcl.farm.farm.Field#getFieldType()
+   * @see #getField()
+   * @generated
+   */
+  EAttribute getField_FieldType();
+
+  /**
+   * Returns the meta object for the attribute '{@link uk.ac.kcl.farm.farm.Field#getFieldLight <em>Field Light</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Field Light</em>'.
+   * @see uk.ac.kcl.farm.farm.Field#getFieldLight()
+   * @see #getField()
+   * @generated
+   */
+  EAttribute getField_FieldLight();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link uk.ac.kcl.farm.farm.Field#getFieldMonitors <em>Field Monitors</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Field Monitors</em>'.
+   * @see uk.ac.kcl.farm.farm.Field#getFieldMonitors()
+   * @see #getField()
+   * @generated
+   */
+  EReference getField_FieldMonitors();
+
+  /**
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.FieldMonitor <em>Field Monitor</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Field Monitor</em>'.
+   * @see uk.ac.kcl.farm.farm.FieldMonitor
+   * @generated
+   */
+  EClass getFieldMonitor();
+
+  /**
+   * Returns the meta object for the reference '{@link uk.ac.kcl.farm.farm.FieldMonitor#getMonitor <em>Monitor</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Monitor</em>'.
+   * @see uk.ac.kcl.farm.farm.FieldMonitor#getMonitor()
+   * @see #getFieldMonitor()
+   * @generated
+   */
+  EReference getFieldMonitor_Monitor();
 
   /**
    * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.Mission <em>Mission</em>}'.
@@ -1547,219 +2911,461 @@ public interface FarmPackage extends EPackage
   EReference getTask_Statements();
 
   /**
-   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.Addition <em>Addition</em>}'.
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.ReturnStatement <em>Return Statement</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Addition</em>'.
-   * @see uk.ac.kcl.farm.farm.Addition
+   * @return the meta object for class '<em>Return Statement</em>'.
+   * @see uk.ac.kcl.farm.farm.ReturnStatement
    * @generated
    */
-  EClass getAddition();
+  EClass getReturnStatement();
 
   /**
-   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.Addition#getLeft <em>Left</em>}'.
+   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.ReturnStatement#getValue <em>Value</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Left</em>'.
-   * @see uk.ac.kcl.farm.farm.Addition#getLeft()
-   * @see #getAddition()
+   * @return the meta object for the containment reference '<em>Value</em>'.
+   * @see uk.ac.kcl.farm.farm.ReturnStatement#getValue()
+   * @see #getReturnStatement()
    * @generated
    */
-  EReference getAddition_Left();
+  EReference getReturnStatement_Value();
 
   /**
-   * Returns the meta object for the attribute list '{@link uk.ac.kcl.farm.farm.Addition#getOperator <em>Operator</em>}'.
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.ExecuteStatement <em>Execute Statement</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Operator</em>'.
-   * @see uk.ac.kcl.farm.farm.Addition#getOperator()
-   * @see #getAddition()
+   * @return the meta object for class '<em>Execute Statement</em>'.
+   * @see uk.ac.kcl.farm.farm.ExecuteStatement
    * @generated
    */
-  EAttribute getAddition_Operator();
+  EClass getExecuteStatement();
 
   /**
-   * Returns the meta object for the containment reference list '{@link uk.ac.kcl.farm.farm.Addition#getRight <em>Right</em>}'.
+   * Returns the meta object for the containment reference list '{@link uk.ac.kcl.farm.farm.ExecuteStatement#getStatements <em>Statements</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Right</em>'.
-   * @see uk.ac.kcl.farm.farm.Addition#getRight()
-   * @see #getAddition()
+   * @return the meta object for the containment reference list '<em>Statements</em>'.
+   * @see uk.ac.kcl.farm.farm.ExecuteStatement#getStatements()
+   * @see #getExecuteStatement()
    * @generated
    */
-  EReference getAddition_Right();
+  EReference getExecuteStatement_Statements();
 
   /**
-   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.Multiplication <em>Multiplication</em>}'.
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.ConditionOrExpression <em>Condition Or Expression</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Multiplication</em>'.
-   * @see uk.ac.kcl.farm.farm.Multiplication
+   * @return the meta object for class '<em>Condition Or Expression</em>'.
+   * @see uk.ac.kcl.farm.farm.ConditionOrExpression
    * @generated
    */
-  EClass getMultiplication();
+  EClass getConditionOrExpression();
 
   /**
-   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.Multiplication#getLeft <em>Left</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Left</em>'.
-   * @see uk.ac.kcl.farm.farm.Multiplication#getLeft()
-   * @see #getMultiplication()
-   * @generated
-   */
-  EReference getMultiplication_Left();
-
-  /**
-   * Returns the meta object for the attribute list '{@link uk.ac.kcl.farm.farm.Multiplication#getOperator <em>Operator</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Operator</em>'.
-   * @see uk.ac.kcl.farm.farm.Multiplication#getOperator()
-   * @see #getMultiplication()
-   * @generated
-   */
-  EAttribute getMultiplication_Operator();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link uk.ac.kcl.farm.farm.Multiplication#getRight <em>Right</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Right</em>'.
-   * @see uk.ac.kcl.farm.farm.Multiplication#getRight()
-   * @see #getMultiplication()
-   * @generated
-   */
-  EReference getMultiplication_Right();
-
-  /**
-   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.OrExpression <em>Or Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Or Expression</em>'.
-   * @see uk.ac.kcl.farm.farm.OrExpression
-   * @generated
-   */
-  EClass getOrExpression();
-
-  /**
-   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.OrExpression#getLeft <em>Left</em>}'.
+   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.ConditionOrExpression#getLeft <em>Left</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Left</em>'.
-   * @see uk.ac.kcl.farm.farm.OrExpression#getLeft()
-   * @see #getOrExpression()
+   * @see uk.ac.kcl.farm.farm.ConditionOrExpression#getLeft()
+   * @see #getConditionOrExpression()
    * @generated
    */
-  EReference getOrExpression_Left();
+  EReference getConditionOrExpression_Left();
 
   /**
-   * Returns the meta object for the attribute list '{@link uk.ac.kcl.farm.farm.OrExpression#getOperator <em>Operator</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Operator</em>'.
-   * @see uk.ac.kcl.farm.farm.OrExpression#getOperator()
-   * @see #getOrExpression()
-   * @generated
-   */
-  EAttribute getOrExpression_Operator();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link uk.ac.kcl.farm.farm.OrExpression#getRight <em>Right</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Right</em>'.
-   * @see uk.ac.kcl.farm.farm.OrExpression#getRight()
-   * @see #getOrExpression()
-   * @generated
-   */
-  EReference getOrExpression_Right();
-
-  /**
-   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.AndExpression <em>And Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>And Expression</em>'.
-   * @see uk.ac.kcl.farm.farm.AndExpression
-   * @generated
-   */
-  EClass getAndExpression();
-
-  /**
-   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.AndExpression#getLeft <em>Left</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Left</em>'.
-   * @see uk.ac.kcl.farm.farm.AndExpression#getLeft()
-   * @see #getAndExpression()
-   * @generated
-   */
-  EReference getAndExpression_Left();
-
-  /**
-   * Returns the meta object for the attribute list '{@link uk.ac.kcl.farm.farm.AndExpression#getOperator <em>Operator</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Operator</em>'.
-   * @see uk.ac.kcl.farm.farm.AndExpression#getOperator()
-   * @see #getAndExpression()
-   * @generated
-   */
-  EAttribute getAndExpression_Operator();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link uk.ac.kcl.farm.farm.AndExpression#getRight <em>Right</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Right</em>'.
-   * @see uk.ac.kcl.farm.farm.AndExpression#getRight()
-   * @see #getAndExpression()
-   * @generated
-   */
-  EReference getAndExpression_Right();
-
-  /**
-   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.ComparisonExpression <em>Comparison Expression</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Comparison Expression</em>'.
-   * @see uk.ac.kcl.farm.farm.ComparisonExpression
-   * @generated
-   */
-  EClass getComparisonExpression();
-
-  /**
-   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.ComparisonExpression#getLeft <em>Left</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Left</em>'.
-   * @see uk.ac.kcl.farm.farm.ComparisonExpression#getLeft()
-   * @see #getComparisonExpression()
-   * @generated
-   */
-  EReference getComparisonExpression_Left();
-
-  /**
-   * Returns the meta object for the attribute '{@link uk.ac.kcl.farm.farm.ComparisonExpression#getOperator <em>Operator</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Operator</em>'.
-   * @see uk.ac.kcl.farm.farm.ComparisonExpression#getOperator()
-   * @see #getComparisonExpression()
-   * @generated
-   */
-  EAttribute getComparisonExpression_Operator();
-
-  /**
-   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.ComparisonExpression#getRight <em>Right</em>}'.
+   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.ConditionOrExpression#getRight <em>Right</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference '<em>Right</em>'.
-   * @see uk.ac.kcl.farm.farm.ComparisonExpression#getRight()
-   * @see #getComparisonExpression()
+   * @see uk.ac.kcl.farm.farm.ConditionOrExpression#getRight()
+   * @see #getConditionOrExpression()
    * @generated
    */
-  EReference getComparisonExpression_Right();
+  EReference getConditionOrExpression_Right();
+
+  /**
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.ConditionAndExpression <em>Condition And Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Condition And Expression</em>'.
+   * @see uk.ac.kcl.farm.farm.ConditionAndExpression
+   * @generated
+   */
+  EClass getConditionAndExpression();
+
+  /**
+   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.ConditionAndExpression#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see uk.ac.kcl.farm.farm.ConditionAndExpression#getLeft()
+   * @see #getConditionAndExpression()
+   * @generated
+   */
+  EReference getConditionAndExpression_Left();
+
+  /**
+   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.ConditionAndExpression#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right</em>'.
+   * @see uk.ac.kcl.farm.farm.ConditionAndExpression#getRight()
+   * @see #getConditionAndExpression()
+   * @generated
+   */
+  EReference getConditionAndExpression_Right();
+
+  /**
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.LessThanOrEqual <em>Less Than Or Equal</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Less Than Or Equal</em>'.
+   * @see uk.ac.kcl.farm.farm.LessThanOrEqual
+   * @generated
+   */
+  EClass getLessThanOrEqual();
+
+  /**
+   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.LessThanOrEqual#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see uk.ac.kcl.farm.farm.LessThanOrEqual#getLeft()
+   * @see #getLessThanOrEqual()
+   * @generated
+   */
+  EReference getLessThanOrEqual_Left();
+
+  /**
+   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.LessThanOrEqual#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right</em>'.
+   * @see uk.ac.kcl.farm.farm.LessThanOrEqual#getRight()
+   * @see #getLessThanOrEqual()
+   * @generated
+   */
+  EReference getLessThanOrEqual_Right();
+
+  /**
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.LessThan <em>Less Than</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Less Than</em>'.
+   * @see uk.ac.kcl.farm.farm.LessThan
+   * @generated
+   */
+  EClass getLessThan();
+
+  /**
+   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.LessThan#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see uk.ac.kcl.farm.farm.LessThan#getLeft()
+   * @see #getLessThan()
+   * @generated
+   */
+  EReference getLessThan_Left();
+
+  /**
+   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.LessThan#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right</em>'.
+   * @see uk.ac.kcl.farm.farm.LessThan#getRight()
+   * @see #getLessThan()
+   * @generated
+   */
+  EReference getLessThan_Right();
+
+  /**
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.GreaterThanOrEqual <em>Greater Than Or Equal</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Greater Than Or Equal</em>'.
+   * @see uk.ac.kcl.farm.farm.GreaterThanOrEqual
+   * @generated
+   */
+  EClass getGreaterThanOrEqual();
+
+  /**
+   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.GreaterThanOrEqual#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see uk.ac.kcl.farm.farm.GreaterThanOrEqual#getLeft()
+   * @see #getGreaterThanOrEqual()
+   * @generated
+   */
+  EReference getGreaterThanOrEqual_Left();
+
+  /**
+   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.GreaterThanOrEqual#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right</em>'.
+   * @see uk.ac.kcl.farm.farm.GreaterThanOrEqual#getRight()
+   * @see #getGreaterThanOrEqual()
+   * @generated
+   */
+  EReference getGreaterThanOrEqual_Right();
+
+  /**
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.GreaterThan <em>Greater Than</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Greater Than</em>'.
+   * @see uk.ac.kcl.farm.farm.GreaterThan
+   * @generated
+   */
+  EClass getGreaterThan();
+
+  /**
+   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.GreaterThan#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see uk.ac.kcl.farm.farm.GreaterThan#getLeft()
+   * @see #getGreaterThan()
+   * @generated
+   */
+  EReference getGreaterThan_Left();
+
+  /**
+   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.GreaterThan#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right</em>'.
+   * @see uk.ac.kcl.farm.farm.GreaterThan#getRight()
+   * @see #getGreaterThan()
+   * @generated
+   */
+  EReference getGreaterThan_Right();
+
+  /**
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.Equal <em>Equal</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Equal</em>'.
+   * @see uk.ac.kcl.farm.farm.Equal
+   * @generated
+   */
+  EClass getEqual();
+
+  /**
+   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.Equal#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see uk.ac.kcl.farm.farm.Equal#getLeft()
+   * @see #getEqual()
+   * @generated
+   */
+  EReference getEqual_Left();
+
+  /**
+   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.Equal#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right</em>'.
+   * @see uk.ac.kcl.farm.farm.Equal#getRight()
+   * @see #getEqual()
+   * @generated
+   */
+  EReference getEqual_Right();
+
+  /**
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.NotEqual <em>Not Equal</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Not Equal</em>'.
+   * @see uk.ac.kcl.farm.farm.NotEqual
+   * @generated
+   */
+  EClass getNotEqual();
+
+  /**
+   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.NotEqual#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see uk.ac.kcl.farm.farm.NotEqual#getLeft()
+   * @see #getNotEqual()
+   * @generated
+   */
+  EReference getNotEqual_Left();
+
+  /**
+   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.NotEqual#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Right</em>'.
+   * @see uk.ac.kcl.farm.farm.NotEqual#getRight()
+   * @see #getNotEqual()
+   * @generated
+   */
+  EReference getNotEqual_Right();
+
+  /**
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.Plus <em>Plus</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Plus</em>'.
+   * @see uk.ac.kcl.farm.farm.Plus
+   * @generated
+   */
+  EClass getPlus();
+
+  /**
+   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.Plus#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see uk.ac.kcl.farm.farm.Plus#getLeft()
+   * @see #getPlus()
+   * @generated
+   */
+  EReference getPlus_Left();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link uk.ac.kcl.farm.farm.Plus#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Right</em>'.
+   * @see uk.ac.kcl.farm.farm.Plus#getRight()
+   * @see #getPlus()
+   * @generated
+   */
+  EReference getPlus_Right();
+
+  /**
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.Minus <em>Minus</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Minus</em>'.
+   * @see uk.ac.kcl.farm.farm.Minus
+   * @generated
+   */
+  EClass getMinus();
+
+  /**
+   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.Minus#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see uk.ac.kcl.farm.farm.Minus#getLeft()
+   * @see #getMinus()
+   * @generated
+   */
+  EReference getMinus_Left();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link uk.ac.kcl.farm.farm.Minus#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Right</em>'.
+   * @see uk.ac.kcl.farm.farm.Minus#getRight()
+   * @see #getMinus()
+   * @generated
+   */
+  EReference getMinus_Right();
+
+  /**
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.Multiply <em>Multiply</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Multiply</em>'.
+   * @see uk.ac.kcl.farm.farm.Multiply
+   * @generated
+   */
+  EClass getMultiply();
+
+  /**
+   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.Multiply#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see uk.ac.kcl.farm.farm.Multiply#getLeft()
+   * @see #getMultiply()
+   * @generated
+   */
+  EReference getMultiply_Left();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link uk.ac.kcl.farm.farm.Multiply#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Right</em>'.
+   * @see uk.ac.kcl.farm.farm.Multiply#getRight()
+   * @see #getMultiply()
+   * @generated
+   */
+  EReference getMultiply_Right();
+
+  /**
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.Divide <em>Divide</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Divide</em>'.
+   * @see uk.ac.kcl.farm.farm.Divide
+   * @generated
+   */
+  EClass getDivide();
+
+  /**
+   * Returns the meta object for the containment reference '{@link uk.ac.kcl.farm.farm.Divide#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Left</em>'.
+   * @see uk.ac.kcl.farm.farm.Divide#getLeft()
+   * @see #getDivide()
+   * @generated
+   */
+  EReference getDivide_Left();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link uk.ac.kcl.farm.farm.Divide#getRight <em>Right</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Right</em>'.
+   * @see uk.ac.kcl.farm.farm.Divide#getRight()
+   * @see #getDivide()
+   * @generated
+   */
+  EReference getDivide_Right();
+
+  /**
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.UnaryExpression <em>Unary Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Unary Expression</em>'.
+   * @see uk.ac.kcl.farm.farm.UnaryExpression
+   * @generated
+   */
+  EClass getUnaryExpression();
+
+  /**
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.BoolLiteral <em>Bool Literal</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Bool Literal</em>'.
+   * @see uk.ac.kcl.farm.farm.BoolLiteral
+   * @generated
+   */
+  EClass getBoolLiteral();
+
+  /**
+   * Returns the meta object for the attribute '{@link uk.ac.kcl.farm.farm.BoolLiteral#isVal <em>Val</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val</em>'.
+   * @see uk.ac.kcl.farm.farm.BoolLiteral#isVal()
+   * @see #getBoolLiteral()
+   * @generated
+   */
+  EAttribute getBoolLiteral_Val();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -1841,14 +3447,14 @@ public interface FarmPackage extends EPackage
     EClass STATEMENT = eINSTANCE.getStatement();
 
     /**
-     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.VariableDeclarationImpl <em>Variable Declaration</em>}' class.
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.VariableImpl <em>Variable</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see uk.ac.kcl.farm.farm.impl.VariableDeclarationImpl
-     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getVariableDeclaration()
+     * @see uk.ac.kcl.farm.farm.impl.VariableImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getVariable()
      * @generated
      */
-    EClass VARIABLE_DECLARATION = eINSTANCE.getVariableDeclaration();
+    EClass VARIABLE = eINSTANCE.getVariable();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -1856,7 +3462,7 @@ public interface FarmPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute VARIABLE_DECLARATION__NAME = eINSTANCE.getVariableDeclaration_Name();
+    EAttribute VARIABLE__NAME = eINSTANCE.getVariable_Name();
 
     /**
      * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
@@ -1864,17 +3470,7 @@ public interface FarmPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference VARIABLE_DECLARATION__VALUE = eINSTANCE.getVariableDeclaration_Value();
-
-    /**
-     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.VariableExpressionImpl <em>Variable Expression</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see uk.ac.kcl.farm.farm.impl.VariableExpressionImpl
-     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getVariableExpression()
-     * @generated
-     */
-    EClass VARIABLE_EXPRESSION = eINSTANCE.getVariableExpression();
+    EReference VARIABLE__VALUE = eINSTANCE.getVariable_Value();
 
     /**
      * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.LoopStatementImpl <em>Loop Statement</em>}' class.
@@ -1903,14 +3499,354 @@ public interface FarmPackage extends EPackage
     EReference LOOP_STATEMENT__STATEMENTS = eINSTANCE.getLoopStatement_Statements();
 
     /**
-     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.RealExpressionImpl <em>Real Expression</em>}' class.
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.JudgeStatementImpl <em>Judge Statement</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see uk.ac.kcl.farm.farm.impl.RealExpressionImpl
-     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getRealExpression()
+     * @see uk.ac.kcl.farm.farm.impl.JudgeStatementImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getJudgeStatement()
      * @generated
      */
-    EClass REAL_EXPRESSION = eINSTANCE.getRealExpression();
+    EClass JUDGE_STATEMENT = eINSTANCE.getJudgeStatement();
+
+    /**
+     * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference JUDGE_STATEMENT__CONDITION = eINSTANCE.getJudgeStatement_Condition();
+
+    /**
+     * The meta object literal for the '<em><b>Statements</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference JUDGE_STATEMENT__STATEMENTS = eINSTANCE.getJudgeStatement_Statements();
+
+    /**
+     * The meta object literal for the '<em><b>Elseif</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference JUDGE_STATEMENT__ELSEIF = eINSTANCE.getJudgeStatement_Elseif();
+
+    /**
+     * The meta object literal for the '<em><b>Else Statement</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference JUDGE_STATEMENT__ELSE_STATEMENT = eINSTANCE.getJudgeStatement_ElseStatement();
+
+    /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.ElseJudgeStatementImpl <em>Else Judge Statement</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.ElseJudgeStatementImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getElseJudgeStatement()
+     * @generated
+     */
+    EClass ELSE_JUDGE_STATEMENT = eINSTANCE.getElseJudgeStatement();
+
+    /**
+     * The meta object literal for the '<em><b>Condition</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ELSE_JUDGE_STATEMENT__CONDITION = eINSTANCE.getElseJudgeStatement_Condition();
+
+    /**
+     * The meta object literal for the '<em><b>Statements</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ELSE_JUDGE_STATEMENT__STATEMENTS = eINSTANCE.getElseJudgeStatement_Statements();
+
+    /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.BuiltinFunctionImpl <em>Builtin Function</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.BuiltinFunctionImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getBuiltinFunction()
+     * @generated
+     */
+    EClass BUILTIN_FUNCTION = eINSTANCE.getBuiltinFunction();
+
+    /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.ReportFunctionImpl <em>Report Function</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.ReportFunctionImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getReportFunction()
+     * @generated
+     */
+    EClass REPORT_FUNCTION = eINSTANCE.getReportFunction();
+
+    /**
+     * The meta object literal for the '<em><b>Report Crop</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference REPORT_FUNCTION__REPORT_CROP = eINSTANCE.getReportFunction_ReportCrop();
+
+    /**
+     * The meta object literal for the '<em><b>Report Field</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference REPORT_FUNCTION__REPORT_FIELD = eINSTANCE.getReportFunction_ReportField();
+
+    /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.GetStageFunctionImpl <em>Get Stage Function</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.GetStageFunctionImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getGetStageFunction()
+     * @generated
+     */
+    EClass GET_STAGE_FUNCTION = eINSTANCE.getGetStageFunction();
+
+    /**
+     * The meta object literal for the '<em><b>Get Stage Crop</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference GET_STAGE_FUNCTION__GET_STAGE_CROP = eINSTANCE.getGetStageFunction_GetStageCrop();
+
+    /**
+     * The meta object literal for the '<em><b>Stage Number</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute GET_STAGE_FUNCTION__STAGE_NUMBER = eINSTANCE.getGetStageFunction_StageNumber();
+
+    /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.CountStageFunctionImpl <em>Count Stage Function</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.CountStageFunctionImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getCountStageFunction()
+     * @generated
+     */
+    EClass COUNT_STAGE_FUNCTION = eINSTANCE.getCountStageFunction();
+
+    /**
+     * The meta object literal for the '<em><b>Count Stage Crop</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference COUNT_STAGE_FUNCTION__COUNT_STAGE_CROP = eINSTANCE.getCountStageFunction_CountStageCrop();
+
+    /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.GetCropValueFunctionImpl <em>Get Crop Value Function</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.GetCropValueFunctionImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getGetCropValueFunction()
+     * @generated
+     */
+    EClass GET_CROP_VALUE_FUNCTION = eINSTANCE.getGetCropValueFunction();
+
+    /**
+     * The meta object literal for the '<em><b>Get Value Crop</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference GET_CROP_VALUE_FUNCTION__GET_VALUE_CROP = eINSTANCE.getGetCropValueFunction_GetValueCrop();
+
+    /**
+     * The meta object literal for the '<em><b>Get Crop Attribute</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute GET_CROP_VALUE_FUNCTION__GET_CROP_ATTRIBUTE = eINSTANCE.getGetCropValueFunction_GetCropAttribute();
+
+    /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.GetFieldValueFunctionImpl <em>Get Field Value Function</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.GetFieldValueFunctionImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getGetFieldValueFunction()
+     * @generated
+     */
+    EClass GET_FIELD_VALUE_FUNCTION = eINSTANCE.getGetFieldValueFunction();
+
+    /**
+     * The meta object literal for the '<em><b>Get Value Field</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference GET_FIELD_VALUE_FUNCTION__GET_VALUE_FIELD = eINSTANCE.getGetFieldValueFunction_GetValueField();
+
+    /**
+     * The meta object literal for the '<em><b>Get Field Attribute</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute GET_FIELD_VALUE_FUNCTION__GET_FIELD_ATTRIBUTE = eINSTANCE.getGetFieldValueFunction_GetFieldAttribute();
+
+    /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.SetFieldValueFunctionImpl <em>Set Field Value Function</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.SetFieldValueFunctionImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getSetFieldValueFunction()
+     * @generated
+     */
+    EClass SET_FIELD_VALUE_FUNCTION = eINSTANCE.getSetFieldValueFunction();
+
+    /**
+     * The meta object literal for the '<em><b>Set Value Field</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SET_FIELD_VALUE_FUNCTION__SET_VALUE_FIELD = eINSTANCE.getSetFieldValueFunction_SetValueField();
+
+    /**
+     * The meta object literal for the '<em><b>Set Field Attribute</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SET_FIELD_VALUE_FUNCTION__SET_FIELD_ATTRIBUTE = eINSTANCE.getSetFieldValueFunction_SetFieldAttribute();
+
+    /**
+     * The meta object literal for the '<em><b>Set Field Value</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SET_FIELD_VALUE_FUNCTION__SET_FIELD_VALUE = eINSTANCE.getSetFieldValueFunction_SetFieldValue();
+
+    /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.PlantFunctionImpl <em>Plant Function</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.PlantFunctionImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getPlantFunction()
+     * @generated
+     */
+    EClass PLANT_FUNCTION = eINSTANCE.getPlantFunction();
+
+    /**
+     * The meta object literal for the '<em><b>Plant In Field</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PLANT_FUNCTION__PLANT_IN_FIELD = eINSTANCE.getPlantFunction_PlantInField();
+
+    /**
+     * The meta object literal for the '<em><b>Plant Crop</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PLANT_FUNCTION__PLANT_CROP = eINSTANCE.getPlantFunction_PlantCrop();
+
+    /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.MoveFunctionImpl <em>Move Function</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.MoveFunctionImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getMoveFunction()
+     * @generated
+     */
+    EClass MOVE_FUNCTION = eINSTANCE.getMoveFunction();
+
+    /**
+     * The meta object literal for the '<em><b>Move From Field</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MOVE_FUNCTION__MOVE_FROM_FIELD = eINSTANCE.getMoveFunction_MoveFromField();
+
+    /**
+     * The meta object literal for the '<em><b>Move To Field</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MOVE_FUNCTION__MOVE_TO_FIELD = eINSTANCE.getMoveFunction_MoveToField();
+
+    /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.WaitFunctionImpl <em>Wait Function</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.WaitFunctionImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getWaitFunction()
+     * @generated
+     */
+    EClass WAIT_FUNCTION = eINSTANCE.getWaitFunction();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference WAIT_FUNCTION__VALUE = eINSTANCE.getWaitFunction_Value();
+
+    /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.ExpressionImpl <em>Expression</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.ExpressionImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getExpression()
+     * @generated
+     */
+    EClass EXPRESSION = eINSTANCE.getExpression();
+
+    /**
+     * The meta object literal for the '<em><b>Exp</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EXPRESSION__EXP = eINSTANCE.getExpression_Exp();
+
+    /**
+     * The meta object literal for the '<em><b>Var</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EXPRESSION__VAR = eINSTANCE.getExpression_Var();
+
+    /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.LiteralImpl <em>Literal</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.LiteralImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getLiteral()
+     * @generated
+     */
+    EClass LITERAL = eINSTANCE.getLiteral();
+
+    /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.BooleanLiteralImpl <em>Boolean Literal</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.BooleanLiteralImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getBooleanLiteral()
+     * @generated
+     */
+    EClass BOOLEAN_LITERAL = eINSTANCE.getBooleanLiteral();
 
     /**
      * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.RealLiteralImpl <em>Real Literal</em>}' class.
@@ -1931,78 +3867,14 @@ public interface FarmPackage extends EPackage
     EAttribute REAL_LITERAL__VAL = eINSTANCE.getRealLiteral_Val();
 
     /**
-     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.RealVarExpressionImpl <em>Real Var Expression</em>}' class.
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.AttributeImpl <em>Attribute</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see uk.ac.kcl.farm.farm.impl.RealVarExpressionImpl
-     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getRealVarExpression()
+     * @see uk.ac.kcl.farm.farm.impl.AttributeImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getAttribute()
      * @generated
      */
-    EClass REAL_VAR_EXPRESSION = eINSTANCE.getRealVarExpression();
-
-    /**
-     * The meta object literal for the '<em><b>Var</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference REAL_VAR_EXPRESSION__VAR = eINSTANCE.getRealVarExpression_Var();
-
-    /**
-     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.ConditionExpressionImpl <em>Condition Expression</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see uk.ac.kcl.farm.farm.impl.ConditionExpressionImpl
-     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getConditionExpression()
-     * @generated
-     */
-    EClass CONDITION_EXPRESSION = eINSTANCE.getConditionExpression();
-
-    /**
-     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.BooleanLiteralImpl <em>Boolean Literal</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see uk.ac.kcl.farm.farm.impl.BooleanLiteralImpl
-     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getBooleanLiteral()
-     * @generated
-     */
-    EClass BOOLEAN_LITERAL = eINSTANCE.getBooleanLiteral();
-
-    /**
-     * The meta object literal for the '<em><b>Val</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute BOOLEAN_LITERAL__VAL = eINSTANCE.getBooleanLiteral_Val();
-
-    /**
-     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.BooleanVarExpressionImpl <em>Boolean Var Expression</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see uk.ac.kcl.farm.farm.impl.BooleanVarExpressionImpl
-     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getBooleanVarExpression()
-     * @generated
-     */
-    EClass BOOLEAN_VAR_EXPRESSION = eINSTANCE.getBooleanVarExpression();
-
-    /**
-     * The meta object literal for the '<em><b>Var</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference BOOLEAN_VAR_EXPRESSION__VAR = eINSTANCE.getBooleanVarExpression_Var();
-
-    /**
-     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.AttributeDeclarationImpl <em>Attribute Declaration</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see uk.ac.kcl.farm.farm.impl.AttributeDeclarationImpl
-     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getAttributeDeclaration()
-     * @generated
-     */
-    EClass ATTRIBUTE_DECLARATION = eINSTANCE.getAttributeDeclaration();
+    EClass ATTRIBUTE = eINSTANCE.getAttribute();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -2010,7 +3882,7 @@ public interface FarmPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ATTRIBUTE_DECLARATION__NAME = eINSTANCE.getAttributeDeclaration_Name();
+    EAttribute ATTRIBUTE__NAME = eINSTANCE.getAttribute_Name();
 
     /**
      * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.CropImpl <em>Crop</em>}' class.
@@ -2125,48 +3997,6 @@ public interface FarmPackage extends EPackage
     EReference CROP_ATTRIBUTES__VALUE = eINSTANCE.getCropAttributes_Value();
 
     /**
-     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.MachineImpl <em>Machine</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see uk.ac.kcl.farm.farm.impl.MachineImpl
-     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getMachine()
-     * @generated
-     */
-    EClass MACHINE = eINSTANCE.getMachine();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute MACHINE__NAME = eINSTANCE.getMachine_Name();
-
-    /**
-     * The meta object literal for the '<em><b>Machine Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute MACHINE__MACHINE_NAME = eINSTANCE.getMachine_MachineName();
-
-    /**
-     * The meta object literal for the '<em><b>Ip</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute MACHINE__IP = eINSTANCE.getMachine_Ip();
-
-    /**
-     * The meta object literal for the '<em><b>Statements</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference MACHINE__STATEMENTS = eINSTANCE.getMachine_Statements();
-
-    /**
      * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.FieldImpl <em>Field</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2183,6 +4013,64 @@ public interface FarmPackage extends EPackage
      * @generated
      */
     EAttribute FIELD__NAME = eINSTANCE.getField_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Field Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute FIELD__FIELD_NAME = eINSTANCE.getField_FieldName();
+
+    /**
+     * The meta object literal for the '<em><b>Ip</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute FIELD__IP = eINSTANCE.getField_Ip();
+
+    /**
+     * The meta object literal for the '<em><b>Field Type</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute FIELD__FIELD_TYPE = eINSTANCE.getField_FieldType();
+
+    /**
+     * The meta object literal for the '<em><b>Field Light</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute FIELD__FIELD_LIGHT = eINSTANCE.getField_FieldLight();
+
+    /**
+     * The meta object literal for the '<em><b>Field Monitors</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference FIELD__FIELD_MONITORS = eINSTANCE.getField_FieldMonitors();
+
+    /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.FieldMonitorImpl <em>Field Monitor</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.FieldMonitorImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getFieldMonitor()
+     * @generated
+     */
+    EClass FIELD_MONITOR = eINSTANCE.getFieldMonitor();
+
+    /**
+     * The meta object literal for the '<em><b>Monitor</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference FIELD_MONITOR__MONITOR = eINSTANCE.getFieldMonitor_Monitor();
 
     /**
      * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.MissionImpl <em>Mission</em>}' class.
@@ -2253,14 +4141,50 @@ public interface FarmPackage extends EPackage
     EReference TASK__STATEMENTS = eINSTANCE.getTask_Statements();
 
     /**
-     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.AdditionImpl <em>Addition</em>}' class.
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.ReturnStatementImpl <em>Return Statement</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see uk.ac.kcl.farm.farm.impl.AdditionImpl
-     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getAddition()
+     * @see uk.ac.kcl.farm.farm.impl.ReturnStatementImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getReturnStatement()
      * @generated
      */
-    EClass ADDITION = eINSTANCE.getAddition();
+    EClass RETURN_STATEMENT = eINSTANCE.getReturnStatement();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference RETURN_STATEMENT__VALUE = eINSTANCE.getReturnStatement_Value();
+
+    /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.ExecuteStatementImpl <em>Execute Statement</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.ExecuteStatementImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getExecuteStatement()
+     * @generated
+     */
+    EClass EXECUTE_STATEMENT = eINSTANCE.getExecuteStatement();
+
+    /**
+     * The meta object literal for the '<em><b>Statements</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EXECUTE_STATEMENT__STATEMENTS = eINSTANCE.getExecuteStatement_Statements();
+
+    /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.ConditionOrExpressionImpl <em>Condition Or Expression</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.ConditionOrExpressionImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getConditionOrExpression()
+     * @generated
+     */
+    EClass CONDITION_OR_EXPRESSION = eINSTANCE.getConditionOrExpression();
 
     /**
      * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
@@ -2268,151 +4192,7 @@ public interface FarmPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ADDITION__LEFT = eINSTANCE.getAddition_Left();
-
-    /**
-     * The meta object literal for the '<em><b>Operator</b></em>' attribute list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute ADDITION__OPERATOR = eINSTANCE.getAddition_Operator();
-
-    /**
-     * The meta object literal for the '<em><b>Right</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ADDITION__RIGHT = eINSTANCE.getAddition_Right();
-
-    /**
-     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.MultiplicationImpl <em>Multiplication</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see uk.ac.kcl.farm.farm.impl.MultiplicationImpl
-     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getMultiplication()
-     * @generated
-     */
-    EClass MULTIPLICATION = eINSTANCE.getMultiplication();
-
-    /**
-     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference MULTIPLICATION__LEFT = eINSTANCE.getMultiplication_Left();
-
-    /**
-     * The meta object literal for the '<em><b>Operator</b></em>' attribute list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute MULTIPLICATION__OPERATOR = eINSTANCE.getMultiplication_Operator();
-
-    /**
-     * The meta object literal for the '<em><b>Right</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference MULTIPLICATION__RIGHT = eINSTANCE.getMultiplication_Right();
-
-    /**
-     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.OrExpressionImpl <em>Or Expression</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see uk.ac.kcl.farm.farm.impl.OrExpressionImpl
-     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getOrExpression()
-     * @generated
-     */
-    EClass OR_EXPRESSION = eINSTANCE.getOrExpression();
-
-    /**
-     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference OR_EXPRESSION__LEFT = eINSTANCE.getOrExpression_Left();
-
-    /**
-     * The meta object literal for the '<em><b>Operator</b></em>' attribute list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute OR_EXPRESSION__OPERATOR = eINSTANCE.getOrExpression_Operator();
-
-    /**
-     * The meta object literal for the '<em><b>Right</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference OR_EXPRESSION__RIGHT = eINSTANCE.getOrExpression_Right();
-
-    /**
-     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.AndExpressionImpl <em>And Expression</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see uk.ac.kcl.farm.farm.impl.AndExpressionImpl
-     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getAndExpression()
-     * @generated
-     */
-    EClass AND_EXPRESSION = eINSTANCE.getAndExpression();
-
-    /**
-     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference AND_EXPRESSION__LEFT = eINSTANCE.getAndExpression_Left();
-
-    /**
-     * The meta object literal for the '<em><b>Operator</b></em>' attribute list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute AND_EXPRESSION__OPERATOR = eINSTANCE.getAndExpression_Operator();
-
-    /**
-     * The meta object literal for the '<em><b>Right</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference AND_EXPRESSION__RIGHT = eINSTANCE.getAndExpression_Right();
-
-    /**
-     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.ComparisonExpressionImpl <em>Comparison Expression</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see uk.ac.kcl.farm.farm.impl.ComparisonExpressionImpl
-     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getComparisonExpression()
-     * @generated
-     */
-    EClass COMPARISON_EXPRESSION = eINSTANCE.getComparisonExpression();
-
-    /**
-     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference COMPARISON_EXPRESSION__LEFT = eINSTANCE.getComparisonExpression_Left();
-
-    /**
-     * The meta object literal for the '<em><b>Operator</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute COMPARISON_EXPRESSION__OPERATOR = eINSTANCE.getComparisonExpression_Operator();
+    EReference CONDITION_OR_EXPRESSION__LEFT = eINSTANCE.getConditionOrExpression_Left();
 
     /**
      * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
@@ -2420,7 +4200,321 @@ public interface FarmPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference COMPARISON_EXPRESSION__RIGHT = eINSTANCE.getComparisonExpression_Right();
+    EReference CONDITION_OR_EXPRESSION__RIGHT = eINSTANCE.getConditionOrExpression_Right();
+
+    /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.ConditionAndExpressionImpl <em>Condition And Expression</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.ConditionAndExpressionImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getConditionAndExpression()
+     * @generated
+     */
+    EClass CONDITION_AND_EXPRESSION = eINSTANCE.getConditionAndExpression();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CONDITION_AND_EXPRESSION__LEFT = eINSTANCE.getConditionAndExpression_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CONDITION_AND_EXPRESSION__RIGHT = eINSTANCE.getConditionAndExpression_Right();
+
+    /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.LessThanOrEqualImpl <em>Less Than Or Equal</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.LessThanOrEqualImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getLessThanOrEqual()
+     * @generated
+     */
+    EClass LESS_THAN_OR_EQUAL = eINSTANCE.getLessThanOrEqual();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference LESS_THAN_OR_EQUAL__LEFT = eINSTANCE.getLessThanOrEqual_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference LESS_THAN_OR_EQUAL__RIGHT = eINSTANCE.getLessThanOrEqual_Right();
+
+    /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.LessThanImpl <em>Less Than</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.LessThanImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getLessThan()
+     * @generated
+     */
+    EClass LESS_THAN = eINSTANCE.getLessThan();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference LESS_THAN__LEFT = eINSTANCE.getLessThan_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference LESS_THAN__RIGHT = eINSTANCE.getLessThan_Right();
+
+    /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.GreaterThanOrEqualImpl <em>Greater Than Or Equal</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.GreaterThanOrEqualImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getGreaterThanOrEqual()
+     * @generated
+     */
+    EClass GREATER_THAN_OR_EQUAL = eINSTANCE.getGreaterThanOrEqual();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference GREATER_THAN_OR_EQUAL__LEFT = eINSTANCE.getGreaterThanOrEqual_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference GREATER_THAN_OR_EQUAL__RIGHT = eINSTANCE.getGreaterThanOrEqual_Right();
+
+    /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.GreaterThanImpl <em>Greater Than</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.GreaterThanImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getGreaterThan()
+     * @generated
+     */
+    EClass GREATER_THAN = eINSTANCE.getGreaterThan();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference GREATER_THAN__LEFT = eINSTANCE.getGreaterThan_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference GREATER_THAN__RIGHT = eINSTANCE.getGreaterThan_Right();
+
+    /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.EqualImpl <em>Equal</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.EqualImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getEqual()
+     * @generated
+     */
+    EClass EQUAL = eINSTANCE.getEqual();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EQUAL__LEFT = eINSTANCE.getEqual_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EQUAL__RIGHT = eINSTANCE.getEqual_Right();
+
+    /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.NotEqualImpl <em>Not Equal</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.NotEqualImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getNotEqual()
+     * @generated
+     */
+    EClass NOT_EQUAL = eINSTANCE.getNotEqual();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference NOT_EQUAL__LEFT = eINSTANCE.getNotEqual_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference NOT_EQUAL__RIGHT = eINSTANCE.getNotEqual_Right();
+
+    /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.PlusImpl <em>Plus</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.PlusImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getPlus()
+     * @generated
+     */
+    EClass PLUS = eINSTANCE.getPlus();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PLUS__LEFT = eINSTANCE.getPlus_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference PLUS__RIGHT = eINSTANCE.getPlus_Right();
+
+    /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.MinusImpl <em>Minus</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.MinusImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getMinus()
+     * @generated
+     */
+    EClass MINUS = eINSTANCE.getMinus();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MINUS__LEFT = eINSTANCE.getMinus_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MINUS__RIGHT = eINSTANCE.getMinus_Right();
+
+    /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.MultiplyImpl <em>Multiply</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.MultiplyImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getMultiply()
+     * @generated
+     */
+    EClass MULTIPLY = eINSTANCE.getMultiply();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MULTIPLY__LEFT = eINSTANCE.getMultiply_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MULTIPLY__RIGHT = eINSTANCE.getMultiply_Right();
+
+    /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.DivideImpl <em>Divide</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.DivideImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getDivide()
+     * @generated
+     */
+    EClass DIVIDE = eINSTANCE.getDivide();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference DIVIDE__LEFT = eINSTANCE.getDivide_Left();
+
+    /**
+     * The meta object literal for the '<em><b>Right</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference DIVIDE__RIGHT = eINSTANCE.getDivide_Right();
+
+    /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.UnaryExpressionImpl <em>Unary Expression</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.UnaryExpressionImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getUnaryExpression()
+     * @generated
+     */
+    EClass UNARY_EXPRESSION = eINSTANCE.getUnaryExpression();
+
+    /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.BoolLiteralImpl <em>Bool Literal</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.BoolLiteralImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getBoolLiteral()
+     * @generated
+     */
+    EClass BOOL_LITERAL = eINSTANCE.getBoolLiteral();
+
+    /**
+     * The meta object literal for the '<em><b>Val</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute BOOL_LITERAL__VAL = eINSTANCE.getBoolLiteral_Val();
 
   }
 

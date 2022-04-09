@@ -25,7 +25,7 @@ import uk.ac.kcl.farm.farm.RealLiteral;
  *
  * @generated
  */
-public class RealLiteralImpl extends RealExpressionImpl implements RealLiteral
+public class RealLiteralImpl extends LiteralImpl implements RealLiteral
 {
   /**
    * The default value of the '{@link #getVal() <em>Val</em>}' attribute.

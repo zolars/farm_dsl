@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import uk.ac.kcl.farm.farm.ConditionExpression;
+import uk.ac.kcl.farm.farm.Expression;
 import uk.ac.kcl.farm.farm.FarmPackage;
 import uk.ac.kcl.farm.farm.LoopStatement;
 import uk.ac.kcl.farm.farm.Statement;
@@ -47,7 +47,7 @@ public class LoopStatementImpl extends StatementImpl implements LoopStatement
    * @generated
    * @ordered
    */
-  protected ConditionExpression condition;
+  protected Expression condition;
 
   /**
    * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
@@ -86,7 +86,7 @@ public class LoopStatementImpl extends StatementImpl implements LoopStatement
    * @generated
    */
   @Override
-  public ConditionExpression getCondition()
+  public Expression getCondition()
   {
     return condition;
   }
@@ -96,9 +96,9 @@ public class LoopStatementImpl extends StatementImpl implements LoopStatement
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetCondition(ConditionExpression newCondition, NotificationChain msgs)
+  public NotificationChain basicSetCondition(Expression newCondition, NotificationChain msgs)
   {
-    ConditionExpression oldCondition = condition;
+    Expression oldCondition = condition;
     condition = newCondition;
     if (eNotificationRequired())
     {
@@ -114,7 +114,7 @@ public class LoopStatementImpl extends StatementImpl implements LoopStatement
    * @generated
    */
   @Override
-  public void setCondition(ConditionExpression newCondition)
+  public void setCondition(Expression newCondition)
   {
     if (newCondition != condition)
     {
@@ -193,7 +193,7 @@ public class LoopStatementImpl extends StatementImpl implements LoopStatement
     switch (featureID)
     {
       case FarmPackage.LOOP_STATEMENT__CONDITION:
-        setCondition((ConditionExpression)newValue);
+        setCondition((Expression)newValue);
         return;
       case FarmPackage.LOOP_STATEMENT__STATEMENTS:
         getStatements().clear();
@@ -214,7 +214,7 @@ public class LoopStatementImpl extends StatementImpl implements LoopStatement
     switch (featureID)
     {
       case FarmPackage.LOOP_STATEMENT__CONDITION:
-        setCondition((ConditionExpression)null);
+        setCondition((Expression)null);
         return;
       case FarmPackage.LOOP_STATEMENT__STATEMENTS:
         getStatements().clear();
