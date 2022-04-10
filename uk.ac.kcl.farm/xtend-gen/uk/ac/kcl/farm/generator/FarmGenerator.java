@@ -3,7 +3,6 @@
  */
 package uk.ac.kcl.farm.generator;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -14,10 +13,8 @@ import org.eclipse.xtext.generator.IGeneratorContext;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
-import uk.ac.kcl.farm.farm.Expression;
+import uk.ac.kcl.farm.farm.Attribute;
 import uk.ac.kcl.farm.farm.FarmProgram;
-import uk.ac.kcl.farm.farm.LoopStatement;
-import uk.ac.kcl.farm.farm.Statement;
 import uk.ac.kcl.farm.farm.Variable;
 
 /**
@@ -72,9 +69,9 @@ public class FarmGenerator extends AbstractGenerator {
     _builder.newLine();
     _builder.newLine();
     _builder.append("- ");
-    int _size = IterableExtensions.size(Iterables.<LoopStatement>filter(program.getStatements(), LoopStatement.class));
+    int _size = IteratorExtensions.size(Iterators.<Attribute>filter(program.eAllContents(), Attribute.class));
     _builder.append(_size);
-    _builder.append(" top-level loops");
+    _builder.append(" attribute declarations");
     _builder.newLineIfNotEmpty();
     _builder.append("- ");
     int _size_1 = IteratorExtensions.size(Iterators.<Variable>filter(program.eAllContents(), Variable.class));
@@ -128,42 +125,5 @@ public class FarmGenerator extends AbstractGenerator {
     _builder.append("}");
     _builder.newLine();
     return _builder.toString();
-  }
-  
-  protected String _generateJavaStatement(final Statement stmt, final FarmGenerator.Environment env) {
-    StringConcatenation _builder = new StringConcatenation();
-    return _builder.toString();
-  }
-  
-  /**
-   * dispatch def String generateJavaStatement(MoveStatement stmt, Environment env) '''move«stmt.command.getName.toFirstUpper»(«stmt.steps.generateJavaExpression»);'''
-   * dispatch def String generateJavaStatement(TurnStatement stmt, Environment env) '''rotate(«if (stmt.command === TurnCommand.LEFT) {'''-'''}»«stmt.degrees»);'''
-   * 
-   * dispatch def String generateJavaStatement(LoopStatement stmt, Environment env) {
-   * val freshVarName = env.getFreshVarName
-   * 
-   * val result =
-   * '''
-   * while ( «freshVarName» ) {
-   * «stmt.statements.map[generateJavaStatement(env)].join('\n')»
-   * }
-   * '''
-   * 
-   * env.exit
-   * 
-   * result
-   * }
-   */
-  protected String _generateJavaExpression(final Expression exp) {
-    StringConcatenation _builder = new StringConcatenation();
-    return _builder.toString();
-  }
-  
-  public String generateJavaStatement(final Statement stmt, final FarmGenerator.Environment env) {
-    return _generateJavaStatement(stmt, env);
-  }
-  
-  public String generateJavaExpression(final Expression exp) {
-    return _generateJavaExpression(exp);
   }
 }

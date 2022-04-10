@@ -3,6 +3,21 @@
  */
 package uk.ac.kcl.farm.validation
 
+//import com.google.inject.Inject
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.common.util.EList
+import org.eclipse.xtext.validation.Check
+
+import uk.ac.kcl.farm.validation.AbstractFarmValidator
+import uk.ac.kcl.farm.farm.FarmPackage
+import uk.ac.kcl.farm.farm.FarmProgram
+import uk.ac.kcl.farm.farm.Crop
+import uk.ac.kcl.farm.farm.Field
+import uk.ac.kcl.farm.farm.Mission
+import uk.ac.kcl.farm.farm.Attribute
+import uk.ac.kcl.farm.farm.Variable
+
+import static extension org.eclipse.xtext.EcoreUtil2.*
 
 /**
  * This class contains custom validation rules. 
@@ -11,15 +26,72 @@ package uk.ac.kcl.farm.validation
  */
 class FarmValidator extends AbstractFarmValidator {
 	
-//	public static val INVALID_NAME = 'invalidName'
-//
-//	@Check
-//	def checkGreetingStartsWithCapital(Greeting greeting) {
-//		if (!Character.isUpperCase(greeting.name.charAt(0))) {
-//			warning('Name should start with a capital', 
-//					FarmPackage.Literals.GREETING__NAME,
-//					INVALID_NAME)
-//		}
-//	}
+	public static val INVALID_ATTRIBUTE_NAME = 'uk.ac.kcl.farm.farm.INVALID_ATTRIBUTE_NAME'
+	public static val INVALID_VARIABLE_NAME = 'uk.ac.kcl.farm.farm.INVALID_VARIABLE_NAME'
+
+	@Check
+	def checkAttributeStartsWithLowerCase(Attribute attribute) {
+		if (!Character.isLowerCase(attribute.name.charAt(0))) {
+			warning('Attribute should start with a lower-case character', 
+					FarmPackage.Literals.ATTRIBUTE__NAME,
+					INVALID_ATTRIBUTE_NAME
+			)
+		}
+	}
+	
+	@Check
+	def checkVariableStartsWithLowerCase(Variable variable) {
+		if (!Character.isLowerCase(variable.name.charAt(0))) {
+			warning('Variable should start with a lower-case character', 
+					FarmPackage.Literals.VARIABLE__EXPRESSION,
+					INVALID_VARIABLE_NAME
+			)
+		}
+	}
+	
+	@Check(NORMAL)
+	def checkHaveCrop(FarmProgram program) {
+		var errorLog = haveAllClass(program.statements)
+		if (errorLog !== "") {
+			error('The farm program must have at least one of Crop, Field and Mission\n' + errorLog, 
+					null,
+					INVALID_VARIABLE_NAME
+			)
+		}
+	}
+	
+	def haveAllClass(EList<EObject> statements) {
+		var haveCrop = false
+		var haveField = false
+		var haveMission = false
+		for (EObject statement : statements) {
+			if (statement instanceof Crop) {
+				haveCrop = true
+			}
+			
+			if (statement instanceof Field) {
+				haveField = true
+			}
+			
+			if (statement instanceof Mission) {
+				haveMission = true
+			}
+		}
+		
+		var errorLog = ""
+		
+		if (!haveCrop) {
+			errorLog += "\tYou must add at least one Crop class\n"
+		}
+		
+		if (!haveField) {
+			errorLog += "\tYou must add at least one Field class\n"
+		}
+		
+		if (!haveMission) {
+			errorLog += "\tYou must add at least one Mission class\n"
+		}
+		return errorLog
+	}
 	
 }

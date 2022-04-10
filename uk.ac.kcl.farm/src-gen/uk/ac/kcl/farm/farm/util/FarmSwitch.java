@@ -8,53 +8,7 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
-import uk.ac.kcl.farm.farm.Attribute;
-import uk.ac.kcl.farm.farm.BoolLiteral;
-import uk.ac.kcl.farm.farm.BooleanLiteral;
-import uk.ac.kcl.farm.farm.BuiltinFunction;
-import uk.ac.kcl.farm.farm.ConditionAndExpression;
-import uk.ac.kcl.farm.farm.ConditionOrExpression;
-import uk.ac.kcl.farm.farm.CountStageFunction;
-import uk.ac.kcl.farm.farm.Crop;
-import uk.ac.kcl.farm.farm.CropAttributes;
-import uk.ac.kcl.farm.farm.CropStage;
-import uk.ac.kcl.farm.farm.CropStages;
-import uk.ac.kcl.farm.farm.Divide;
-import uk.ac.kcl.farm.farm.ElseJudgeStatement;
-import uk.ac.kcl.farm.farm.Entity;
-import uk.ac.kcl.farm.farm.Equal;
-import uk.ac.kcl.farm.farm.ExecuteStatement;
-import uk.ac.kcl.farm.farm.Expression;
-import uk.ac.kcl.farm.farm.FarmPackage;
-import uk.ac.kcl.farm.farm.FarmProgram;
-import uk.ac.kcl.farm.farm.Field;
-import uk.ac.kcl.farm.farm.FieldMonitor;
-import uk.ac.kcl.farm.farm.GetStageFunction;
-import uk.ac.kcl.farm.farm.GetValueFunction;
-import uk.ac.kcl.farm.farm.GreaterThan;
-import uk.ac.kcl.farm.farm.GreaterThanOrEqual;
-import uk.ac.kcl.farm.farm.JudgeStatement;
-import uk.ac.kcl.farm.farm.LessThan;
-import uk.ac.kcl.farm.farm.LessThanOrEqual;
-import uk.ac.kcl.farm.farm.Literal;
-import uk.ac.kcl.farm.farm.LoopStatement;
-import uk.ac.kcl.farm.farm.Minus;
-import uk.ac.kcl.farm.farm.Mission;
-import uk.ac.kcl.farm.farm.MoveFunction;
-import uk.ac.kcl.farm.farm.Multiply;
-import uk.ac.kcl.farm.farm.NotEqual;
-import uk.ac.kcl.farm.farm.Param;
-import uk.ac.kcl.farm.farm.PlantFunction;
-import uk.ac.kcl.farm.farm.Plus;
-import uk.ac.kcl.farm.farm.RealLiteral;
-import uk.ac.kcl.farm.farm.ReportFunction;
-import uk.ac.kcl.farm.farm.ReturnStatement;
-import uk.ac.kcl.farm.farm.SetFieldValueFunction;
-import uk.ac.kcl.farm.farm.Statement;
-import uk.ac.kcl.farm.farm.TaskStatement;
-import uk.ac.kcl.farm.farm.UnaryExpression;
-import uk.ac.kcl.farm.farm.Variable;
-import uk.ac.kcl.farm.farm.WaitFunction;
+import uk.ac.kcl.farm.farm.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -126,13 +80,6 @@ public class FarmSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FarmPackage.CLASS:
-      {
-        uk.ac.kcl.farm.farm.Class class_ = (uk.ac.kcl.farm.farm.Class)theEObject;
-        T result = caseClass(class_);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case FarmPackage.PARAM:
       {
         Param param = (Param)theEObject;
@@ -144,6 +91,20 @@ public class FarmSwitch<T> extends Switch<T>
       {
         Statement statement = (Statement)theEObject;
         T result = caseStatement(statement);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FarmPackage.ENTITY:
+      {
+        Entity entity = (Entity)theEObject;
+        T result = caseEntity(entity);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FarmPackage.ATTRIBUTE:
+      {
+        Attribute attribute = (Attribute)theEObject;
+        T result = caseAttribute(attribute);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -179,6 +140,13 @@ public class FarmSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case FarmPackage.ELSE_STATEMENT:
+      {
+        ElseStatement elseStatement = (ElseStatement)theEObject;
+        T result = caseElseStatement(elseStatement);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case FarmPackage.BUILTIN_FUNCTION:
       {
         BuiltinFunction builtinFunction = (BuiltinFunction)theEObject;
@@ -187,10 +155,12 @@ public class FarmSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FarmPackage.ENTITY:
+      case FarmPackage.GET_VALUE_FUNCTION:
       {
-        Entity entity = (Entity)theEObject;
-        T result = caseEntity(entity);
+        GetValueFunction getValueFunction = (GetValueFunction)theEObject;
+        T result = caseGetValueFunction(getValueFunction);
+        if (result == null) result = caseBuiltinFunction(getValueFunction);
+        if (result == null) result = caseStatement(getValueFunction);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -203,30 +173,12 @@ public class FarmSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FarmPackage.GET_STAGE_FUNCTION:
-      {
-        GetStageFunction getStageFunction = (GetStageFunction)theEObject;
-        T result = caseGetStageFunction(getStageFunction);
-        if (result == null) result = caseBuiltinFunction(getStageFunction);
-        if (result == null) result = caseStatement(getStageFunction);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case FarmPackage.COUNT_STAGE_FUNCTION:
       {
         CountStageFunction countStageFunction = (CountStageFunction)theEObject;
         T result = caseCountStageFunction(countStageFunction);
         if (result == null) result = caseBuiltinFunction(countStageFunction);
         if (result == null) result = caseStatement(countStageFunction);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case FarmPackage.GET_VALUE_FUNCTION:
-      {
-        GetValueFunction getValueFunction = (GetValueFunction)theEObject;
-        T result = caseGetValueFunction(getValueFunction);
-        if (result == null) result = caseBuiltinFunction(getValueFunction);
-        if (result == null) result = caseStatement(getValueFunction);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -299,18 +251,10 @@ public class FarmSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case FarmPackage.ATTRIBUTE:
-      {
-        Attribute attribute = (Attribute)theEObject;
-        T result = caseAttribute(attribute);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case FarmPackage.CROP:
       {
         Crop crop = (Crop)theEObject;
         T result = caseCrop(crop);
-        if (result == null) result = caseClass(crop);
         if (result == null) result = caseEntity(crop);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -340,7 +284,6 @@ public class FarmSwitch<T> extends Switch<T>
       {
         Field field = (Field)theEObject;
         T result = caseField(field);
-        if (result == null) result = caseClass(field);
         if (result == null) result = caseEntity(field);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -356,7 +299,6 @@ public class FarmSwitch<T> extends Switch<T>
       {
         Mission mission = (Mission)theEObject;
         T result = caseMission(mission);
-        if (result == null) result = caseClass(mission);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -516,22 +458,6 @@ public class FarmSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Class</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Class</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseClass(uk.ac.kcl.farm.farm.Class object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Param</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -559,6 +485,38 @@ public class FarmSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseStatement(Statement object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Entity</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Entity</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEntity(Entity object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Attribute</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Attribute</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAttribute(Attribute object)
   {
     return null;
   }
@@ -628,6 +586,22 @@ public class FarmSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Else Statement</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Else Statement</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseElseStatement(ElseStatement object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Builtin Function</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -644,17 +618,17 @@ public class FarmSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Entity</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Get Value Function</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Entity</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Get Value Function</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseEntity(Entity object)
+  public T caseGetValueFunction(GetValueFunction object)
   {
     return null;
   }
@@ -676,22 +650,6 @@ public class FarmSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Get Stage Function</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Get Stage Function</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseGetStageFunction(GetStageFunction object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Count Stage Function</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -703,22 +661,6 @@ public class FarmSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseCountStageFunction(CountStageFunction object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Get Value Function</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Get Value Function</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseGetValueFunction(GetValueFunction object)
   {
     return null;
   }
@@ -847,22 +789,6 @@ public class FarmSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseRealLiteral(RealLiteral object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Attribute</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Attribute</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseAttribute(Attribute object)
   {
     return null;
   }

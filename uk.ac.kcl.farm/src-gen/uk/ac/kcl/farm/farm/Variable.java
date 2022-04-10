@@ -13,7 +13,7 @@ package uk.ac.kcl.farm.farm;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.farm.farm.Variable#getValue <em>Value</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.Variable#getExpression <em>Expression</em>}</li>
  * </ul>
  *
  * @see uk.ac.kcl.farm.farm.FarmPackage#getVariable()
@@ -23,25 +23,25 @@ package uk.ac.kcl.farm.farm;
 public interface Variable extends Statement, Entity
 {
   /**
-   * Returns the value of the '<em><b>Value</b></em>' containment reference.
+   * Returns the value of the '<em><b>Expression</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Value</em>' containment reference.
-   * @see #setValue(Expression)
-   * @see uk.ac.kcl.farm.farm.FarmPackage#getVariable_Value()
+   * @return the value of the '<em>Expression</em>' containment reference.
+   * @see #setExpression(Expression)
+   * @see uk.ac.kcl.farm.farm.FarmPackage#getVariable_Expression()
    * @model containment="true"
    * @generated
    */
-  Expression getValue();
+  Expression getExpression();
 
   /**
-   * Sets the value of the '{@link uk.ac.kcl.farm.farm.Variable#getValue <em>Value</em>}' containment reference.
+   * Sets the value of the '{@link uk.ac.kcl.farm.farm.Variable#getExpression <em>Expression</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Value</em>' containment reference.
-   * @see #getValue()
+   * @param value the new value of the '<em>Expression</em>' containment reference.
+   * @see #getExpression()
    * @generated
    */
-  void setValue(Expression value);
+  void setExpression(Expression value);
 
 } // Variable

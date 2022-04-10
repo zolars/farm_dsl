@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link uk.ac.kcl.farm.farm.ElseJudgeStatement#getCondition <em>Condition</em>}</li>
- *   <li>{@link uk.ac.kcl.farm.farm.ElseJudgeStatement#getStatements <em>Statements</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.ElseJudgeStatement#getElseJudgeStatements <em>Else Judge Statements</em>}</li>
  * </ul>
  *
  * @see uk.ac.kcl.farm.farm.FarmPackage#getElseJudgeStatement()
@@ -49,15 +49,15 @@ public interface ElseJudgeStatement extends EObject
   void setCondition(Expression value);
 
   /**
-   * Returns the value of the '<em><b>Statements</b></em>' containment reference list.
+   * Returns the value of the '<em><b>Else Judge Statements</b></em>' containment reference list.
    * The list contents are of type {@link uk.ac.kcl.farm.farm.Statement}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Statements</em>' containment reference list.
-   * @see uk.ac.kcl.farm.farm.FarmPackage#getElseJudgeStatement_Statements()
+   * @return the value of the '<em>Else Judge Statements</em>' containment reference list.
+   * @see uk.ac.kcl.farm.farm.FarmPackage#getElseJudgeStatement_ElseJudgeStatements()
    * @model containment="true"
    * @generated
    */
-  EList<Statement> getStatements();
+  EList<Statement> getElseJudgeStatements();
 
 } // ElseJudgeStatement

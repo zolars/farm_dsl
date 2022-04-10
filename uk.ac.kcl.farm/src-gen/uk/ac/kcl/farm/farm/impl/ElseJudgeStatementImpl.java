@@ -33,7 +33,7 @@ import uk.ac.kcl.farm.farm.Statement;
  * </p>
  * <ul>
  *   <li>{@link uk.ac.kcl.farm.farm.impl.ElseJudgeStatementImpl#getCondition <em>Condition</em>}</li>
- *   <li>{@link uk.ac.kcl.farm.farm.impl.ElseJudgeStatementImpl#getStatements <em>Statements</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.impl.ElseJudgeStatementImpl#getElseJudgeStatements <em>Else Judge Statements</em>}</li>
  * </ul>
  *
  * @generated
@@ -51,14 +51,14 @@ public class ElseJudgeStatementImpl extends MinimalEObjectImpl.Container impleme
   protected Expression condition;
 
   /**
-   * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
+   * The cached value of the '{@link #getElseJudgeStatements() <em>Else Judge Statements</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getStatements()
+   * @see #getElseJudgeStatements()
    * @generated
    * @ordered
    */
-  protected EList<Statement> statements;
+  protected EList<Statement> elseJudgeStatements;
 
   /**
    * <!-- begin-user-doc -->
@@ -137,13 +137,13 @@ public class ElseJudgeStatementImpl extends MinimalEObjectImpl.Container impleme
    * @generated
    */
   @Override
-  public EList<Statement> getStatements()
+  public EList<Statement> getElseJudgeStatements()
   {
-    if (statements == null)
+    if (elseJudgeStatements == null)
     {
-      statements = new EObjectContainmentEList<Statement>(Statement.class, this, FarmPackage.ELSE_JUDGE_STATEMENT__STATEMENTS);
+      elseJudgeStatements = new EObjectContainmentEList<Statement>(Statement.class, this, FarmPackage.ELSE_JUDGE_STATEMENT__ELSE_JUDGE_STATEMENTS);
     }
-    return statements;
+    return elseJudgeStatements;
   }
 
   /**
@@ -158,8 +158,8 @@ public class ElseJudgeStatementImpl extends MinimalEObjectImpl.Container impleme
     {
       case FarmPackage.ELSE_JUDGE_STATEMENT__CONDITION:
         return basicSetCondition(null, msgs);
-      case FarmPackage.ELSE_JUDGE_STATEMENT__STATEMENTS:
-        return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
+      case FarmPackage.ELSE_JUDGE_STATEMENT__ELSE_JUDGE_STATEMENTS:
+        return ((InternalEList<?>)getElseJudgeStatements()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -176,8 +176,8 @@ public class ElseJudgeStatementImpl extends MinimalEObjectImpl.Container impleme
     {
       case FarmPackage.ELSE_JUDGE_STATEMENT__CONDITION:
         return getCondition();
-      case FarmPackage.ELSE_JUDGE_STATEMENT__STATEMENTS:
-        return getStatements();
+      case FarmPackage.ELSE_JUDGE_STATEMENT__ELSE_JUDGE_STATEMENTS:
+        return getElseJudgeStatements();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -196,9 +196,9 @@ public class ElseJudgeStatementImpl extends MinimalEObjectImpl.Container impleme
       case FarmPackage.ELSE_JUDGE_STATEMENT__CONDITION:
         setCondition((Expression)newValue);
         return;
-      case FarmPackage.ELSE_JUDGE_STATEMENT__STATEMENTS:
-        getStatements().clear();
-        getStatements().addAll((Collection<? extends Statement>)newValue);
+      case FarmPackage.ELSE_JUDGE_STATEMENT__ELSE_JUDGE_STATEMENTS:
+        getElseJudgeStatements().clear();
+        getElseJudgeStatements().addAll((Collection<? extends Statement>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -217,8 +217,8 @@ public class ElseJudgeStatementImpl extends MinimalEObjectImpl.Container impleme
       case FarmPackage.ELSE_JUDGE_STATEMENT__CONDITION:
         setCondition((Expression)null);
         return;
-      case FarmPackage.ELSE_JUDGE_STATEMENT__STATEMENTS:
-        getStatements().clear();
+      case FarmPackage.ELSE_JUDGE_STATEMENT__ELSE_JUDGE_STATEMENTS:
+        getElseJudgeStatements().clear();
         return;
     }
     super.eUnset(featureID);
@@ -236,8 +236,8 @@ public class ElseJudgeStatementImpl extends MinimalEObjectImpl.Container impleme
     {
       case FarmPackage.ELSE_JUDGE_STATEMENT__CONDITION:
         return condition != null;
-      case FarmPackage.ELSE_JUDGE_STATEMENT__STATEMENTS:
-        return statements != null && !statements.isEmpty();
+      case FarmPackage.ELSE_JUDGE_STATEMENT__ELSE_JUDGE_STATEMENTS:
+        return elseJudgeStatements != null && !elseJudgeStatements.isEmpty();
     }
     return super.eIsSet(featureID);
   }

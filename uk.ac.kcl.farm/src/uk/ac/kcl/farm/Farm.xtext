@@ -5,16 +5,15 @@ generate farm "http://www.ac.uk/kcl/farm/Farm"
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 FarmProgram:
-	statements += (Class | Attribute)+
+	statements += (
+		Attribute |
+		Crop |
+		Field |
+		Mission
+	)+
 ;
 
 // General statement
-
-Class:
-	Crop |
-	Field |
-	Mission
-;
 
 Param:
 	"crop" param=ID |
@@ -35,76 +34,93 @@ Statement:
 	BuiltinFunction
 ;
 
+Entity:
+	Crop |
+	Field |
+	Variable
+;
+
+//Attribute:
+//	entity=[Entity | ID] (
+//		".name" | 
+//		".stage" |
+//		".ip" |
+//		".type" |
+//		".light" |
+//		"." monitor=[Attribute | ID]
+//	)?
+//;
+
+// Define codes
+Attribute:
+	"define" name=ID
+;
+
 Variable:
-	"var" name=ID "=" value=Expression
+	"var" name=ID "=" expression=Expression // | attribute=Attribute
 ;
 
 LoopStatement:
 	"while" "(" condition=Expression ")" "{"
-		statements += Statement*
+		loopStatements += Statement*
 	"}"
 ;
 
 JudgeStatement:
 	"if" "(" condition=Expression ")" "{"
-		statements += Statement*
-	"}" elseif += ElseJudgeStatement*
-	("else" "{" elseStatement += Statement* "}")?
+		judgeStatements += Statement*
+	"}" 
+	elseJudgeStatements += ElseJudgeStatement*
+	elseStatements += ElseStatement?
 ;
 
 ElseJudgeStatement:
 	"elseif" "(" condition=Expression ")" "{"
-		statements += Statement*
+		elseJudgeStatements += Statement*
 	"}"
 ;
 
+ElseStatement:
+	{ElseStatement}
+	"else" "{" elseStatements += Statement* "}"
+;
+
 BuiltinFunction:
-	ReportFunction | 
-	GetStageFunction |
-	CountStageFunction |
 	GetValueFunction |
+	ReportFunction |
+	CountStageFunction |
 	SetFieldValueFunction |
 	PlantFunction | 
 	MoveFunction |
 	WaitFunction
 ;
 
-
-Entity:
-	Crop | 
-	Field | 
-	Variable
-;
-
-ReportFunction hidden():
-	"report(" entity=[Entity] ")"
-;
-
-GetStageFunction hidden():
-	getStageCrop=[Crop | ID] ".getStage(" stageNumber=INT ")"
-;
-
-CountStageFunction hidden():
-	countStageCrop=[Crop | ID] ".countStage(" ")"
-;
-
-GetValueFunction hidden():
+GetValueFunction:
 	entity=[Entity] ".getValue(" attribute=STRING ")"
 ;
 
-SetFieldValueFunction hidden():
+
+ReportFunction:
+	"report(" entity=[Entity | ID] ")"
+;
+
+CountStageFunction:
+	countStageCrop=[Crop | ID] ".countStage(" ")"
+;
+
+SetFieldValueFunction:
 	setValueField=[Field | ID] ".setFieldValue(" setFieldAttribute=STRING "," setFieldValue=AdditionExpression ")"
 ;
 
-PlantFunction hidden():
+PlantFunction:
 	plantInField=[Field | ID] ".plant(" plantCrop=[Crop | ID] ")"
 ;
 
-MoveFunction hidden():
+MoveFunction:
 	"move(" moveFromField=[Field | ID] ","  moveToField=[Field | ID] ")"
 ;
 
-WaitFunction hidden():
+WaitFunction:
 	"wait(" value=AdditionExpression ")"
 ;
 
@@ -166,7 +182,7 @@ NotBooleanExpression returns Expression:
 
 PrimaryExpression returns Expression:
 	Literal |
-	var=[Variable | ID] |
+	var=[Variable] |
 	"(" Expression ")"
 ;
 
@@ -190,17 +206,12 @@ REAL returns ecore::EFloat hidden():
 	INT? "." INT
 ;
 
-// Define codes
-Attribute:
-	"define" name=ID
-;
-
 // Crop code block
 Crop:
 	"crop" name=ID "{"
 		"name" ":" cropName=STRING
 		"stage" ":" "["
-			statements += CropStages
+			cropStages += CropStages
 		"]"
 	"}"
 ;
@@ -243,14 +254,14 @@ FieldMonitor:
 // Main code block
 Mission:
 	"mission" name=ID "{"
-		statements += (TaskStatement | ExecuteStatement)+
+		missionStatements += (TaskStatement | ExecuteStatement)+
 	"}"
 ;
 
 // Task code block
 TaskStatement:
 	"task" name=ID "(" (parmas+=Param ("," parmas+=Param)*)? ")" ":" typeName=TypeName "{"
-		statements += (Statement | ReturnStatement)*
+		taskStatements += (Statement | ReturnStatement)*
 	"}"
 ;
 
@@ -259,7 +270,8 @@ ReturnStatement:
 ;
 
 ExecuteStatement:
+	{ExecuteStatement} 
 	"execute" "{"
-		statements += Statement*
+		executeStatements += Statement*
 	"}"
 ;

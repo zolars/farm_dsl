@@ -33,15 +33,6 @@ public interface FarmFactory extends EFactory
   FarmProgram createFarmProgram();
 
   /**
-   * Returns a new object of class '<em>Class</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Class</em>'.
-   * @generated
-   */
-  Class createClass();
-
-  /**
    * Returns a new object of class '<em>Param</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -58,6 +49,24 @@ public interface FarmFactory extends EFactory
    * @generated
    */
   Statement createStatement();
+
+  /**
+   * Returns a new object of class '<em>Entity</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Entity</em>'.
+   * @generated
+   */
+  Entity createEntity();
+
+  /**
+   * Returns a new object of class '<em>Attribute</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Attribute</em>'.
+   * @generated
+   */
+  Attribute createAttribute();
 
   /**
    * Returns a new object of class '<em>Variable</em>'.
@@ -96,6 +105,15 @@ public interface FarmFactory extends EFactory
   ElseJudgeStatement createElseJudgeStatement();
 
   /**
+   * Returns a new object of class '<em>Else Statement</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Else Statement</em>'.
+   * @generated
+   */
+  ElseStatement createElseStatement();
+
+  /**
    * Returns a new object of class '<em>Builtin Function</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -105,13 +123,13 @@ public interface FarmFactory extends EFactory
   BuiltinFunction createBuiltinFunction();
 
   /**
-   * Returns a new object of class '<em>Entity</em>'.
+   * Returns a new object of class '<em>Get Value Function</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Entity</em>'.
+   * @return a new object of class '<em>Get Value Function</em>'.
    * @generated
    */
-  Entity createEntity();
+  GetValueFunction createGetValueFunction();
 
   /**
    * Returns a new object of class '<em>Report Function</em>'.
@@ -123,15 +141,6 @@ public interface FarmFactory extends EFactory
   ReportFunction createReportFunction();
 
   /**
-   * Returns a new object of class '<em>Get Stage Function</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Get Stage Function</em>'.
-   * @generated
-   */
-  GetStageFunction createGetStageFunction();
-
-  /**
    * Returns a new object of class '<em>Count Stage Function</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -139,15 +148,6 @@ public interface FarmFactory extends EFactory
    * @generated
    */
   CountStageFunction createCountStageFunction();
-
-  /**
-   * Returns a new object of class '<em>Get Value Function</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Get Value Function</em>'.
-   * @generated
-   */
-  GetValueFunction createGetValueFunction();
 
   /**
    * Returns a new object of class '<em>Set Field Value Function</em>'.
@@ -220,15 +220,6 @@ public interface FarmFactory extends EFactory
    * @generated
    */
   RealLiteral createRealLiteral();
-
-  /**
-   * Returns a new object of class '<em>Attribute</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Attribute</em>'.
-   * @generated
-   */
-  Attribute createAttribute();
 
   /**
    * Returns a new object of class '<em>Crop</em>'.

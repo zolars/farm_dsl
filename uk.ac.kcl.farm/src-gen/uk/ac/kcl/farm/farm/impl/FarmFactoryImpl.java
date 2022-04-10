@@ -11,54 +11,7 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import uk.ac.kcl.farm.farm.Attribute;
-import uk.ac.kcl.farm.farm.BoolLiteral;
-import uk.ac.kcl.farm.farm.BooleanLiteral;
-import uk.ac.kcl.farm.farm.BuiltinFunction;
-import uk.ac.kcl.farm.farm.ConditionAndExpression;
-import uk.ac.kcl.farm.farm.ConditionOrExpression;
-import uk.ac.kcl.farm.farm.CountStageFunction;
-import uk.ac.kcl.farm.farm.Crop;
-import uk.ac.kcl.farm.farm.CropAttributes;
-import uk.ac.kcl.farm.farm.CropStage;
-import uk.ac.kcl.farm.farm.CropStages;
-import uk.ac.kcl.farm.farm.Divide;
-import uk.ac.kcl.farm.farm.ElseJudgeStatement;
-import uk.ac.kcl.farm.farm.Entity;
-import uk.ac.kcl.farm.farm.Equal;
-import uk.ac.kcl.farm.farm.ExecuteStatement;
-import uk.ac.kcl.farm.farm.Expression;
-import uk.ac.kcl.farm.farm.FarmFactory;
-import uk.ac.kcl.farm.farm.FarmPackage;
-import uk.ac.kcl.farm.farm.FarmProgram;
-import uk.ac.kcl.farm.farm.Field;
-import uk.ac.kcl.farm.farm.FieldMonitor;
-import uk.ac.kcl.farm.farm.GetStageFunction;
-import uk.ac.kcl.farm.farm.GetValueFunction;
-import uk.ac.kcl.farm.farm.GreaterThan;
-import uk.ac.kcl.farm.farm.GreaterThanOrEqual;
-import uk.ac.kcl.farm.farm.JudgeStatement;
-import uk.ac.kcl.farm.farm.LessThan;
-import uk.ac.kcl.farm.farm.LessThanOrEqual;
-import uk.ac.kcl.farm.farm.Literal;
-import uk.ac.kcl.farm.farm.LoopStatement;
-import uk.ac.kcl.farm.farm.Minus;
-import uk.ac.kcl.farm.farm.Mission;
-import uk.ac.kcl.farm.farm.MoveFunction;
-import uk.ac.kcl.farm.farm.Multiply;
-import uk.ac.kcl.farm.farm.NotEqual;
-import uk.ac.kcl.farm.farm.Param;
-import uk.ac.kcl.farm.farm.PlantFunction;
-import uk.ac.kcl.farm.farm.Plus;
-import uk.ac.kcl.farm.farm.RealLiteral;
-import uk.ac.kcl.farm.farm.ReportFunction;
-import uk.ac.kcl.farm.farm.ReturnStatement;
-import uk.ac.kcl.farm.farm.SetFieldValueFunction;
-import uk.ac.kcl.farm.farm.Statement;
-import uk.ac.kcl.farm.farm.TaskStatement;
-import uk.ac.kcl.farm.farm.UnaryExpression;
-import uk.ac.kcl.farm.farm.Variable;
-import uk.ac.kcl.farm.farm.WaitFunction;
+import uk.ac.kcl.farm.farm.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -113,19 +66,19 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
     switch (eClass.getClassifierID())
     {
       case FarmPackage.FARM_PROGRAM: return createFarmProgram();
-      case FarmPackage.CLASS: return createClass();
       case FarmPackage.PARAM: return createParam();
       case FarmPackage.STATEMENT: return createStatement();
+      case FarmPackage.ENTITY: return createEntity();
+      case FarmPackage.ATTRIBUTE: return createAttribute();
       case FarmPackage.VARIABLE: return createVariable();
       case FarmPackage.LOOP_STATEMENT: return createLoopStatement();
       case FarmPackage.JUDGE_STATEMENT: return createJudgeStatement();
       case FarmPackage.ELSE_JUDGE_STATEMENT: return createElseJudgeStatement();
+      case FarmPackage.ELSE_STATEMENT: return createElseStatement();
       case FarmPackage.BUILTIN_FUNCTION: return createBuiltinFunction();
-      case FarmPackage.ENTITY: return createEntity();
-      case FarmPackage.REPORT_FUNCTION: return createReportFunction();
-      case FarmPackage.GET_STAGE_FUNCTION: return createGetStageFunction();
-      case FarmPackage.COUNT_STAGE_FUNCTION: return createCountStageFunction();
       case FarmPackage.GET_VALUE_FUNCTION: return createGetValueFunction();
+      case FarmPackage.REPORT_FUNCTION: return createReportFunction();
+      case FarmPackage.COUNT_STAGE_FUNCTION: return createCountStageFunction();
       case FarmPackage.SET_FIELD_VALUE_FUNCTION: return createSetFieldValueFunction();
       case FarmPackage.PLANT_FUNCTION: return createPlantFunction();
       case FarmPackage.MOVE_FUNCTION: return createMoveFunction();
@@ -134,7 +87,6 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
       case FarmPackage.LITERAL: return createLiteral();
       case FarmPackage.BOOLEAN_LITERAL: return createBooleanLiteral();
       case FarmPackage.REAL_LITERAL: return createRealLiteral();
-      case FarmPackage.ATTRIBUTE: return createAttribute();
       case FarmPackage.CROP: return createCrop();
       case FarmPackage.CROP_STAGES: return createCropStages();
       case FarmPackage.CROP_STAGE: return createCropStage();
@@ -182,18 +134,6 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
    * @generated
    */
   @Override
-  public uk.ac.kcl.farm.farm.Class createClass()
-  {
-    ClassImpl class_ = new ClassImpl();
-    return class_;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public Param createParam()
   {
     ParamImpl param = new ParamImpl();
@@ -210,6 +150,30 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
   {
     StatementImpl statement = new StatementImpl();
     return statement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Entity createEntity()
+  {
+    EntityImpl entity = new EntityImpl();
+    return entity;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Attribute createAttribute()
+  {
+    AttributeImpl attribute = new AttributeImpl();
+    return attribute;
   }
 
   /**
@@ -266,6 +230,18 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
    * @generated
    */
   @Override
+  public ElseStatement createElseStatement()
+  {
+    ElseStatementImpl elseStatement = new ElseStatementImpl();
+    return elseStatement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public BuiltinFunction createBuiltinFunction()
   {
     BuiltinFunctionImpl builtinFunction = new BuiltinFunctionImpl();
@@ -278,10 +254,10 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
    * @generated
    */
   @Override
-  public Entity createEntity()
+  public GetValueFunction createGetValueFunction()
   {
-    EntityImpl entity = new EntityImpl();
-    return entity;
+    GetValueFunctionImpl getValueFunction = new GetValueFunctionImpl();
+    return getValueFunction;
   }
 
   /**
@@ -302,34 +278,10 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
    * @generated
    */
   @Override
-  public GetStageFunction createGetStageFunction()
-  {
-    GetStageFunctionImpl getStageFunction = new GetStageFunctionImpl();
-    return getStageFunction;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public CountStageFunction createCountStageFunction()
   {
     CountStageFunctionImpl countStageFunction = new CountStageFunctionImpl();
     return countStageFunction;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public GetValueFunction createGetValueFunction()
-  {
-    GetValueFunctionImpl getValueFunction = new GetValueFunctionImpl();
-    return getValueFunction;
   }
 
   /**
@@ -426,18 +378,6 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
   {
     RealLiteralImpl realLiteral = new RealLiteralImpl();
     return realLiteral;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Attribute createAttribute()
-  {
-    AttributeImpl attribute = new AttributeImpl();
-    return attribute;
   }
 
   /**

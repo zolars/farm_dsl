@@ -1,0 +1,4 @@
+Program contains:
+
+- 2 attribute declarations
+- 23 variable declarations

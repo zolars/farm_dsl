@@ -23,6 +23,7 @@ import uk.ac.kcl.farm.farm.CropStage;
 import uk.ac.kcl.farm.farm.CropStages;
 import uk.ac.kcl.farm.farm.Divide;
 import uk.ac.kcl.farm.farm.ElseJudgeStatement;
+import uk.ac.kcl.farm.farm.ElseStatement;
 import uk.ac.kcl.farm.farm.Entity;
 import uk.ac.kcl.farm.farm.Equal;
 import uk.ac.kcl.farm.farm.ExecuteStatement;
@@ -32,7 +33,6 @@ import uk.ac.kcl.farm.farm.FarmPackage;
 import uk.ac.kcl.farm.farm.FarmProgram;
 import uk.ac.kcl.farm.farm.Field;
 import uk.ac.kcl.farm.farm.FieldMonitor;
-import uk.ac.kcl.farm.farm.GetStageFunction;
 import uk.ac.kcl.farm.farm.GetValueFunction;
 import uk.ac.kcl.farm.farm.GreaterThan;
 import uk.ac.kcl.farm.farm.GreaterThanOrEqual;
@@ -79,13 +79,6 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass classEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   private EClass paramEClass = null;
 
   /**
@@ -94,6 +87,20 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   private EClass statementEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass entityEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass attributeEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -128,6 +135,13 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass elseStatementEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass builtinFunctionEClass = null;
 
   /**
@@ -135,7 +149,7 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass entityEClass = null;
+  private EClass getValueFunctionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -149,21 +163,7 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass getStageFunctionEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   private EClass countStageFunctionEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass getValueFunctionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -220,13 +220,6 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   private EClass realLiteralEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass attributeEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -487,17 +480,6 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
-  public EClass getClass_()
-  {
-    return classEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EClass getParam()
   {
     return paramEClass;
@@ -531,6 +513,50 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
+  public EClass getEntity()
+  {
+    return entityEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getEntity_Name()
+  {
+    return (EAttribute)entityEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getAttribute()
+  {
+    return attributeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getAttribute_Name()
+  {
+    return (EAttribute)attributeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getVariable()
   {
     return variableEClass;
@@ -542,7 +568,7 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
-  public EReference getVariable_Value()
+  public EReference getVariable_Expression()
   {
     return (EReference)variableEClass.getEStructuralFeatures().get(0);
   }
@@ -575,7 +601,7 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
-  public EReference getLoopStatement_Statements()
+  public EReference getLoopStatement_LoopStatements()
   {
     return (EReference)loopStatementEClass.getEStructuralFeatures().get(1);
   }
@@ -608,7 +634,7 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
-  public EReference getJudgeStatement_Statements()
+  public EReference getJudgeStatement_JudgeStatements()
   {
     return (EReference)judgeStatementEClass.getEStructuralFeatures().get(1);
   }
@@ -619,7 +645,7 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
-  public EReference getJudgeStatement_Elseif()
+  public EReference getJudgeStatement_ElseJudgeStatements()
   {
     return (EReference)judgeStatementEClass.getEStructuralFeatures().get(2);
   }
@@ -630,7 +656,7 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
-  public EReference getJudgeStatement_ElseStatement()
+  public EReference getJudgeStatement_ElseStatements()
   {
     return (EReference)judgeStatementEClass.getEStructuralFeatures().get(3);
   }
@@ -663,9 +689,31 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
-  public EReference getElseJudgeStatement_Statements()
+  public EReference getElseJudgeStatement_ElseJudgeStatements()
   {
     return (EReference)elseJudgeStatementEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getElseStatement()
+  {
+    return elseStatementEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getElseStatement_ElseStatements()
+  {
+    return (EReference)elseStatementEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -677,105 +725,6 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
   public EClass getBuiltinFunction()
   {
     return builtinFunctionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getEntity()
-  {
-    return entityEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getEntity_Name()
-  {
-    return (EAttribute)entityEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getReportFunction()
-  {
-    return reportFunctionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getReportFunction_Entity()
-  {
-    return (EReference)reportFunctionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getGetStageFunction()
-  {
-    return getStageFunctionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getGetStageFunction_GetStageCrop()
-  {
-    return (EReference)getStageFunctionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getGetStageFunction_StageNumber()
-  {
-    return (EAttribute)getStageFunctionEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EClass getCountStageFunction()
-  {
-    return countStageFunctionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EReference getCountStageFunction_CountStageCrop()
-  {
-    return (EReference)countStageFunctionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -809,6 +758,50 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
   public EAttribute getGetValueFunction_Attribute()
   {
     return (EAttribute)getValueFunctionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getReportFunction()
+  {
+    return reportFunctionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getReportFunction_Entity()
+  {
+    return (EReference)reportFunctionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getCountStageFunction()
+  {
+    return countStageFunctionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getCountStageFunction_CountStageCrop()
+  {
+    return (EReference)countStageFunctionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1026,28 +1019,6 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
-  public EClass getAttribute()
-  {
-    return attributeEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EAttribute getAttribute_Name()
-  {
-    return (EAttribute)attributeEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public EClass getCrop()
   {
     return cropEClass;
@@ -1070,7 +1041,7 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
-  public EReference getCrop_Statements()
+  public EReference getCrop_CropStages()
   {
     return (EReference)cropEClass.getEStructuralFeatures().get(1);
   }
@@ -1290,7 +1261,7 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
-  public EReference getMission_Statements()
+  public EReference getMission_MissionStatements()
   {
     return (EReference)missionEClass.getEStructuralFeatures().get(1);
   }
@@ -1345,7 +1316,7 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
-  public EReference getTaskStatement_Statements()
+  public EReference getTaskStatement_TaskStatements()
   {
     return (EReference)taskStatementEClass.getEStructuralFeatures().get(3);
   }
@@ -1389,7 +1360,7 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
-  public EReference getExecuteStatement_Statements()
+  public EReference getExecuteStatement_ExecuteStatements()
   {
     return (EReference)executeStatementEClass.getEStructuralFeatures().get(0);
   }
@@ -1857,48 +1828,48 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
     farmProgramEClass = createEClass(FARM_PROGRAM);
     createEReference(farmProgramEClass, FARM_PROGRAM__STATEMENTS);
 
-    classEClass = createEClass(CLASS);
-
     paramEClass = createEClass(PARAM);
     createEAttribute(paramEClass, PARAM__PARAM);
 
     statementEClass = createEClass(STATEMENT);
 
-    variableEClass = createEClass(VARIABLE);
-    createEReference(variableEClass, VARIABLE__VALUE);
-
-    loopStatementEClass = createEClass(LOOP_STATEMENT);
-    createEReference(loopStatementEClass, LOOP_STATEMENT__CONDITION);
-    createEReference(loopStatementEClass, LOOP_STATEMENT__STATEMENTS);
-
-    judgeStatementEClass = createEClass(JUDGE_STATEMENT);
-    createEReference(judgeStatementEClass, JUDGE_STATEMENT__CONDITION);
-    createEReference(judgeStatementEClass, JUDGE_STATEMENT__STATEMENTS);
-    createEReference(judgeStatementEClass, JUDGE_STATEMENT__ELSEIF);
-    createEReference(judgeStatementEClass, JUDGE_STATEMENT__ELSE_STATEMENT);
-
-    elseJudgeStatementEClass = createEClass(ELSE_JUDGE_STATEMENT);
-    createEReference(elseJudgeStatementEClass, ELSE_JUDGE_STATEMENT__CONDITION);
-    createEReference(elseJudgeStatementEClass, ELSE_JUDGE_STATEMENT__STATEMENTS);
-
-    builtinFunctionEClass = createEClass(BUILTIN_FUNCTION);
-
     entityEClass = createEClass(ENTITY);
     createEAttribute(entityEClass, ENTITY__NAME);
 
-    reportFunctionEClass = createEClass(REPORT_FUNCTION);
-    createEReference(reportFunctionEClass, REPORT_FUNCTION__ENTITY);
+    attributeEClass = createEClass(ATTRIBUTE);
+    createEAttribute(attributeEClass, ATTRIBUTE__NAME);
 
-    getStageFunctionEClass = createEClass(GET_STAGE_FUNCTION);
-    createEReference(getStageFunctionEClass, GET_STAGE_FUNCTION__GET_STAGE_CROP);
-    createEAttribute(getStageFunctionEClass, GET_STAGE_FUNCTION__STAGE_NUMBER);
+    variableEClass = createEClass(VARIABLE);
+    createEReference(variableEClass, VARIABLE__EXPRESSION);
 
-    countStageFunctionEClass = createEClass(COUNT_STAGE_FUNCTION);
-    createEReference(countStageFunctionEClass, COUNT_STAGE_FUNCTION__COUNT_STAGE_CROP);
+    loopStatementEClass = createEClass(LOOP_STATEMENT);
+    createEReference(loopStatementEClass, LOOP_STATEMENT__CONDITION);
+    createEReference(loopStatementEClass, LOOP_STATEMENT__LOOP_STATEMENTS);
+
+    judgeStatementEClass = createEClass(JUDGE_STATEMENT);
+    createEReference(judgeStatementEClass, JUDGE_STATEMENT__CONDITION);
+    createEReference(judgeStatementEClass, JUDGE_STATEMENT__JUDGE_STATEMENTS);
+    createEReference(judgeStatementEClass, JUDGE_STATEMENT__ELSE_JUDGE_STATEMENTS);
+    createEReference(judgeStatementEClass, JUDGE_STATEMENT__ELSE_STATEMENTS);
+
+    elseJudgeStatementEClass = createEClass(ELSE_JUDGE_STATEMENT);
+    createEReference(elseJudgeStatementEClass, ELSE_JUDGE_STATEMENT__CONDITION);
+    createEReference(elseJudgeStatementEClass, ELSE_JUDGE_STATEMENT__ELSE_JUDGE_STATEMENTS);
+
+    elseStatementEClass = createEClass(ELSE_STATEMENT);
+    createEReference(elseStatementEClass, ELSE_STATEMENT__ELSE_STATEMENTS);
+
+    builtinFunctionEClass = createEClass(BUILTIN_FUNCTION);
 
     getValueFunctionEClass = createEClass(GET_VALUE_FUNCTION);
     createEReference(getValueFunctionEClass, GET_VALUE_FUNCTION__ENTITY);
     createEAttribute(getValueFunctionEClass, GET_VALUE_FUNCTION__ATTRIBUTE);
+
+    reportFunctionEClass = createEClass(REPORT_FUNCTION);
+    createEReference(reportFunctionEClass, REPORT_FUNCTION__ENTITY);
+
+    countStageFunctionEClass = createEClass(COUNT_STAGE_FUNCTION);
+    createEReference(countStageFunctionEClass, COUNT_STAGE_FUNCTION__COUNT_STAGE_CROP);
 
     setFieldValueFunctionEClass = createEClass(SET_FIELD_VALUE_FUNCTION);
     createEReference(setFieldValueFunctionEClass, SET_FIELD_VALUE_FUNCTION__SET_VALUE_FIELD);
@@ -1927,12 +1898,9 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
     realLiteralEClass = createEClass(REAL_LITERAL);
     createEAttribute(realLiteralEClass, REAL_LITERAL__VAL);
 
-    attributeEClass = createEClass(ATTRIBUTE);
-    createEAttribute(attributeEClass, ATTRIBUTE__NAME);
-
     cropEClass = createEClass(CROP);
     createEAttribute(cropEClass, CROP__CROP_NAME);
-    createEReference(cropEClass, CROP__STATEMENTS);
+    createEReference(cropEClass, CROP__CROP_STAGES);
 
     cropStagesEClass = createEClass(CROP_STAGES);
     createEReference(cropStagesEClass, CROP_STAGES__ELEMENTS);
@@ -1958,19 +1926,19 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
 
     missionEClass = createEClass(MISSION);
     createEAttribute(missionEClass, MISSION__NAME);
-    createEReference(missionEClass, MISSION__STATEMENTS);
+    createEReference(missionEClass, MISSION__MISSION_STATEMENTS);
 
     taskStatementEClass = createEClass(TASK_STATEMENT);
     createEAttribute(taskStatementEClass, TASK_STATEMENT__NAME);
     createEReference(taskStatementEClass, TASK_STATEMENT__PARMAS);
     createEAttribute(taskStatementEClass, TASK_STATEMENT__TYPE_NAME);
-    createEReference(taskStatementEClass, TASK_STATEMENT__STATEMENTS);
+    createEReference(taskStatementEClass, TASK_STATEMENT__TASK_STATEMENTS);
 
     returnStatementEClass = createEClass(RETURN_STATEMENT);
     createEReference(returnStatementEClass, RETURN_STATEMENT__VALUE);
 
     executeStatementEClass = createEClass(EXECUTE_STATEMENT);
-    createEReference(executeStatementEClass, EXECUTE_STATEMENT__STATEMENTS);
+    createEReference(executeStatementEClass, EXECUTE_STATEMENT__EXECUTE_STATEMENTS);
 
     conditionOrExpressionEClass = createEClass(CONDITION_OR_EXPRESSION);
     createEReference(conditionOrExpressionEClass, CONDITION_OR_EXPRESSION__LEFT);
@@ -2060,10 +2028,9 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
     loopStatementEClass.getESuperTypes().add(this.getStatement());
     judgeStatementEClass.getESuperTypes().add(this.getStatement());
     builtinFunctionEClass.getESuperTypes().add(this.getStatement());
-    reportFunctionEClass.getESuperTypes().add(this.getBuiltinFunction());
-    getStageFunctionEClass.getESuperTypes().add(this.getBuiltinFunction());
-    countStageFunctionEClass.getESuperTypes().add(this.getBuiltinFunction());
     getValueFunctionEClass.getESuperTypes().add(this.getBuiltinFunction());
+    reportFunctionEClass.getESuperTypes().add(this.getBuiltinFunction());
+    countStageFunctionEClass.getESuperTypes().add(this.getBuiltinFunction());
     setFieldValueFunctionEClass.getESuperTypes().add(this.getBuiltinFunction());
     plantFunctionEClass.getESuperTypes().add(this.getBuiltinFunction());
     moveFunctionEClass.getESuperTypes().add(this.getBuiltinFunction());
@@ -2071,11 +2038,8 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
     literalEClass.getESuperTypes().add(this.getExpression());
     booleanLiteralEClass.getESuperTypes().add(this.getLiteral());
     realLiteralEClass.getESuperTypes().add(this.getLiteral());
-    cropEClass.getESuperTypes().add(this.getClass_());
     cropEClass.getESuperTypes().add(this.getEntity());
-    fieldEClass.getESuperTypes().add(this.getClass_());
     fieldEClass.getESuperTypes().add(this.getEntity());
-    missionEClass.getESuperTypes().add(this.getClass_());
     conditionOrExpressionEClass.getESuperTypes().add(this.getExpression());
     conditionAndExpressionEClass.getESuperTypes().add(this.getExpression());
     lessThanOrEqualEClass.getESuperTypes().add(this.getExpression());
@@ -2095,48 +2059,48 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
     initEClass(farmProgramEClass, FarmProgram.class, "FarmProgram", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getFarmProgram_Statements(), ecorePackage.getEObject(), null, "statements", null, 0, -1, FarmProgram.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(classEClass, uk.ac.kcl.farm.farm.Class.class, "Class", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
     initEClass(paramEClass, Param.class, "Param", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getParam_Param(), ecorePackage.getEString(), "param", null, 0, 1, Param.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(statementEClass, Statement.class, "Statement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(variableEClass, Variable.class, "Variable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getVariable_Value(), this.getExpression(), null, "value", null, 0, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(loopStatementEClass, LoopStatement.class, "LoopStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getLoopStatement_Condition(), this.getExpression(), null, "condition", null, 0, 1, LoopStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getLoopStatement_Statements(), this.getStatement(), null, "statements", null, 0, -1, LoopStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(judgeStatementEClass, JudgeStatement.class, "JudgeStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getJudgeStatement_Condition(), this.getExpression(), null, "condition", null, 0, 1, JudgeStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getJudgeStatement_Statements(), this.getStatement(), null, "statements", null, 0, -1, JudgeStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getJudgeStatement_Elseif(), this.getElseJudgeStatement(), null, "elseif", null, 0, -1, JudgeStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getJudgeStatement_ElseStatement(), this.getStatement(), null, "elseStatement", null, 0, -1, JudgeStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(elseJudgeStatementEClass, ElseJudgeStatement.class, "ElseJudgeStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getElseJudgeStatement_Condition(), this.getExpression(), null, "condition", null, 0, 1, ElseJudgeStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getElseJudgeStatement_Statements(), this.getStatement(), null, "statements", null, 0, -1, ElseJudgeStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(builtinFunctionEClass, BuiltinFunction.class, "BuiltinFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
     initEClass(entityEClass, Entity.class, "Entity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEntity_Name(), ecorePackage.getEString(), "name", null, 0, 1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(reportFunctionEClass, ReportFunction.class, "ReportFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getReportFunction_Entity(), this.getEntity(), null, "entity", null, 0, 1, ReportFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getAttribute_Name(), ecorePackage.getEString(), "name", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(getStageFunctionEClass, GetStageFunction.class, "GetStageFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getGetStageFunction_GetStageCrop(), this.getCrop(), null, "getStageCrop", null, 0, 1, GetStageFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getGetStageFunction_StageNumber(), ecorePackage.getEInt(), "stageNumber", null, 0, 1, GetStageFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(variableEClass, Variable.class, "Variable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getVariable_Expression(), this.getExpression(), null, "expression", null, 0, 1, Variable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(countStageFunctionEClass, CountStageFunction.class, "CountStageFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getCountStageFunction_CountStageCrop(), this.getCrop(), null, "countStageCrop", null, 0, 1, CountStageFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(loopStatementEClass, LoopStatement.class, "LoopStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getLoopStatement_Condition(), this.getExpression(), null, "condition", null, 0, 1, LoopStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getLoopStatement_LoopStatements(), this.getStatement(), null, "loopStatements", null, 0, -1, LoopStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(judgeStatementEClass, JudgeStatement.class, "JudgeStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getJudgeStatement_Condition(), this.getExpression(), null, "condition", null, 0, 1, JudgeStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getJudgeStatement_JudgeStatements(), this.getStatement(), null, "judgeStatements", null, 0, -1, JudgeStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getJudgeStatement_ElseJudgeStatements(), this.getElseJudgeStatement(), null, "elseJudgeStatements", null, 0, -1, JudgeStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getJudgeStatement_ElseStatements(), this.getElseStatement(), null, "elseStatements", null, 0, -1, JudgeStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(elseJudgeStatementEClass, ElseJudgeStatement.class, "ElseJudgeStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getElseJudgeStatement_Condition(), this.getExpression(), null, "condition", null, 0, 1, ElseJudgeStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getElseJudgeStatement_ElseJudgeStatements(), this.getStatement(), null, "elseJudgeStatements", null, 0, -1, ElseJudgeStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(elseStatementEClass, ElseStatement.class, "ElseStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getElseStatement_ElseStatements(), this.getStatement(), null, "elseStatements", null, 0, -1, ElseStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(builtinFunctionEClass, BuiltinFunction.class, "BuiltinFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(getValueFunctionEClass, GetValueFunction.class, "GetValueFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getGetValueFunction_Entity(), this.getEntity(), null, "entity", null, 0, 1, GetValueFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getGetValueFunction_Attribute(), ecorePackage.getEString(), "attribute", null, 0, 1, GetValueFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(reportFunctionEClass, ReportFunction.class, "ReportFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getReportFunction_Entity(), this.getEntity(), null, "entity", null, 0, 1, ReportFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(countStageFunctionEClass, CountStageFunction.class, "CountStageFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getCountStageFunction_CountStageCrop(), this.getCrop(), null, "countStageCrop", null, 0, 1, CountStageFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(setFieldValueFunctionEClass, SetFieldValueFunction.class, "SetFieldValueFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getSetFieldValueFunction_SetValueField(), this.getField(), null, "setValueField", null, 0, 1, SetFieldValueFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2165,12 +2129,9 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
     initEClass(realLiteralEClass, RealLiteral.class, "RealLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getRealLiteral_Val(), ecorePackage.getEFloat(), "val", null, 0, 1, RealLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getAttribute_Name(), ecorePackage.getEString(), "name", null, 0, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
     initEClass(cropEClass, Crop.class, "Crop", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getCrop_CropName(), ecorePackage.getEString(), "cropName", null, 0, 1, Crop.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getCrop_Statements(), this.getCropStages(), null, "statements", null, 0, -1, Crop.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getCrop_CropStages(), this.getCropStages(), null, "cropStages", null, 0, -1, Crop.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(cropStagesEClass, CropStages.class, "CropStages", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getCropStages_Elements(), this.getCropStage(), null, "elements", null, 0, -1, CropStages.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2196,19 +2157,19 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
 
     initEClass(missionEClass, Mission.class, "Mission", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getMission_Name(), ecorePackage.getEString(), "name", null, 0, 1, Mission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getMission_Statements(), ecorePackage.getEObject(), null, "statements", null, 0, -1, Mission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getMission_MissionStatements(), ecorePackage.getEObject(), null, "missionStatements", null, 0, -1, Mission.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(taskStatementEClass, TaskStatement.class, "TaskStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getTaskStatement_Name(), ecorePackage.getEString(), "name", null, 0, 1, TaskStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTaskStatement_Parmas(), this.getParam(), null, "parmas", null, 0, -1, TaskStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTaskStatement_TypeName(), ecorePackage.getEString(), "typeName", null, 0, 1, TaskStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getTaskStatement_Statements(), ecorePackage.getEObject(), null, "statements", null, 0, -1, TaskStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTaskStatement_TaskStatements(), ecorePackage.getEObject(), null, "taskStatements", null, 0, -1, TaskStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(returnStatementEClass, ReturnStatement.class, "ReturnStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getReturnStatement_Value(), this.getExpression(), null, "value", null, 0, 1, ReturnStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(executeStatementEClass, ExecuteStatement.class, "ExecuteStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getExecuteStatement_Statements(), this.getStatement(), null, "statements", null, 0, -1, ExecuteStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getExecuteStatement_ExecuteStatements(), this.getStatement(), null, "executeStatements", null, 0, -1, ExecuteStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(conditionOrExpressionEClass, ConditionOrExpression.class, "ConditionOrExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getConditionOrExpression_Left(), this.getExpression(), null, "left", null, 0, 1, ConditionOrExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

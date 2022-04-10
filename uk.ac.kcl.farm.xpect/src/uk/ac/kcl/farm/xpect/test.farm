@@ -1,5 +1,3 @@
-/* XPECT_SETUP uk.ac.kcl.farm.xpect.XPectTests  END_SETUP */
-
 define humidity
 define temperature
 
@@ -72,7 +70,6 @@ mission qwe {
 	task testScoping(real number) : real {
 		var taskvar = true
 		return(taskvar)
-				
 	}
 	
 	task testParams(real number, crop cropOne) : null {
@@ -81,23 +78,22 @@ mission qwe {
 		var qwe = 12.23
 		while (true) {
 			var loopvar=1.0
-			report(loopvar)
+//			report(loopvar)
 			var e = 1.0
 		}
 		
 		var try = 10.0 + e
 		report(e)
-		
-		report(loopvar)
 	}
 	execute {
-//		report(testParams.taskvar)
+		
 		var loopCounter = 10.0
 	
 		var condition = false
 		
 		report(greenhouse_2)
 		report(loopCounter)
+		report(crop_a)
 		
 		var try = 10.0 + loopCounter
 
@@ -136,6 +132,7 @@ mission qwe {
 		
 		var try = 10.0 + e
 		report(e)
-
+		
+//		report(taskvar)
 	}
 }

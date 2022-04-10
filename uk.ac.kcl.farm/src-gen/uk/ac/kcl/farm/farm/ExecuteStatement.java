@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.farm.farm.ExecuteStatement#getStatements <em>Statements</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.ExecuteStatement#getExecuteStatements <em>Execute Statements</em>}</li>
  * </ul>
  *
  * @see uk.ac.kcl.farm.farm.FarmPackage#getExecuteStatement()
@@ -26,15 +26,15 @@ import org.eclipse.emf.ecore.EObject;
 public interface ExecuteStatement extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Statements</b></em>' containment reference list.
+   * Returns the value of the '<em><b>Execute Statements</b></em>' containment reference list.
    * The list contents are of type {@link uk.ac.kcl.farm.farm.Statement}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Statements</em>' containment reference list.
-   * @see uk.ac.kcl.farm.farm.FarmPackage#getExecuteStatement_Statements()
+   * @return the value of the '<em>Execute Statements</em>' containment reference list.
+   * @see uk.ac.kcl.farm.farm.FarmPackage#getExecuteStatement_ExecuteStatements()
    * @model containment="true"
    * @generated
    */
-  EList<Statement> getStatements();
+  EList<Statement> getExecuteStatements();
 
 } // ExecuteStatement

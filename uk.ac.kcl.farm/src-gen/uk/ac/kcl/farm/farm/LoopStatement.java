@@ -15,7 +15,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link uk.ac.kcl.farm.farm.LoopStatement#getCondition <em>Condition</em>}</li>
- *   <li>{@link uk.ac.kcl.farm.farm.LoopStatement#getStatements <em>Statements</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.LoopStatement#getLoopStatements <em>Loop Statements</em>}</li>
  * </ul>
  *
  * @see uk.ac.kcl.farm.farm.FarmPackage#getLoopStatement()
@@ -47,15 +47,15 @@ public interface LoopStatement extends Statement
   void setCondition(Expression value);
 
   /**
-   * Returns the value of the '<em><b>Statements</b></em>' containment reference list.
+   * Returns the value of the '<em><b>Loop Statements</b></em>' containment reference list.
    * The list contents are of type {@link uk.ac.kcl.farm.farm.Statement}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Statements</em>' containment reference list.
-   * @see uk.ac.kcl.farm.farm.FarmPackage#getLoopStatement_Statements()
+   * @return the value of the '<em>Loop Statements</em>' containment reference list.
+   * @see uk.ac.kcl.farm.farm.FarmPackage#getLoopStatement_LoopStatements()
    * @model containment="true"
    * @generated
    */
-  EList<Statement> getStatements();
+  EList<Statement> getLoopStatements();
 
 } // LoopStatement

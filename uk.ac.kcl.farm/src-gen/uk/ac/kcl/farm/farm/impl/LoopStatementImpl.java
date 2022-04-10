@@ -32,7 +32,7 @@ import uk.ac.kcl.farm.farm.Statement;
  * </p>
  * <ul>
  *   <li>{@link uk.ac.kcl.farm.farm.impl.LoopStatementImpl#getCondition <em>Condition</em>}</li>
- *   <li>{@link uk.ac.kcl.farm.farm.impl.LoopStatementImpl#getStatements <em>Statements</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.impl.LoopStatementImpl#getLoopStatements <em>Loop Statements</em>}</li>
  * </ul>
  *
  * @generated
@@ -50,14 +50,14 @@ public class LoopStatementImpl extends StatementImpl implements LoopStatement
   protected Expression condition;
 
   /**
-   * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
+   * The cached value of the '{@link #getLoopStatements() <em>Loop Statements</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getStatements()
+   * @see #getLoopStatements()
    * @generated
    * @ordered
    */
-  protected EList<Statement> statements;
+  protected EList<Statement> loopStatements;
 
   /**
    * <!-- begin-user-doc -->
@@ -136,13 +136,13 @@ public class LoopStatementImpl extends StatementImpl implements LoopStatement
    * @generated
    */
   @Override
-  public EList<Statement> getStatements()
+  public EList<Statement> getLoopStatements()
   {
-    if (statements == null)
+    if (loopStatements == null)
     {
-      statements = new EObjectContainmentEList<Statement>(Statement.class, this, FarmPackage.LOOP_STATEMENT__STATEMENTS);
+      loopStatements = new EObjectContainmentEList<Statement>(Statement.class, this, FarmPackage.LOOP_STATEMENT__LOOP_STATEMENTS);
     }
-    return statements;
+    return loopStatements;
   }
 
   /**
@@ -157,8 +157,8 @@ public class LoopStatementImpl extends StatementImpl implements LoopStatement
     {
       case FarmPackage.LOOP_STATEMENT__CONDITION:
         return basicSetCondition(null, msgs);
-      case FarmPackage.LOOP_STATEMENT__STATEMENTS:
-        return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
+      case FarmPackage.LOOP_STATEMENT__LOOP_STATEMENTS:
+        return ((InternalEList<?>)getLoopStatements()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -175,8 +175,8 @@ public class LoopStatementImpl extends StatementImpl implements LoopStatement
     {
       case FarmPackage.LOOP_STATEMENT__CONDITION:
         return getCondition();
-      case FarmPackage.LOOP_STATEMENT__STATEMENTS:
-        return getStatements();
+      case FarmPackage.LOOP_STATEMENT__LOOP_STATEMENTS:
+        return getLoopStatements();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -195,9 +195,9 @@ public class LoopStatementImpl extends StatementImpl implements LoopStatement
       case FarmPackage.LOOP_STATEMENT__CONDITION:
         setCondition((Expression)newValue);
         return;
-      case FarmPackage.LOOP_STATEMENT__STATEMENTS:
-        getStatements().clear();
-        getStatements().addAll((Collection<? extends Statement>)newValue);
+      case FarmPackage.LOOP_STATEMENT__LOOP_STATEMENTS:
+        getLoopStatements().clear();
+        getLoopStatements().addAll((Collection<? extends Statement>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -216,8 +216,8 @@ public class LoopStatementImpl extends StatementImpl implements LoopStatement
       case FarmPackage.LOOP_STATEMENT__CONDITION:
         setCondition((Expression)null);
         return;
-      case FarmPackage.LOOP_STATEMENT__STATEMENTS:
-        getStatements().clear();
+      case FarmPackage.LOOP_STATEMENT__LOOP_STATEMENTS:
+        getLoopStatements().clear();
         return;
     }
     super.eUnset(featureID);
@@ -235,8 +235,8 @@ public class LoopStatementImpl extends StatementImpl implements LoopStatement
     {
       case FarmPackage.LOOP_STATEMENT__CONDITION:
         return condition != null;
-      case FarmPackage.LOOP_STATEMENT__STATEMENTS:
-        return statements != null && !statements.isEmpty();
+      case FarmPackage.LOOP_STATEMENT__LOOP_STATEMENTS:
+        return loopStatements != null && !loopStatements.isEmpty();
     }
     return super.eIsSet(featureID);
   }

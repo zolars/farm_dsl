@@ -15,9 +15,9 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link uk.ac.kcl.farm.farm.JudgeStatement#getCondition <em>Condition</em>}</li>
- *   <li>{@link uk.ac.kcl.farm.farm.JudgeStatement#getStatements <em>Statements</em>}</li>
- *   <li>{@link uk.ac.kcl.farm.farm.JudgeStatement#getElseif <em>Elseif</em>}</li>
- *   <li>{@link uk.ac.kcl.farm.farm.JudgeStatement#getElseStatement <em>Else Statement</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.JudgeStatement#getJudgeStatements <em>Judge Statements</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.JudgeStatement#getElseJudgeStatements <em>Else Judge Statements</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.JudgeStatement#getElseStatements <em>Else Statements</em>}</li>
  * </ul>
  *
  * @see uk.ac.kcl.farm.farm.FarmPackage#getJudgeStatement()
@@ -49,39 +49,39 @@ public interface JudgeStatement extends Statement
   void setCondition(Expression value);
 
   /**
-   * Returns the value of the '<em><b>Statements</b></em>' containment reference list.
+   * Returns the value of the '<em><b>Judge Statements</b></em>' containment reference list.
    * The list contents are of type {@link uk.ac.kcl.farm.farm.Statement}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Statements</em>' containment reference list.
-   * @see uk.ac.kcl.farm.farm.FarmPackage#getJudgeStatement_Statements()
+   * @return the value of the '<em>Judge Statements</em>' containment reference list.
+   * @see uk.ac.kcl.farm.farm.FarmPackage#getJudgeStatement_JudgeStatements()
    * @model containment="true"
    * @generated
    */
-  EList<Statement> getStatements();
+  EList<Statement> getJudgeStatements();
 
   /**
-   * Returns the value of the '<em><b>Elseif</b></em>' containment reference list.
+   * Returns the value of the '<em><b>Else Judge Statements</b></em>' containment reference list.
    * The list contents are of type {@link uk.ac.kcl.farm.farm.ElseJudgeStatement}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Elseif</em>' containment reference list.
-   * @see uk.ac.kcl.farm.farm.FarmPackage#getJudgeStatement_Elseif()
+   * @return the value of the '<em>Else Judge Statements</em>' containment reference list.
+   * @see uk.ac.kcl.farm.farm.FarmPackage#getJudgeStatement_ElseJudgeStatements()
    * @model containment="true"
    * @generated
    */
-  EList<ElseJudgeStatement> getElseif();
+  EList<ElseJudgeStatement> getElseJudgeStatements();
 
   /**
-   * Returns the value of the '<em><b>Else Statement</b></em>' containment reference list.
-   * The list contents are of type {@link uk.ac.kcl.farm.farm.Statement}.
+   * Returns the value of the '<em><b>Else Statements</b></em>' containment reference list.
+   * The list contents are of type {@link uk.ac.kcl.farm.farm.ElseStatement}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Else Statement</em>' containment reference list.
-   * @see uk.ac.kcl.farm.farm.FarmPackage#getJudgeStatement_ElseStatement()
+   * @return the value of the '<em>Else Statements</em>' containment reference list.
+   * @see uk.ac.kcl.farm.farm.FarmPackage#getJudgeStatement_ElseStatements()
    * @model containment="true"
    * @generated
    */
-  EList<Statement> getElseStatement();
+  EList<ElseStatement> getElseStatements();
 
 } // JudgeStatement

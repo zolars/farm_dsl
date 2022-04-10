@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import uk.ac.kcl.farm.farm.Entity;
 import uk.ac.kcl.farm.farm.FarmPackage;
 import uk.ac.kcl.farm.farm.Field;
 import uk.ac.kcl.farm.farm.FieldMonitor;
@@ -31,7 +30,6 @@ import uk.ac.kcl.farm.farm.FieldMonitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.farm.farm.impl.FieldImpl#getName <em>Name</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.impl.FieldImpl#getFieldName <em>Field Name</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.impl.FieldImpl#getIp <em>Ip</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.impl.FieldImpl#getFieldType <em>Field Type</em>}</li>
@@ -41,28 +39,8 @@ import uk.ac.kcl.farm.farm.FieldMonitor;
  *
  * @generated
  */
-public class FieldImpl extends ClassImpl implements Field
+public class FieldImpl extends EntityImpl implements Field
 {
-  /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected static final String NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected String name = NAME_EDEFAULT;
-
   /**
    * The default value of the '{@link #getFieldName() <em>Field Name</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -172,31 +150,6 @@ public class FieldImpl extends ClassImpl implements Field
   protected EClass eStaticClass()
   {
     return FarmPackage.Literals.FIELD;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String getName()
-  {
-    return name;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setName(String newName)
-  {
-    String oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.FIELD__NAME, oldName, name));
   }
 
   /**
@@ -340,8 +293,6 @@ public class FieldImpl extends ClassImpl implements Field
   {
     switch (featureID)
     {
-      case FarmPackage.FIELD__NAME:
-        return getName();
       case FarmPackage.FIELD__FIELD_NAME:
         return getFieldName();
       case FarmPackage.FIELD__IP:
@@ -367,9 +318,6 @@ public class FieldImpl extends ClassImpl implements Field
   {
     switch (featureID)
     {
-      case FarmPackage.FIELD__NAME:
-        setName((String)newValue);
-        return;
       case FarmPackage.FIELD__FIELD_NAME:
         setFieldName((String)newValue);
         return;
@@ -400,9 +348,6 @@ public class FieldImpl extends ClassImpl implements Field
   {
     switch (featureID)
     {
-      case FarmPackage.FIELD__NAME:
-        setName(NAME_EDEFAULT);
-        return;
       case FarmPackage.FIELD__FIELD_NAME:
         setFieldName(FIELD_NAME_EDEFAULT);
         return;
@@ -432,8 +377,6 @@ public class FieldImpl extends ClassImpl implements Field
   {
     switch (featureID)
     {
-      case FarmPackage.FIELD__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case FarmPackage.FIELD__FIELD_NAME:
         return FIELD_NAME_EDEFAULT == null ? fieldName != null : !FIELD_NAME_EDEFAULT.equals(fieldName);
       case FarmPackage.FIELD__IP:
@@ -454,52 +397,12 @@ public class FieldImpl extends ClassImpl implements Field
    * @generated
    */
   @Override
-  public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
-  {
-    if (baseClass == Entity.class)
-    {
-      switch (derivedFeatureID)
-      {
-        case FarmPackage.FIELD__NAME: return FarmPackage.ENTITY__NAME;
-        default: return -1;
-      }
-    }
-    return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
-  {
-    if (baseClass == Entity.class)
-    {
-      switch (baseFeatureID)
-      {
-        case FarmPackage.ENTITY__NAME: return FarmPackage.FIELD__NAME;
-        default: return -1;
-      }
-    }
-    return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public String toString()
   {
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(", fieldName: ");
+    result.append(" (fieldName: ");
     result.append(fieldName);
     result.append(", ip: ");
     result.append(ip);

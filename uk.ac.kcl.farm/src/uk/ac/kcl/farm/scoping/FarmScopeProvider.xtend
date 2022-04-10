@@ -3,17 +3,25 @@
  */
 package uk.ac.kcl.farm.scoping
 
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EReference
 import org.eclipse.xtext.scoping.IScope
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider
-import uk.ac.kcl.farm.farm.FarmProgram
-import uk.ac.kcl.farm.farm.Expression
 import uk.ac.kcl.farm.farm.Variable
+import uk.ac.kcl.farm.farm.Expression
+import uk.ac.kcl.farm.farm.Entity
+import uk.ac.kcl.farm.farm.ReportFunction
 import uk.ac.kcl.farm.farm.LoopStatement
 import uk.ac.kcl.farm.farm.TaskStatement
 import uk.ac.kcl.farm.farm.ExecuteStatement
+//import uk.ac.kcl.farm.farm.JudgeStatement
+//import uk.ac.kcl.farm.farm.ElseJudgeStatement
+//import uk.ac.kcl.farm.farm.ElseStatement
+//
+//import uk.ac.kcl.farm.farm.Call
 
 import static org.eclipse.xtext.scoping.Scopes.*
+//import static extension org.eclipse.xtext.EcoreUtil2.*
 
 /**
  * This class contains custom scoping description.
@@ -22,32 +30,49 @@ import static org.eclipse.xtext.scoping.Scopes.*
  * on how and when to use it.
  */
 class FarmScopeProvider extends AbstractDeclarativeScopeProvider {
-	def IScope scope_IntVarExpression_var(Expression context, EReference ref) {
-		context.visibleVariablesScope
-	}
 	
-	dispatch def IScope visibleVariablesScope(Expression ip) {
-		ip.eContainer.visibleVariablesScope
-	}
-	
-	dispatch def IScope visibleVariablesScope(FarmProgram tp) {
-		scopeFor(tp.statements.filter(Variable))
+	def IScope scope_ReportFunction_var(ReportFunction context, EReference ref) {
+		System.out.println(context.entity);
+      	context.visibleVariablesScope
 	}
 
+	dispatch def IScope visibleVariablesScope(Expression context) {
+		context.eContainer.visibleVariablesScope
+	}
+	
+	dispatch def IScope visibleVariablesScope(Entity context) {
+		context.eContainer.visibleVariablesScope
+	}
+	
+	dispatch def IScope visibleVariablesScope(EObject context) {
+		context.eContainer.visibleVariablesScope
+	}
+	
+	dispatch def IScope visibleVariablesScope(TaskStatement context) {
+		scopeFor(context.taskStatements.filter(Variable))
+	}
+	
+	dispatch def IScope visibleVariablesScope(ExecuteStatement context) {
+		scopeFor(context.executeStatements.filter(Variable))
+	}
+	
+	dispatch def IScope visibleVariablesScope(LoopStatement context) {
+		context.eContainer.internalVisibleVariablesScope
+	}
+	
+	dispatch def IScope internalVisibleVariablesScope(TaskStatement context) {
+		System.out.println(context.name);
+		scopeFor(context.taskStatements.filter(Variable))
+	}
+	
+	dispatch def IScope internalVisibleVariablesScope(ExecuteStatement context) {
+		System.out.println(context.executeStatements);
+		scopeFor(context.executeStatements.filter(Variable))
+	}
+	
+	dispatch def IScope internalVisibleVariablesScope(LoopStatement context) {
+		System.out.println(context.condition);
+		scopeFor(context.loopStatements.filter(Variable), context.eContainer.internalVisibleVariablesScope)
+	}
 
-	dispatch def IScope internalVisibleVariablesScope(FarmProgram tp) {
-		scopeFor(tp.statements.filter(Variable))
-	}
-	
-	dispatch def IScope internalVisibleVariablesScope(LoopStatement ls) {
-		scopeFor(ls.statements.filter(Variable), ls.eContainer.internalVisibleVariablesScope)
-	}
-	
-	dispatch def IScope internalVisibleVariablesScope(TaskStatement ls) {
-		scopeFor(ls.statements.filter(Variable), ls.eContainer.internalVisibleVariablesScope)
-	}
-	
-	dispatch def IScope internalVisibleVariablesScope(ExecuteStatement ls) {
-		scopeFor(ls.statements.filter(Variable), ls.eContainer.internalVisibleVariablesScope)
-	}
 }

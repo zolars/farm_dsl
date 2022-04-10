@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -31,12 +32,12 @@ import uk.ac.kcl.farm.farm.Mission;
  * </p>
  * <ul>
  *   <li>{@link uk.ac.kcl.farm.farm.impl.MissionImpl#getName <em>Name</em>}</li>
- *   <li>{@link uk.ac.kcl.farm.farm.impl.MissionImpl#getStatements <em>Statements</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.impl.MissionImpl#getMissionStatements <em>Mission Statements</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class MissionImpl extends ClassImpl implements Mission
+public class MissionImpl extends MinimalEObjectImpl.Container implements Mission
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -59,14 +60,14 @@ public class MissionImpl extends ClassImpl implements Mission
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
+   * The cached value of the '{@link #getMissionStatements() <em>Mission Statements</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getStatements()
+   * @see #getMissionStatements()
    * @generated
    * @ordered
    */
-  protected EList<EObject> statements;
+  protected EList<EObject> missionStatements;
 
   /**
    * <!-- begin-user-doc -->
@@ -120,13 +121,13 @@ public class MissionImpl extends ClassImpl implements Mission
    * @generated
    */
   @Override
-  public EList<EObject> getStatements()
+  public EList<EObject> getMissionStatements()
   {
-    if (statements == null)
+    if (missionStatements == null)
     {
-      statements = new EObjectContainmentEList<EObject>(EObject.class, this, FarmPackage.MISSION__STATEMENTS);
+      missionStatements = new EObjectContainmentEList<EObject>(EObject.class, this, FarmPackage.MISSION__MISSION_STATEMENTS);
     }
-    return statements;
+    return missionStatements;
   }
 
   /**
@@ -139,8 +140,8 @@ public class MissionImpl extends ClassImpl implements Mission
   {
     switch (featureID)
     {
-      case FarmPackage.MISSION__STATEMENTS:
-        return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
+      case FarmPackage.MISSION__MISSION_STATEMENTS:
+        return ((InternalEList<?>)getMissionStatements()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -157,8 +158,8 @@ public class MissionImpl extends ClassImpl implements Mission
     {
       case FarmPackage.MISSION__NAME:
         return getName();
-      case FarmPackage.MISSION__STATEMENTS:
-        return getStatements();
+      case FarmPackage.MISSION__MISSION_STATEMENTS:
+        return getMissionStatements();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -177,9 +178,9 @@ public class MissionImpl extends ClassImpl implements Mission
       case FarmPackage.MISSION__NAME:
         setName((String)newValue);
         return;
-      case FarmPackage.MISSION__STATEMENTS:
-        getStatements().clear();
-        getStatements().addAll((Collection<? extends EObject>)newValue);
+      case FarmPackage.MISSION__MISSION_STATEMENTS:
+        getMissionStatements().clear();
+        getMissionStatements().addAll((Collection<? extends EObject>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -198,8 +199,8 @@ public class MissionImpl extends ClassImpl implements Mission
       case FarmPackage.MISSION__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case FarmPackage.MISSION__STATEMENTS:
-        getStatements().clear();
+      case FarmPackage.MISSION__MISSION_STATEMENTS:
+        getMissionStatements().clear();
         return;
     }
     super.eUnset(featureID);
@@ -217,8 +218,8 @@ public class MissionImpl extends ClassImpl implements Mission
     {
       case FarmPackage.MISSION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case FarmPackage.MISSION__STATEMENTS:
-        return statements != null && !statements.isEmpty();
+      case FarmPackage.MISSION__MISSION_STATEMENTS:
+        return missionStatements != null && !missionStatements.isEmpty();
     }
     return super.eIsSet(featureID);
   }

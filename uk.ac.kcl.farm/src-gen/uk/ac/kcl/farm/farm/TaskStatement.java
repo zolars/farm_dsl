@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link uk.ac.kcl.farm.farm.TaskStatement#getName <em>Name</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.TaskStatement#getParmas <em>Parmas</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.TaskStatement#getTypeName <em>Type Name</em>}</li>
- *   <li>{@link uk.ac.kcl.farm.farm.TaskStatement#getStatements <em>Statements</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.TaskStatement#getTaskStatements <em>Task Statements</em>}</li>
  * </ul>
  *
  * @see uk.ac.kcl.farm.farm.FarmPackage#getTaskStatement()
@@ -85,15 +85,15 @@ public interface TaskStatement extends EObject
   void setTypeName(String value);
 
   /**
-   * Returns the value of the '<em><b>Statements</b></em>' containment reference list.
+   * Returns the value of the '<em><b>Task Statements</b></em>' containment reference list.
    * The list contents are of type {@link org.eclipse.emf.ecore.EObject}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Statements</em>' containment reference list.
-   * @see uk.ac.kcl.farm.farm.FarmPackage#getTaskStatement_Statements()
+   * @return the value of the '<em>Task Statements</em>' containment reference list.
+   * @see uk.ac.kcl.farm.farm.FarmPackage#getTaskStatement_TaskStatements()
    * @model containment="true"
    * @generated
    */
-  EList<EObject> getStatements();
+  EList<EObject> getTaskStatements();
 
 } // TaskStatement

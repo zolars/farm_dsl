@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import uk.ac.kcl.farm.farm.Crop;
 import uk.ac.kcl.farm.farm.CropStages;
-import uk.ac.kcl.farm.farm.Entity;
 import uk.ac.kcl.farm.farm.FarmPackage;
 
 /**
@@ -31,35 +30,14 @@ import uk.ac.kcl.farm.farm.FarmPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.farm.farm.impl.CropImpl#getName <em>Name</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.impl.CropImpl#getCropName <em>Crop Name</em>}</li>
- *   <li>{@link uk.ac.kcl.farm.farm.impl.CropImpl#getStatements <em>Statements</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.impl.CropImpl#getCropStages <em>Crop Stages</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class CropImpl extends ClassImpl implements Crop
+public class CropImpl extends EntityImpl implements Crop
 {
-  /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected static final String NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected String name = NAME_EDEFAULT;
-
   /**
    * The default value of the '{@link #getCropName() <em>Crop Name</em>}' attribute.
    * <!-- begin-user-doc -->
@@ -81,14 +59,14 @@ public class CropImpl extends ClassImpl implements Crop
   protected String cropName = CROP_NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
+   * The cached value of the '{@link #getCropStages() <em>Crop Stages</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getStatements()
+   * @see #getCropStages()
    * @generated
    * @ordered
    */
-  protected EList<CropStages> statements;
+  protected EList<CropStages> cropStages;
 
   /**
    * <!-- begin-user-doc -->
@@ -109,31 +87,6 @@ public class CropImpl extends ClassImpl implements Crop
   protected EClass eStaticClass()
   {
     return FarmPackage.Literals.CROP;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String getName()
-  {
-    return name;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setName(String newName)
-  {
-    String oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.CROP__NAME, oldName, name));
   }
 
   /**
@@ -167,13 +120,13 @@ public class CropImpl extends ClassImpl implements Crop
    * @generated
    */
   @Override
-  public EList<CropStages> getStatements()
+  public EList<CropStages> getCropStages()
   {
-    if (statements == null)
+    if (cropStages == null)
     {
-      statements = new EObjectContainmentEList<CropStages>(CropStages.class, this, FarmPackage.CROP__STATEMENTS);
+      cropStages = new EObjectContainmentEList<CropStages>(CropStages.class, this, FarmPackage.CROP__CROP_STAGES);
     }
-    return statements;
+    return cropStages;
   }
 
   /**
@@ -186,8 +139,8 @@ public class CropImpl extends ClassImpl implements Crop
   {
     switch (featureID)
     {
-      case FarmPackage.CROP__STATEMENTS:
-        return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
+      case FarmPackage.CROP__CROP_STAGES:
+        return ((InternalEList<?>)getCropStages()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -202,12 +155,10 @@ public class CropImpl extends ClassImpl implements Crop
   {
     switch (featureID)
     {
-      case FarmPackage.CROP__NAME:
-        return getName();
       case FarmPackage.CROP__CROP_NAME:
         return getCropName();
-      case FarmPackage.CROP__STATEMENTS:
-        return getStatements();
+      case FarmPackage.CROP__CROP_STAGES:
+        return getCropStages();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -223,15 +174,12 @@ public class CropImpl extends ClassImpl implements Crop
   {
     switch (featureID)
     {
-      case FarmPackage.CROP__NAME:
-        setName((String)newValue);
-        return;
       case FarmPackage.CROP__CROP_NAME:
         setCropName((String)newValue);
         return;
-      case FarmPackage.CROP__STATEMENTS:
-        getStatements().clear();
-        getStatements().addAll((Collection<? extends CropStages>)newValue);
+      case FarmPackage.CROP__CROP_STAGES:
+        getCropStages().clear();
+        getCropStages().addAll((Collection<? extends CropStages>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -247,14 +195,11 @@ public class CropImpl extends ClassImpl implements Crop
   {
     switch (featureID)
     {
-      case FarmPackage.CROP__NAME:
-        setName(NAME_EDEFAULT);
-        return;
       case FarmPackage.CROP__CROP_NAME:
         setCropName(CROP_NAME_EDEFAULT);
         return;
-      case FarmPackage.CROP__STATEMENTS:
-        getStatements().clear();
+      case FarmPackage.CROP__CROP_STAGES:
+        getCropStages().clear();
         return;
     }
     super.eUnset(featureID);
@@ -270,52 +215,12 @@ public class CropImpl extends ClassImpl implements Crop
   {
     switch (featureID)
     {
-      case FarmPackage.CROP__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case FarmPackage.CROP__CROP_NAME:
         return CROP_NAME_EDEFAULT == null ? cropName != null : !CROP_NAME_EDEFAULT.equals(cropName);
-      case FarmPackage.CROP__STATEMENTS:
-        return statements != null && !statements.isEmpty();
+      case FarmPackage.CROP__CROP_STAGES:
+        return cropStages != null && !cropStages.isEmpty();
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
-  {
-    if (baseClass == Entity.class)
-    {
-      switch (derivedFeatureID)
-      {
-        case FarmPackage.CROP__NAME: return FarmPackage.ENTITY__NAME;
-        default: return -1;
-      }
-    }
-    return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
-  {
-    if (baseClass == Entity.class)
-    {
-      switch (baseFeatureID)
-      {
-        case FarmPackage.ENTITY__NAME: return FarmPackage.CROP__NAME;
-        default: return -1;
-      }
-    }
-    return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
   }
 
   /**
@@ -329,9 +234,7 @@ public class CropImpl extends ClassImpl implements Crop
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(", cropName: ");
+    result.append(" (cropName: ");
     result.append(cropName);
     result.append(')');
     return result.toString();

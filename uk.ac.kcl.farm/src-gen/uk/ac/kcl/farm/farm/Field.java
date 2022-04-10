@@ -25,7 +25,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Field extends uk.ac.kcl.farm.farm.Class, Entity
+public interface Field extends Entity
 {
   /**
    * Returns the value of the '<em><b>Field Name</b></em>' attribute.

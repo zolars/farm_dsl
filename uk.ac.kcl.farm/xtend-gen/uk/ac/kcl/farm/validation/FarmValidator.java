@@ -3,6 +3,18 @@
  */
 package uk.ac.kcl.farm.validation;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.validation.Check;
+import org.eclipse.xtext.validation.CheckType;
+import uk.ac.kcl.farm.farm.Attribute;
+import uk.ac.kcl.farm.farm.Crop;
+import uk.ac.kcl.farm.farm.FarmPackage;
+import uk.ac.kcl.farm.farm.FarmProgram;
+import uk.ac.kcl.farm.farm.Field;
+import uk.ac.kcl.farm.farm.Mission;
+import uk.ac.kcl.farm.farm.Variable;
+
 /**
  * This class contains custom validation rules.
  * 
@@ -10,4 +22,72 @@ package uk.ac.kcl.farm.validation;
  */
 @SuppressWarnings("all")
 public class FarmValidator extends AbstractFarmValidator {
+  public static final String INVALID_ATTRIBUTE_NAME = "uk.ac.kcl.farm.farm.INVALID_ATTRIBUTE_NAME";
+  
+  public static final String INVALID_VARIABLE_NAME = "uk.ac.kcl.farm.farm.INVALID_VARIABLE_NAME";
+  
+  @Check
+  public void checkAttributeStartsWithLowerCase(final Attribute attribute) {
+    boolean _isLowerCase = Character.isLowerCase(attribute.getName().charAt(0));
+    boolean _not = (!_isLowerCase);
+    if (_not) {
+      this.warning("Attribute should start with a lower-case character", 
+        FarmPackage.Literals.ATTRIBUTE__NAME, 
+        FarmValidator.INVALID_ATTRIBUTE_NAME);
+    }
+  }
+  
+  @Check
+  public void checkVariableStartsWithLowerCase(final Variable variable) {
+    boolean _isLowerCase = Character.isLowerCase(variable.getName().charAt(0));
+    boolean _not = (!_isLowerCase);
+    if (_not) {
+      this.warning("Variable should start with a lower-case character", 
+        FarmPackage.Literals.VARIABLE__EXPRESSION, 
+        FarmValidator.INVALID_VARIABLE_NAME);
+    }
+  }
+  
+  @Check(CheckType.NORMAL)
+  public void checkHaveCrop(final FarmProgram program) {
+    String errorLog = this.haveAllClass(program.getStatements());
+    if ((errorLog != "")) {
+      this.error(("The farm program must have at least one of Crop, Field and Mission\n" + errorLog), 
+        null, 
+        FarmValidator.INVALID_VARIABLE_NAME);
+    }
+  }
+  
+  public String haveAllClass(final EList<EObject> statements) {
+    boolean haveCrop = false;
+    boolean haveField = false;
+    boolean haveMission = false;
+    for (final EObject statement : statements) {
+      {
+        if ((statement instanceof Crop)) {
+          haveCrop = true;
+        }
+        if ((statement instanceof Field)) {
+          haveField = true;
+        }
+        if ((statement instanceof Mission)) {
+          haveMission = true;
+        }
+      }
+    }
+    String errorLog = "";
+    if ((!haveCrop)) {
+      String _errorLog = errorLog;
+      errorLog = (_errorLog + "\tYou must add at least one Crop class\n");
+    }
+    if ((!haveField)) {
+      String _errorLog_1 = errorLog;
+      errorLog = (_errorLog_1 + "\tYou must add at least one Field class\n");
+    }
+    if ((!haveMission)) {
+      String _errorLog_2 = errorLog;
+      errorLog = (_errorLog_2 + "\tYou must add at least one Mission class\n");
+    }
+    return errorLog;
+  }
 }

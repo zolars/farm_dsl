@@ -11,12 +11,13 @@ import uk.ac.kcl.farm.farm.LoopStatement
 // import uk.ac.kcl.farm.farm.MoveStatement
 // import uk.ac.kcl.farm.farm.TurnStatement
 import uk.ac.kcl.farm.farm.FarmProgram
+import uk.ac.kcl.farm.farm.Attribute
 import uk.ac.kcl.farm.farm.Variable
-import uk.ac.kcl.farm.farm.Statement
+// import uk.ac.kcl.farm.farm.Statement
 // import uk.ac.kcl.farm.farm.TurnCommand
-import uk.ac.kcl.farm.farm.Expression
-//import uk.ac.kcl.farm.farm.AdditionExpression
-//import uk.ac.kcl.farm.farm.MultiplicationExpression
+// import uk.ac.kcl.farm.farm.Expression
+// import uk.ac.kcl.farm.farm.AdditionExpression
+// import uk.ac.kcl.farm.farm.MultiplicationExpression
 
 /**
  * Generates code from your model files on save.
@@ -46,7 +47,7 @@ class FarmGenerator extends AbstractGenerator {
 	def String doGenerateStats(FarmProgram program) '''
 		Program contains:
 		
-		- «program.statements.filter(LoopStatement).size» top-level loops
+		- «program.eAllContents.filter(Attribute).size» attribute declarations
 		- «program.eAllContents.filter(Variable).size» variable declarations
 	'''
 	
@@ -77,13 +78,9 @@ class FarmGenerator extends AbstractGenerator {
 		
 		def exit() { counter-- }
 	}
+	/* 	
+    dispatch def String generateJavaStatement(Statement stmt, Environment env) ''''''
 	
-	dispatch def String generateJavaStatement(Statement stmt, Environment env) ''''''
-	
-	/* 
-	dispatch def String generateJavaStatement(MoveStatement stmt, Environment env) '''move«stmt.command.getName.toFirstUpper»(«stmt.steps.generateJavaExpression»);'''
-	dispatch def String generateJavaStatement(TurnStatement stmt, Environment env) '''rotate(«if (stmt.command === TurnCommand.LEFT) {'''-'''}»«stmt.degrees»);'''
-
 	dispatch def String generateJavaStatement(LoopStatement stmt, Environment env) {
 		val freshVarName = env.getFreshVarName
 		
@@ -98,13 +95,13 @@ class FarmGenerator extends AbstractGenerator {
 		
 		result
 	}
-
-	*/
 	
 	dispatch def String generateJavaExpression(Expression exp) ''''''
-//	dispatch def String generateJavaExpression(AdditionExpression exp) '''
-//		(«exp.left.generateJavaExpression»«FOR idx: (0..exp.operator.size-1)» «exp.operator.get(idx)» «exp.right.get(idx).generateJavaExpression»«ENDFOR»)'''
-//	dispatch def String generateJavaExpression(MultiplicationExpression exp) '''
-//		«exp.left.generateJavaExpression»«FOR idx: (0..exp.operator.size-1)» «exp.operator.get(idx)» «exp.right.get(idx).generateJavaExpression»«ENDFOR»'''
-//	dispatch def String generateJavaExpression(IntLiteral exp) '''«exp.^val»'''
+	dispatch def String generateJavaExpression(AdditionExpression exp) '''
+		(«exp.left.generateJavaExpression»«FOR idx: (0..exp.operator.size-1)» «exp.operator.get(idx)» «exp.right.get(idx).generateJavaExpression»«ENDFOR»)'''
+	dispatch def String generateJavaExpression(MultiplicationExpression exp) '''
+		«exp.left.generateJavaExpression»«FOR idx: (0..exp.operator.size-1)» «exp.operator.get(idx)» «exp.right.get(idx).generateJavaExpression»«ENDFOR»'''
+	dispatch def String generateJavaExpression(IntLiteral exp) '''«exp.^val»'''
+	* 
+	*/
 }

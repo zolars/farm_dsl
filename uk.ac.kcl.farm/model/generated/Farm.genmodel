@@ -9,45 +9,46 @@
     <genClasses ecoreClass="Farm.ecore#//FarmProgram">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Farm.ecore#//FarmProgram/statements"/>
     </genClasses>
-    <genClasses ecoreClass="Farm.ecore#//Class"/>
     <genClasses ecoreClass="Farm.ecore#//Param">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Farm.ecore#//Param/param"/>
     </genClasses>
     <genClasses ecoreClass="Farm.ecore#//Statement"/>
+    <genClasses ecoreClass="Farm.ecore#//Entity">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Farm.ecore#//Entity/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Farm.ecore#//Attribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Farm.ecore#//Attribute/name"/>
+    </genClasses>
     <genClasses ecoreClass="Farm.ecore#//Variable">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Farm.ecore#//Variable/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Farm.ecore#//Variable/expression"/>
     </genClasses>
     <genClasses ecoreClass="Farm.ecore#//LoopStatement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Farm.ecore#//LoopStatement/condition"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Farm.ecore#//LoopStatement/statements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Farm.ecore#//LoopStatement/loopStatements"/>
     </genClasses>
     <genClasses ecoreClass="Farm.ecore#//JudgeStatement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Farm.ecore#//JudgeStatement/condition"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Farm.ecore#//JudgeStatement/statements"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Farm.ecore#//JudgeStatement/elseif"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Farm.ecore#//JudgeStatement/elseStatement"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Farm.ecore#//JudgeStatement/judgeStatements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Farm.ecore#//JudgeStatement/elseJudgeStatements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Farm.ecore#//JudgeStatement/elseStatements"/>
     </genClasses>
     <genClasses ecoreClass="Farm.ecore#//ElseJudgeStatement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Farm.ecore#//ElseJudgeStatement/condition"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Farm.ecore#//ElseJudgeStatement/statements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Farm.ecore#//ElseJudgeStatement/elseJudgeStatements"/>
+    </genClasses>
+    <genClasses ecoreClass="Farm.ecore#//ElseStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Farm.ecore#//ElseStatement/elseStatements"/>
     </genClasses>
     <genClasses ecoreClass="Farm.ecore#//BuiltinFunction"/>
-    <genClasses ecoreClass="Farm.ecore#//Entity">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Farm.ecore#//Entity/name"/>
+    <genClasses ecoreClass="Farm.ecore#//GetValueFunction">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Farm.ecore#//GetValueFunction/entity"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Farm.ecore#//GetValueFunction/attribute"/>
     </genClasses>
     <genClasses ecoreClass="Farm.ecore#//ReportFunction">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Farm.ecore#//ReportFunction/entity"/>
     </genClasses>
-    <genClasses ecoreClass="Farm.ecore#//GetStageFunction">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Farm.ecore#//GetStageFunction/getStageCrop"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Farm.ecore#//GetStageFunction/stageNumber"/>
-    </genClasses>
     <genClasses ecoreClass="Farm.ecore#//CountStageFunction">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Farm.ecore#//CountStageFunction/countStageCrop"/>
-    </genClasses>
-    <genClasses ecoreClass="Farm.ecore#//GetValueFunction">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Farm.ecore#//GetValueFunction/entity"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Farm.ecore#//GetValueFunction/attribute"/>
     </genClasses>
     <genClasses ecoreClass="Farm.ecore#//SetFieldValueFunction">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Farm.ecore#//SetFieldValueFunction/setValueField"/>
@@ -74,12 +75,9 @@
     <genClasses ecoreClass="Farm.ecore#//RealLiteral">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Farm.ecore#//RealLiteral/val"/>
     </genClasses>
-    <genClasses ecoreClass="Farm.ecore#//Attribute">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Farm.ecore#//Attribute/name"/>
-    </genClasses>
     <genClasses ecoreClass="Farm.ecore#//Crop">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Farm.ecore#//Crop/cropName"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Farm.ecore#//Crop/statements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Farm.ecore#//Crop/cropStages"/>
     </genClasses>
     <genClasses ecoreClass="Farm.ecore#//CropStages">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Farm.ecore#//CropStages/elements"/>
@@ -105,19 +103,19 @@
     </genClasses>
     <genClasses ecoreClass="Farm.ecore#//Mission">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Farm.ecore#//Mission/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Farm.ecore#//Mission/statements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Farm.ecore#//Mission/missionStatements"/>
     </genClasses>
     <genClasses ecoreClass="Farm.ecore#//TaskStatement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Farm.ecore#//TaskStatement/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Farm.ecore#//TaskStatement/parmas"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Farm.ecore#//TaskStatement/typeName"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Farm.ecore#//TaskStatement/statements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Farm.ecore#//TaskStatement/taskStatements"/>
     </genClasses>
     <genClasses ecoreClass="Farm.ecore#//ReturnStatement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Farm.ecore#//ReturnStatement/value"/>
     </genClasses>
     <genClasses ecoreClass="Farm.ecore#//ExecuteStatement">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Farm.ecore#//ExecuteStatement/statements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Farm.ecore#//ExecuteStatement/executeStatements"/>
     </genClasses>
     <genClasses ecoreClass="Farm.ecore#//ConditionOrExpression">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Farm.ecore#//ConditionOrExpression/left"/>
