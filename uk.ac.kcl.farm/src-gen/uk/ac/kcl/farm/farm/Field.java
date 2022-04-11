@@ -15,7 +15,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link uk.ac.kcl.farm.farm.Field#getFieldName <em>Field Name</em>}</li>
- *   <li>{@link uk.ac.kcl.farm.farm.Field#getIp <em>Ip</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.Field#getFieldIP <em>Field IP</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.Field#getFieldType <em>Field Type</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.Field#getFieldLight <em>Field Light</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.Field#getFieldMonitors <em>Field Monitors</em>}</li>
@@ -25,7 +25,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Field extends Entity
+public interface Field extends Instance
 {
   /**
    * Returns the value of the '<em><b>Field Name</b></em>' attribute.
@@ -50,26 +50,26 @@ public interface Field extends Entity
   void setFieldName(String value);
 
   /**
-   * Returns the value of the '<em><b>Ip</b></em>' attribute.
+   * Returns the value of the '<em><b>Field IP</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Ip</em>' attribute.
-   * @see #setIp(String)
-   * @see uk.ac.kcl.farm.farm.FarmPackage#getField_Ip()
+   * @return the value of the '<em>Field IP</em>' attribute.
+   * @see #setFieldIP(String)
+   * @see uk.ac.kcl.farm.farm.FarmPackage#getField_FieldIP()
    * @model
    * @generated
    */
-  String getIp();
+  String getFieldIP();
 
   /**
-   * Sets the value of the '{@link uk.ac.kcl.farm.farm.Field#getIp <em>Ip</em>}' attribute.
+   * Sets the value of the '{@link uk.ac.kcl.farm.farm.Field#getFieldIP <em>Field IP</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Ip</em>' attribute.
-   * @see #getIp()
+   * @param value the new value of the '<em>Field IP</em>' attribute.
+   * @see #getFieldIP()
    * @generated
    */
-  void setIp(String value);
+  void setFieldIP(String value);
 
   /**
    * Returns the value of the '<em><b>Field Type</b></em>' attribute.

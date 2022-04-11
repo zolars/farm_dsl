@@ -67,72 +67,49 @@ field greenhouse_2 {
 }
 
 mission qwe {
-	task testScoping(real number) : real {
-		var taskvar = true
-		return(taskvar)
-	}
-	
-	task testParams(real number, crop cropOne) : null {
-		var ok = 123.3 
-		var intasd = 123.323
-		var qwe = 12.23
-		while (true) {
-			var loopvar=1.0
-//			report(loopvar)
-			var e = 1.0
-		}
-		
-		var try = 10.0 + e
-		report(e)
-	}
-	execute {
-		
-		var loopCounter = 10.0
-	
-		var condition = false
-		
-		report(greenhouse_2)
-		report(loopCounter)
-		report(crop_a)
-		
-		var try = 10.0 + loopCounter
+//	report(testParams.taskvar)
+	var loopCounter = 10.0
 
-		
-		if (false) {
-			var ifvar = 1.0
-			var try = 10.0 + loopCounter
-			var try = 10.0 + ifvar
-		} elseif (true) {
-		} 
+	var condition = false
+	
+	report(greenhouse_2)
+	report(loopCounter)
+	
+	var try = 10.0 + loopCounter
+
+	
+	if (false) {
+		var ifvar = 1.0
+		var try = 10.0 + loopCounter
+		var try = 10.0 + ifvar
+	} elseif (true) {
+	} 
 //		report(ifvar)
+	
+	if (true) {} elseif (false && true) {
 		
-		if (true) {} elseif (false && true) {
-			
-		} else {
-			
-		}
+	} else {
 		
-		while (false && true || true) {
-			var a = 1.0
-			var b = 2.0
-			var c = false
-			while (false) {
-				var d = (11.0 + 13.0) * 23.0
-				var e = (false || true) && (true && c)
-				var loopvar = 1.0
-			}
-		}
-		
+	}
+	
+	while (false && true || true) {
+		var a = 1.0
+		var b = 2.0
+		var c = false
 		while (false) {
 			var d = (11.0 + 13.0) * 23.0
 			var e = (false || true) && (true && c)
 			var loopvar = 1.0
-			report(e)
 		}
-		
-		var try = 10.0 + e
-		report(e)
-		
-//		report(taskvar)
 	}
+	
+	while (false) {
+		var d = (11.0 + 13.0) * 23.0
+		var e = (false || true) && (true && c)
+		var loopvar = 1.0
+		report(e)
+	}
+	
+	var try = 10.0 + e
+	report(e)
 }

@@ -1,0 +1,142 @@
+/* XPECT_SETUP uk.ac.kcl.farm.xpect.XPectTests  END_SETUP */
+
+/*
+XPECT generated file text.farm.xt.txt ---
+Program contains:
+
+- 2 attribute declarations
+    - Attribute `temperature` processed
+    - Attribute `humidity` processed
+- 2 attribute processed
+- 1 crop declarations
+    - Crop `crop_tomato` processed
+- 1 crop processed
+- 2 field declarations
+    - Field `greenhouse_1` processed
+    - Field `greenhouse_2` processed
+- 2 field processed
+
+---
+*/
+
+/*
+XPECT generated file TextFarm.java ---
+import uk.ac.kcl.farm.library.*
+
+public class TextFarm {
+
+	public static void main (String[] args) {
+		FarmFrame tf = new FarmFrame();
+		
+		Farm t = new Farm(tf) {
+			@Override
+			protected void run() {
+				temperature
+				humidity
+			}
+		};
+		
+		t.run();
+	}
+}
+---
+*/
+
+define temperature
+define humidity
+
+crop crop_tomato {
+	name : "tomato"
+	
+	stage : [
+ 		{
+            name : "Sprout"
+            timeConsumed : 20.0
+
+            temperature : 10.1 * 7.123
+            humidity : 90.0
+        },
+        {
+            name : "Seedling"
+            timeConsumed : 1.0 + 2.2
+
+            temperature : 21.0
+            humidity : 80.0
+        },
+        {
+            name : "Vegetative"
+            timeConsumed : 20.0
+
+            temperature : 26.0
+            humidity : 12.0
+        },
+        {
+            name : "Budding"
+            timeConsumed : 5.0
+            
+            temperature : 26.0
+            humidity : 60.0
+        },
+        {
+            name : "Flowering"
+            timeConsumed : 5.0
+            
+            temperature : 26.0
+            humidity : 60.0
+        },
+        {
+            name : "Ripening"
+            timeConsumed : 10.0
+            
+            temperature : (12.0 + 45.0) * (1231.123 / 123.1234) + 456234.234 * 234.1
+            humidity : 30.0 + 67.1
+        }
+	]
+}
+
+field greenhouse_1 {
+    name : "Large Greenhouse No.1"
+    ip: "192.128.0.1"
+    type : outside
+    light : sunlight
+    monitor: [humidity]
+}
+
+field greenhouse_2 {
+    name : "Large Greenhouse No.2"
+    ip: "192.128.0.2"
+    type : inside
+    light : LED
+    monitor: [humidity, temperature]
+}
+
+mission {
+	report(crop_tomato)
+	report(greenhouse_1)
+	var realVar = (12.0 + 45.0)
+	report(realVar)
+	
+	var boolVar = 12.0 > 11.0
+	
+	var new = 12.1 * 2.8 + 23.0
+	var old = new
+
+	if (false) {
+		var a = 12.1 * 2.8 + 23.0
+	} elseif (false || true) {
+		var b = 12.0
+	} else {
+		var c = 109.2
+	}
+	
+//	var call = greenhouse_1.light
+	
+	var loopvar = 11.0
+	while (loopvar > 0.0) {
+		loopvar = loopvar - 1.0
+		var newloopvar = loopvar
+		while (newloopvar > 0.0) {
+			newloopvar = newloopvar - 1.0
+		}
+	}
+}

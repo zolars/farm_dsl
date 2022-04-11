@@ -58,8 +58,9 @@ public class FarmSyntacticSequencer extends AbstractSyntacticSequencer {
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) (ambiguity) '!' exp=UnaryExpression
 	 *     (rule start) (ambiguity) '-' exp=UnaryExpression
-	 *     (rule start) (ambiguity) val=BOOLEAN
-	 *     (rule start) (ambiguity) val=REAL
+	 *     (rule start) (ambiguity) num=REAL
+	 *     (rule start) (ambiguity) value='false'
+	 *     (rule start) (ambiguity) value='true'
 	 *     (rule start) (ambiguity) var=[Variable|ID]
 	 *     (rule start) (ambiguity) {ConditionAndExpression.left=}
 	 *     (rule start) (ambiguity) {ConditionOrExpression.left=}

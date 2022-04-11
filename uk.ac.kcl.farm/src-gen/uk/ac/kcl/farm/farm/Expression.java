@@ -10,13 +10,6 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Expression</b></em>'.
  * <!-- end-user-doc -->
  *
- * <p>
- * The following features are supported:
- * </p>
- * <ul>
- *   <li>{@link uk.ac.kcl.farm.farm.Expression#getExp <em>Exp</em>}</li>
- *   <li>{@link uk.ac.kcl.farm.farm.Expression#getVar <em>Var</em>}</li>
- * </ul>
  *
  * @see uk.ac.kcl.farm.farm.FarmPackage#getExpression()
  * @model
@@ -24,48 +17,4 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface Expression extends EObject
 {
-  /**
-   * Returns the value of the '<em><b>Exp</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Exp</em>' containment reference.
-   * @see #setExp(Expression)
-   * @see uk.ac.kcl.farm.farm.FarmPackage#getExpression_Exp()
-   * @model containment="true"
-   * @generated
-   */
-  Expression getExp();
-
-  /**
-   * Sets the value of the '{@link uk.ac.kcl.farm.farm.Expression#getExp <em>Exp</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Exp</em>' containment reference.
-   * @see #getExp()
-   * @generated
-   */
-  void setExp(Expression value);
-
-  /**
-   * Returns the value of the '<em><b>Var</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Var</em>' reference.
-   * @see #setVar(Variable)
-   * @see uk.ac.kcl.farm.farm.FarmPackage#getExpression_Var()
-   * @model
-   * @generated
-   */
-  Variable getVar();
-
-  /**
-   * Sets the value of the '{@link uk.ac.kcl.farm.farm.Expression#getVar <em>Var</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Var</em>' reference.
-   * @see #getVar()
-   * @generated
-   */
-  void setVar(Variable value);
-
 } // Expression

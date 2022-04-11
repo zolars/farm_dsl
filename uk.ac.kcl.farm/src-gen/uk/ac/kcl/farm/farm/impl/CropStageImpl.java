@@ -33,8 +33,8 @@ import uk.ac.kcl.farm.farm.FarmPackage;
  * </p>
  * <ul>
  *   <li>{@link uk.ac.kcl.farm.farm.impl.CropStageImpl#getName <em>Name</em>}</li>
- *   <li>{@link uk.ac.kcl.farm.farm.impl.CropStageImpl#getTimeConsumend <em>Time Consumend</em>}</li>
- *   <li>{@link uk.ac.kcl.farm.farm.impl.CropStageImpl#getElements <em>Elements</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.impl.CropStageImpl#getTime <em>Time</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.impl.CropStageImpl#getAttributes <em>Attributes</em>}</li>
  * </ul>
  *
  * @generated
@@ -62,24 +62,24 @@ public class CropStageImpl extends MinimalEObjectImpl.Container implements CropS
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getTimeConsumend() <em>Time Consumend</em>}' containment reference.
+   * The cached value of the '{@link #getTime() <em>Time</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getTimeConsumend()
+   * @see #getTime()
    * @generated
    * @ordered
    */
-  protected Expression timeConsumend;
+  protected Expression time;
 
   /**
-   * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
+   * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getElements()
+   * @see #getAttributes()
    * @generated
    * @ordered
    */
-  protected EList<CropAttributes> elements;
+  protected EList<CropAttributes> attributes;
 
   /**
    * <!-- begin-user-doc -->
@@ -133,9 +133,9 @@ public class CropStageImpl extends MinimalEObjectImpl.Container implements CropS
    * @generated
    */
   @Override
-  public Expression getTimeConsumend()
+  public Expression getTime()
   {
-    return timeConsumend;
+    return time;
   }
 
   /**
@@ -143,13 +143,13 @@ public class CropStageImpl extends MinimalEObjectImpl.Container implements CropS
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetTimeConsumend(Expression newTimeConsumend, NotificationChain msgs)
+  public NotificationChain basicSetTime(Expression newTime, NotificationChain msgs)
   {
-    Expression oldTimeConsumend = timeConsumend;
-    timeConsumend = newTimeConsumend;
+    Expression oldTime = time;
+    time = newTime;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FarmPackage.CROP_STAGE__TIME_CONSUMEND, oldTimeConsumend, newTimeConsumend);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FarmPackage.CROP_STAGE__TIME, oldTime, newTime);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -161,20 +161,20 @@ public class CropStageImpl extends MinimalEObjectImpl.Container implements CropS
    * @generated
    */
   @Override
-  public void setTimeConsumend(Expression newTimeConsumend)
+  public void setTime(Expression newTime)
   {
-    if (newTimeConsumend != timeConsumend)
+    if (newTime != time)
     {
       NotificationChain msgs = null;
-      if (timeConsumend != null)
-        msgs = ((InternalEObject)timeConsumend).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FarmPackage.CROP_STAGE__TIME_CONSUMEND, null, msgs);
-      if (newTimeConsumend != null)
-        msgs = ((InternalEObject)newTimeConsumend).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FarmPackage.CROP_STAGE__TIME_CONSUMEND, null, msgs);
-      msgs = basicSetTimeConsumend(newTimeConsumend, msgs);
+      if (time != null)
+        msgs = ((InternalEObject)time).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FarmPackage.CROP_STAGE__TIME, null, msgs);
+      if (newTime != null)
+        msgs = ((InternalEObject)newTime).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FarmPackage.CROP_STAGE__TIME, null, msgs);
+      msgs = basicSetTime(newTime, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.CROP_STAGE__TIME_CONSUMEND, newTimeConsumend, newTimeConsumend));
+      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.CROP_STAGE__TIME, newTime, newTime));
   }
 
   /**
@@ -183,13 +183,13 @@ public class CropStageImpl extends MinimalEObjectImpl.Container implements CropS
    * @generated
    */
   @Override
-  public EList<CropAttributes> getElements()
+  public EList<CropAttributes> getAttributes()
   {
-    if (elements == null)
+    if (attributes == null)
     {
-      elements = new EObjectContainmentEList<CropAttributes>(CropAttributes.class, this, FarmPackage.CROP_STAGE__ELEMENTS);
+      attributes = new EObjectContainmentEList<CropAttributes>(CropAttributes.class, this, FarmPackage.CROP_STAGE__ATTRIBUTES);
     }
-    return elements;
+    return attributes;
   }
 
   /**
@@ -202,10 +202,10 @@ public class CropStageImpl extends MinimalEObjectImpl.Container implements CropS
   {
     switch (featureID)
     {
-      case FarmPackage.CROP_STAGE__TIME_CONSUMEND:
-        return basicSetTimeConsumend(null, msgs);
-      case FarmPackage.CROP_STAGE__ELEMENTS:
-        return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
+      case FarmPackage.CROP_STAGE__TIME:
+        return basicSetTime(null, msgs);
+      case FarmPackage.CROP_STAGE__ATTRIBUTES:
+        return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -222,10 +222,10 @@ public class CropStageImpl extends MinimalEObjectImpl.Container implements CropS
     {
       case FarmPackage.CROP_STAGE__NAME:
         return getName();
-      case FarmPackage.CROP_STAGE__TIME_CONSUMEND:
-        return getTimeConsumend();
-      case FarmPackage.CROP_STAGE__ELEMENTS:
-        return getElements();
+      case FarmPackage.CROP_STAGE__TIME:
+        return getTime();
+      case FarmPackage.CROP_STAGE__ATTRIBUTES:
+        return getAttributes();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -244,12 +244,12 @@ public class CropStageImpl extends MinimalEObjectImpl.Container implements CropS
       case FarmPackage.CROP_STAGE__NAME:
         setName((String)newValue);
         return;
-      case FarmPackage.CROP_STAGE__TIME_CONSUMEND:
-        setTimeConsumend((Expression)newValue);
+      case FarmPackage.CROP_STAGE__TIME:
+        setTime((Expression)newValue);
         return;
-      case FarmPackage.CROP_STAGE__ELEMENTS:
-        getElements().clear();
-        getElements().addAll((Collection<? extends CropAttributes>)newValue);
+      case FarmPackage.CROP_STAGE__ATTRIBUTES:
+        getAttributes().clear();
+        getAttributes().addAll((Collection<? extends CropAttributes>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -268,11 +268,11 @@ public class CropStageImpl extends MinimalEObjectImpl.Container implements CropS
       case FarmPackage.CROP_STAGE__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case FarmPackage.CROP_STAGE__TIME_CONSUMEND:
-        setTimeConsumend((Expression)null);
+      case FarmPackage.CROP_STAGE__TIME:
+        setTime((Expression)null);
         return;
-      case FarmPackage.CROP_STAGE__ELEMENTS:
-        getElements().clear();
+      case FarmPackage.CROP_STAGE__ATTRIBUTES:
+        getAttributes().clear();
         return;
     }
     super.eUnset(featureID);
@@ -290,10 +290,10 @@ public class CropStageImpl extends MinimalEObjectImpl.Container implements CropS
     {
       case FarmPackage.CROP_STAGE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case FarmPackage.CROP_STAGE__TIME_CONSUMEND:
-        return timeConsumend != null;
-      case FarmPackage.CROP_STAGE__ELEMENTS:
-        return elements != null && !elements.isEmpty();
+      case FarmPackage.CROP_STAGE__TIME:
+        return time != null;
+      case FarmPackage.CROP_STAGE__ATTRIBUTES:
+        return attributes != null && !attributes.isEmpty();
     }
     return super.eIsSet(featureID);
   }

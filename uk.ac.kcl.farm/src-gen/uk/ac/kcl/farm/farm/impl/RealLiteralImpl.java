@@ -20,7 +20,7 @@ import uk.ac.kcl.farm.farm.RealLiteral;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.farm.farm.impl.RealLiteralImpl#getVal <em>Val</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.impl.RealLiteralImpl#getNum <em>Num</em>}</li>
  * </ul>
  *
  * @generated
@@ -28,24 +28,24 @@ import uk.ac.kcl.farm.farm.RealLiteral;
 public class RealLiteralImpl extends LiteralImpl implements RealLiteral
 {
   /**
-   * The default value of the '{@link #getVal() <em>Val</em>}' attribute.
+   * The default value of the '{@link #getNum() <em>Num</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getVal()
+   * @see #getNum()
    * @generated
    * @ordered
    */
-  protected static final float VAL_EDEFAULT = 0.0F;
+  protected static final float NUM_EDEFAULT = 0.0F;
 
   /**
-   * The cached value of the '{@link #getVal() <em>Val</em>}' attribute.
+   * The cached value of the '{@link #getNum() <em>Num</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getVal()
+   * @see #getNum()
    * @generated
    * @ordered
    */
-  protected float val = VAL_EDEFAULT;
+  protected float num = NUM_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -74,9 +74,9 @@ public class RealLiteralImpl extends LiteralImpl implements RealLiteral
    * @generated
    */
   @Override
-  public float getVal()
+  public float getNum()
   {
-    return val;
+    return num;
   }
 
   /**
@@ -85,12 +85,12 @@ public class RealLiteralImpl extends LiteralImpl implements RealLiteral
    * @generated
    */
   @Override
-  public void setVal(float newVal)
+  public void setNum(float newNum)
   {
-    float oldVal = val;
-    val = newVal;
+    float oldNum = num;
+    num = newNum;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.REAL_LITERAL__VAL, oldVal, val));
+      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.REAL_LITERAL__NUM, oldNum, num));
   }
 
   /**
@@ -103,8 +103,8 @@ public class RealLiteralImpl extends LiteralImpl implements RealLiteral
   {
     switch (featureID)
     {
-      case FarmPackage.REAL_LITERAL__VAL:
-        return getVal();
+      case FarmPackage.REAL_LITERAL__NUM:
+        return getNum();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -119,8 +119,8 @@ public class RealLiteralImpl extends LiteralImpl implements RealLiteral
   {
     switch (featureID)
     {
-      case FarmPackage.REAL_LITERAL__VAL:
-        setVal((Float)newValue);
+      case FarmPackage.REAL_LITERAL__NUM:
+        setNum((Float)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -136,8 +136,8 @@ public class RealLiteralImpl extends LiteralImpl implements RealLiteral
   {
     switch (featureID)
     {
-      case FarmPackage.REAL_LITERAL__VAL:
-        setVal(VAL_EDEFAULT);
+      case FarmPackage.REAL_LITERAL__NUM:
+        setNum(NUM_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -153,8 +153,8 @@ public class RealLiteralImpl extends LiteralImpl implements RealLiteral
   {
     switch (featureID)
     {
-      case FarmPackage.REAL_LITERAL__VAL:
-        return val != VAL_EDEFAULT;
+      case FarmPackage.REAL_LITERAL__NUM:
+        return num != NUM_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }
@@ -170,8 +170,8 @@ public class RealLiteralImpl extends LiteralImpl implements RealLiteral
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (val: ");
-    result.append(val);
+    result.append(" (num: ");
+    result.append(num);
     result.append(')');
     return result.toString();
   }

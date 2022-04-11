@@ -3,7 +3,6 @@
  */
 package uk.ac.kcl.farm.farm;
 
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -47,15 +46,25 @@ public interface Minus extends Expression
   void setLeft(Expression value);
 
   /**
-   * Returns the value of the '<em><b>Right</b></em>' containment reference list.
-   * The list contents are of type {@link uk.ac.kcl.farm.farm.Expression}.
+   * Returns the value of the '<em><b>Right</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Right</em>' containment reference list.
+   * @return the value of the '<em>Right</em>' containment reference.
+   * @see #setRight(Expression)
    * @see uk.ac.kcl.farm.farm.FarmPackage#getMinus_Right()
    * @model containment="true"
    * @generated
    */
-  EList<Expression> getRight();
+  Expression getRight();
+
+  /**
+   * Sets the value of the '{@link uk.ac.kcl.farm.farm.Minus#getRight <em>Right</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Right</em>' containment reference.
+   * @see #getRight()
+   * @generated
+   */
+  void setRight(Expression value);
 
 } // Minus

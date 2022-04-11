@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.common.util.EList
 import org.eclipse.xtext.validation.Check
 
+
 import uk.ac.kcl.farm.validation.AbstractFarmValidator
 import uk.ac.kcl.farm.farm.FarmPackage
 import uk.ac.kcl.farm.farm.FarmProgram
@@ -16,8 +17,13 @@ import uk.ac.kcl.farm.farm.Field
 import uk.ac.kcl.farm.farm.Mission
 import uk.ac.kcl.farm.farm.Attribute
 import uk.ac.kcl.farm.farm.Variable
+import uk.ac.kcl.farm.farm.Expression
+import uk.ac.kcl.farm.farm.ConditionOrExpression
+import uk.ac.kcl.farm.farm.LoopStatement
 
-import static extension org.eclipse.xtext.EcoreUtil2.*
+import uk.ac.kcl.farm.interpreter.Exp
+
+//import static extension org.eclipse.xtext.EcoreUtil2.*
 
 /**
  * This class contains custom validation rules. 
@@ -26,8 +32,12 @@ import static extension org.eclipse.xtext.EcoreUtil2.*
  */
 class FarmValidator extends AbstractFarmValidator {
 	
+	Exp expRuntime = new Exp()
+	
 	public static val INVALID_ATTRIBUTE_NAME = 'uk.ac.kcl.farm.farm.INVALID_ATTRIBUTE_NAME'
 	public static val INVALID_VARIABLE_NAME = 'uk.ac.kcl.farm.farm.INVALID_VARIABLE_NAME'
+	public static val INVALID_EXPRESSION = 'uk.ac.kcl.farm.farm.INVALID_EXPRESSION'
+	public static val INVALID_IP_ADDRESS = 'uk.ac.kcl.farm.farm.INVALID_IP_ADDRESS'
 
 	@Check
 	def checkAttributeStartsWithLowerCase(Attribute attribute) {
@@ -49,13 +59,57 @@ class FarmValidator extends AbstractFarmValidator {
 		}
 	}
 	
-	@Check(NORMAL)
-	def checkHaveCrop(FarmProgram program) {
-		var errorLog = haveAllClass(program.statements)
-		if (errorLog !== "") {
-			error('The farm program must have at least one of Crop, Field and Mission\n' + errorLog, 
-					null,
-					INVALID_VARIABLE_NAME
+//	@Check
+//	def checkExpressionType(Expression exp) {
+//		try {
+//			expRuntime.toBoolean(exp)
+//		} catch (Exception e1) {
+//			try {
+//				expRuntime.toFloat(exp)
+//			} catch (Exception e2) {
+//				error(
+//					'Variable cannot be interpreted', 
+//					null,
+//					INVALID_EXPRESSION
+//				)
+//			}
+//		}
+//	}
+	
+//	@Check
+//	def checkExpressionType(LoopStatement loop) {
+//		try {
+//			expRuntime.toBoolean(loop.condition)
+//		} catch (Exception e1) {
+//			try {
+//				expRuntime.toBoolean(loop.condition)
+//				error(
+//					'Type mismatch: cannot convert from Real to Boolean', 
+//					FarmPackage.Literals.LOOP_STATEMENT__CONDITION,
+//					INVALID_EXPRESSION
+//				)
+//			} catch (Exception e2) {
+//				error(
+//					'Variable cannot be interpreted', 
+//					FarmPackage.Literals.LOOP_STATEMENT__CONDITION,
+//					INVALID_EXPRESSION
+//				)
+//			}
+//		}
+//	}
+	
+	def static boolean validateIPAddress(String ip) {
+	    val PATTERN = "^((0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)\\.){3}(0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)$";
+	
+	    return ip.matches(PATTERN);
+	}
+	
+	@Check
+	def checkIPAddressFormat(Field field) {
+		if (!validateIPAddress(field.fieldIP)) {
+			warning('IP Address format is wrong', 
+					FarmPackage.Literals.FIELD__FIELD_IP,
+					INVALID_IP_ADDRESS
 			)
 		}
 	}
@@ -92,6 +146,16 @@ class FarmValidator extends AbstractFarmValidator {
 			errorLog += "\tYou must add at least one Mission class\n"
 		}
 		return errorLog
+	}
+	@Check(NORMAL)
+	def checkHaveCrop(FarmProgram program) {
+		var errorLog = haveAllClass(program.statements)
+		if (errorLog !== "") {
+			error('The farm program must have at least one of Crop, Field and Mission\n' + errorLog, 
+					null,
+					INVALID_VARIABLE_NAME
+			)
+		}
 	}
 	
 }

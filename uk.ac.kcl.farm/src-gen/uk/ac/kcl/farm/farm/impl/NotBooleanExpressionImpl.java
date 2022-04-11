@@ -10,43 +10,42 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import uk.ac.kcl.farm.farm.Expression;
 import uk.ac.kcl.farm.farm.FarmPackage;
-import uk.ac.kcl.farm.farm.ReturnStatement;
+import uk.ac.kcl.farm.farm.NotBooleanExpression;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Return Statement</b></em>'.
+ * An implementation of the model object '<em><b>Not Boolean Expression</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.farm.farm.impl.ReturnStatementImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.impl.NotBooleanExpressionImpl#getExp <em>Exp</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ReturnStatementImpl extends MinimalEObjectImpl.Container implements ReturnStatement
+public class NotBooleanExpressionImpl extends ExpressionImpl implements NotBooleanExpression
 {
   /**
-   * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
+   * The cached value of the '{@link #getExp() <em>Exp</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getValue()
+   * @see #getExp()
    * @generated
    * @ordered
    */
-  protected Expression value;
+  protected Expression exp;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ReturnStatementImpl()
+  protected NotBooleanExpressionImpl()
   {
     super();
   }
@@ -59,7 +58,7 @@ public class ReturnStatementImpl extends MinimalEObjectImpl.Container implements
   @Override
   protected EClass eStaticClass()
   {
-    return FarmPackage.Literals.RETURN_STATEMENT;
+    return FarmPackage.Literals.NOT_BOOLEAN_EXPRESSION;
   }
 
   /**
@@ -68,9 +67,9 @@ public class ReturnStatementImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public Expression getValue()
+  public Expression getExp()
   {
-    return value;
+    return exp;
   }
 
   /**
@@ -78,13 +77,13 @@ public class ReturnStatementImpl extends MinimalEObjectImpl.Container implements
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetValue(Expression newValue, NotificationChain msgs)
+  public NotificationChain basicSetExp(Expression newExp, NotificationChain msgs)
   {
-    Expression oldValue = value;
-    value = newValue;
+    Expression oldExp = exp;
+    exp = newExp;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FarmPackage.RETURN_STATEMENT__VALUE, oldValue, newValue);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FarmPackage.NOT_BOOLEAN_EXPRESSION__EXP, oldExp, newExp);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -96,20 +95,20 @@ public class ReturnStatementImpl extends MinimalEObjectImpl.Container implements
    * @generated
    */
   @Override
-  public void setValue(Expression newValue)
+  public void setExp(Expression newExp)
   {
-    if (newValue != value)
+    if (newExp != exp)
     {
       NotificationChain msgs = null;
-      if (value != null)
-        msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FarmPackage.RETURN_STATEMENT__VALUE, null, msgs);
-      if (newValue != null)
-        msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FarmPackage.RETURN_STATEMENT__VALUE, null, msgs);
-      msgs = basicSetValue(newValue, msgs);
+      if (exp != null)
+        msgs = ((InternalEObject)exp).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FarmPackage.NOT_BOOLEAN_EXPRESSION__EXP, null, msgs);
+      if (newExp != null)
+        msgs = ((InternalEObject)newExp).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FarmPackage.NOT_BOOLEAN_EXPRESSION__EXP, null, msgs);
+      msgs = basicSetExp(newExp, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.RETURN_STATEMENT__VALUE, newValue, newValue));
+      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.NOT_BOOLEAN_EXPRESSION__EXP, newExp, newExp));
   }
 
   /**
@@ -122,8 +121,8 @@ public class ReturnStatementImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case FarmPackage.RETURN_STATEMENT__VALUE:
-        return basicSetValue(null, msgs);
+      case FarmPackage.NOT_BOOLEAN_EXPRESSION__EXP:
+        return basicSetExp(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -138,8 +137,8 @@ public class ReturnStatementImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case FarmPackage.RETURN_STATEMENT__VALUE:
-        return getValue();
+      case FarmPackage.NOT_BOOLEAN_EXPRESSION__EXP:
+        return getExp();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -154,8 +153,8 @@ public class ReturnStatementImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case FarmPackage.RETURN_STATEMENT__VALUE:
-        setValue((Expression)newValue);
+      case FarmPackage.NOT_BOOLEAN_EXPRESSION__EXP:
+        setExp((Expression)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -171,8 +170,8 @@ public class ReturnStatementImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case FarmPackage.RETURN_STATEMENT__VALUE:
-        setValue((Expression)null);
+      case FarmPackage.NOT_BOOLEAN_EXPRESSION__EXP:
+        setExp((Expression)null);
         return;
     }
     super.eUnset(featureID);
@@ -188,10 +187,10 @@ public class ReturnStatementImpl extends MinimalEObjectImpl.Container implements
   {
     switch (featureID)
     {
-      case FarmPackage.RETURN_STATEMENT__VALUE:
-        return value != null;
+      case FarmPackage.NOT_BOOLEAN_EXPRESSION__EXP:
+        return exp != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //ReturnStatementImpl
+} //NotBooleanExpressionImpl

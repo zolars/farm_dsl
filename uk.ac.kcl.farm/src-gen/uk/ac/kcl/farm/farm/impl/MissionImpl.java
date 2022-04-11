@@ -5,16 +5,13 @@ package uk.ac.kcl.farm.farm.impl;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -22,6 +19,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import uk.ac.kcl.farm.farm.FarmPackage;
 import uk.ac.kcl.farm.farm.Mission;
+import uk.ac.kcl.farm.farm.Statement;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,7 +29,6 @@ import uk.ac.kcl.farm.farm.Mission;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.farm.farm.impl.MissionImpl#getName <em>Name</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.impl.MissionImpl#getMissionStatements <em>Mission Statements</em>}</li>
  * </ul>
  *
@@ -40,26 +37,6 @@ import uk.ac.kcl.farm.farm.Mission;
 public class MissionImpl extends MinimalEObjectImpl.Container implements Mission
 {
   /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected static final String NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected String name = NAME_EDEFAULT;
-
-  /**
    * The cached value of the '{@link #getMissionStatements() <em>Mission Statements</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -67,7 +44,7 @@ public class MissionImpl extends MinimalEObjectImpl.Container implements Mission
    * @generated
    * @ordered
    */
-  protected EList<EObject> missionStatements;
+  protected EList<Statement> missionStatements;
 
   /**
    * <!-- begin-user-doc -->
@@ -96,36 +73,11 @@ public class MissionImpl extends MinimalEObjectImpl.Container implements Mission
    * @generated
    */
   @Override
-  public String getName()
-  {
-    return name;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setName(String newName)
-  {
-    String oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.MISSION__NAME, oldName, name));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public EList<EObject> getMissionStatements()
+  public EList<Statement> getMissionStatements()
   {
     if (missionStatements == null)
     {
-      missionStatements = new EObjectContainmentEList<EObject>(EObject.class, this, FarmPackage.MISSION__MISSION_STATEMENTS);
+      missionStatements = new EObjectContainmentEList<Statement>(Statement.class, this, FarmPackage.MISSION__MISSION_STATEMENTS);
     }
     return missionStatements;
   }
@@ -156,8 +108,6 @@ public class MissionImpl extends MinimalEObjectImpl.Container implements Mission
   {
     switch (featureID)
     {
-      case FarmPackage.MISSION__NAME:
-        return getName();
       case FarmPackage.MISSION__MISSION_STATEMENTS:
         return getMissionStatements();
     }
@@ -175,12 +125,9 @@ public class MissionImpl extends MinimalEObjectImpl.Container implements Mission
   {
     switch (featureID)
     {
-      case FarmPackage.MISSION__NAME:
-        setName((String)newValue);
-        return;
       case FarmPackage.MISSION__MISSION_STATEMENTS:
         getMissionStatements().clear();
-        getMissionStatements().addAll((Collection<? extends EObject>)newValue);
+        getMissionStatements().addAll((Collection<? extends Statement>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -196,9 +143,6 @@ public class MissionImpl extends MinimalEObjectImpl.Container implements Mission
   {
     switch (featureID)
     {
-      case FarmPackage.MISSION__NAME:
-        setName(NAME_EDEFAULT);
-        return;
       case FarmPackage.MISSION__MISSION_STATEMENTS:
         getMissionStatements().clear();
         return;
@@ -216,29 +160,10 @@ public class MissionImpl extends MinimalEObjectImpl.Container implements Mission
   {
     switch (featureID)
     {
-      case FarmPackage.MISSION__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case FarmPackage.MISSION__MISSION_STATEMENTS:
         return missionStatements != null && !missionStatements.isEmpty();
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(')');
-    return result.toString();
   }
 
 } //MissionImpl

@@ -31,7 +31,7 @@ import uk.ac.kcl.farm.farm.FieldMonitor;
  * </p>
  * <ul>
  *   <li>{@link uk.ac.kcl.farm.farm.impl.FieldImpl#getFieldName <em>Field Name</em>}</li>
- *   <li>{@link uk.ac.kcl.farm.farm.impl.FieldImpl#getIp <em>Ip</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.impl.FieldImpl#getFieldIP <em>Field IP</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.impl.FieldImpl#getFieldType <em>Field Type</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.impl.FieldImpl#getFieldLight <em>Field Light</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.impl.FieldImpl#getFieldMonitors <em>Field Monitors</em>}</li>
@@ -39,7 +39,7 @@ import uk.ac.kcl.farm.farm.FieldMonitor;
  *
  * @generated
  */
-public class FieldImpl extends EntityImpl implements Field
+public class FieldImpl extends InstanceImpl implements Field
 {
   /**
    * The default value of the '{@link #getFieldName() <em>Field Name</em>}' attribute.
@@ -62,24 +62,24 @@ public class FieldImpl extends EntityImpl implements Field
   protected String fieldName = FIELD_NAME_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getIp() <em>Ip</em>}' attribute.
+   * The default value of the '{@link #getFieldIP() <em>Field IP</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getIp()
+   * @see #getFieldIP()
    * @generated
    * @ordered
    */
-  protected static final String IP_EDEFAULT = null;
+  protected static final String FIELD_IP_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getIp() <em>Ip</em>}' attribute.
+   * The cached value of the '{@link #getFieldIP() <em>Field IP</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getIp()
+   * @see #getFieldIP()
    * @generated
    * @ordered
    */
-  protected String ip = IP_EDEFAULT;
+  protected String fieldIP = FIELD_IP_EDEFAULT;
 
   /**
    * The default value of the '{@link #getFieldType() <em>Field Type</em>}' attribute.
@@ -183,9 +183,9 @@ public class FieldImpl extends EntityImpl implements Field
    * @generated
    */
   @Override
-  public String getIp()
+  public String getFieldIP()
   {
-    return ip;
+    return fieldIP;
   }
 
   /**
@@ -194,12 +194,12 @@ public class FieldImpl extends EntityImpl implements Field
    * @generated
    */
   @Override
-  public void setIp(String newIp)
+  public void setFieldIP(String newFieldIP)
   {
-    String oldIp = ip;
-    ip = newIp;
+    String oldFieldIP = fieldIP;
+    fieldIP = newFieldIP;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.FIELD__IP, oldIp, ip));
+      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.FIELD__FIELD_IP, oldFieldIP, fieldIP));
   }
 
   /**
@@ -295,8 +295,8 @@ public class FieldImpl extends EntityImpl implements Field
     {
       case FarmPackage.FIELD__FIELD_NAME:
         return getFieldName();
-      case FarmPackage.FIELD__IP:
-        return getIp();
+      case FarmPackage.FIELD__FIELD_IP:
+        return getFieldIP();
       case FarmPackage.FIELD__FIELD_TYPE:
         return getFieldType();
       case FarmPackage.FIELD__FIELD_LIGHT:
@@ -321,8 +321,8 @@ public class FieldImpl extends EntityImpl implements Field
       case FarmPackage.FIELD__FIELD_NAME:
         setFieldName((String)newValue);
         return;
-      case FarmPackage.FIELD__IP:
-        setIp((String)newValue);
+      case FarmPackage.FIELD__FIELD_IP:
+        setFieldIP((String)newValue);
         return;
       case FarmPackage.FIELD__FIELD_TYPE:
         setFieldType((String)newValue);
@@ -351,8 +351,8 @@ public class FieldImpl extends EntityImpl implements Field
       case FarmPackage.FIELD__FIELD_NAME:
         setFieldName(FIELD_NAME_EDEFAULT);
         return;
-      case FarmPackage.FIELD__IP:
-        setIp(IP_EDEFAULT);
+      case FarmPackage.FIELD__FIELD_IP:
+        setFieldIP(FIELD_IP_EDEFAULT);
         return;
       case FarmPackage.FIELD__FIELD_TYPE:
         setFieldType(FIELD_TYPE_EDEFAULT);
@@ -379,8 +379,8 @@ public class FieldImpl extends EntityImpl implements Field
     {
       case FarmPackage.FIELD__FIELD_NAME:
         return FIELD_NAME_EDEFAULT == null ? fieldName != null : !FIELD_NAME_EDEFAULT.equals(fieldName);
-      case FarmPackage.FIELD__IP:
-        return IP_EDEFAULT == null ? ip != null : !IP_EDEFAULT.equals(ip);
+      case FarmPackage.FIELD__FIELD_IP:
+        return FIELD_IP_EDEFAULT == null ? fieldIP != null : !FIELD_IP_EDEFAULT.equals(fieldIP);
       case FarmPackage.FIELD__FIELD_TYPE:
         return FIELD_TYPE_EDEFAULT == null ? fieldType != null : !FIELD_TYPE_EDEFAULT.equals(fieldType);
       case FarmPackage.FIELD__FIELD_LIGHT:
@@ -404,8 +404,8 @@ public class FieldImpl extends EntityImpl implements Field
     StringBuilder result = new StringBuilder(super.toString());
     result.append(" (fieldName: ");
     result.append(fieldName);
-    result.append(", ip: ");
-    result.append(ip);
+    result.append(", fieldIP: ");
+    result.append(fieldIP);
     result.append(", fieldType: ");
     result.append(fieldType);
     result.append(", fieldLight: ");

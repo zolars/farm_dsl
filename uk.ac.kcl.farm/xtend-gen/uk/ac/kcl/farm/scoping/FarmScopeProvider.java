@@ -10,12 +10,10 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
-import uk.ac.kcl.farm.farm.Entity;
-import uk.ac.kcl.farm.farm.ExecuteStatement;
 import uk.ac.kcl.farm.farm.Expression;
 import uk.ac.kcl.farm.farm.LoopStatement;
+import uk.ac.kcl.farm.farm.Mission;
 import uk.ac.kcl.farm.farm.ReportFunction;
-import uk.ac.kcl.farm.farm.TaskStatement;
 import uk.ac.kcl.farm.farm.Variable;
 
 /**
@@ -29,50 +27,34 @@ public class FarmScopeProvider extends AbstractDeclarativeScopeProvider {
   public IScope scope_ReportFunction_var(final ReportFunction context, final EReference ref) {
     IScope _xblockexpression = null;
     {
-      System.out.println(context.getEntity());
+      System.out.println(context);
       _xblockexpression = this.visibleVariablesScope(context);
     }
     return _xblockexpression;
   }
   
-  protected IScope _visibleVariablesScope(final Expression context) {
-    return this.visibleVariablesScope(context.eContainer());
+  public IScope scope_Expression_expression(final Expression context) {
+    IScope _xblockexpression = null;
+    {
+      System.out.println(context);
+      _xblockexpression = this.visibleVariablesScope(context);
+    }
+    return _xblockexpression;
   }
   
-  protected IScope _visibleVariablesScope(final Entity context) {
-    return this.visibleVariablesScope(context.eContainer());
-  }
-  
-  protected IScope _visibleVariablesScope(final EObject context) {
-    return this.visibleVariablesScope(context.eContainer());
-  }
-  
-  protected IScope _visibleVariablesScope(final TaskStatement context) {
-    return Scopes.scopeFor(Iterables.<Variable>filter(context.getTaskStatements(), Variable.class));
-  }
-  
-  protected IScope _visibleVariablesScope(final ExecuteStatement context) {
-    return Scopes.scopeFor(Iterables.<Variable>filter(context.getExecuteStatements(), Variable.class));
+  protected IScope _visibleVariablesScope(final Mission context) {
+    return Scopes.scopeFor(Iterables.<Variable>filter(context.getMissionStatements(), Variable.class));
   }
   
   protected IScope _visibleVariablesScope(final LoopStatement context) {
     return this.internalVisibleVariablesScope(context.eContainer());
   }
   
-  protected IScope _internalVisibleVariablesScope(final TaskStatement context) {
+  protected IScope _internalVisibleVariablesScope(final Mission context) {
     IScope _xblockexpression = null;
     {
-      System.out.println(context.getName());
-      _xblockexpression = Scopes.scopeFor(Iterables.<Variable>filter(context.getTaskStatements(), Variable.class));
-    }
-    return _xblockexpression;
-  }
-  
-  protected IScope _internalVisibleVariablesScope(final ExecuteStatement context) {
-    IScope _xblockexpression = null;
-    {
-      System.out.println(context.getExecuteStatements());
-      _xblockexpression = Scopes.scopeFor(Iterables.<Variable>filter(context.getExecuteStatements(), Variable.class));
+      System.out.println(context.getMissionStatements());
+      _xblockexpression = Scopes.scopeFor(Iterables.<Variable>filter(context.getMissionStatements(), Variable.class));
     }
     return _xblockexpression;
   }
@@ -89,16 +71,8 @@ public class FarmScopeProvider extends AbstractDeclarativeScopeProvider {
   public IScope visibleVariablesScope(final EObject context) {
     if (context instanceof LoopStatement) {
       return _visibleVariablesScope((LoopStatement)context);
-    } else if (context instanceof Entity) {
-      return _visibleVariablesScope((Entity)context);
-    } else if (context instanceof ExecuteStatement) {
-      return _visibleVariablesScope((ExecuteStatement)context);
-    } else if (context instanceof Expression) {
-      return _visibleVariablesScope((Expression)context);
-    } else if (context instanceof TaskStatement) {
-      return _visibleVariablesScope((TaskStatement)context);
-    } else if (context != null) {
-      return _visibleVariablesScope(context);
+    } else if (context instanceof Mission) {
+      return _visibleVariablesScope((Mission)context);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(context).toString());
@@ -108,10 +82,8 @@ public class FarmScopeProvider extends AbstractDeclarativeScopeProvider {
   public IScope internalVisibleVariablesScope(final EObject context) {
     if (context instanceof LoopStatement) {
       return _internalVisibleVariablesScope((LoopStatement)context);
-    } else if (context instanceof ExecuteStatement) {
-      return _internalVisibleVariablesScope((ExecuteStatement)context);
-    } else if (context instanceof TaskStatement) {
-      return _internalVisibleVariablesScope((TaskStatement)context);
+    } else if (context instanceof Mission) {
+      return _internalVisibleVariablesScope((Mission)context);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(context).toString());

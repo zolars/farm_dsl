@@ -13,7 +13,7 @@ package uk.ac.kcl.farm.farm;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.farm.farm.RealLiteral#getVal <em>Val</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.RealLiteral#getNum <em>Num</em>}</li>
  * </ul>
  *
  * @see uk.ac.kcl.farm.farm.FarmPackage#getRealLiteral()
@@ -23,25 +23,25 @@ package uk.ac.kcl.farm.farm;
 public interface RealLiteral extends Literal
 {
   /**
-   * Returns the value of the '<em><b>Val</b></em>' attribute.
+   * Returns the value of the '<em><b>Num</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Val</em>' attribute.
-   * @see #setVal(float)
-   * @see uk.ac.kcl.farm.farm.FarmPackage#getRealLiteral_Val()
+   * @return the value of the '<em>Num</em>' attribute.
+   * @see #setNum(float)
+   * @see uk.ac.kcl.farm.farm.FarmPackage#getRealLiteral_Num()
    * @model
    * @generated
    */
-  float getVal();
+  float getNum();
 
   /**
-   * Sets the value of the '{@link uk.ac.kcl.farm.farm.RealLiteral#getVal <em>Val</em>}' attribute.
+   * Sets the value of the '{@link uk.ac.kcl.farm.farm.RealLiteral#getNum <em>Num</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Val</em>' attribute.
-   * @see #getVal()
+   * @param value the new value of the '<em>Num</em>' attribute.
+   * @see #getNum()
    * @generated
    */
-  void setVal(float value);
+  void setNum(float value);
 
 } // RealLiteral

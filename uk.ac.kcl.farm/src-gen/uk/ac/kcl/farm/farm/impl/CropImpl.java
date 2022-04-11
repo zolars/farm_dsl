@@ -36,7 +36,7 @@ import uk.ac.kcl.farm.farm.FarmPackage;
  *
  * @generated
  */
-public class CropImpl extends EntityImpl implements Crop
+public class CropImpl extends InstanceImpl implements Crop
 {
   /**
    * The default value of the '{@link #getCropName() <em>Crop Name</em>}' attribute.

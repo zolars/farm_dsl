@@ -14,8 +14,8 @@ import org.eclipse.xtext.serializer.ISerializationContext;
 import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequencer;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
+import uk.ac.kcl.farm.farm.Assignment;
 import uk.ac.kcl.farm.farm.Attribute;
-import uk.ac.kcl.farm.farm.BoolLiteral;
 import uk.ac.kcl.farm.farm.ConditionAndExpression;
 import uk.ac.kcl.farm.farm.ConditionOrExpression;
 import uk.ac.kcl.farm.farm.CountStageFunction;
@@ -27,13 +27,11 @@ import uk.ac.kcl.farm.farm.Divide;
 import uk.ac.kcl.farm.farm.ElseJudgeStatement;
 import uk.ac.kcl.farm.farm.ElseStatement;
 import uk.ac.kcl.farm.farm.Equal;
-import uk.ac.kcl.farm.farm.ExecuteStatement;
-import uk.ac.kcl.farm.farm.Expression;
+import uk.ac.kcl.farm.farm.FalseLiteral;
 import uk.ac.kcl.farm.farm.FarmPackage;
 import uk.ac.kcl.farm.farm.FarmProgram;
 import uk.ac.kcl.farm.farm.Field;
 import uk.ac.kcl.farm.farm.FieldMonitor;
-import uk.ac.kcl.farm.farm.GetValueFunction;
 import uk.ac.kcl.farm.farm.GreaterThan;
 import uk.ac.kcl.farm.farm.GreaterThanOrEqual;
 import uk.ac.kcl.farm.farm.JudgeStatement;
@@ -44,16 +42,16 @@ import uk.ac.kcl.farm.farm.Minus;
 import uk.ac.kcl.farm.farm.Mission;
 import uk.ac.kcl.farm.farm.MoveFunction;
 import uk.ac.kcl.farm.farm.Multiply;
+import uk.ac.kcl.farm.farm.NotBooleanExpression;
 import uk.ac.kcl.farm.farm.NotEqual;
-import uk.ac.kcl.farm.farm.Param;
 import uk.ac.kcl.farm.farm.PlantFunction;
 import uk.ac.kcl.farm.farm.Plus;
 import uk.ac.kcl.farm.farm.RealLiteral;
 import uk.ac.kcl.farm.farm.ReportFunction;
-import uk.ac.kcl.farm.farm.ReturnStatement;
 import uk.ac.kcl.farm.farm.SetFieldValueFunction;
-import uk.ac.kcl.farm.farm.TaskStatement;
+import uk.ac.kcl.farm.farm.TrueLiteral;
 import uk.ac.kcl.farm.farm.UnaryExpression;
+import uk.ac.kcl.farm.farm.VarExpression;
 import uk.ac.kcl.farm.farm.Variable;
 import uk.ac.kcl.farm.farm.WaitFunction;
 import uk.ac.kcl.farm.services.FarmGrammarAccess;
@@ -72,11 +70,11 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		Set<Parameter> parameters = context.getEnabledBooleanParameters();
 		if (epackage == FarmPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {
+			case FarmPackage.ASSIGNMENT:
+				sequence_Assignment(context, (Assignment) semanticObject); 
+				return; 
 			case FarmPackage.ATTRIBUTE:
 				sequence_Attribute(context, (Attribute) semanticObject); 
-				return; 
-			case FarmPackage.BOOL_LITERAL:
-				sequence_BooleanLiteral(context, (BoolLiteral) semanticObject); 
 				return; 
 			case FarmPackage.CONDITION_AND_EXPRESSION:
 				sequence_ConditionAndExpression(context, (ConditionAndExpression) semanticObject); 
@@ -111,39 +109,9 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case FarmPackage.EQUAL:
 				sequence_RelationOrExpression(context, (Equal) semanticObject); 
 				return; 
-			case FarmPackage.EXECUTE_STATEMENT:
-				sequence_ExecuteStatement(context, (ExecuteStatement) semanticObject); 
+			case FarmPackage.FALSE_LITERAL:
+				sequence_FalseLiteral(context, (FalseLiteral) semanticObject); 
 				return; 
-			case FarmPackage.EXPRESSION:
-				if (rule == grammarAccess.getNotBooleanExpressionRule()) {
-					sequence_NotBooleanExpression(context, (Expression) semanticObject); 
-					return; 
-				}
-				else if (rule == grammarAccess.getExpressionRule()
-						|| rule == grammarAccess.getConditionOrExpressionRule()
-						|| action == grammarAccess.getConditionOrExpressionAccess().getConditionOrExpressionLeftAction_1_0_0()
-						|| rule == grammarAccess.getConditionAndExpressionRule()
-						|| action == grammarAccess.getConditionAndExpressionAccess().getConditionAndExpressionLeftAction_1_0_0()
-						|| rule == grammarAccess.getRelationOrExpressionRule()
-						|| action == grammarAccess.getRelationOrExpressionAccess().getLessThanOrEqualLeftAction_1_0_0_0_0()
-						|| action == grammarAccess.getRelationOrExpressionAccess().getLessThanLeftAction_1_0_0_1_0()
-						|| action == grammarAccess.getRelationOrExpressionAccess().getGreaterThanOrEqualLeftAction_1_0_0_2_0()
-						|| action == grammarAccess.getRelationOrExpressionAccess().getGreaterThanLeftAction_1_0_0_3_0()
-						|| action == grammarAccess.getRelationOrExpressionAccess().getEqualLeftAction_1_0_0_4_0()
-						|| action == grammarAccess.getRelationOrExpressionAccess().getNotEqualLeftAction_1_0_0_5_0()
-						|| rule == grammarAccess.getAdditionExpressionRule()
-						|| action == grammarAccess.getAdditionExpressionAccess().getPlusLeftAction_1_0_0_0_0()
-						|| action == grammarAccess.getAdditionExpressionAccess().getMinusLeftAction_1_0_0_1_0()
-						|| rule == grammarAccess.getMultiplicationExpressionRule()
-						|| action == grammarAccess.getMultiplicationExpressionAccess().getMultiplyLeftAction_1_0_0_0_0()
-						|| action == grammarAccess.getMultiplicationExpressionAccess().getDivideLeftAction_1_0_0_1_0()
-						|| rule == grammarAccess.getUnaryExpressionRule()
-						|| rule == grammarAccess.getUnaryExpressionNotPlusMinusRule()
-						|| rule == grammarAccess.getPrimaryExpressionRule()) {
-					sequence_NotBooleanExpression_PrimaryExpression(context, (Expression) semanticObject); 
-					return; 
-				}
-				else break;
 			case FarmPackage.FARM_PROGRAM:
 				sequence_FarmProgram(context, (FarmProgram) semanticObject); 
 				return; 
@@ -152,9 +120,6 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case FarmPackage.FIELD_MONITOR:
 				sequence_FieldMonitor(context, (FieldMonitor) semanticObject); 
-				return; 
-			case FarmPackage.GET_VALUE_FUNCTION:
-				sequence_GetValueFunction(context, (GetValueFunction) semanticObject); 
 				return; 
 			case FarmPackage.GREATER_THAN:
 				sequence_RelationOrExpression(context, (GreaterThan) semanticObject); 
@@ -186,11 +151,11 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case FarmPackage.MULTIPLY:
 				sequence_MultiplicationExpression(context, (Multiply) semanticObject); 
 				return; 
+			case FarmPackage.NOT_BOOLEAN_EXPRESSION:
+				sequence_NotBooleanExpression(context, (NotBooleanExpression) semanticObject); 
+				return; 
 			case FarmPackage.NOT_EQUAL:
 				sequence_RelationOrExpression(context, (NotEqual) semanticObject); 
-				return; 
-			case FarmPackage.PARAM:
-				sequence_Param(context, (Param) semanticObject); 
 				return; 
 			case FarmPackage.PLANT_FUNCTION:
 				sequence_PlantFunction(context, (PlantFunction) semanticObject); 
@@ -204,17 +169,17 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case FarmPackage.REPORT_FUNCTION:
 				sequence_ReportFunction(context, (ReportFunction) semanticObject); 
 				return; 
-			case FarmPackage.RETURN_STATEMENT:
-				sequence_ReturnStatement(context, (ReturnStatement) semanticObject); 
-				return; 
 			case FarmPackage.SET_FIELD_VALUE_FUNCTION:
 				sequence_SetFieldValueFunction(context, (SetFieldValueFunction) semanticObject); 
 				return; 
-			case FarmPackage.TASK_STATEMENT:
-				sequence_TaskStatement(context, (TaskStatement) semanticObject); 
+			case FarmPackage.TRUE_LITERAL:
+				sequence_TrueLiteral(context, (TrueLiteral) semanticObject); 
 				return; 
 			case FarmPackage.UNARY_EXPRESSION:
 				sequence_UnaryExpression(context, (UnaryExpression) semanticObject); 
+				return; 
+			case FarmPackage.VAR_EXPRESSION:
+				sequence_VarExpression(context, (VarExpression) semanticObject); 
 				return; 
 			case FarmPackage.VARIABLE:
 				sequence_Variable(context, (Variable) semanticObject); 
@@ -253,11 +218,20 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     PrimaryExpression returns Minus
 	 *
 	 * Constraint:
-	 *     (left=AdditionExpression_Minus_1_0_0_1_0 right+=MultiplicationExpression)
+	 *     (left=AdditionExpression_Minus_1_0_0_1_0 right=MultiplicationExpression)
 	 * </pre>
 	 */
 	protected void sequence_AdditionExpression(ISerializationContext context, Minus semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.MINUS__LEFT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.MINUS__LEFT));
+			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.MINUS__RIGHT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.MINUS__RIGHT));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getAdditionExpressionAccess().getMinusLeftAction_1_0_0_1_0(), semanticObject.getLeft());
+		feeder.accept(grammarAccess.getAdditionExpressionAccess().getRightMultiplicationExpressionParserRuleCall_1_1_0(), semanticObject.getRight());
+		feeder.finish();
 	}
 	
 	
@@ -287,11 +261,44 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     PrimaryExpression returns Plus
 	 *
 	 * Constraint:
-	 *     (left=AdditionExpression_Plus_1_0_0_0_0 right+=MultiplicationExpression)
+	 *     (left=AdditionExpression_Plus_1_0_0_0_0 right=MultiplicationExpression)
 	 * </pre>
 	 */
 	protected void sequence_AdditionExpression(ISerializationContext context, Plus semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.PLUS__LEFT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.PLUS__LEFT));
+			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.PLUS__RIGHT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.PLUS__RIGHT));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getAdditionExpressionAccess().getPlusLeftAction_1_0_0_0_0(), semanticObject.getLeft());
+		feeder.accept(grammarAccess.getAdditionExpressionAccess().getRightMultiplicationExpressionParserRuleCall_1_1_0(), semanticObject.getRight());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Statement returns Assignment
+	 *     Assignment returns Assignment
+	 *
+	 * Constraint:
+	 *     (var=[Variable|ID] expression=Expression)
+	 * </pre>
+	 */
+	protected void sequence_Assignment(ISerializationContext context, Assignment semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.ASSIGNMENT__VAR) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.ASSIGNMENT__VAR));
+			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.ASSIGNMENT__EXPRESSION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.ASSIGNMENT__EXPRESSION));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getAssignmentAccess().getVarVariableIDTerminalRuleCall_0_0_1(), semanticObject.eGet(FarmPackage.Literals.ASSIGNMENT__VAR, false));
+		feeder.accept(grammarAccess.getAssignmentAccess().getExpressionExpressionParserRuleCall_2_0(), semanticObject.getExpression());
+		feeder.finish();
 	}
 	
 	
@@ -311,48 +318,6 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     Expression returns BoolLiteral
-	 *     ConditionOrExpression returns BoolLiteral
-	 *     ConditionOrExpression.ConditionOrExpression_1_0_0 returns BoolLiteral
-	 *     ConditionAndExpression returns BoolLiteral
-	 *     ConditionAndExpression.ConditionAndExpression_1_0_0 returns BoolLiteral
-	 *     RelationOrExpression returns BoolLiteral
-	 *     RelationOrExpression.LessThanOrEqual_1_0_0_0_0 returns BoolLiteral
-	 *     RelationOrExpression.LessThan_1_0_0_1_0 returns BoolLiteral
-	 *     RelationOrExpression.GreaterThanOrEqual_1_0_0_2_0 returns BoolLiteral
-	 *     RelationOrExpression.GreaterThan_1_0_0_3_0 returns BoolLiteral
-	 *     RelationOrExpression.Equal_1_0_0_4_0 returns BoolLiteral
-	 *     RelationOrExpression.NotEqual_1_0_0_5_0 returns BoolLiteral
-	 *     AdditionExpression returns BoolLiteral
-	 *     AdditionExpression.Plus_1_0_0_0_0 returns BoolLiteral
-	 *     AdditionExpression.Minus_1_0_0_1_0 returns BoolLiteral
-	 *     MultiplicationExpression returns BoolLiteral
-	 *     MultiplicationExpression.Multiply_1_0_0_0_0 returns BoolLiteral
-	 *     MultiplicationExpression.Divide_1_0_0_1_0 returns BoolLiteral
-	 *     UnaryExpression returns BoolLiteral
-	 *     UnaryExpressionNotPlusMinus returns BoolLiteral
-	 *     PrimaryExpression returns BoolLiteral
-	 *     Literal returns BoolLiteral
-	 *     BooleanLiteral returns BoolLiteral
-	 *
-	 * Constraint:
-	 *     val=BOOLEAN
-	 * </pre>
-	 */
-	protected void sequence_BooleanLiteral(ISerializationContext context, BoolLiteral semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.BOOL_LITERAL__VAL) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.BOOL_LITERAL__VAL));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getBooleanLiteralAccess().getValBOOLEANTerminalRuleCall_1_0(), semanticObject.isVal());
 		feeder.finish();
 	}
 	
@@ -471,7 +436,7 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     CropAttributes returns CropAttributes
 	 *
 	 * Constraint:
-	 *     (type=[Attribute|ID] value=Expression)
+	 *     (type=[Attribute|ID] value=AdditionExpression)
 	 * </pre>
 	 */
 	protected void sequence_CropAttributes(ISerializationContext context, CropAttributes semanticObject) {
@@ -483,7 +448,7 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getCropAttributesAccess().getTypeAttributeIDTerminalRuleCall_0_0_1(), semanticObject.eGet(FarmPackage.Literals.CROP_ATTRIBUTES__TYPE, false));
-		feeder.accept(grammarAccess.getCropAttributesAccess().getValueExpressionParserRuleCall_2_0(), semanticObject.getValue());
+		feeder.accept(grammarAccess.getCropAttributesAccess().getValueAdditionExpressionParserRuleCall_2_0(), semanticObject.getValue());
 		feeder.finish();
 	}
 	
@@ -494,7 +459,7 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     CropStage returns CropStage
 	 *
 	 * Constraint:
-	 *     (name=STRING timeConsumend=Expression elements+=CropAttributes*)
+	 *     (name=STRING time=AdditionExpression attributes+=CropAttributes*)
 	 * </pre>
 	 */
 	protected void sequence_CropStage(ISerializationContext context, CropStage semanticObject) {
@@ -519,7 +484,7 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Entity returns Crop
+	 *     Instance returns Crop
 	 *     Crop returns Crop
 	 *
 	 * Constraint:
@@ -562,14 +527,42 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     ExecuteStatement returns ExecuteStatement
+	 *     Expression returns FalseLiteral
+	 *     ConditionOrExpression returns FalseLiteral
+	 *     ConditionOrExpression.ConditionOrExpression_1_0_0 returns FalseLiteral
+	 *     ConditionAndExpression returns FalseLiteral
+	 *     ConditionAndExpression.ConditionAndExpression_1_0_0 returns FalseLiteral
+	 *     RelationOrExpression returns FalseLiteral
+	 *     RelationOrExpression.LessThanOrEqual_1_0_0_0_0 returns FalseLiteral
+	 *     RelationOrExpression.LessThan_1_0_0_1_0 returns FalseLiteral
+	 *     RelationOrExpression.GreaterThanOrEqual_1_0_0_2_0 returns FalseLiteral
+	 *     RelationOrExpression.GreaterThan_1_0_0_3_0 returns FalseLiteral
+	 *     RelationOrExpression.Equal_1_0_0_4_0 returns FalseLiteral
+	 *     RelationOrExpression.NotEqual_1_0_0_5_0 returns FalseLiteral
+	 *     AdditionExpression returns FalseLiteral
+	 *     AdditionExpression.Plus_1_0_0_0_0 returns FalseLiteral
+	 *     AdditionExpression.Minus_1_0_0_1_0 returns FalseLiteral
+	 *     MultiplicationExpression returns FalseLiteral
+	 *     MultiplicationExpression.Multiply_1_0_0_0_0 returns FalseLiteral
+	 *     MultiplicationExpression.Divide_1_0_0_1_0 returns FalseLiteral
+	 *     UnaryExpression returns FalseLiteral
+	 *     UnaryExpressionNotPlusMinus returns FalseLiteral
+	 *     PrimaryExpression returns FalseLiteral
+	 *     Literal returns FalseLiteral
+	 *     FalseLiteral returns FalseLiteral
 	 *
 	 * Constraint:
-	 *     executeStatements+=Statement*
+	 *     value='false'
 	 * </pre>
 	 */
-	protected void sequence_ExecuteStatement(ISerializationContext context, ExecuteStatement semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+	protected void sequence_FalseLiteral(ISerializationContext context, FalseLiteral semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.FALSE_LITERAL__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.FALSE_LITERAL__VALUE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getFalseLiteralAccess().getValueFalseKeyword_1_0(), semanticObject.getValue());
+		feeder.finish();
 	}
 	
 	
@@ -579,7 +572,7 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     FarmProgram returns FarmProgram
 	 *
 	 * Constraint:
-	 *     (statements+=Crop | statements+=Field | statements+=Mission | statements+=Attribute)+
+	 *     (statements+=Attribute | statements+=Crop | statements+=Field | statements+=Mission)+
 	 * </pre>
 	 */
 	protected void sequence_FarmProgram(ISerializationContext context, FarmProgram semanticObject) {
@@ -610,14 +603,14 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Entity returns Field
+	 *     Instance returns Field
 	 *     Field returns Field
 	 *
 	 * Constraint:
 	 *     (
 	 *         name=ID 
 	 *         fieldName=STRING 
-	 *         ip=IP 
+	 *         fieldIP=STRING 
 	 *         (fieldType='inside' | fieldType='outside') 
 	 *         (fieldLight='sunlight' | fieldLight='LED') 
 	 *         fieldMonitors+=FieldMonitor 
@@ -633,36 +626,11 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Statement returns GetValueFunction
-	 *     BuiltinFunction returns GetValueFunction
-	 *     GetValueFunction returns GetValueFunction
-	 *
-	 * Constraint:
-	 *     (entity=[Entity|ID] attribute=STRING)
-	 * </pre>
-	 */
-	protected void sequence_GetValueFunction(ISerializationContext context, GetValueFunction semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.GET_VALUE_FUNCTION__ENTITY) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.GET_VALUE_FUNCTION__ENTITY));
-			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.GET_VALUE_FUNCTION__ATTRIBUTE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.GET_VALUE_FUNCTION__ATTRIBUTE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getGetValueFunctionAccess().getEntityEntityIDTerminalRuleCall_0_0_1(), semanticObject.eGet(FarmPackage.Literals.GET_VALUE_FUNCTION__ENTITY, false));
-		feeder.accept(grammarAccess.getGetValueFunctionAccess().getAttributeSTRINGTerminalRuleCall_2_0(), semanticObject.getAttribute());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
 	 *     Statement returns JudgeStatement
 	 *     JudgeStatement returns JudgeStatement
 	 *
 	 * Constraint:
-	 *     (condition=Expression judgeStatements+=Statement* elseJudgeStatements+=ElseJudgeStatement* elseStatements+=ElseStatement?)
+	 *     (condition=Expression judgeStatements+=Statement* elseJudgeStatements+=ElseJudgeStatement* elseStatement+=ElseStatement?)
 	 * </pre>
 	 */
 	protected void sequence_JudgeStatement(ISerializationContext context, JudgeStatement semanticObject) {
@@ -691,7 +659,7 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Mission returns Mission
 	 *
 	 * Constraint:
-	 *     (name=ID (missionStatements+=TaskStatement | missionStatements+=ExecuteStatement)+)
+	 *     missionStatements+=Statement+
 	 * </pre>
 	 */
 	protected void sequence_Mission(ISerializationContext context, Mission semanticObject) {
@@ -750,11 +718,20 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     PrimaryExpression returns Divide
 	 *
 	 * Constraint:
-	 *     (left=MultiplicationExpression_Divide_1_0_0_1_0 right+=UnaryExpression)
+	 *     (left=MultiplicationExpression_Divide_1_0_0_1_0 right=UnaryExpression)
 	 * </pre>
 	 */
 	protected void sequence_MultiplicationExpression(ISerializationContext context, Divide semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.DIVIDE__LEFT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.DIVIDE__LEFT));
+			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.DIVIDE__RIGHT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.DIVIDE__RIGHT));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getMultiplicationExpressionAccess().getDivideLeftAction_1_0_0_1_0(), semanticObject.getLeft());
+		feeder.accept(grammarAccess.getMultiplicationExpressionAccess().getRightUnaryExpressionParserRuleCall_1_1_0(), semanticObject.getRight());
+		feeder.finish();
 	}
 	
 	
@@ -784,30 +761,19 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     PrimaryExpression returns Multiply
 	 *
 	 * Constraint:
-	 *     (left=MultiplicationExpression_Multiply_1_0_0_0_0 right+=UnaryExpression)
+	 *     (left=MultiplicationExpression_Multiply_1_0_0_0_0 right=UnaryExpression)
 	 * </pre>
 	 */
 	protected void sequence_MultiplicationExpression(ISerializationContext context, Multiply semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     NotBooleanExpression returns Expression
-	 *
-	 * Constraint:
-	 *     exp=UnaryExpression
-	 * </pre>
-	 */
-	protected void sequence_NotBooleanExpression(ISerializationContext context, Expression semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.EXPRESSION__EXP) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.EXPRESSION__EXP));
+			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.MULTIPLY__LEFT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.MULTIPLY__LEFT));
+			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.MULTIPLY__RIGHT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.MULTIPLY__RIGHT));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getNotBooleanExpressionAccess().getExpUnaryExpressionParserRuleCall_1_0(), semanticObject.getExp());
+		feeder.accept(grammarAccess.getMultiplicationExpressionAccess().getMultiplyLeftAction_1_0_0_0_0(), semanticObject.getLeft());
+		feeder.accept(grammarAccess.getMultiplicationExpressionAccess().getRightUnaryExpressionParserRuleCall_1_1_0(), semanticObject.getRight());
 		feeder.finish();
 	}
 	
@@ -815,48 +781,41 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Expression returns Expression
-	 *     ConditionOrExpression returns Expression
-	 *     ConditionOrExpression.ConditionOrExpression_1_0_0 returns Expression
-	 *     ConditionAndExpression returns Expression
-	 *     ConditionAndExpression.ConditionAndExpression_1_0_0 returns Expression
-	 *     RelationOrExpression returns Expression
-	 *     RelationOrExpression.LessThanOrEqual_1_0_0_0_0 returns Expression
-	 *     RelationOrExpression.LessThan_1_0_0_1_0 returns Expression
-	 *     RelationOrExpression.GreaterThanOrEqual_1_0_0_2_0 returns Expression
-	 *     RelationOrExpression.GreaterThan_1_0_0_3_0 returns Expression
-	 *     RelationOrExpression.Equal_1_0_0_4_0 returns Expression
-	 *     RelationOrExpression.NotEqual_1_0_0_5_0 returns Expression
-	 *     AdditionExpression returns Expression
-	 *     AdditionExpression.Plus_1_0_0_0_0 returns Expression
-	 *     AdditionExpression.Minus_1_0_0_1_0 returns Expression
-	 *     MultiplicationExpression returns Expression
-	 *     MultiplicationExpression.Multiply_1_0_0_0_0 returns Expression
-	 *     MultiplicationExpression.Divide_1_0_0_1_0 returns Expression
-	 *     UnaryExpression returns Expression
-	 *     UnaryExpressionNotPlusMinus returns Expression
-	 *     PrimaryExpression returns Expression
+	 *     Expression returns NotBooleanExpression
+	 *     ConditionOrExpression returns NotBooleanExpression
+	 *     ConditionOrExpression.ConditionOrExpression_1_0_0 returns NotBooleanExpression
+	 *     ConditionAndExpression returns NotBooleanExpression
+	 *     ConditionAndExpression.ConditionAndExpression_1_0_0 returns NotBooleanExpression
+	 *     RelationOrExpression returns NotBooleanExpression
+	 *     RelationOrExpression.LessThanOrEqual_1_0_0_0_0 returns NotBooleanExpression
+	 *     RelationOrExpression.LessThan_1_0_0_1_0 returns NotBooleanExpression
+	 *     RelationOrExpression.GreaterThanOrEqual_1_0_0_2_0 returns NotBooleanExpression
+	 *     RelationOrExpression.GreaterThan_1_0_0_3_0 returns NotBooleanExpression
+	 *     RelationOrExpression.Equal_1_0_0_4_0 returns NotBooleanExpression
+	 *     RelationOrExpression.NotEqual_1_0_0_5_0 returns NotBooleanExpression
+	 *     AdditionExpression returns NotBooleanExpression
+	 *     AdditionExpression.Plus_1_0_0_0_0 returns NotBooleanExpression
+	 *     AdditionExpression.Minus_1_0_0_1_0 returns NotBooleanExpression
+	 *     MultiplicationExpression returns NotBooleanExpression
+	 *     MultiplicationExpression.Multiply_1_0_0_0_0 returns NotBooleanExpression
+	 *     MultiplicationExpression.Divide_1_0_0_1_0 returns NotBooleanExpression
+	 *     UnaryExpression returns NotBooleanExpression
+	 *     UnaryExpressionNotPlusMinus returns NotBooleanExpression
+	 *     NotBooleanExpression returns NotBooleanExpression
+	 *     PrimaryExpression returns NotBooleanExpression
 	 *
 	 * Constraint:
-	 *     (exp=UnaryExpression | var=[Variable|ID])
+	 *     exp=UnaryExpression
 	 * </pre>
 	 */
-	protected void sequence_NotBooleanExpression_PrimaryExpression(ISerializationContext context, Expression semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     Param returns Param
-	 *
-	 * Constraint:
-	 *     (param=ID | param=ID | param=ID | param=ID | param=ID)
-	 * </pre>
-	 */
-	protected void sequence_Param(ISerializationContext context, Param semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+	protected void sequence_NotBooleanExpression(ISerializationContext context, NotBooleanExpression semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.NOT_BOOLEAN_EXPRESSION__EXP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.NOT_BOOLEAN_EXPRESSION__EXP));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getNotBooleanExpressionAccess().getExpUnaryExpressionParserRuleCall_1_0(), semanticObject.getExp());
+		feeder.finish();
 	}
 	
 	
@@ -913,16 +872,16 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     RealLiteral returns RealLiteral
 	 *
 	 * Constraint:
-	 *     val=REAL
+	 *     num=REAL
 	 * </pre>
 	 */
 	protected void sequence_RealLiteral(ISerializationContext context, RealLiteral semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.REAL_LITERAL__VAL) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.REAL_LITERAL__VAL));
+			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.REAL_LITERAL__NUM) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.REAL_LITERAL__NUM));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getRealLiteralAccess().getValREALParserRuleCall_1_0(), semanticObject.getVal());
+		feeder.accept(grammarAccess.getRealLiteralAccess().getNumREALParserRuleCall_1_0(), semanticObject.getNum());
 		feeder.finish();
 	}
 	
@@ -1193,36 +1152,16 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     ReportFunction returns ReportFunction
 	 *
 	 * Constraint:
-	 *     entity=[Entity|ID]
+	 *     instance=[Instance|ID]
 	 * </pre>
 	 */
 	protected void sequence_ReportFunction(ISerializationContext context, ReportFunction semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.REPORT_FUNCTION__ENTITY) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.REPORT_FUNCTION__ENTITY));
+			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.REPORT_FUNCTION__INSTANCE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.REPORT_FUNCTION__INSTANCE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getReportFunctionAccess().getEntityEntityIDTerminalRuleCall_1_0_1(), semanticObject.eGet(FarmPackage.Literals.REPORT_FUNCTION__ENTITY, false));
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     ReturnStatement returns ReturnStatement
-	 *
-	 * Constraint:
-	 *     value=Expression
-	 * </pre>
-	 */
-	protected void sequence_ReturnStatement(ISerializationContext context, ReturnStatement semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.RETURN_STATEMENT__VALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.RETURN_STATEMENT__VALUE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getReturnStatementAccess().getValueExpressionParserRuleCall_2_0(), semanticObject.getValue());
+		feeder.accept(grammarAccess.getReportFunctionAccess().getInstanceInstanceIDTerminalRuleCall_1_0_1(), semanticObject.eGet(FarmPackage.Literals.REPORT_FUNCTION__INSTANCE, false));
 		feeder.finish();
 	}
 	
@@ -1258,14 +1197,42 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     TaskStatement returns TaskStatement
+	 *     Expression returns TrueLiteral
+	 *     ConditionOrExpression returns TrueLiteral
+	 *     ConditionOrExpression.ConditionOrExpression_1_0_0 returns TrueLiteral
+	 *     ConditionAndExpression returns TrueLiteral
+	 *     ConditionAndExpression.ConditionAndExpression_1_0_0 returns TrueLiteral
+	 *     RelationOrExpression returns TrueLiteral
+	 *     RelationOrExpression.LessThanOrEqual_1_0_0_0_0 returns TrueLiteral
+	 *     RelationOrExpression.LessThan_1_0_0_1_0 returns TrueLiteral
+	 *     RelationOrExpression.GreaterThanOrEqual_1_0_0_2_0 returns TrueLiteral
+	 *     RelationOrExpression.GreaterThan_1_0_0_3_0 returns TrueLiteral
+	 *     RelationOrExpression.Equal_1_0_0_4_0 returns TrueLiteral
+	 *     RelationOrExpression.NotEqual_1_0_0_5_0 returns TrueLiteral
+	 *     AdditionExpression returns TrueLiteral
+	 *     AdditionExpression.Plus_1_0_0_0_0 returns TrueLiteral
+	 *     AdditionExpression.Minus_1_0_0_1_0 returns TrueLiteral
+	 *     MultiplicationExpression returns TrueLiteral
+	 *     MultiplicationExpression.Multiply_1_0_0_0_0 returns TrueLiteral
+	 *     MultiplicationExpression.Divide_1_0_0_1_0 returns TrueLiteral
+	 *     UnaryExpression returns TrueLiteral
+	 *     UnaryExpressionNotPlusMinus returns TrueLiteral
+	 *     PrimaryExpression returns TrueLiteral
+	 *     Literal returns TrueLiteral
+	 *     TrueLiteral returns TrueLiteral
 	 *
 	 * Constraint:
-	 *     (name=ID (parmas+=Param parmas+=Param*)? typeName=TypeName (taskStatements+=Statement | taskStatements+=ReturnStatement)*)
+	 *     value='true'
 	 * </pre>
 	 */
-	protected void sequence_TaskStatement(ISerializationContext context, TaskStatement semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+	protected void sequence_TrueLiteral(ISerializationContext context, TrueLiteral semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.TRUE_LITERAL__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.TRUE_LITERAL__VALUE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getTrueLiteralAccess().getValueTrueKeyword_1_0(), semanticObject.getValue());
+		feeder.finish();
 	}
 	
 	
@@ -1300,8 +1267,8 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 */
 	protected void sequence_UnaryExpression(ISerializationContext context, UnaryExpression semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.EXPRESSION__EXP) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.EXPRESSION__EXP));
+			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.UNARY_EXPRESSION__EXP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.UNARY_EXPRESSION__EXP));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getUnaryExpressionAccess().getExpUnaryExpressionParserRuleCall_1_2_0(), semanticObject.getExp());
@@ -1312,9 +1279,50 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     VarExpression returns VarExpression
+	 *     Expression returns VarExpression
+	 *     ConditionOrExpression returns VarExpression
+	 *     ConditionOrExpression.ConditionOrExpression_1_0_0 returns VarExpression
+	 *     ConditionAndExpression returns VarExpression
+	 *     ConditionAndExpression.ConditionAndExpression_1_0_0 returns VarExpression
+	 *     RelationOrExpression returns VarExpression
+	 *     RelationOrExpression.LessThanOrEqual_1_0_0_0_0 returns VarExpression
+	 *     RelationOrExpression.LessThan_1_0_0_1_0 returns VarExpression
+	 *     RelationOrExpression.GreaterThanOrEqual_1_0_0_2_0 returns VarExpression
+	 *     RelationOrExpression.GreaterThan_1_0_0_3_0 returns VarExpression
+	 *     RelationOrExpression.Equal_1_0_0_4_0 returns VarExpression
+	 *     RelationOrExpression.NotEqual_1_0_0_5_0 returns VarExpression
+	 *     AdditionExpression returns VarExpression
+	 *     AdditionExpression.Plus_1_0_0_0_0 returns VarExpression
+	 *     AdditionExpression.Minus_1_0_0_1_0 returns VarExpression
+	 *     MultiplicationExpression returns VarExpression
+	 *     MultiplicationExpression.Multiply_1_0_0_0_0 returns VarExpression
+	 *     MultiplicationExpression.Divide_1_0_0_1_0 returns VarExpression
+	 *     UnaryExpression returns VarExpression
+	 *     UnaryExpressionNotPlusMinus returns VarExpression
+	 *     PrimaryExpression returns VarExpression
+	 *
+	 * Constraint:
+	 *     var=[Variable|ID]
+	 * </pre>
+	 */
+	protected void sequence_VarExpression(ISerializationContext context, VarExpression semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.VAR_EXPRESSION__VAR) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.VAR_EXPRESSION__VAR));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getVarExpressionAccess().getVarVariableIDTerminalRuleCall_0_1(), semanticObject.eGet(FarmPackage.Literals.VAR_EXPRESSION__VAR, false));
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
 	 *     Statement returns Variable
-	 *     Entity returns Variable
 	 *     Variable returns Variable
+	 *     Instance returns Variable
 	 *
 	 * Constraint:
 	 *     (name=ID expression=Expression)
@@ -1322,8 +1330,8 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 */
 	protected void sequence_Variable(ISerializationContext context, Variable semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.ENTITY__NAME) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.ENTITY__NAME));
+			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.INSTANCE__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.INSTANCE__NAME));
 			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.VARIABLE__EXPRESSION) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.VARIABLE__EXPRESSION));
 		}
@@ -1342,7 +1350,7 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     WaitFunction returns WaitFunction
 	 *
 	 * Constraint:
-	 *     value=AdditionExpression
+	 *     value=Expression
 	 * </pre>
 	 */
 	protected void sequence_WaitFunction(ISerializationContext context, WaitFunction semanticObject) {
@@ -1351,7 +1359,7 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.WAIT_FUNCTION__VALUE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getWaitFunctionAccess().getValueAdditionExpressionParserRuleCall_1_0(), semanticObject.getValue());
+		feeder.accept(grammarAccess.getWaitFunctionAccess().getValueExpressionParserRuleCall_1_0(), semanticObject.getValue());
 		feeder.finish();
 	}
 	

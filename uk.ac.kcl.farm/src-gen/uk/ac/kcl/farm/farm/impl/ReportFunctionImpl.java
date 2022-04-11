@@ -10,8 +10,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import uk.ac.kcl.farm.farm.Entity;
 import uk.ac.kcl.farm.farm.FarmPackage;
+import uk.ac.kcl.farm.farm.Instance;
 import uk.ac.kcl.farm.farm.ReportFunction;
 
 /**
@@ -22,7 +22,7 @@ import uk.ac.kcl.farm.farm.ReportFunction;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.farm.farm.impl.ReportFunctionImpl#getEntity <em>Entity</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.impl.ReportFunctionImpl#getInstance <em>Instance</em>}</li>
  * </ul>
  *
  * @generated
@@ -30,14 +30,14 @@ import uk.ac.kcl.farm.farm.ReportFunction;
 public class ReportFunctionImpl extends BuiltinFunctionImpl implements ReportFunction
 {
   /**
-   * The cached value of the '{@link #getEntity() <em>Entity</em>}' reference.
+   * The cached value of the '{@link #getInstance() <em>Instance</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getEntity()
+   * @see #getInstance()
    * @generated
    * @ordered
    */
-  protected Entity entity;
+  protected Instance instance;
 
   /**
    * <!-- begin-user-doc -->
@@ -66,19 +66,19 @@ public class ReportFunctionImpl extends BuiltinFunctionImpl implements ReportFun
    * @generated
    */
   @Override
-  public Entity getEntity()
+  public Instance getInstance()
   {
-    if (entity != null && entity.eIsProxy())
+    if (instance != null && instance.eIsProxy())
     {
-      InternalEObject oldEntity = (InternalEObject)entity;
-      entity = (Entity)eResolveProxy(oldEntity);
-      if (entity != oldEntity)
+      InternalEObject oldInstance = (InternalEObject)instance;
+      instance = (Instance)eResolveProxy(oldInstance);
+      if (instance != oldInstance)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, FarmPackage.REPORT_FUNCTION__ENTITY, oldEntity, entity));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, FarmPackage.REPORT_FUNCTION__INSTANCE, oldInstance, instance));
       }
     }
-    return entity;
+    return instance;
   }
 
   /**
@@ -86,9 +86,9 @@ public class ReportFunctionImpl extends BuiltinFunctionImpl implements ReportFun
    * <!-- end-user-doc -->
    * @generated
    */
-  public Entity basicGetEntity()
+  public Instance basicGetInstance()
   {
-    return entity;
+    return instance;
   }
 
   /**
@@ -97,12 +97,12 @@ public class ReportFunctionImpl extends BuiltinFunctionImpl implements ReportFun
    * @generated
    */
   @Override
-  public void setEntity(Entity newEntity)
+  public void setInstance(Instance newInstance)
   {
-    Entity oldEntity = entity;
-    entity = newEntity;
+    Instance oldInstance = instance;
+    instance = newInstance;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.REPORT_FUNCTION__ENTITY, oldEntity, entity));
+      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.REPORT_FUNCTION__INSTANCE, oldInstance, instance));
   }
 
   /**
@@ -115,9 +115,9 @@ public class ReportFunctionImpl extends BuiltinFunctionImpl implements ReportFun
   {
     switch (featureID)
     {
-      case FarmPackage.REPORT_FUNCTION__ENTITY:
-        if (resolve) return getEntity();
-        return basicGetEntity();
+      case FarmPackage.REPORT_FUNCTION__INSTANCE:
+        if (resolve) return getInstance();
+        return basicGetInstance();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -132,8 +132,8 @@ public class ReportFunctionImpl extends BuiltinFunctionImpl implements ReportFun
   {
     switch (featureID)
     {
-      case FarmPackage.REPORT_FUNCTION__ENTITY:
-        setEntity((Entity)newValue);
+      case FarmPackage.REPORT_FUNCTION__INSTANCE:
+        setInstance((Instance)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -149,8 +149,8 @@ public class ReportFunctionImpl extends BuiltinFunctionImpl implements ReportFun
   {
     switch (featureID)
     {
-      case FarmPackage.REPORT_FUNCTION__ENTITY:
-        setEntity((Entity)null);
+      case FarmPackage.REPORT_FUNCTION__INSTANCE:
+        setInstance((Instance)null);
         return;
     }
     super.eUnset(featureID);
@@ -166,8 +166,8 @@ public class ReportFunctionImpl extends BuiltinFunctionImpl implements ReportFun
   {
     switch (featureID)
     {
-      case FarmPackage.REPORT_FUNCTION__ENTITY:
-        return entity != null;
+      case FarmPackage.REPORT_FUNCTION__INSTANCE:
+        return instance != null;
     }
     return super.eIsSet(featureID);
   }

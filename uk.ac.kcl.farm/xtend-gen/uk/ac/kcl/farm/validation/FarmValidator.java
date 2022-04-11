@@ -14,6 +14,7 @@ import uk.ac.kcl.farm.farm.FarmProgram;
 import uk.ac.kcl.farm.farm.Field;
 import uk.ac.kcl.farm.farm.Mission;
 import uk.ac.kcl.farm.farm.Variable;
+import uk.ac.kcl.farm.interpreter.Exp;
 
 /**
  * This class contains custom validation rules.
@@ -22,9 +23,15 @@ import uk.ac.kcl.farm.farm.Variable;
  */
 @SuppressWarnings("all")
 public class FarmValidator extends AbstractFarmValidator {
+  private Exp expRuntime = new Exp();
+  
   public static final String INVALID_ATTRIBUTE_NAME = "uk.ac.kcl.farm.farm.INVALID_ATTRIBUTE_NAME";
   
   public static final String INVALID_VARIABLE_NAME = "uk.ac.kcl.farm.farm.INVALID_VARIABLE_NAME";
+  
+  public static final String INVALID_EXPRESSION = "uk.ac.kcl.farm.farm.INVALID_EXPRESSION";
+  
+  public static final String INVALID_IP_ADDRESS = "uk.ac.kcl.farm.farm.INVALID_IP_ADDRESS";
   
   @Check
   public void checkAttributeStartsWithLowerCase(final Attribute attribute) {
@@ -48,13 +55,19 @@ public class FarmValidator extends AbstractFarmValidator {
     }
   }
   
-  @Check(CheckType.NORMAL)
-  public void checkHaveCrop(final FarmProgram program) {
-    String errorLog = this.haveAllClass(program.getStatements());
-    if ((errorLog != "")) {
-      this.error(("The farm program must have at least one of Crop, Field and Mission\n" + errorLog), 
-        null, 
-        FarmValidator.INVALID_VARIABLE_NAME);
+  public static boolean validateIPAddress(final String ip) {
+    final String PATTERN = "^((0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)\\.){3}(0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)$";
+    return ip.matches(PATTERN);
+  }
+  
+  @Check
+  public void checkIPAddressFormat(final Field field) {
+    boolean _validateIPAddress = FarmValidator.validateIPAddress(field.getFieldIP());
+    boolean _not = (!_validateIPAddress);
+    if (_not) {
+      this.warning("IP Address format is wrong", 
+        FarmPackage.Literals.FIELD__FIELD_IP, 
+        FarmValidator.INVALID_IP_ADDRESS);
     }
   }
   
@@ -89,5 +102,15 @@ public class FarmValidator extends AbstractFarmValidator {
       errorLog = (_errorLog_2 + "\tYou must add at least one Mission class\n");
     }
     return errorLog;
+  }
+  
+  @Check(CheckType.NORMAL)
+  public void checkHaveCrop(final FarmProgram program) {
+    String errorLog = this.haveAllClass(program.getStatements());
+    if ((errorLog != "")) {
+      this.error(("The farm program must have at least one of Crop, Field and Mission\n" + errorLog), 
+        null, 
+        FarmValidator.INVALID_VARIABLE_NAME);
+    }
   }
 }

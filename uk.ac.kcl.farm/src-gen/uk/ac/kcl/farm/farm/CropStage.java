@@ -17,8 +17,8 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link uk.ac.kcl.farm.farm.CropStage#getName <em>Name</em>}</li>
- *   <li>{@link uk.ac.kcl.farm.farm.CropStage#getTimeConsumend <em>Time Consumend</em>}</li>
- *   <li>{@link uk.ac.kcl.farm.farm.CropStage#getElements <em>Elements</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.CropStage#getTime <em>Time</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.CropStage#getAttributes <em>Attributes</em>}</li>
  * </ul>
  *
  * @see uk.ac.kcl.farm.farm.FarmPackage#getCropStage()
@@ -50,37 +50,37 @@ public interface CropStage extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Time Consumend</b></em>' containment reference.
+   * Returns the value of the '<em><b>Time</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Time Consumend</em>' containment reference.
-   * @see #setTimeConsumend(Expression)
-   * @see uk.ac.kcl.farm.farm.FarmPackage#getCropStage_TimeConsumend()
+   * @return the value of the '<em>Time</em>' containment reference.
+   * @see #setTime(Expression)
+   * @see uk.ac.kcl.farm.farm.FarmPackage#getCropStage_Time()
    * @model containment="true"
    * @generated
    */
-  Expression getTimeConsumend();
+  Expression getTime();
 
   /**
-   * Sets the value of the '{@link uk.ac.kcl.farm.farm.CropStage#getTimeConsumend <em>Time Consumend</em>}' containment reference.
+   * Sets the value of the '{@link uk.ac.kcl.farm.farm.CropStage#getTime <em>Time</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Time Consumend</em>' containment reference.
-   * @see #getTimeConsumend()
+   * @param value the new value of the '<em>Time</em>' containment reference.
+   * @see #getTime()
    * @generated
    */
-  void setTimeConsumend(Expression value);
+  void setTime(Expression value);
 
   /**
-   * Returns the value of the '<em><b>Elements</b></em>' containment reference list.
+   * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
    * The list contents are of type {@link uk.ac.kcl.farm.farm.CropAttributes}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Elements</em>' containment reference list.
-   * @see uk.ac.kcl.farm.farm.FarmPackage#getCropStage_Elements()
+   * @return the value of the '<em>Attributes</em>' containment reference list.
+   * @see uk.ac.kcl.farm.farm.FarmPackage#getCropStage_Attributes()
    * @model containment="true"
    * @generated
    */
-  EList<CropAttributes> getElements();
+  EList<CropAttributes> getAttributes();
 
 } // CropStage

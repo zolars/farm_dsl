@@ -28,188 +28,62 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.FarmProgram");
 		private final Assignment cStatementsAssignment = (Assignment)rule.eContents().get(1);
 		private final Alternatives cStatementsAlternatives_0 = (Alternatives)cStatementsAssignment.eContents().get(0);
-		private final RuleCall cStatementsCropParserRuleCall_0_0 = (RuleCall)cStatementsAlternatives_0.eContents().get(0);
-		private final RuleCall cStatementsFieldParserRuleCall_0_1 = (RuleCall)cStatementsAlternatives_0.eContents().get(1);
-		private final RuleCall cStatementsMissionParserRuleCall_0_2 = (RuleCall)cStatementsAlternatives_0.eContents().get(2);
-		private final RuleCall cStatementsAttributeParserRuleCall_0_3 = (RuleCall)cStatementsAlternatives_0.eContents().get(3);
+		private final RuleCall cStatementsAttributeParserRuleCall_0_0 = (RuleCall)cStatementsAlternatives_0.eContents().get(0);
+		private final RuleCall cStatementsCropParserRuleCall_0_1 = (RuleCall)cStatementsAlternatives_0.eContents().get(1);
+		private final RuleCall cStatementsFieldParserRuleCall_0_2 = (RuleCall)cStatementsAlternatives_0.eContents().get(2);
+		private final RuleCall cStatementsMissionParserRuleCall_0_3 = (RuleCall)cStatementsAlternatives_0.eContents().get(3);
 		
 		//FarmProgram:
 		//    statements += (
+		//        Attribute |
 		//        Crop |
 		//        Field |
-		//        Mission |
-		//        Attribute
+		//        Mission
 		//    )+
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//statements += (
+		//    Attribute |
 		//    Crop |
 		//    Field |
-		//    Mission |
-		//    Attribute
+		//    Mission
 		//)+
 		public Assignment getStatementsAssignment() { return cStatementsAssignment; }
 		
 		//(
+		//       Attribute |
 		//       Crop |
 		//       Field |
-		//       Mission |
-		//       Attribute
+		//       Mission
 		//   )
 		public Alternatives getStatementsAlternatives_0() { return cStatementsAlternatives_0; }
 		
+		//Attribute
+		public RuleCall getStatementsAttributeParserRuleCall_0_0() { return cStatementsAttributeParserRuleCall_0_0; }
+		
 		//Crop
-		public RuleCall getStatementsCropParserRuleCall_0_0() { return cStatementsCropParserRuleCall_0_0; }
+		public RuleCall getStatementsCropParserRuleCall_0_1() { return cStatementsCropParserRuleCall_0_1; }
 		
 		//Field
-		public RuleCall getStatementsFieldParserRuleCall_0_1() { return cStatementsFieldParserRuleCall_0_1; }
+		public RuleCall getStatementsFieldParserRuleCall_0_2() { return cStatementsFieldParserRuleCall_0_2; }
 		
 		//Mission
-		public RuleCall getStatementsMissionParserRuleCall_0_2() { return cStatementsMissionParserRuleCall_0_2; }
-		
-		//Attribute
-		public RuleCall getStatementsAttributeParserRuleCall_0_3() { return cStatementsAttributeParserRuleCall_0_3; }
-	}
-	public class ParamElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.Param");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
-		private final Keyword cCropKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
-		private final Assignment cParamAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
-		private final RuleCall cParamIDTerminalRuleCall_0_1_0 = (RuleCall)cParamAssignment_0_1.eContents().get(0);
-		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
-		private final Keyword cFieldKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final Assignment cParamAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cParamIDTerminalRuleCall_1_1_0 = (RuleCall)cParamAssignment_1_1.eContents().get(0);
-		private final Group cGroup_2 = (Group)cAlternatives.eContents().get(2);
-		private final Keyword cMissionKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cParamAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cParamIDTerminalRuleCall_2_1_0 = (RuleCall)cParamAssignment_2_1.eContents().get(0);
-		private final Group cGroup_3 = (Group)cAlternatives.eContents().get(3);
-		private final Keyword cRealKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cParamAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cParamIDTerminalRuleCall_3_1_0 = (RuleCall)cParamAssignment_3_1.eContents().get(0);
-		private final Group cGroup_4 = (Group)cAlternatives.eContents().get(4);
-		private final Keyword cStringKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Assignment cParamAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
-		private final RuleCall cParamIDTerminalRuleCall_4_1_0 = (RuleCall)cParamAssignment_4_1.eContents().get(0);
-		
-		//// General statement
-		//Param:
-		//    "crop" param=ID |
-		//    "field" param=ID |
-		//    "mission" param=ID |
-		//    "real" param=ID |
-		//    "string" param=ID
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//"crop" param=ID |
-		//"field" param=ID |
-		//"mission" param=ID |
-		//"real" param=ID |
-		//"string" param=ID
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//"crop" param=ID
-		public Group getGroup_0() { return cGroup_0; }
-		
-		//"crop"
-		public Keyword getCropKeyword_0_0() { return cCropKeyword_0_0; }
-		
-		//param=ID
-		public Assignment getParamAssignment_0_1() { return cParamAssignment_0_1; }
-		
-		//ID
-		public RuleCall getParamIDTerminalRuleCall_0_1_0() { return cParamIDTerminalRuleCall_0_1_0; }
-		
-		//"field" param=ID
-		public Group getGroup_1() { return cGroup_1; }
-		
-		//"field"
-		public Keyword getFieldKeyword_1_0() { return cFieldKeyword_1_0; }
-		
-		//param=ID
-		public Assignment getParamAssignment_1_1() { return cParamAssignment_1_1; }
-		
-		//ID
-		public RuleCall getParamIDTerminalRuleCall_1_1_0() { return cParamIDTerminalRuleCall_1_1_0; }
-		
-		//"mission" param=ID
-		public Group getGroup_2() { return cGroup_2; }
-		
-		//"mission"
-		public Keyword getMissionKeyword_2_0() { return cMissionKeyword_2_0; }
-		
-		//param=ID
-		public Assignment getParamAssignment_2_1() { return cParamAssignment_2_1; }
-		
-		//ID
-		public RuleCall getParamIDTerminalRuleCall_2_1_0() { return cParamIDTerminalRuleCall_2_1_0; }
-		
-		//"real" param=ID
-		public Group getGroup_3() { return cGroup_3; }
-		
-		//"real"
-		public Keyword getRealKeyword_3_0() { return cRealKeyword_3_0; }
-		
-		//param=ID
-		public Assignment getParamAssignment_3_1() { return cParamAssignment_3_1; }
-		
-		//ID
-		public RuleCall getParamIDTerminalRuleCall_3_1_0() { return cParamIDTerminalRuleCall_3_1_0; }
-		
-		//"string" param=ID
-		public Group getGroup_4() { return cGroup_4; }
-		
-		//"string"
-		public Keyword getStringKeyword_4_0() { return cStringKeyword_4_0; }
-		
-		//param=ID
-		public Assignment getParamAssignment_4_1() { return cParamAssignment_4_1; }
-		
-		//ID
-		public RuleCall getParamIDTerminalRuleCall_4_1_0() { return cParamIDTerminalRuleCall_4_1_0; }
-	}
-	public class TypeNameElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.TypeName");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Keyword cNullKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
-		private final Keyword cRealKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
-		private final Keyword cBooleanKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
-		private final Keyword cStringKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
-		
-		//TypeName:
-		//    "null" | "real" | "boolean" | "string"
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//"null" | "real" | "boolean" | "string"
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//"null"
-		public Keyword getNullKeyword_0() { return cNullKeyword_0; }
-		
-		//"real"
-		public Keyword getRealKeyword_1() { return cRealKeyword_1; }
-		
-		//"boolean"
-		public Keyword getBooleanKeyword_2() { return cBooleanKeyword_2; }
-		
-		//"string"
-		public Keyword getStringKeyword_3() { return cStringKeyword_3; }
+		public RuleCall getStatementsMissionParserRuleCall_0_3() { return cStatementsMissionParserRuleCall_0_3; }
 	}
 	public class StatementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.Statement");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cVariableParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cLoopStatementParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cJudgeStatementParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		private final RuleCall cBuiltinFunctionParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cAssignmentParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cLoopStatementParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cJudgeStatementParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cBuiltinFunctionParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		
+		//// General statement
 		//Statement:
 		//    Variable |
+		//    Assignment |
 		//    LoopStatement |
 		//    JudgeStatement |
 		//    BuiltinFunction
@@ -217,6 +91,7 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Variable |
+		//Assignment |
 		//LoopStatement |
 		//JudgeStatement |
 		//BuiltinFunction
@@ -225,42 +100,17 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//Variable
 		public RuleCall getVariableParserRuleCall_0() { return cVariableParserRuleCall_0; }
 		
+		//Assignment
+		public RuleCall getAssignmentParserRuleCall_1() { return cAssignmentParserRuleCall_1; }
+		
 		//LoopStatement
-		public RuleCall getLoopStatementParserRuleCall_1() { return cLoopStatementParserRuleCall_1; }
+		public RuleCall getLoopStatementParserRuleCall_2() { return cLoopStatementParserRuleCall_2; }
 		
 		//JudgeStatement
-		public RuleCall getJudgeStatementParserRuleCall_2() { return cJudgeStatementParserRuleCall_2; }
+		public RuleCall getJudgeStatementParserRuleCall_3() { return cJudgeStatementParserRuleCall_3; }
 		
 		//BuiltinFunction
-		public RuleCall getBuiltinFunctionParserRuleCall_3() { return cBuiltinFunctionParserRuleCall_3; }
-	}
-	public class EntityElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.Entity");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cCropParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cFieldParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cVariableParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		
-		//Entity:
-		//    Crop |
-		//    Field |
-		//    Variable
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//Crop |
-		//Field |
-		//Variable
-		public Alternatives getAlternatives() { return cAlternatives; }
-		
-		//Crop
-		public RuleCall getCropParserRuleCall_0() { return cCropParserRuleCall_0; }
-		
-		//Field
-		public RuleCall getFieldParserRuleCall_1() { return cFieldParserRuleCall_1; }
-		
-		//Variable
-		public RuleCall getVariableParserRuleCall_2() { return cVariableParserRuleCall_2; }
+		public RuleCall getBuiltinFunctionParserRuleCall_4() { return cBuiltinFunctionParserRuleCall_4; }
 	}
 	public class AttributeElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.Attribute");
@@ -269,16 +119,6 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		
-		////Attribute:
-		////    entity=[Entity | ID] (
-		////        ".name" |
-		////        ".stage" |
-		////        ".ip" |
-		////        ".type" |
-		////        ".light" |
-		////        "." monitor=[Attribute | ID]
-		////    )?
-		////;
 		//// Define codes
 		//Attribute:
 		//    "define" name=ID
@@ -308,7 +148,7 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final RuleCall cExpressionExpressionParserRuleCall_3_0 = (RuleCall)cExpressionAssignment_3.eContents().get(0);
 		
 		//Variable:
-		//    "var" name=ID "=" expression=Expression // | attribute=Attribute
+		//    "var" name=ID "=" expression=Expression
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -332,6 +172,62 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		
 		//Expression
 		public RuleCall getExpressionExpressionParserRuleCall_3_0() { return cExpressionExpressionParserRuleCall_3_0; }
+	}
+	public class VarExpressionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.VarExpression");
+		private final Assignment cVarAssignment = (Assignment)rule.eContents().get(1);
+		private final CrossReference cVarVariableCrossReference_0 = (CrossReference)cVarAssignment.eContents().get(0);
+		private final RuleCall cVarVariableIDTerminalRuleCall_0_1 = (RuleCall)cVarVariableCrossReference_0.eContents().get(1);
+		
+		//VarExpression:
+		//    var=[Variable]
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//var=[Variable]
+		public Assignment getVarAssignment() { return cVarAssignment; }
+		
+		//[Variable]
+		public CrossReference getVarVariableCrossReference_0() { return cVarVariableCrossReference_0; }
+		
+		//ID
+		public RuleCall getVarVariableIDTerminalRuleCall_0_1() { return cVarVariableIDTerminalRuleCall_0_1; }
+	}
+	public class AssignmentElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.Assignment");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cVarAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final CrossReference cVarVariableCrossReference_0_0 = (CrossReference)cVarAssignment_0.eContents().get(0);
+		private final RuleCall cVarVariableIDTerminalRuleCall_0_0_1 = (RuleCall)cVarVariableCrossReference_0_0.eContents().get(1);
+		private final Keyword cEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cExpressionAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cExpressionExpressionParserRuleCall_2_0 = (RuleCall)cExpressionAssignment_2.eContents().get(0);
+		
+		//Assignment:
+		//    var=[Variable] "=" expression=Expression
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//var=[Variable] "=" expression=Expression
+		public Group getGroup() { return cGroup; }
+		
+		//var=[Variable]
+		public Assignment getVarAssignment_0() { return cVarAssignment_0; }
+		
+		//[Variable]
+		public CrossReference getVarVariableCrossReference_0_0() { return cVarVariableCrossReference_0_0; }
+		
+		//ID
+		public RuleCall getVarVariableIDTerminalRuleCall_0_0_1() { return cVarVariableIDTerminalRuleCall_0_0_1; }
+		
+		//"="
+		public Keyword getEqualsSignKeyword_1() { return cEqualsSignKeyword_1; }
+		
+		//expression=Expression
+		public Assignment getExpressionAssignment_2() { return cExpressionAssignment_2; }
+		
+		//Expression
+		public RuleCall getExpressionExpressionParserRuleCall_2_0() { return cExpressionExpressionParserRuleCall_2_0; }
 	}
 	public class LoopStatementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.LoopStatement");
@@ -399,15 +295,15 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		private final Assignment cElseJudgeStatementsAssignment_7 = (Assignment)cGroup.eContents().get(7);
 		private final RuleCall cElseJudgeStatementsElseJudgeStatementParserRuleCall_7_0 = (RuleCall)cElseJudgeStatementsAssignment_7.eContents().get(0);
-		private final Assignment cElseStatementsAssignment_8 = (Assignment)cGroup.eContents().get(8);
-		private final RuleCall cElseStatementsElseStatementParserRuleCall_8_0 = (RuleCall)cElseStatementsAssignment_8.eContents().get(0);
+		private final Assignment cElseStatementAssignment_8 = (Assignment)cGroup.eContents().get(8);
+		private final RuleCall cElseStatementElseStatementParserRuleCall_8_0 = (RuleCall)cElseStatementAssignment_8.eContents().get(0);
 		
 		//JudgeStatement:
 		//    "if" "(" condition=Expression ")" "{"
 		//        judgeStatements += Statement*
 		//    "}"
 		//    elseJudgeStatements += ElseJudgeStatement*
-		//    elseStatements += ElseStatement?
+		//    elseStatement += ElseStatement?
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
@@ -415,7 +311,7 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//    judgeStatements += Statement*
 		//"}"
 		//elseJudgeStatements += ElseJudgeStatement*
-		//elseStatements += ElseStatement?
+		//elseStatement += ElseStatement?
 		public Group getGroup() { return cGroup; }
 		
 		//"if"
@@ -451,11 +347,11 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//ElseJudgeStatement
 		public RuleCall getElseJudgeStatementsElseJudgeStatementParserRuleCall_7_0() { return cElseJudgeStatementsElseJudgeStatementParserRuleCall_7_0; }
 		
-		//elseStatements += ElseStatement?
-		public Assignment getElseStatementsAssignment_8() { return cElseStatementsAssignment_8; }
+		//elseStatement += ElseStatement?
+		public Assignment getElseStatementAssignment_8() { return cElseStatementAssignment_8; }
 		
 		//ElseStatement
-		public RuleCall getElseStatementsElseStatementParserRuleCall_8_0() { return cElseStatementsElseStatementParserRuleCall_8_0; }
+		public RuleCall getElseStatementElseStatementParserRuleCall_8_0() { return cElseStatementElseStatementParserRuleCall_8_0; }
 	}
 	public class ElseJudgeStatementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.ElseJudgeStatement");
@@ -550,16 +446,14 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	public class BuiltinFunctionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.BuiltinFunction");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cGetValueFunctionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cReportFunctionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cCountStageFunctionParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		private final RuleCall cSetFieldValueFunctionParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
-		private final RuleCall cPlantFunctionParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
-		private final RuleCall cMoveFunctionParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
-		private final RuleCall cWaitFunctionParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
+		private final RuleCall cReportFunctionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cCountStageFunctionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cSetFieldValueFunctionParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cPlantFunctionParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cMoveFunctionParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cWaitFunctionParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		
 		//BuiltinFunction:
-		//    GetValueFunction |
 		//    ReportFunction |
 		//    CountStageFunction |
 		//    SetFieldValueFunction |
@@ -569,7 +463,6 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//GetValueFunction |
 		//ReportFunction |
 		//CountStageFunction |
 		//SetFieldValueFunction |
@@ -578,95 +471,80 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//WaitFunction
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//GetValueFunction
-		public RuleCall getGetValueFunctionParserRuleCall_0() { return cGetValueFunctionParserRuleCall_0; }
-		
 		//ReportFunction
-		public RuleCall getReportFunctionParserRuleCall_1() { return cReportFunctionParserRuleCall_1; }
+		public RuleCall getReportFunctionParserRuleCall_0() { return cReportFunctionParserRuleCall_0; }
 		
 		//CountStageFunction
-		public RuleCall getCountStageFunctionParserRuleCall_2() { return cCountStageFunctionParserRuleCall_2; }
+		public RuleCall getCountStageFunctionParserRuleCall_1() { return cCountStageFunctionParserRuleCall_1; }
 		
 		//SetFieldValueFunction
-		public RuleCall getSetFieldValueFunctionParserRuleCall_3() { return cSetFieldValueFunctionParserRuleCall_3; }
+		public RuleCall getSetFieldValueFunctionParserRuleCall_2() { return cSetFieldValueFunctionParserRuleCall_2; }
 		
 		//PlantFunction
-		public RuleCall getPlantFunctionParserRuleCall_4() { return cPlantFunctionParserRuleCall_4; }
+		public RuleCall getPlantFunctionParserRuleCall_3() { return cPlantFunctionParserRuleCall_3; }
 		
 		//MoveFunction
-		public RuleCall getMoveFunctionParserRuleCall_5() { return cMoveFunctionParserRuleCall_5; }
+		public RuleCall getMoveFunctionParserRuleCall_4() { return cMoveFunctionParserRuleCall_4; }
 		
 		//WaitFunction
-		public RuleCall getWaitFunctionParserRuleCall_6() { return cWaitFunctionParserRuleCall_6; }
+		public RuleCall getWaitFunctionParserRuleCall_5() { return cWaitFunctionParserRuleCall_5; }
 	}
-	public class GetValueFunctionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.GetValueFunction");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cEntityAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final CrossReference cEntityEntityCrossReference_0_0 = (CrossReference)cEntityAssignment_0.eContents().get(0);
-		private final RuleCall cEntityEntityIDTerminalRuleCall_0_0_1 = (RuleCall)cEntityEntityCrossReference_0_0.eContents().get(1);
-		private final Keyword cGetValueKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cAttributeAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cAttributeSTRINGTerminalRuleCall_2_0 = (RuleCall)cAttributeAssignment_2.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
+	public class InstanceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.Instance");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cCropParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cFieldParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cVariableParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
-		//GetValueFunction:
-		//    entity=[Entity] ".getValue(" attribute=STRING ")"
+		//Instance:
+		//    Crop |
+		//    Field |
+		//    Variable
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//entity=[Entity] ".getValue(" attribute=STRING ")"
-		public Group getGroup() { return cGroup; }
+		//Crop |
+		//Field |
+		//Variable
+		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//entity=[Entity]
-		public Assignment getEntityAssignment_0() { return cEntityAssignment_0; }
+		//Crop
+		public RuleCall getCropParserRuleCall_0() { return cCropParserRuleCall_0; }
 		
-		//[Entity]
-		public CrossReference getEntityEntityCrossReference_0_0() { return cEntityEntityCrossReference_0_0; }
+		//Field
+		public RuleCall getFieldParserRuleCall_1() { return cFieldParserRuleCall_1; }
 		
-		//ID
-		public RuleCall getEntityEntityIDTerminalRuleCall_0_0_1() { return cEntityEntityIDTerminalRuleCall_0_0_1; }
-		
-		//".getValue("
-		public Keyword getGetValueKeyword_1() { return cGetValueKeyword_1; }
-		
-		//attribute=STRING
-		public Assignment getAttributeAssignment_2() { return cAttributeAssignment_2; }
-		
-		//STRING
-		public RuleCall getAttributeSTRINGTerminalRuleCall_2_0() { return cAttributeSTRINGTerminalRuleCall_2_0; }
-		
-		//")"
-		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
+		//Variable
+		public RuleCall getVariableParserRuleCall_2() { return cVariableParserRuleCall_2; }
 	}
 	public class ReportFunctionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.ReportFunction");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cReportKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cEntityAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cEntityEntityCrossReference_1_0 = (CrossReference)cEntityAssignment_1.eContents().get(0);
-		private final RuleCall cEntityEntityIDTerminalRuleCall_1_0_1 = (RuleCall)cEntityEntityCrossReference_1_0.eContents().get(1);
+		private final Assignment cInstanceAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cInstanceInstanceCrossReference_1_0 = (CrossReference)cInstanceAssignment_1.eContents().get(0);
+		private final RuleCall cInstanceInstanceIDTerminalRuleCall_1_0_1 = (RuleCall)cInstanceInstanceCrossReference_1_0.eContents().get(1);
 		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//ReportFunction:
-		//    "report(" entity=[Entity | ID] ")"
+		//    "report(" instance=[Instance | ID] ")"
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"report(" entity=[Entity | ID] ")"
+		//"report(" instance=[Instance | ID] ")"
 		public Group getGroup() { return cGroup; }
 		
 		//"report("
 		public Keyword getReportKeyword_0() { return cReportKeyword_0; }
 		
-		//entity=[Entity | ID]
-		public Assignment getEntityAssignment_1() { return cEntityAssignment_1; }
+		//instance=[Instance | ID]
+		public Assignment getInstanceAssignment_1() { return cInstanceAssignment_1; }
 		
-		//[Entity | ID]
-		public CrossReference getEntityEntityCrossReference_1_0() { return cEntityEntityCrossReference_1_0; }
+		//[Instance | ID]
+		public CrossReference getInstanceInstanceCrossReference_1_0() { return cInstanceInstanceCrossReference_1_0; }
 		
 		//ID
-		public RuleCall getEntityEntityIDTerminalRuleCall_1_0_1() { return cEntityEntityIDTerminalRuleCall_1_0_1; }
+		public RuleCall getInstanceInstanceIDTerminalRuleCall_1_0_1() { return cInstanceInstanceIDTerminalRuleCall_1_0_1; }
 		
 		//")"
 		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
@@ -681,17 +559,17 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//CountStageFunction:
-		//    countStageCrop=[Crop | ID] ".countStage(" ")"
+		//    countStageCrop=[Crop] ".countStage(" ")"
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//countStageCrop=[Crop | ID] ".countStage(" ")"
+		//countStageCrop=[Crop] ".countStage(" ")"
 		public Group getGroup() { return cGroup; }
 		
-		//countStageCrop=[Crop | ID]
+		//countStageCrop=[Crop]
 		public Assignment getCountStageCropAssignment_0() { return cCountStageCropAssignment_0; }
 		
-		//[Crop | ID]
+		//[Crop]
 		public CrossReference getCountStageCropCropCrossReference_0_0() { return cCountStageCropCropCrossReference_0_0; }
 		
 		//ID
@@ -718,17 +596,17 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//SetFieldValueFunction:
-		//    setValueField=[Field | ID] ".setFieldValue(" setFieldAttribute=STRING "," setFieldValue=AdditionExpression ")"
+		//    setValueField=[Field] ".setFieldValue(" setFieldAttribute=STRING "," setFieldValue=AdditionExpression ")"
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//setValueField=[Field | ID] ".setFieldValue(" setFieldAttribute=STRING "," setFieldValue=AdditionExpression ")"
+		//setValueField=[Field] ".setFieldValue(" setFieldAttribute=STRING "," setFieldValue=AdditionExpression ")"
 		public Group getGroup() { return cGroup; }
 		
-		//setValueField=[Field | ID]
+		//setValueField=[Field]
 		public Assignment getSetValueFieldAssignment_0() { return cSetValueFieldAssignment_0; }
 		
-		//[Field | ID]
+		//[Field]
 		public CrossReference getSetValueFieldFieldCrossReference_0_0() { return cSetValueFieldFieldCrossReference_0_0; }
 		
 		//ID
@@ -852,25 +730,25 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cWaitKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cValueAdditionExpressionParserRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
+		private final RuleCall cValueExpressionParserRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//WaitFunction:
-		//    "wait(" value=AdditionExpression ")"
+		//    "wait(" value=Expression ")"
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"wait(" value=AdditionExpression ")"
+		//"wait(" value=Expression ")"
 		public Group getGroup() { return cGroup; }
 		
 		//"wait("
 		public Keyword getWaitKeyword_0() { return cWaitKeyword_0; }
 		
-		//value=AdditionExpression
+		//value=Expression
 		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
 		
-		//AdditionExpression
-		public RuleCall getValueAdditionExpressionParserRuleCall_1_0() { return cValueAdditionExpressionParserRuleCall_1_0; }
+		//Expression
+		public RuleCall getValueExpressionParserRuleCall_1_0() { return cValueExpressionParserRuleCall_1_0; }
 		
 		//")"
 		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
@@ -1141,14 +1019,14 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//    MultiplicationExpression ( => (
 		//        {Plus.left=current} "+" |
 		//        {Minus.left=current} "-"
-		//    ) right+=MultiplicationExpression )*
+		//    ) right=MultiplicationExpression )*
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//MultiplicationExpression ( => (
 		//    {Plus.left=current} "+" |
 		//    {Minus.left=current} "-"
-		//) right+=MultiplicationExpression )*
+		//) right=MultiplicationExpression )*
 		public Group getGroup() { return cGroup; }
 		
 		//MultiplicationExpression
@@ -1157,7 +1035,7 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//( => (
 		//       {Plus.left=current} "+" |
 		//       {Minus.left=current} "-"
-		//   ) right+=MultiplicationExpression )*
+		//   ) right=MultiplicationExpression )*
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//=> (
@@ -1188,7 +1066,7 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//"-"
 		public Keyword getHyphenMinusKeyword_1_0_0_1_1() { return cHyphenMinusKeyword_1_0_0_1_1; }
 		
-		//right+=MultiplicationExpression
+		//right=MultiplicationExpression
 		public Assignment getRightAssignment_1_1() { return cRightAssignment_1_1; }
 		
 		//MultiplicationExpression
@@ -1214,14 +1092,14 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//    UnaryExpression ( => (
 		//        {Multiply.left=current} "*" |
 		//        {Divide.left=current} "/"
-		//    ) right+=UnaryExpression)*
+		//    ) right=UnaryExpression )*
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//UnaryExpression ( => (
 		//    {Multiply.left=current} "*" |
 		//    {Divide.left=current} "/"
-		//) right+=UnaryExpression)*
+		//) right=UnaryExpression )*
 		public Group getGroup() { return cGroup; }
 		
 		//UnaryExpression
@@ -1230,7 +1108,7 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//( => (
 		//       {Multiply.left=current} "*" |
 		//       {Divide.left=current} "/"
-		//   ) right+=UnaryExpression)*
+		//   ) right=UnaryExpression )*
 		public Group getGroup_1() { return cGroup_1; }
 		
 		//=> (
@@ -1261,7 +1139,7 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//"/"
 		public Keyword getSolidusKeyword_1_0_0_1_1() { return cSolidusKeyword_1_0_0_1_1; }
 		
-		//right+=UnaryExpression
+		//right=UnaryExpression
 		public Assignment getRightAssignment_1_1() { return cRightAssignment_1_1; }
 		
 		//UnaryExpression
@@ -1332,7 +1210,7 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final Assignment cExpAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cExpUnaryExpressionParserRuleCall_1_0 = (RuleCall)cExpAssignment_1.eContents().get(0);
 		
-		//NotBooleanExpression returns Expression:
+		//NotBooleanExpression:
 		//    "!" exp=UnaryExpression
 		//;
 		@Override public ParserRule getRule() { return rule; }
@@ -1353,9 +1231,7 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.PrimaryExpression");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cLiteralParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final Assignment cVarAssignment_1 = (Assignment)cAlternatives.eContents().get(1);
-		private final CrossReference cVarVariableCrossReference_1_0 = (CrossReference)cVarAssignment_1.eContents().get(0);
-		private final RuleCall cVarVariableIDTerminalRuleCall_1_0_1 = (RuleCall)cVarVariableCrossReference_1_0.eContents().get(1);
+		private final RuleCall cVarExpressionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final Group cGroup_2 = (Group)cAlternatives.eContents().get(2);
 		private final Keyword cLeftParenthesisKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final RuleCall cExpressionParserRuleCall_2_1 = (RuleCall)cGroup_2.eContents().get(1);
@@ -1363,27 +1239,21 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		
 		//PrimaryExpression returns Expression:
 		//    Literal |
-		//    var=[Variable] |
+		//    VarExpression |
 		//    "(" Expression ")"
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//Literal |
-		//var=[Variable] |
+		//VarExpression |
 		//"(" Expression ")"
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//Literal
 		public RuleCall getLiteralParserRuleCall_0() { return cLiteralParserRuleCall_0; }
 		
-		//var=[Variable]
-		public Assignment getVarAssignment_1() { return cVarAssignment_1; }
-		
-		//[Variable]
-		public CrossReference getVarVariableCrossReference_1_0() { return cVarVariableCrossReference_1_0; }
-		
-		//ID
-		public RuleCall getVarVariableIDTerminalRuleCall_1_0_1() { return cVarVariableIDTerminalRuleCall_1_0_1; }
+		//VarExpression
+		public RuleCall getVarExpressionParserRuleCall_1() { return cVarExpressionParserRuleCall_1; }
 		
 		//"(" Expression ")"
 		public Group getGroup_2() { return cGroup_2; }
@@ -1400,70 +1270,101 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	public class LiteralElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.Literal");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cBooleanLiteralParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cRealLiteralParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cTrueLiteralParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cFalseLiteralParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cRealLiteralParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//Literal:
-		//    BooleanLiteral | RealLiteral
+		//    TrueLiteral | FalseLiteral | RealLiteral
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//BooleanLiteral | RealLiteral
+		//TrueLiteral | FalseLiteral | RealLiteral
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
-		//BooleanLiteral
-		public RuleCall getBooleanLiteralParserRuleCall_0() { return cBooleanLiteralParserRuleCall_0; }
+		//TrueLiteral
+		public RuleCall getTrueLiteralParserRuleCall_0() { return cTrueLiteralParserRuleCall_0; }
+		
+		//FalseLiteral
+		public RuleCall getFalseLiteralParserRuleCall_1() { return cFalseLiteralParserRuleCall_1; }
 		
 		//RealLiteral
-		public RuleCall getRealLiteralParserRuleCall_1() { return cRealLiteralParserRuleCall_1; }
+		public RuleCall getRealLiteralParserRuleCall_2() { return cRealLiteralParserRuleCall_2; }
 	}
-	public class BooleanLiteralElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.BooleanLiteral");
+	public class TrueLiteralElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.TrueLiteral");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cBoolLiteralAction_0 = (Action)cGroup.eContents().get(0);
-		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cValBOOLEANTerminalRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
+		private final Action cTrueLiteralAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final Keyword cValueTrueKeyword_1_0 = (Keyword)cValueAssignment_1.eContents().get(0);
 		
-		//BooleanLiteral:
-		//    {BoolLiteral} val=BOOLEAN
+		//TrueLiteral:
+		//    {TrueLiteral} value="true"
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{BoolLiteral} val=BOOLEAN
+		//{TrueLiteral} value="true"
 		public Group getGroup() { return cGroup; }
 		
-		//{BoolLiteral}
-		public Action getBoolLiteralAction_0() { return cBoolLiteralAction_0; }
+		//{TrueLiteral}
+		public Action getTrueLiteralAction_0() { return cTrueLiteralAction_0; }
 		
-		//val=BOOLEAN
-		public Assignment getValAssignment_1() { return cValAssignment_1; }
+		//value="true"
+		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
 		
-		//BOOLEAN
-		public RuleCall getValBOOLEANTerminalRuleCall_1_0() { return cValBOOLEANTerminalRuleCall_1_0; }
+		//"true"
+		public Keyword getValueTrueKeyword_1_0() { return cValueTrueKeyword_1_0; }
+	}
+	public class FalseLiteralElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.FalseLiteral");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cFalseLiteralAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cValueAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final Keyword cValueFalseKeyword_1_0 = (Keyword)cValueAssignment_1.eContents().get(0);
+		
+		//FalseLiteral:
+		//    {FalseLiteral} value="false"
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{FalseLiteral} value="false"
+		public Group getGroup() { return cGroup; }
+		
+		//{FalseLiteral}
+		public Action getFalseLiteralAction_0() { return cFalseLiteralAction_0; }
+		
+		//value="false"
+		public Assignment getValueAssignment_1() { return cValueAssignment_1; }
+		
+		//"false"
+		public Keyword getValueFalseKeyword_1_0() { return cValueFalseKeyword_1_0; }
 	}
 	public class RealLiteralElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.RealLiteral");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cRealLiteralAction_0 = (Action)cGroup.eContents().get(0);
-		private final Assignment cValAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cValREALParserRuleCall_1_0 = (RuleCall)cValAssignment_1.eContents().get(0);
+		private final Assignment cNumAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNumREALParserRuleCall_1_0 = (RuleCall)cNumAssignment_1.eContents().get(0);
 		
+		////BOOLEAN returns ecore::EBoolean hidden():
+		////    "true" | "false"
+		////;
 		//RealLiteral:
-		//    {RealLiteral} val=REAL
+		//    {RealLiteral} num=REAL
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//{RealLiteral} val=REAL
+		//{RealLiteral} num=REAL
 		public Group getGroup() { return cGroup; }
 		
 		//{RealLiteral}
 		public Action getRealLiteralAction_0() { return cRealLiteralAction_0; }
 		
-		//val=REAL
-		public Assignment getValAssignment_1() { return cValAssignment_1; }
+		//num=REAL
+		public Assignment getNumAssignment_1() { return cNumAssignment_1; }
 		
 		//REAL
-		public RuleCall getValREALParserRuleCall_1_0() { return cValREALParserRuleCall_1_0; }
+		public RuleCall getNumREALParserRuleCall_1_0() { return cNumREALParserRuleCall_1_0; }
 	}
 	public class REALElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.REAL");
@@ -1618,25 +1519,25 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final RuleCall cNameSTRINGTerminalRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
 		private final Keyword cTimeConsumedKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Keyword cColonKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Assignment cTimeConsumendAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final RuleCall cTimeConsumendExpressionParserRuleCall_6_0 = (RuleCall)cTimeConsumendAssignment_6.eContents().get(0);
-		private final Assignment cElementsAssignment_7 = (Assignment)cGroup.eContents().get(7);
-		private final RuleCall cElementsCropAttributesParserRuleCall_7_0 = (RuleCall)cElementsAssignment_7.eContents().get(0);
+		private final Assignment cTimeAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cTimeAdditionExpressionParserRuleCall_6_0 = (RuleCall)cTimeAssignment_6.eContents().get(0);
+		private final Assignment cAttributesAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final RuleCall cAttributesCropAttributesParserRuleCall_7_0 = (RuleCall)cAttributesAssignment_7.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		
 		//CropStage:
 		//    "{"
 		//        "name" ":" name=STRING
-		//        "timeConsumed" ":" timeConsumend=Expression
-		//        elements += CropAttributes*
+		//        "timeConsumed" ":" time=AdditionExpression
+		//        attributes += CropAttributes*
 		//    "}"
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//"{"
 		//    "name" ":" name=STRING
-		//    "timeConsumed" ":" timeConsumend=Expression
-		//    elements += CropAttributes*
+		//    "timeConsumed" ":" time=AdditionExpression
+		//    attributes += CropAttributes*
 		//"}"
 		public Group getGroup() { return cGroup; }
 		
@@ -1661,17 +1562,17 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//":"
 		public Keyword getColonKeyword_5() { return cColonKeyword_5; }
 		
-		//timeConsumend=Expression
-		public Assignment getTimeConsumendAssignment_6() { return cTimeConsumendAssignment_6; }
+		//time=AdditionExpression
+		public Assignment getTimeAssignment_6() { return cTimeAssignment_6; }
 		
-		//Expression
-		public RuleCall getTimeConsumendExpressionParserRuleCall_6_0() { return cTimeConsumendExpressionParserRuleCall_6_0; }
+		//AdditionExpression
+		public RuleCall getTimeAdditionExpressionParserRuleCall_6_0() { return cTimeAdditionExpressionParserRuleCall_6_0; }
 		
-		//elements += CropAttributes*
-		public Assignment getElementsAssignment_7() { return cElementsAssignment_7; }
+		//attributes += CropAttributes*
+		public Assignment getAttributesAssignment_7() { return cAttributesAssignment_7; }
 		
 		//CropAttributes
-		public RuleCall getElementsCropAttributesParserRuleCall_7_0() { return cElementsCropAttributesParserRuleCall_7_0; }
+		public RuleCall getAttributesCropAttributesParserRuleCall_7_0() { return cAttributesCropAttributesParserRuleCall_7_0; }
 		
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_8() { return cRightCurlyBracketKeyword_8; }
@@ -1684,14 +1585,14 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final RuleCall cTypeAttributeIDTerminalRuleCall_0_0_1 = (RuleCall)cTypeAttributeCrossReference_0_0.eContents().get(1);
 		private final Keyword cColonKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cValueExpressionParserRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
+		private final RuleCall cValueAdditionExpressionParserRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
 		
 		//CropAttributes:
-		//    type=[Attribute | ID] ":" value=Expression
+		//    type=[Attribute | ID] ":" value=AdditionExpression
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//type=[Attribute | ID] ":" value=Expression
+		//type=[Attribute | ID] ":" value=AdditionExpression
 		public Group getGroup() { return cGroup; }
 		
 		//type=[Attribute | ID]
@@ -1706,11 +1607,11 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//":"
 		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
 		
-		//value=Expression
+		//value=AdditionExpression
 		public Assignment getValueAssignment_2() { return cValueAssignment_2; }
 		
-		//Expression
-		public RuleCall getValueExpressionParserRuleCall_2_0() { return cValueExpressionParserRuleCall_2_0; }
+		//AdditionExpression
+		public RuleCall getValueAdditionExpressionParserRuleCall_2_0() { return cValueAdditionExpressionParserRuleCall_2_0; }
 	}
 	public class FieldElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.Field");
@@ -1725,8 +1626,8 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final RuleCall cFieldNameSTRINGTerminalRuleCall_5_0 = (RuleCall)cFieldNameAssignment_5.eContents().get(0);
 		private final Keyword cIpKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		private final Keyword cColonKeyword_7 = (Keyword)cGroup.eContents().get(7);
-		private final Assignment cIpAssignment_8 = (Assignment)cGroup.eContents().get(8);
-		private final RuleCall cIpIPParserRuleCall_8_0 = (RuleCall)cIpAssignment_8.eContents().get(0);
+		private final Assignment cFieldIPAssignment_8 = (Assignment)cGroup.eContents().get(8);
+		private final RuleCall cFieldIPSTRINGTerminalRuleCall_8_0 = (RuleCall)cFieldIPAssignment_8.eContents().get(0);
 		private final Keyword cTypeKeyword_9 = (Keyword)cGroup.eContents().get(9);
 		private final Keyword cColonKeyword_10 = (Keyword)cGroup.eContents().get(10);
 		private final Assignment cFieldTypeAssignment_11 = (Assignment)cGroup.eContents().get(11);
@@ -1755,7 +1656,7 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//Field:
 		//    "field" name=ID "{"
 		//        "name" ":" fieldName=STRING
-		//        "ip" ":" ip=IP
+		//        "ip" ":" fieldIP=STRING
 		//        "type" ":" fieldType=("inside" | "outside")
 		//        "light" ":" fieldLight=("sunlight" | "LED")
 		//        "monitor" ":" "[" fieldMonitors+=FieldMonitor ("," fieldMonitors+=FieldMonitor)* "]"
@@ -1765,7 +1666,7 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		
 		//"field" name=ID "{"
 		//    "name" ":" fieldName=STRING
-		//    "ip" ":" ip=IP
+		//    "ip" ":" fieldIP=STRING
 		//    "type" ":" fieldType=("inside" | "outside")
 		//    "light" ":" fieldLight=("sunlight" | "LED")
 		//    "monitor" ":" "[" fieldMonitors+=FieldMonitor ("," fieldMonitors+=FieldMonitor)* "]"
@@ -1802,11 +1703,11 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//":"
 		public Keyword getColonKeyword_7() { return cColonKeyword_7; }
 		
-		//ip=IP
-		public Assignment getIpAssignment_8() { return cIpAssignment_8; }
+		//fieldIP=STRING
+		public Assignment getFieldIPAssignment_8() { return cFieldIPAssignment_8; }
 		
-		//IP
-		public RuleCall getIpIPParserRuleCall_8_0() { return cIpIPParserRuleCall_8_0; }
+		//STRING
+		public RuleCall getFieldIPSTRINGTerminalRuleCall_8_0() { return cFieldIPSTRINGTerminalRuleCall_8_0; }
 		
 		//"type"
 		public Keyword getTypeKeyword_9() { return cTypeKeyword_9; }
@@ -1877,54 +1778,6 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_21() { return cRightCurlyBracketKeyword_21; }
 	}
-	public class IPElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.IP");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cINTTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
-		private final Keyword cFullStopKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final RuleCall cINTTerminalRuleCall_2_0 = (RuleCall)cGroup_2.eContents().get(0);
-		private final Keyword cFullStopKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
-		private final Group cGroup_2_2 = (Group)cGroup_2.eContents().get(2);
-		private final RuleCall cINTTerminalRuleCall_2_2_0 = (RuleCall)cGroup_2_2.eContents().get(0);
-		private final Keyword cFullStopKeyword_2_2_1 = (Keyword)cGroup_2_2.eContents().get(1);
-		private final RuleCall cINTTerminalRuleCall_2_2_2 = (RuleCall)cGroup_2_2.eContents().get(2);
-		
-		//IP hidden():
-		//    (INT '.' (INT '.' (INT '.' (INT))))
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//(INT '.' (INT '.' (INT '.' (INT))))
-		public Group getGroup() { return cGroup; }
-		
-		//INT
-		public RuleCall getINTTerminalRuleCall_0() { return cINTTerminalRuleCall_0; }
-		
-		//'.'
-		public Keyword getFullStopKeyword_1() { return cFullStopKeyword_1; }
-		
-		//(INT '.' (INT '.' (INT)))
-		public Group getGroup_2() { return cGroup_2; }
-		
-		//INT
-		public RuleCall getINTTerminalRuleCall_2_0() { return cINTTerminalRuleCall_2_0; }
-		
-		//'.'
-		public Keyword getFullStopKeyword_2_1() { return cFullStopKeyword_2_1; }
-		
-		//(INT '.' (INT))
-		public Group getGroup_2_2() { return cGroup_2_2; }
-		
-		//INT
-		public RuleCall getINTTerminalRuleCall_2_2_0() { return cINTTerminalRuleCall_2_2_0; }
-		
-		//'.'
-		public Keyword getFullStopKeyword_2_2_1() { return cFullStopKeyword_2_2_1; }
-		
-		//(INT)
-		public RuleCall getINTTerminalRuleCall_2_2_2() { return cINTTerminalRuleCall_2_2_2; }
-	}
 	public class FieldMonitorElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.FieldMonitor");
 		private final Assignment cMonitorAssignment = (Assignment)rule.eContents().get(1);
@@ -1949,245 +1802,54 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.Mission");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cMissionKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cMissionStatementsAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final Alternatives cMissionStatementsAlternatives_3_0 = (Alternatives)cMissionStatementsAssignment_3.eContents().get(0);
-		private final RuleCall cMissionStatementsTaskStatementParserRuleCall_3_0_0 = (RuleCall)cMissionStatementsAlternatives_3_0.eContents().get(0);
-		private final RuleCall cMissionStatementsExecuteStatementParserRuleCall_3_0_1 = (RuleCall)cMissionStatementsAlternatives_3_0.eContents().get(1);
-		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cMissionStatementsAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cMissionStatementsStatementParserRuleCall_2_0 = (RuleCall)cMissionStatementsAssignment_2.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//// Main code block
 		//Mission:
-		//    "mission" name=ID "{"
-		//        missionStatements += (TaskStatement | ExecuteStatement)+
+		//    "mission" "{"
+		//        missionStatements += Statement* // (ExecuteStatement| TaskStatement)+
 		//    "}"
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//"mission" name=ID "{"
-		//    missionStatements += (TaskStatement | ExecuteStatement)+
+		//"mission" "{"
+		//    missionStatements += Statement* // (ExecuteStatement| TaskStatement)+
 		//"}"
 		public Group getGroup() { return cGroup; }
 		
 		//"mission"
 		public Keyword getMissionKeyword_0() { return cMissionKeyword_0; }
 		
-		//name=ID
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-		
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
-		
 		//"{"
-		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 		
-		//missionStatements += (TaskStatement | ExecuteStatement)+
-		public Assignment getMissionStatementsAssignment_3() { return cMissionStatementsAssignment_3; }
-		
-		//(TaskStatement | ExecuteStatement)
-		public Alternatives getMissionStatementsAlternatives_3_0() { return cMissionStatementsAlternatives_3_0; }
-		
-		//TaskStatement
-		public RuleCall getMissionStatementsTaskStatementParserRuleCall_3_0_0() { return cMissionStatementsTaskStatementParserRuleCall_3_0_0; }
-		
-		//ExecuteStatement
-		public RuleCall getMissionStatementsExecuteStatementParserRuleCall_3_0_1() { return cMissionStatementsExecuteStatementParserRuleCall_3_0_1; }
-		
-		//"}"
-		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
-	}
-	public class TaskStatementElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.TaskStatement");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cTaskKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Assignment cParmasAssignment_3_0 = (Assignment)cGroup_3.eContents().get(0);
-		private final RuleCall cParmasParamParserRuleCall_3_0_0 = (RuleCall)cParmasAssignment_3_0.eContents().get(0);
-		private final Group cGroup_3_1 = (Group)cGroup_3.eContents().get(1);
-		private final Keyword cCommaKeyword_3_1_0 = (Keyword)cGroup_3_1.eContents().get(0);
-		private final Assignment cParmasAssignment_3_1_1 = (Assignment)cGroup_3_1.eContents().get(1);
-		private final RuleCall cParmasParamParserRuleCall_3_1_1_0 = (RuleCall)cParmasAssignment_3_1_1.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		private final Keyword cColonKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		private final Assignment cTypeNameAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final RuleCall cTypeNameTypeNameParserRuleCall_6_0 = (RuleCall)cTypeNameAssignment_6.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
-		private final Assignment cTaskStatementsAssignment_8 = (Assignment)cGroup.eContents().get(8);
-		private final Alternatives cTaskStatementsAlternatives_8_0 = (Alternatives)cTaskStatementsAssignment_8.eContents().get(0);
-		private final RuleCall cTaskStatementsStatementParserRuleCall_8_0_0 = (RuleCall)cTaskStatementsAlternatives_8_0.eContents().get(0);
-		private final RuleCall cTaskStatementsReturnStatementParserRuleCall_8_0_1 = (RuleCall)cTaskStatementsAlternatives_8_0.eContents().get(1);
-		private final Keyword cRightCurlyBracketKeyword_9 = (Keyword)cGroup.eContents().get(9);
-		
-		//// Task code block
-		//TaskStatement:
-		//    "task" name=ID "(" (parmas+=Param ("," parmas+=Param)*)? ")" ":" typeName=TypeName "{"
-		//        taskStatements += (Statement | ReturnStatement)*
-		//    "}"
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//"task" name=ID "(" (parmas+=Param ("," parmas+=Param)*)? ")" ":" typeName=TypeName "{"
-		//    taskStatements += (Statement | ReturnStatement)*
-		//"}"
-		public Group getGroup() { return cGroup; }
-		
-		//"task"
-		public Keyword getTaskKeyword_0() { return cTaskKeyword_0; }
-		
-		//name=ID
-		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
-		
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
-		
-		//"("
-		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
-		
-		//(parmas+=Param ("," parmas+=Param)*)?
-		public Group getGroup_3() { return cGroup_3; }
-		
-		//parmas+=Param
-		public Assignment getParmasAssignment_3_0() { return cParmasAssignment_3_0; }
-		
-		//Param
-		public RuleCall getParmasParamParserRuleCall_3_0_0() { return cParmasParamParserRuleCall_3_0_0; }
-		
-		//("," parmas+=Param)*
-		public Group getGroup_3_1() { return cGroup_3_1; }
-		
-		//","
-		public Keyword getCommaKeyword_3_1_0() { return cCommaKeyword_3_1_0; }
-		
-		//parmas+=Param
-		public Assignment getParmasAssignment_3_1_1() { return cParmasAssignment_3_1_1; }
-		
-		//Param
-		public RuleCall getParmasParamParserRuleCall_3_1_1_0() { return cParmasParamParserRuleCall_3_1_1_0; }
-		
-		//")"
-		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
-		
-		//":"
-		public Keyword getColonKeyword_5() { return cColonKeyword_5; }
-		
-		//typeName=TypeName
-		public Assignment getTypeNameAssignment_6() { return cTypeNameAssignment_6; }
-		
-		//TypeName
-		public RuleCall getTypeNameTypeNameParserRuleCall_6_0() { return cTypeNameTypeNameParserRuleCall_6_0; }
-		
-		//"{"
-		public Keyword getLeftCurlyBracketKeyword_7() { return cLeftCurlyBracketKeyword_7; }
-		
-		//taskStatements += (Statement | ReturnStatement)*
-		public Assignment getTaskStatementsAssignment_8() { return cTaskStatementsAssignment_8; }
-		
-		//(Statement | ReturnStatement)
-		public Alternatives getTaskStatementsAlternatives_8_0() { return cTaskStatementsAlternatives_8_0; }
+		//missionStatements += Statement*
+		public Assignment getMissionStatementsAssignment_2() { return cMissionStatementsAssignment_2; }
 		
 		//Statement
-		public RuleCall getTaskStatementsStatementParserRuleCall_8_0_0() { return cTaskStatementsStatementParserRuleCall_8_0_0; }
+		public RuleCall getMissionStatementsStatementParserRuleCall_2_0() { return cMissionStatementsStatementParserRuleCall_2_0; }
 		
-		//ReturnStatement
-		public RuleCall getTaskStatementsReturnStatementParserRuleCall_8_0_1() { return cTaskStatementsReturnStatementParserRuleCall_8_0_1; }
-		
-		//"}"
-		public Keyword getRightCurlyBracketKeyword_9() { return cRightCurlyBracketKeyword_9; }
-	}
-	public class ReturnStatementElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.ReturnStatement");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cReturnKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cValueExpressionParserRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		
-		//ReturnStatement:
-		//    "return" "(" value=Expression ")"
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//"return" "(" value=Expression ")"
-		public Group getGroup() { return cGroup; }
-		
-		//"return"
-		public Keyword getReturnKeyword_0() { return cReturnKeyword_0; }
-		
-		//"("
-		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
-		
-		//value=Expression
-		public Assignment getValueAssignment_2() { return cValueAssignment_2; }
-		
-		//Expression
-		public RuleCall getValueExpressionParserRuleCall_2_0() { return cValueExpressionParserRuleCall_2_0; }
-		
-		//")"
-		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
-	}
-	public class ExecuteStatementElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.ExecuteStatement");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cExecuteStatementAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cExecuteKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cExecuteStatementsAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cExecuteStatementsStatementParserRuleCall_3_0 = (RuleCall)cExecuteStatementsAssignment_3.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		
-		//ExecuteStatement:
-		//    {ExecuteStatement}
-		//    "execute" "{"
-		//        executeStatements += Statement*
-		//    "}"
-		//;
-		@Override public ParserRule getRule() { return rule; }
-		
-		//{ExecuteStatement}
-		//"execute" "{"
-		//    executeStatements += Statement*
-		//"}"
-		public Group getGroup() { return cGroup; }
-		
-		//{ExecuteStatement}
-		public Action getExecuteStatementAction_0() { return cExecuteStatementAction_0; }
-		
-		//"execute"
-		public Keyword getExecuteKeyword_1() { return cExecuteKeyword_1; }
-		
-		//"{"
-		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
-		
-		//executeStatements += Statement*
-		public Assignment getExecuteStatementsAssignment_3() { return cExecuteStatementsAssignment_3; }
-		
-		//Statement
-		public RuleCall getExecuteStatementsStatementParserRuleCall_3_0() { return cExecuteStatementsStatementParserRuleCall_3_0; }
-		
-		//"}"
-		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
+		//// (ExecuteStatement| TaskStatement)+
+		//   "}"
+		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
 	}
 	
 	
 	private final FarmProgramElements pFarmProgram;
-	private final ParamElements pParam;
-	private final TypeNameElements pTypeName;
 	private final StatementElements pStatement;
-	private final EntityElements pEntity;
 	private final AttributeElements pAttribute;
 	private final VariableElements pVariable;
+	private final VarExpressionElements pVarExpression;
+	private final AssignmentElements pAssignment;
 	private final LoopStatementElements pLoopStatement;
 	private final JudgeStatementElements pJudgeStatement;
 	private final ElseJudgeStatementElements pElseJudgeStatement;
 	private final ElseStatementElements pElseStatement;
 	private final BuiltinFunctionElements pBuiltinFunction;
-	private final GetValueFunctionElements pGetValueFunction;
+	private final InstanceElements pInstance;
 	private final ReportFunctionElements pReportFunction;
 	private final CountStageFunctionElements pCountStageFunction;
 	private final SetFieldValueFunctionElements pSetFieldValueFunction;
@@ -2205,8 +1867,8 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	private final NotBooleanExpressionElements pNotBooleanExpression;
 	private final PrimaryExpressionElements pPrimaryExpression;
 	private final LiteralElements pLiteral;
-	private final BooleanLiteralElements pBooleanLiteral;
-	private final TerminalRule tBOOLEAN;
+	private final TrueLiteralElements pTrueLiteral;
+	private final FalseLiteralElements pFalseLiteral;
 	private final RealLiteralElements pRealLiteral;
 	private final REALElements pREAL;
 	private final CropElements pCrop;
@@ -2214,12 +1876,8 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	private final CropStageElements pCropStage;
 	private final CropAttributesElements pCropAttributes;
 	private final FieldElements pField;
-	private final IPElements pIP;
 	private final FieldMonitorElements pFieldMonitor;
 	private final MissionElements pMission;
-	private final TaskStatementElements pTaskStatement;
-	private final ReturnStatementElements pReturnStatement;
-	private final ExecuteStatementElements pExecuteStatement;
 	
 	private final Grammar grammar;
 	
@@ -2231,18 +1889,17 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 		this.pFarmProgram = new FarmProgramElements();
-		this.pParam = new ParamElements();
-		this.pTypeName = new TypeNameElements();
 		this.pStatement = new StatementElements();
-		this.pEntity = new EntityElements();
 		this.pAttribute = new AttributeElements();
 		this.pVariable = new VariableElements();
+		this.pVarExpression = new VarExpressionElements();
+		this.pAssignment = new AssignmentElements();
 		this.pLoopStatement = new LoopStatementElements();
 		this.pJudgeStatement = new JudgeStatementElements();
 		this.pElseJudgeStatement = new ElseJudgeStatementElements();
 		this.pElseStatement = new ElseStatementElements();
 		this.pBuiltinFunction = new BuiltinFunctionElements();
-		this.pGetValueFunction = new GetValueFunctionElements();
+		this.pInstance = new InstanceElements();
 		this.pReportFunction = new ReportFunctionElements();
 		this.pCountStageFunction = new CountStageFunctionElements();
 		this.pSetFieldValueFunction = new SetFieldValueFunctionElements();
@@ -2260,8 +1917,8 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		this.pNotBooleanExpression = new NotBooleanExpressionElements();
 		this.pPrimaryExpression = new PrimaryExpressionElements();
 		this.pLiteral = new LiteralElements();
-		this.pBooleanLiteral = new BooleanLiteralElements();
-		this.tBOOLEAN = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.BOOLEAN");
+		this.pTrueLiteral = new TrueLiteralElements();
+		this.pFalseLiteral = new FalseLiteralElements();
 		this.pRealLiteral = new RealLiteralElements();
 		this.pREAL = new REALElements();
 		this.pCrop = new CropElements();
@@ -2269,12 +1926,8 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		this.pCropStage = new CropStageElements();
 		this.pCropAttributes = new CropAttributesElements();
 		this.pField = new FieldElements();
-		this.pIP = new IPElements();
 		this.pFieldMonitor = new FieldMonitorElements();
 		this.pMission = new MissionElements();
-		this.pTaskStatement = new TaskStatementElements();
-		this.pReturnStatement = new ReturnStatementElements();
-		this.pExecuteStatement = new ExecuteStatementElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -2306,10 +1959,10 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	
 	//FarmProgram:
 	//    statements += (
+	//        Attribute |
 	//        Crop |
 	//        Field |
-	//        Mission |
-	//        Attribute
+	//        Mission
 	//    )+
 	//;
 	public FarmProgramElements getFarmProgramAccess() {
@@ -2321,34 +1974,9 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	}
 	
 	//// General statement
-	//Param:
-	//    "crop" param=ID |
-	//    "field" param=ID |
-	//    "mission" param=ID |
-	//    "real" param=ID |
-	//    "string" param=ID
-	//;
-	public ParamElements getParamAccess() {
-		return pParam;
-	}
-	
-	public ParserRule getParamRule() {
-		return getParamAccess().getRule();
-	}
-	
-	//TypeName:
-	//    "null" | "real" | "boolean" | "string"
-	//;
-	public TypeNameElements getTypeNameAccess() {
-		return pTypeName;
-	}
-	
-	public ParserRule getTypeNameRule() {
-		return getTypeNameAccess().getRule();
-	}
-	
 	//Statement:
 	//    Variable |
+	//    Assignment |
 	//    LoopStatement |
 	//    JudgeStatement |
 	//    BuiltinFunction
@@ -2361,29 +1989,6 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		return getStatementAccess().getRule();
 	}
 	
-	//Entity:
-	//    Crop |
-	//    Field |
-	//    Variable
-	//;
-	public EntityElements getEntityAccess() {
-		return pEntity;
-	}
-	
-	public ParserRule getEntityRule() {
-		return getEntityAccess().getRule();
-	}
-	
-	////Attribute:
-	////    entity=[Entity | ID] (
-	////        ".name" |
-	////        ".stage" |
-	////        ".ip" |
-	////        ".type" |
-	////        ".light" |
-	////        "." monitor=[Attribute | ID]
-	////    )?
-	////;
 	//// Define codes
 	//Attribute:
 	//    "define" name=ID
@@ -2397,7 +2002,7 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	}
 	
 	//Variable:
-	//    "var" name=ID "=" expression=Expression // | attribute=Attribute
+	//    "var" name=ID "=" expression=Expression
 	//;
 	public VariableElements getVariableAccess() {
 		return pVariable;
@@ -2405,6 +2010,28 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	
 	public ParserRule getVariableRule() {
 		return getVariableAccess().getRule();
+	}
+	
+	//VarExpression:
+	//    var=[Variable]
+	//;
+	public VarExpressionElements getVarExpressionAccess() {
+		return pVarExpression;
+	}
+	
+	public ParserRule getVarExpressionRule() {
+		return getVarExpressionAccess().getRule();
+	}
+	
+	//Assignment:
+	//    var=[Variable] "=" expression=Expression
+	//;
+	public AssignmentElements getAssignmentAccess() {
+		return pAssignment;
+	}
+	
+	public ParserRule getAssignmentRule() {
+		return getAssignmentAccess().getRule();
 	}
 	
 	//LoopStatement:
@@ -2425,7 +2052,7 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	//        judgeStatements += Statement*
 	//    "}"
 	//    elseJudgeStatements += ElseJudgeStatement*
-	//    elseStatements += ElseStatement?
+	//    elseStatement += ElseStatement?
 	//;
 	public JudgeStatementElements getJudgeStatementAccess() {
 		return pJudgeStatement;
@@ -2461,7 +2088,6 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	}
 	
 	//BuiltinFunction:
-	//    GetValueFunction |
 	//    ReportFunction |
 	//    CountStageFunction |
 	//    SetFieldValueFunction |
@@ -2477,19 +2103,21 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		return getBuiltinFunctionAccess().getRule();
 	}
 	
-	//GetValueFunction:
-	//    entity=[Entity] ".getValue(" attribute=STRING ")"
+	//Instance:
+	//    Crop |
+	//    Field |
+	//    Variable
 	//;
-	public GetValueFunctionElements getGetValueFunctionAccess() {
-		return pGetValueFunction;
+	public InstanceElements getInstanceAccess() {
+		return pInstance;
 	}
 	
-	public ParserRule getGetValueFunctionRule() {
-		return getGetValueFunctionAccess().getRule();
+	public ParserRule getInstanceRule() {
+		return getInstanceAccess().getRule();
 	}
 	
 	//ReportFunction:
-	//    "report(" entity=[Entity | ID] ")"
+	//    "report(" instance=[Instance | ID] ")"
 	//;
 	public ReportFunctionElements getReportFunctionAccess() {
 		return pReportFunction;
@@ -2500,7 +2128,7 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	}
 	
 	//CountStageFunction:
-	//    countStageCrop=[Crop | ID] ".countStage(" ")"
+	//    countStageCrop=[Crop] ".countStage(" ")"
 	//;
 	public CountStageFunctionElements getCountStageFunctionAccess() {
 		return pCountStageFunction;
@@ -2511,7 +2139,7 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	}
 	
 	//SetFieldValueFunction:
-	//    setValueField=[Field | ID] ".setFieldValue(" setFieldAttribute=STRING "," setFieldValue=AdditionExpression ")"
+	//    setValueField=[Field] ".setFieldValue(" setFieldAttribute=STRING "," setFieldValue=AdditionExpression ")"
 	//;
 	public SetFieldValueFunctionElements getSetFieldValueFunctionAccess() {
 		return pSetFieldValueFunction;
@@ -2544,7 +2172,7 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	}
 	
 	//WaitFunction:
-	//    "wait(" value=AdditionExpression ")"
+	//    "wait(" value=Expression ")"
 	//;
 	public WaitFunctionElements getWaitFunctionAccess() {
 		return pWaitFunction;
@@ -2614,7 +2242,7 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	//    MultiplicationExpression ( => (
 	//        {Plus.left=current} "+" |
 	//        {Minus.left=current} "-"
-	//    ) right+=MultiplicationExpression )*
+	//    ) right=MultiplicationExpression )*
 	//;
 	public AdditionExpressionElements getAdditionExpressionAccess() {
 		return pAdditionExpression;
@@ -2628,7 +2256,7 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	//    UnaryExpression ( => (
 	//        {Multiply.left=current} "*" |
 	//        {Divide.left=current} "/"
-	//    ) right+=UnaryExpression)*
+	//    ) right=UnaryExpression )*
 	//;
 	public MultiplicationExpressionElements getMultiplicationExpressionAccess() {
 		return pMultiplicationExpression;
@@ -2661,7 +2289,7 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		return getUnaryExpressionNotPlusMinusAccess().getRule();
 	}
 	
-	//NotBooleanExpression returns Expression:
+	//NotBooleanExpression:
 	//    "!" exp=UnaryExpression
 	//;
 	public NotBooleanExpressionElements getNotBooleanExpressionAccess() {
@@ -2674,7 +2302,7 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	
 	//PrimaryExpression returns Expression:
 	//    Literal |
-	//    var=[Variable] |
+	//    VarExpression |
 	//    "(" Expression ")"
 	//;
 	public PrimaryExpressionElements getPrimaryExpressionAccess() {
@@ -2686,7 +2314,7 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	}
 	
 	//Literal:
-	//    BooleanLiteral | RealLiteral
+	//    TrueLiteral | FalseLiteral | RealLiteral
 	//;
 	public LiteralElements getLiteralAccess() {
 		return pLiteral;
@@ -2696,26 +2324,33 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		return getLiteralAccess().getRule();
 	}
 	
-	//BooleanLiteral:
-	//    {BoolLiteral} val=BOOLEAN
+	//TrueLiteral:
+	//    {TrueLiteral} value="true"
 	//;
-	public BooleanLiteralElements getBooleanLiteralAccess() {
-		return pBooleanLiteral;
+	public TrueLiteralElements getTrueLiteralAccess() {
+		return pTrueLiteral;
 	}
 	
-	public ParserRule getBooleanLiteralRule() {
-		return getBooleanLiteralAccess().getRule();
+	public ParserRule getTrueLiteralRule() {
+		return getTrueLiteralAccess().getRule();
 	}
 	
-	//terminal BOOLEAN returns ecore::EBoolean:
-	//    "true" | "false"
+	//FalseLiteral:
+	//    {FalseLiteral} value="false"
 	//;
-	public TerminalRule getBOOLEANRule() {
-		return tBOOLEAN;
+	public FalseLiteralElements getFalseLiteralAccess() {
+		return pFalseLiteral;
 	}
 	
+	public ParserRule getFalseLiteralRule() {
+		return getFalseLiteralAccess().getRule();
+	}
+	
+	////BOOLEAN returns ecore::EBoolean hidden():
+	////    "true" | "false"
+	////;
 	//RealLiteral:
-	//    {RealLiteral} val=REAL
+	//    {RealLiteral} num=REAL
 	//;
 	public RealLiteralElements getRealLiteralAccess() {
 		return pRealLiteral;
@@ -2767,8 +2402,8 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	//CropStage:
 	//    "{"
 	//        "name" ":" name=STRING
-	//        "timeConsumed" ":" timeConsumend=Expression
-	//        elements += CropAttributes*
+	//        "timeConsumed" ":" time=AdditionExpression
+	//        attributes += CropAttributes*
 	//    "}"
 	//;
 	public CropStageElements getCropStageAccess() {
@@ -2780,7 +2415,7 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	}
 	
 	//CropAttributes:
-	//    type=[Attribute | ID] ":" value=Expression
+	//    type=[Attribute | ID] ":" value=AdditionExpression
 	//;
 	public CropAttributesElements getCropAttributesAccess() {
 		return pCropAttributes;
@@ -2794,7 +2429,7 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	//Field:
 	//    "field" name=ID "{"
 	//        "name" ":" fieldName=STRING
-	//        "ip" ":" ip=IP
+	//        "ip" ":" fieldIP=STRING
 	//        "type" ":" fieldType=("inside" | "outside")
 	//        "light" ":" fieldLight=("sunlight" | "LED")
 	//        "monitor" ":" "[" fieldMonitors+=FieldMonitor ("," fieldMonitors+=FieldMonitor)* "]"
@@ -2806,17 +2441,6 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	
 	public ParserRule getFieldRule() {
 		return getFieldAccess().getRule();
-	}
-	
-	//IP hidden():
-	//    (INT '.' (INT '.' (INT '.' (INT))))
-	//;
-	public IPElements getIPAccess() {
-		return pIP;
-	}
-	
-	public ParserRule getIPRule() {
-		return getIPAccess().getRule();
 	}
 	
 	//FieldMonitor:
@@ -2832,8 +2456,8 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	
 	//// Main code block
 	//Mission:
-	//    "mission" name=ID "{"
-	//        missionStatements += (TaskStatement | ExecuteStatement)+
+	//    "mission" "{"
+	//        missionStatements += Statement* // (ExecuteStatement| TaskStatement)+
 	//    "}"
 	//;
 	public MissionElements getMissionAccess() {
@@ -2842,45 +2466,6 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	
 	public ParserRule getMissionRule() {
 		return getMissionAccess().getRule();
-	}
-	
-	//// Task code block
-	//TaskStatement:
-	//    "task" name=ID "(" (parmas+=Param ("," parmas+=Param)*)? ")" ":" typeName=TypeName "{"
-	//        taskStatements += (Statement | ReturnStatement)*
-	//    "}"
-	//;
-	public TaskStatementElements getTaskStatementAccess() {
-		return pTaskStatement;
-	}
-	
-	public ParserRule getTaskStatementRule() {
-		return getTaskStatementAccess().getRule();
-	}
-	
-	//ReturnStatement:
-	//    "return" "(" value=Expression ")"
-	//;
-	public ReturnStatementElements getReturnStatementAccess() {
-		return pReturnStatement;
-	}
-	
-	public ParserRule getReturnStatementRule() {
-		return getReturnStatementAccess().getRule();
-	}
-	
-	//ExecuteStatement:
-	//    {ExecuteStatement}
-	//    "execute" "{"
-	//        executeStatements += Statement*
-	//    "}"
-	//;
-	public ExecuteStatementElements getExecuteStatementAccess() {
-		return pExecuteStatement;
-	}
-	
-	public ParserRule getExecuteStatementRule() {
-		return getExecuteStatementAccess().getRule();
 	}
 	
 	//terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;

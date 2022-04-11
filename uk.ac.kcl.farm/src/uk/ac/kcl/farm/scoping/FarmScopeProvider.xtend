@@ -3,25 +3,22 @@
  */
 package uk.ac.kcl.farm.scoping
 
-import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EReference
 import org.eclipse.xtext.scoping.IScope
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider
+
+import uk.ac.kcl.farm.farm.Mission
 import uk.ac.kcl.farm.farm.Variable
 import uk.ac.kcl.farm.farm.Expression
-import uk.ac.kcl.farm.farm.Entity
 import uk.ac.kcl.farm.farm.ReportFunction
 import uk.ac.kcl.farm.farm.LoopStatement
-import uk.ac.kcl.farm.farm.TaskStatement
-import uk.ac.kcl.farm.farm.ExecuteStatement
+//import uk.ac.kcl.farm.farm.TaskStatement
+//import uk.ac.kcl.farm.farm.ExecuteStatement
 //import uk.ac.kcl.farm.farm.JudgeStatement
 //import uk.ac.kcl.farm.farm.ElseJudgeStatement
 //import uk.ac.kcl.farm.farm.ElseStatement
-//
-//import uk.ac.kcl.farm.farm.Call
 
 import static org.eclipse.xtext.scoping.Scopes.*
-//import static extension org.eclipse.xtext.EcoreUtil2.*
 
 /**
  * This class contains custom scoping description.
@@ -32,42 +29,45 @@ import static org.eclipse.xtext.scoping.Scopes.*
 class FarmScopeProvider extends AbstractDeclarativeScopeProvider {
 	
 	def IScope scope_ReportFunction_var(ReportFunction context, EReference ref) {
-		System.out.println(context.entity);
+		System.out.println(context);
       	context.visibleVariablesScope
 	}
 
-	dispatch def IScope visibleVariablesScope(Expression context) {
-		context.eContainer.visibleVariablesScope
+	def IScope scope_Expression_expression(Expression context) {
+		System.out.println(context);
+      	context.visibleVariablesScope
 	}
 	
-	dispatch def IScope visibleVariablesScope(Entity context) {
-		context.eContainer.visibleVariablesScope
-	}
+	dispatch def IScope visibleVariablesScope(Mission context) {
+		scopeFor(context.missionStatements.filter(Variable))
+	}	
 	
-	dispatch def IScope visibleVariablesScope(EObject context) {
-		context.eContainer.visibleVariablesScope
-	}
+//	dispatch def IScope visibleVariablesScope(TaskStatement context) {
+//		scopeFor(context.taskStatements.filter(Variable))
+//	}
 	
-	dispatch def IScope visibleVariablesScope(TaskStatement context) {
-		scopeFor(context.taskStatements.filter(Variable))
-	}
+//	dispatch def IScope visibleVariablesScope(ExecuteStatement context) {
+//		scopeFor(context.executeStatements.filter(Variable))
+//	}
 	
-	dispatch def IScope visibleVariablesScope(ExecuteStatement context) {
-		scopeFor(context.executeStatements.filter(Variable))
-	}
-	
+
 	dispatch def IScope visibleVariablesScope(LoopStatement context) {
 		context.eContainer.internalVisibleVariablesScope
 	}
 	
-	dispatch def IScope internalVisibleVariablesScope(TaskStatement context) {
-		System.out.println(context.name);
-		scopeFor(context.taskStatements.filter(Variable))
-	}
+//	dispatch def IScope internalVisibleVariablesScope(TaskStatement context) {
+//		System.out.println(context.name);
+//		scopeFor(context.taskStatements.filter(Variable))
+//	}
 	
-	dispatch def IScope internalVisibleVariablesScope(ExecuteStatement context) {
-		System.out.println(context.executeStatements);
-		scopeFor(context.executeStatements.filter(Variable))
+//	dispatch def IScope internalVisibleVariablesScope(ExecuteStatement context) {
+//		System.out.println(context.executeStatements);
+//		scopeFor(context.executeStatements.filter(Variable))
+//	}
+
+	dispatch def IScope internalVisibleVariablesScope(Mission context) {
+		System.out.println(context.missionStatements);
+		scopeFor(context.missionStatements.filter(Variable))
 	}
 	
 	dispatch def IScope internalVisibleVariablesScope(LoopStatement context) {

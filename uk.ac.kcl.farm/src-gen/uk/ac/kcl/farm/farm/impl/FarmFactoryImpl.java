@@ -66,17 +66,17 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
     switch (eClass.getClassifierID())
     {
       case FarmPackage.FARM_PROGRAM: return createFarmProgram();
-      case FarmPackage.PARAM: return createParam();
       case FarmPackage.STATEMENT: return createStatement();
-      case FarmPackage.ENTITY: return createEntity();
       case FarmPackage.ATTRIBUTE: return createAttribute();
       case FarmPackage.VARIABLE: return createVariable();
+      case FarmPackage.VAR_EXPRESSION: return createVarExpression();
+      case FarmPackage.ASSIGNMENT: return createAssignment();
       case FarmPackage.LOOP_STATEMENT: return createLoopStatement();
       case FarmPackage.JUDGE_STATEMENT: return createJudgeStatement();
       case FarmPackage.ELSE_JUDGE_STATEMENT: return createElseJudgeStatement();
       case FarmPackage.ELSE_STATEMENT: return createElseStatement();
       case FarmPackage.BUILTIN_FUNCTION: return createBuiltinFunction();
-      case FarmPackage.GET_VALUE_FUNCTION: return createGetValueFunction();
+      case FarmPackage.INSTANCE: return createInstance();
       case FarmPackage.REPORT_FUNCTION: return createReportFunction();
       case FarmPackage.COUNT_STAGE_FUNCTION: return createCountStageFunction();
       case FarmPackage.SET_FIELD_VALUE_FUNCTION: return createSetFieldValueFunction();
@@ -84,8 +84,10 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
       case FarmPackage.MOVE_FUNCTION: return createMoveFunction();
       case FarmPackage.WAIT_FUNCTION: return createWaitFunction();
       case FarmPackage.EXPRESSION: return createExpression();
+      case FarmPackage.NOT_BOOLEAN_EXPRESSION: return createNotBooleanExpression();
       case FarmPackage.LITERAL: return createLiteral();
-      case FarmPackage.BOOLEAN_LITERAL: return createBooleanLiteral();
+      case FarmPackage.TRUE_LITERAL: return createTrueLiteral();
+      case FarmPackage.FALSE_LITERAL: return createFalseLiteral();
       case FarmPackage.REAL_LITERAL: return createRealLiteral();
       case FarmPackage.CROP: return createCrop();
       case FarmPackage.CROP_STAGES: return createCropStages();
@@ -94,9 +96,6 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
       case FarmPackage.FIELD: return createField();
       case FarmPackage.FIELD_MONITOR: return createFieldMonitor();
       case FarmPackage.MISSION: return createMission();
-      case FarmPackage.TASK_STATEMENT: return createTaskStatement();
-      case FarmPackage.RETURN_STATEMENT: return createReturnStatement();
-      case FarmPackage.EXECUTE_STATEMENT: return createExecuteStatement();
       case FarmPackage.CONDITION_OR_EXPRESSION: return createConditionOrExpression();
       case FarmPackage.CONDITION_AND_EXPRESSION: return createConditionAndExpression();
       case FarmPackage.LESS_THAN_OR_EQUAL: return createLessThanOrEqual();
@@ -110,7 +109,6 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
       case FarmPackage.MULTIPLY: return createMultiply();
       case FarmPackage.DIVIDE: return createDivide();
       case FarmPackage.UNARY_EXPRESSION: return createUnaryExpression();
-      case FarmPackage.BOOL_LITERAL: return createBoolLiteral();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -134,34 +132,10 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
    * @generated
    */
   @Override
-  public Param createParam()
-  {
-    ParamImpl param = new ParamImpl();
-    return param;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public Statement createStatement()
   {
     StatementImpl statement = new StatementImpl();
     return statement;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Entity createEntity()
-  {
-    EntityImpl entity = new EntityImpl();
-    return entity;
   }
 
   /**
@@ -186,6 +160,30 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
   {
     VariableImpl variable = new VariableImpl();
     return variable;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public VarExpression createVarExpression()
+  {
+    VarExpressionImpl varExpression = new VarExpressionImpl();
+    return varExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Assignment createAssignment()
+  {
+    AssignmentImpl assignment = new AssignmentImpl();
+    return assignment;
   }
 
   /**
@@ -254,10 +252,10 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
    * @generated
    */
   @Override
-  public GetValueFunction createGetValueFunction()
+  public Instance createInstance()
   {
-    GetValueFunctionImpl getValueFunction = new GetValueFunctionImpl();
-    return getValueFunction;
+    InstanceImpl instance = new InstanceImpl();
+    return instance;
   }
 
   /**
@@ -350,6 +348,18 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
    * @generated
    */
   @Override
+  public NotBooleanExpression createNotBooleanExpression()
+  {
+    NotBooleanExpressionImpl notBooleanExpression = new NotBooleanExpressionImpl();
+    return notBooleanExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Literal createLiteral()
   {
     LiteralImpl literal = new LiteralImpl();
@@ -362,10 +372,22 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
    * @generated
    */
   @Override
-  public BooleanLiteral createBooleanLiteral()
+  public TrueLiteral createTrueLiteral()
   {
-    BooleanLiteralImpl booleanLiteral = new BooleanLiteralImpl();
-    return booleanLiteral;
+    TrueLiteralImpl trueLiteral = new TrueLiteralImpl();
+    return trueLiteral;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public FalseLiteral createFalseLiteral()
+  {
+    FalseLiteralImpl falseLiteral = new FalseLiteralImpl();
+    return falseLiteral;
   }
 
   /**
@@ -462,42 +484,6 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
   {
     MissionImpl mission = new MissionImpl();
     return mission;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public TaskStatement createTaskStatement()
-  {
-    TaskStatementImpl taskStatement = new TaskStatementImpl();
-    return taskStatement;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public ReturnStatement createReturnStatement()
-  {
-    ReturnStatementImpl returnStatement = new ReturnStatementImpl();
-    return returnStatement;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public ExecuteStatement createExecuteStatement()
-  {
-    ExecuteStatementImpl executeStatement = new ExecuteStatementImpl();
-    return executeStatement;
   }
 
   /**
@@ -654,18 +640,6 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
   {
     UnaryExpressionImpl unaryExpression = new UnaryExpressionImpl();
     return unaryExpression;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public BoolLiteral createBoolLiteral()
-  {
-    BoolLiteralImpl boolLiteral = new BoolLiteralImpl();
-    return boolLiteral;
   }
 
   /**

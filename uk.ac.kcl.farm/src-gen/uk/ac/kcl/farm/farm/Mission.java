@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.farm.farm.Mission#getName <em>Name</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.Mission#getMissionStatements <em>Mission Statements</em>}</li>
  * </ul>
  *
@@ -27,30 +26,8 @@ import org.eclipse.emf.ecore.EObject;
 public interface Mission extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' attribute.
-   * @see #setName(String)
-   * @see uk.ac.kcl.farm.farm.FarmPackage#getMission_Name()
-   * @model
-   * @generated
-   */
-  String getName();
-
-  /**
-   * Sets the value of the '{@link uk.ac.kcl.farm.farm.Mission#getName <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' attribute.
-   * @see #getName()
-   * @generated
-   */
-  void setName(String value);
-
-  /**
    * Returns the value of the '<em><b>Mission Statements</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.emf.ecore.EObject}.
+   * The list contents are of type {@link uk.ac.kcl.farm.farm.Statement}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Mission Statements</em>' containment reference list.
@@ -58,6 +35,6 @@ public interface Mission extends EObject
    * @model containment="true"
    * @generated
    */
-  EList<EObject> getMissionStatements();
+  EList<Statement> getMissionStatements();
 
 } // Mission

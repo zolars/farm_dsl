@@ -33,15 +33,6 @@ public interface FarmFactory extends EFactory
   FarmProgram createFarmProgram();
 
   /**
-   * Returns a new object of class '<em>Param</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Param</em>'.
-   * @generated
-   */
-  Param createParam();
-
-  /**
    * Returns a new object of class '<em>Statement</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -49,15 +40,6 @@ public interface FarmFactory extends EFactory
    * @generated
    */
   Statement createStatement();
-
-  /**
-   * Returns a new object of class '<em>Entity</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Entity</em>'.
-   * @generated
-   */
-  Entity createEntity();
 
   /**
    * Returns a new object of class '<em>Attribute</em>'.
@@ -76,6 +58,24 @@ public interface FarmFactory extends EFactory
    * @generated
    */
   Variable createVariable();
+
+  /**
+   * Returns a new object of class '<em>Var Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Var Expression</em>'.
+   * @generated
+   */
+  VarExpression createVarExpression();
+
+  /**
+   * Returns a new object of class '<em>Assignment</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Assignment</em>'.
+   * @generated
+   */
+  Assignment createAssignment();
 
   /**
    * Returns a new object of class '<em>Loop Statement</em>'.
@@ -123,13 +123,13 @@ public interface FarmFactory extends EFactory
   BuiltinFunction createBuiltinFunction();
 
   /**
-   * Returns a new object of class '<em>Get Value Function</em>'.
+   * Returns a new object of class '<em>Instance</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Get Value Function</em>'.
+   * @return a new object of class '<em>Instance</em>'.
    * @generated
    */
-  GetValueFunction createGetValueFunction();
+  Instance createInstance();
 
   /**
    * Returns a new object of class '<em>Report Function</em>'.
@@ -195,6 +195,15 @@ public interface FarmFactory extends EFactory
   Expression createExpression();
 
   /**
+   * Returns a new object of class '<em>Not Boolean Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Not Boolean Expression</em>'.
+   * @generated
+   */
+  NotBooleanExpression createNotBooleanExpression();
+
+  /**
    * Returns a new object of class '<em>Literal</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -204,13 +213,22 @@ public interface FarmFactory extends EFactory
   Literal createLiteral();
 
   /**
-   * Returns a new object of class '<em>Boolean Literal</em>'.
+   * Returns a new object of class '<em>True Literal</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Boolean Literal</em>'.
+   * @return a new object of class '<em>True Literal</em>'.
    * @generated
    */
-  BooleanLiteral createBooleanLiteral();
+  TrueLiteral createTrueLiteral();
+
+  /**
+   * Returns a new object of class '<em>False Literal</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>False Literal</em>'.
+   * @generated
+   */
+  FalseLiteral createFalseLiteral();
 
   /**
    * Returns a new object of class '<em>Real Literal</em>'.
@@ -283,33 +301,6 @@ public interface FarmFactory extends EFactory
    * @generated
    */
   Mission createMission();
-
-  /**
-   * Returns a new object of class '<em>Task Statement</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Task Statement</em>'.
-   * @generated
-   */
-  TaskStatement createTaskStatement();
-
-  /**
-   * Returns a new object of class '<em>Return Statement</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Return Statement</em>'.
-   * @generated
-   */
-  ReturnStatement createReturnStatement();
-
-  /**
-   * Returns a new object of class '<em>Execute Statement</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Execute Statement</em>'.
-   * @generated
-   */
-  ExecuteStatement createExecuteStatement();
 
   /**
    * Returns a new object of class '<em>Condition Or Expression</em>'.
@@ -427,15 +418,6 @@ public interface FarmFactory extends EFactory
    * @generated
    */
   UnaryExpression createUnaryExpression();
-
-  /**
-   * Returns a new object of class '<em>Bool Literal</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Bool Literal</em>'.
-   * @generated
-   */
-  BoolLiteral createBoolLiteral();
 
   /**
    * Returns the package supported by this factory.

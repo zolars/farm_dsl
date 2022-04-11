@@ -6,54 +6,45 @@ package uk.ac.kcl.farm.farm.impl;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import uk.ac.kcl.farm.farm.FarmPackage;
-import uk.ac.kcl.farm.farm.Param;
+import uk.ac.kcl.farm.farm.VarExpression;
+import uk.ac.kcl.farm.farm.Variable;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Param</b></em>'.
+ * An implementation of the model object '<em><b>Var Expression</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.farm.farm.impl.ParamImpl#getParam <em>Param</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.impl.VarExpressionImpl#getVar <em>Var</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ParamImpl extends MinimalEObjectImpl.Container implements Param
+public class VarExpressionImpl extends ExpressionImpl implements VarExpression
 {
   /**
-   * The default value of the '{@link #getParam() <em>Param</em>}' attribute.
+   * The cached value of the '{@link #getVar() <em>Var</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getParam()
+   * @see #getVar()
    * @generated
    * @ordered
    */
-  protected static final String PARAM_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getParam() <em>Param</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getParam()
-   * @generated
-   * @ordered
-   */
-  protected String param = PARAM_EDEFAULT;
+  protected Variable var;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ParamImpl()
+  protected VarExpressionImpl()
   {
     super();
   }
@@ -66,7 +57,7 @@ public class ParamImpl extends MinimalEObjectImpl.Container implements Param
   @Override
   protected EClass eStaticClass()
   {
-    return FarmPackage.Literals.PARAM;
+    return FarmPackage.Literals.VAR_EXPRESSION;
   }
 
   /**
@@ -75,9 +66,29 @@ public class ParamImpl extends MinimalEObjectImpl.Container implements Param
    * @generated
    */
   @Override
-  public String getParam()
+  public Variable getVar()
   {
-    return param;
+    if (var != null && var.eIsProxy())
+    {
+      InternalEObject oldVar = (InternalEObject)var;
+      var = (Variable)eResolveProxy(oldVar);
+      if (var != oldVar)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, FarmPackage.VAR_EXPRESSION__VAR, oldVar, var));
+      }
+    }
+    return var;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Variable basicGetVar()
+  {
+    return var;
   }
 
   /**
@@ -86,12 +97,12 @@ public class ParamImpl extends MinimalEObjectImpl.Container implements Param
    * @generated
    */
   @Override
-  public void setParam(String newParam)
+  public void setVar(Variable newVar)
   {
-    String oldParam = param;
-    param = newParam;
+    Variable oldVar = var;
+    var = newVar;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.PARAM__PARAM, oldParam, param));
+      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.VAR_EXPRESSION__VAR, oldVar, var));
   }
 
   /**
@@ -104,8 +115,9 @@ public class ParamImpl extends MinimalEObjectImpl.Container implements Param
   {
     switch (featureID)
     {
-      case FarmPackage.PARAM__PARAM:
-        return getParam();
+      case FarmPackage.VAR_EXPRESSION__VAR:
+        if (resolve) return getVar();
+        return basicGetVar();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -120,8 +132,8 @@ public class ParamImpl extends MinimalEObjectImpl.Container implements Param
   {
     switch (featureID)
     {
-      case FarmPackage.PARAM__PARAM:
-        setParam((String)newValue);
+      case FarmPackage.VAR_EXPRESSION__VAR:
+        setVar((Variable)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -137,8 +149,8 @@ public class ParamImpl extends MinimalEObjectImpl.Container implements Param
   {
     switch (featureID)
     {
-      case FarmPackage.PARAM__PARAM:
-        setParam(PARAM_EDEFAULT);
+      case FarmPackage.VAR_EXPRESSION__VAR:
+        setVar((Variable)null);
         return;
     }
     super.eUnset(featureID);
@@ -154,27 +166,10 @@ public class ParamImpl extends MinimalEObjectImpl.Container implements Param
   {
     switch (featureID)
     {
-      case FarmPackage.PARAM__PARAM:
-        return PARAM_EDEFAULT == null ? param != null : !PARAM_EDEFAULT.equals(param);
+      case FarmPackage.VAR_EXPRESSION__VAR:
+        return var != null;
     }
     return super.eIsSet(featureID);
   }
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (param: ");
-    result.append(param);
-    result.append(')');
-    return result.toString();
-  }
-
-} //ParamImpl
+} //VarExpressionImpl

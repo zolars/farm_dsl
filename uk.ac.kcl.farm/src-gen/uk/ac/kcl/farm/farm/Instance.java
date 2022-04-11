@@ -7,21 +7,21 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Entity</b></em>'.
+ * A representation of the model object '<em><b>Instance</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.farm.farm.Entity#getName <em>Name</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.Instance#getName <em>Name</em>}</li>
  * </ul>
  *
- * @see uk.ac.kcl.farm.farm.FarmPackage#getEntity()
+ * @see uk.ac.kcl.farm.farm.FarmPackage#getInstance()
  * @model
  * @generated
  */
-public interface Entity extends EObject
+public interface Instance extends EObject
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.
@@ -29,14 +29,14 @@ public interface Entity extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Name</em>' attribute.
    * @see #setName(String)
-   * @see uk.ac.kcl.farm.farm.FarmPackage#getEntity_Name()
+   * @see uk.ac.kcl.farm.farm.FarmPackage#getInstance_Name()
    * @model
    * @generated
    */
   String getName();
 
   /**
-   * Sets the value of the '{@link uk.ac.kcl.farm.farm.Entity#getName <em>Name</em>}' attribute.
+   * Sets the value of the '{@link uk.ac.kcl.farm.farm.Instance#getName <em>Name</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Name</em>' attribute.
@@ -45,4 +45,4 @@ public interface Entity extends EObject
    */
   void setName(String value);
 
-} // Entity
+} // Instance

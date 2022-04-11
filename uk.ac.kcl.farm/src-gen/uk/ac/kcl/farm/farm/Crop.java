@@ -22,7 +22,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Crop extends Entity
+public interface Crop extends Instance
 {
   /**
    * Returns the value of the '<em><b>Crop Name</b></em>' attribute.

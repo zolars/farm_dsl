@@ -15,41 +15,13 @@ FarmProgram:
 
 // General statement
 
-Param:
-	"crop" param=ID |
-	"field" param=ID |
-	"mission" param=ID |
-	"real" param=ID |
-	"string" param=ID
-;
-
-TypeName:
-	"null" | "real" | "boolean" | "string"
-;
-
 Statement:
 	Variable |
+	Assignment |
 	LoopStatement |
 	JudgeStatement |
 	BuiltinFunction
 ;
-
-Entity:
-	Crop |
-	Field |
-	Variable
-;
-
-//Attribute:
-//	entity=[Entity | ID] (
-//		".name" | 
-//		".stage" |
-//		".ip" |
-//		".type" |
-//		".light" |
-//		"." monitor=[Attribute | ID]
-//	)?
-//;
 
 // Define codes
 Attribute:
@@ -57,7 +29,15 @@ Attribute:
 ;
 
 Variable:
-	"var" name=ID "=" expression=Expression // | attribute=Attribute
+	"var" name=ID "=" expression=Expression
+;
+
+VarExpression:
+	var=[Variable]
+;
+
+Assignment:
+	var=[Variable] "=" expression=Expression
 ;
 
 LoopStatement:
@@ -71,7 +51,7 @@ JudgeStatement:
 		judgeStatements += Statement*
 	"}" 
 	elseJudgeStatements += ElseJudgeStatement*
-	elseStatements += ElseStatement?
+	elseStatement += ElseStatement?
 ;
 
 ElseJudgeStatement:
@@ -86,7 +66,6 @@ ElseStatement:
 ;
 
 BuiltinFunction:
-	GetValueFunction |
 	ReportFunction |
 	CountStageFunction |
 	SetFieldValueFunction |
@@ -95,21 +74,22 @@ BuiltinFunction:
 	WaitFunction
 ;
 
-GetValueFunction:
-	entity=[Entity] ".getValue(" attribute=STRING ")"
+Instance:
+	Crop |
+	Field |
+	Variable
 ;
 
-
 ReportFunction:
-	"report(" entity=[Entity | ID] ")"
+	"report(" instance=[Instance | ID] ")"
 ;
 
 CountStageFunction:
-	countStageCrop=[Crop | ID] ".countStage(" ")"
+	countStageCrop=[Crop] ".countStage(" ")"
 ;
 
 SetFieldValueFunction:
-	setValueField=[Field | ID] ".setFieldValue(" setFieldAttribute=STRING "," setFieldValue=AdditionExpression ")"
+	setValueField=[Field] ".setFieldValue(" setFieldAttribute=STRING "," setFieldValue=AdditionExpression ")"
 ;
 
 PlantFunction:
@@ -121,7 +101,7 @@ MoveFunction:
 ;
 
 WaitFunction:
-	"wait(" value=AdditionExpression ")"
+	"wait(" value=Expression ")"
 ;
 
 //Expressions
@@ -157,14 +137,14 @@ AdditionExpression returns Expression:
 	MultiplicationExpression ( => (
 		{Plus.left=current} "+" |
 		{Minus.left=current} "-"
-	) right+=MultiplicationExpression )*
+	) right=MultiplicationExpression )*
 ;
 
 MultiplicationExpression returns Expression:
 	UnaryExpression ( => (
 		{Multiply.left=current} "*" | 
 		{Divide.left=current} "/" 
-	) right+=UnaryExpression)*
+	) right=UnaryExpression )*
 ;
 
 UnaryExpression returns Expression:
@@ -176,30 +156,34 @@ UnaryExpressionNotPlusMinus returns Expression:
 	NotBooleanExpression | PrimaryExpression
 ;
 
-NotBooleanExpression returns Expression:
+NotBooleanExpression:
 	"!" exp=UnaryExpression
 ;
 
 PrimaryExpression returns Expression:
 	Literal |
-	var=[Variable] |
+	VarExpression |
 	"(" Expression ")"
 ;
 
 Literal:
-	BooleanLiteral | RealLiteral
+	TrueLiteral | FalseLiteral | RealLiteral
 ;
 
-BooleanLiteral:
-	{BoolLiteral} val=BOOLEAN
+TrueLiteral:
+	{TrueLiteral} value="true"
 ;
 
-terminal BOOLEAN returns ecore::EBoolean:
-	"true" | "false"
+FalseLiteral:
+	{FalseLiteral} value="false"
 ;
+
+//BOOLEAN returns ecore::EBoolean hidden():
+//	"true" | "false"
+//;
 
 RealLiteral:
-	{RealLiteral} val=REAL
+	{RealLiteral} num=REAL
 ;
 
 REAL returns ecore::EFloat hidden():
@@ -223,28 +207,24 @@ CropStages:
 CropStage:
 	"{"	
 		"name" ":" name=STRING
-		"timeConsumed" ":" timeConsumend=Expression
-		elements += CropAttributes*
+		"timeConsumed" ":" time=AdditionExpression
+		attributes += CropAttributes*
 	"}"
 ;
 
 CropAttributes:
-	type=[Attribute | ID] ":" value=Expression
+	type=[Attribute | ID] ":" value=AdditionExpression
 ;
 
 // Field code block
 Field:
 	"field" name=ID "{"
 		"name" ":" fieldName=STRING
-		"ip" ":" ip=IP
+		"ip" ":" fieldIP=STRING
 		"type" ":" fieldType=("inside" | "outside")
 		"light" ":" fieldLight=("sunlight" | "LED")
 		"monitor" ":" "[" fieldMonitors+=FieldMonitor ("," fieldMonitors+=FieldMonitor)* "]"
 	"}"
-;
-
-IP hidden():
-	(INT '.' (INT '.' (INT '.' (INT))))
 ;
 
 FieldMonitor:
@@ -253,25 +233,7 @@ FieldMonitor:
 
 // Main code block
 Mission:
-	"mission" name=ID "{"
-		missionStatements += (TaskStatement | ExecuteStatement)+
-	"}"
-;
-
-// Task code block
-TaskStatement:
-	"task" name=ID "(" (parmas+=Param ("," parmas+=Param)*)? ")" ":" typeName=TypeName "{"
-		taskStatements += (Statement | ReturnStatement)*
-	"}"
-;
-
-ReturnStatement:
-	"return" "(" value=Expression ")" 
-;
-
-ExecuteStatement:
-	{ExecuteStatement} 
-	"execute" "{"
-		executeStatements += Statement*
+	"mission" "{"
+		missionStatements += Statement* // (ExecuteStatement| TaskStatement)+
 	"}"
 ;

@@ -3,25 +3,45 @@
  */
 package uk.ac.kcl.farm.generator;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.AbstractGenerator;
 import org.eclipse.xtext.generator.IFileSystemAccess2;
 import org.eclipse.xtext.generator.IGeneratorContext;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import uk.ac.kcl.farm.farm.Assignment;
 import uk.ac.kcl.farm.farm.Attribute;
+import uk.ac.kcl.farm.farm.Crop;
+import uk.ac.kcl.farm.farm.CropAttributes;
+import uk.ac.kcl.farm.farm.CropStage;
+import uk.ac.kcl.farm.farm.CropStages;
+import uk.ac.kcl.farm.farm.ElseJudgeStatement;
+import uk.ac.kcl.farm.farm.ElseStatement;
+import uk.ac.kcl.farm.farm.Expression;
 import uk.ac.kcl.farm.farm.FarmProgram;
+import uk.ac.kcl.farm.farm.Field;
+import uk.ac.kcl.farm.farm.FieldMonitor;
+import uk.ac.kcl.farm.farm.JudgeStatement;
+import uk.ac.kcl.farm.farm.LoopStatement;
+import uk.ac.kcl.farm.farm.Mission;
+import uk.ac.kcl.farm.farm.ReportFunction;
+import uk.ac.kcl.farm.farm.Statement;
 import uk.ac.kcl.farm.farm.Variable;
+import uk.ac.kcl.farm.interpreter.Exp;
 
-/**
- * Generates code from your model files on save.
- * 
- * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
- */
 @SuppressWarnings("all")
 public class FarmGenerator extends AbstractGenerator {
   private static class Environment {
@@ -39,6 +59,14 @@ public class FarmGenerator extends AbstractGenerator {
       return this.counter--;
     }
   }
+  
+  private List<String> attributeList = CollectionLiterals.<String>newArrayList();
+  
+  private HashMap<String, GeneratedCrop> cropMap = new HashMap<String, GeneratedCrop>();
+  
+  private HashMap<String, GeneratedField> fieldMap = new HashMap<String, GeneratedField>();
+  
+  private Exp expRuntime = new Exp();
   
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
@@ -73,10 +101,60 @@ public class FarmGenerator extends AbstractGenerator {
     _builder.append(_size);
     _builder.append(" attribute declarations");
     _builder.newLineIfNotEmpty();
+    final Function1<Attribute, String> _function = (Attribute it) -> {
+      FarmGenerator.Environment _environment = new FarmGenerator.Environment();
+      return this.generateTimetable(it, _environment);
+    };
+    String _join = IterableExtensions.join(IterableExtensions.<Attribute, String>map(Iterables.<Attribute>filter(program.getStatements(), Attribute.class), _function), "\n");
+    _builder.append(_join);
+    _builder.newLineIfNotEmpty();
     _builder.append("- ");
-    int _size_1 = IteratorExtensions.size(Iterators.<Variable>filter(program.eAllContents(), Variable.class));
+    int _size_1 = this.attributeList.size();
     _builder.append(_size_1);
-    _builder.append(" variable declarations");
+    _builder.append(" attribute processed");
+    _builder.newLineIfNotEmpty();
+    _builder.append("- ");
+    int _size_2 = IteratorExtensions.size(Iterators.<Crop>filter(program.eAllContents(), Crop.class));
+    _builder.append(_size_2);
+    _builder.append(" crop declarations");
+    _builder.newLineIfNotEmpty();
+    final Function1<Crop, String> _function_1 = (Crop it) -> {
+      FarmGenerator.Environment _environment = new FarmGenerator.Environment();
+      return this.generateTimetable(it, _environment);
+    };
+    String _join_1 = IterableExtensions.join(IterableExtensions.<Crop, String>map(Iterables.<Crop>filter(program.getStatements(), Crop.class), _function_1), "\n");
+    _builder.append(_join_1);
+    _builder.newLineIfNotEmpty();
+    _builder.append("- ");
+    int _size_3 = this.cropMap.size();
+    _builder.append(_size_3);
+    _builder.append(" crop processed");
+    _builder.newLineIfNotEmpty();
+    _builder.append("- ");
+    int _size_4 = IteratorExtensions.size(Iterators.<Field>filter(program.eAllContents(), Field.class));
+    _builder.append(_size_4);
+    _builder.append(" field declarations");
+    _builder.newLineIfNotEmpty();
+    final Function1<Field, String> _function_2 = (Field it) -> {
+      FarmGenerator.Environment _environment = new FarmGenerator.Environment();
+      return this.generateTimetable(it, _environment);
+    };
+    String _join_2 = IterableExtensions.join(IterableExtensions.<Field, String>map(Iterables.<Field>filter(program.getStatements(), Field.class), _function_2), "\n");
+    _builder.append(_join_2);
+    _builder.newLineIfNotEmpty();
+    _builder.append("- ");
+    int _size_5 = this.fieldMap.size();
+    _builder.append(_size_5);
+    _builder.append(" field processed");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.newLine();
+    final Function1<Mission, String> _function_3 = (Mission it) -> {
+      FarmGenerator.Environment _environment = new FarmGenerator.Environment();
+      return this.generateTimetable(it, _environment);
+    };
+    String _join_3 = IterableExtensions.join(IterableExtensions.<Mission, String>map(Iterables.<Mission>filter(program.getStatements(), Mission.class), _function_3), "\n");
+    _builder.append(_join_3);
     _builder.newLineIfNotEmpty();
     return _builder.toString();
   }
@@ -108,6 +186,14 @@ public class FarmGenerator extends AbstractGenerator {
     _builder.append("\t\t\t");
     _builder.append("protected void run() {");
     _builder.newLine();
+    _builder.append("\t\t\t\t");
+    final Function1<EObject, String> _function = (EObject it) -> {
+      FarmGenerator.Environment _environment = new FarmGenerator.Environment();
+      return this.generateJavaStatement(it, _environment);
+    };
+    String _join = IterableExtensions.join(ListExtensions.<EObject, String>map(program.getStatements(), _function), "\n");
+    _builder.append(_join, "\t\t\t\t");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
     _builder.append("}");
     _builder.newLine();
@@ -125,5 +211,370 @@ public class FarmGenerator extends AbstractGenerator {
     _builder.append("}");
     _builder.newLine();
     return _builder.toString();
+  }
+  
+  /**
+   * generateTimetable
+   */
+  protected String _generateTimetable(final Attribute attribute, final FarmGenerator.Environment env) {
+    String _xblockexpression = null;
+    {
+      this.attributeList.add(attribute.getName());
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("    ");
+      _builder.append("- Attribute `");
+      String _name = attribute.getName();
+      _builder.append(_name, "    ");
+      _builder.append("` processed");
+      _xblockexpression = _builder.toString();
+    }
+    return _xblockexpression;
+  }
+  
+  protected String _generateTimetable(final Crop crop, final FarmGenerator.Environment env) {
+    try {
+      String _xblockexpression = null;
+      {
+        List<GeneratedStage> generatedStages = CollectionLiterals.<GeneratedStage>newArrayList();
+        EList<CropStages> _cropStages = crop.getCropStages();
+        for (final CropStages stages : _cropStages) {
+          EList<CropStage> _elements = stages.getElements();
+          for (final CropStage stage : _elements) {
+            {
+              HashMap<String, Float> attributes = new HashMap<String, Float>();
+              EList<CropAttributes> _attributes = stage.getAttributes();
+              for (final CropAttributes attribute : _attributes) {
+                boolean _contains = this.attributeList.contains(attribute.getType().getName());
+                if (_contains) {
+                  attributes.put(attribute.getType().getName(), this.expRuntime.toFloat(attribute.getValue()));
+                } else {
+                  StringConcatenation _builder = new StringConcatenation();
+                  _builder.append("Undefined attribute ");
+                  String _name = attribute.getType().getName();
+                  _builder.append(_name);
+                  _builder.append(" used in Crop: ");
+                  String _name_1 = crop.getName();
+                  _builder.append(_name_1);
+                  _builder.newLineIfNotEmpty();
+                  _builder.append("Avaible attributes is as below: ");
+                  _builder.append(this.attributeList);
+                  _builder.newLineIfNotEmpty();
+                  throw new Exception(_builder.toString());
+                }
+              }
+              String _name_2 = stage.getName();
+              Float _float = this.expRuntime.toFloat(stage.getTime());
+              GeneratedStage newStage = new GeneratedStage(_name_2, _float, attributes);
+              generatedStages.add(newStage);
+            }
+          }
+        }
+        String _cropName = crop.getCropName();
+        GeneratedCrop newCrop = new GeneratedCrop(_cropName, generatedStages);
+        this.cropMap.put(crop.getName(), newCrop);
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("    ");
+        _builder.append("- Crop `");
+        String _name = crop.getName();
+        _builder.append(_name, "    ");
+        _builder.append("` processed");
+        _xblockexpression = _builder.toString();
+      }
+      return _xblockexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected String _generateTimetable(final Field field, final FarmGenerator.Environment env) {
+    try {
+      String _xblockexpression = null;
+      {
+        List<String> monitors = CollectionLiterals.<String>newArrayList();
+        EList<FieldMonitor> _fieldMonitors = field.getFieldMonitors();
+        for (final FieldMonitor monitor : _fieldMonitors) {
+          boolean _contains = this.attributeList.contains(monitor.getMonitor().getName());
+          if (_contains) {
+            monitors.add(monitor.getMonitor().getName());
+          } else {
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append("Undefined attribute ");
+            String _name = monitor.getMonitor().getName();
+            _builder.append(_name);
+            _builder.append(" used in Field: ");
+            String _name_1 = field.getName();
+            _builder.append(_name_1);
+            _builder.newLineIfNotEmpty();
+            _builder.append("Avaible attributes is as below: ");
+            _builder.append(this.attributeList);
+            _builder.newLineIfNotEmpty();
+            throw new Exception(_builder.toString());
+          }
+        }
+        String _fieldName = field.getFieldName();
+        String _fieldIP = field.getFieldIP();
+        String _fieldType = field.getFieldType();
+        String _fieldLight = field.getFieldLight();
+        GeneratedField newField = new GeneratedField(_fieldName, _fieldIP, _fieldType, _fieldLight, monitors);
+        this.fieldMap.put(field.getName(), newField);
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("    ");
+        _builder_1.append("- Field `");
+        String _name_2 = field.getName();
+        _builder_1.append(_name_2, "    ");
+        _builder_1.append("` processed");
+        _xblockexpression = _builder_1.toString();
+      }
+      return _xblockexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected String _generateTimetable(final Mission mission, final FarmGenerator.Environment env) {
+    StringConcatenation _builder = new StringConcatenation();
+    final Function1<Statement, String> _function = (Statement it) -> {
+      FarmGenerator.Environment _environment = new FarmGenerator.Environment();
+      return this.generateTimetable(it, _environment);
+    };
+    String _join = IterableExtensions.join(ListExtensions.<Statement, String>map(mission.getMissionStatements(), _function), "\n");
+    _builder.append(_join);
+    return _builder.toString();
+  }
+  
+  protected String _generateTimetable(final Variable variable, final FarmGenerator.Environment env) {
+    try {
+      String _xblockexpression = null;
+      {
+        Expression exp = variable.getExpression();
+        try {
+          this.expRuntime.variableMap.put(variable.getName(), this.expRuntime.toFloat(exp));
+        } catch (final Throwable _t) {
+          if (_t instanceof Exception) {
+            try {
+              this.expRuntime.variableMap.put(variable.getName(), this.expRuntime.toBoolean(exp));
+            } catch (final Throwable _t_1) {
+              if (_t_1 instanceof Exception) {
+                throw new Exception("Variable cannot be interpreted");
+              } else {
+                throw Exceptions.sneakyThrow(_t_1);
+              }
+            }
+          } else {
+            throw Exceptions.sneakyThrow(_t);
+          }
+        }
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("- Variable `");
+        String _name = variable.getName();
+        _builder.append(_name);
+        _builder.append(" : ");
+        Object _get = this.expRuntime.variableMap.get(variable.getName());
+        _builder.append(_get);
+        _builder.append("` processed");
+        System.out.println(_builder);
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _xblockexpression = _builder_1.toString();
+      }
+      return _xblockexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected String _generateTimetable(final Assignment assignment, final FarmGenerator.Environment env) {
+    try {
+      String _xblockexpression = null;
+      {
+        Expression exp = assignment.getExpression();
+        try {
+          this.expRuntime.variableMap.put(assignment.getVar().getName(), this.expRuntime.toFloat(exp));
+        } catch (final Throwable _t) {
+          if (_t instanceof Exception) {
+            try {
+              this.expRuntime.variableMap.put(assignment.getVar().getName(), this.expRuntime.toBoolean(exp));
+            } catch (final Throwable _t_1) {
+              if (_t_1 instanceof Exception) {
+                throw new Exception("Variable cannot be interpreted");
+              } else {
+                throw Exceptions.sneakyThrow(_t_1);
+              }
+            }
+          } else {
+            throw Exceptions.sneakyThrow(_t);
+          }
+        }
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("- Assignment `");
+        String _name = assignment.getVar().getName();
+        _builder.append(_name);
+        _builder.append(" : ");
+        Object _get = this.expRuntime.variableMap.get(assignment.getVar().getName());
+        _builder.append(_get);
+        _builder.append("` processed");
+        System.out.println(_builder);
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _xblockexpression = _builder_1.toString();
+      }
+      return _xblockexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected String _generateTimetable(final LoopStatement loop, final FarmGenerator.Environment env) {
+    String _xblockexpression = null;
+    {
+      String result = "";
+      while ((this.expRuntime.toBoolean(loop.getCondition())).booleanValue()) {
+        String _result = result;
+        final Function1<Statement, String> _function = (Statement it) -> {
+          FarmGenerator.Environment _environment = new FarmGenerator.Environment();
+          return this.generateTimetable(it, _environment);
+        };
+        String _join = IterableExtensions.join(ListExtensions.<Statement, String>map(loop.getLoopStatements(), _function), "\n");
+        result = (_result + _join);
+      }
+      _xblockexpression = result;
+    }
+    return _xblockexpression;
+  }
+  
+  protected String _generateTimetable(final JudgeStatement judge, final FarmGenerator.Environment env) {
+    String _xblockexpression = null;
+    {
+      String result = "";
+      Boolean _boolean = this.expRuntime.toBoolean(judge.getCondition());
+      if ((_boolean).booleanValue()) {
+        String _result = result;
+        final Function1<Statement, String> _function = (Statement it) -> {
+          FarmGenerator.Environment _environment = new FarmGenerator.Environment();
+          return this.generateTimetable(it, _environment);
+        };
+        String _join = IterableExtensions.join(ListExtensions.<Statement, String>map(judge.getJudgeStatements(), _function), "\n");
+        result = (_result + _join);
+      } else {
+        boolean successKey = false;
+        EList<ElseJudgeStatement> _elseJudgeStatements = judge.getElseJudgeStatements();
+        for (final ElseJudgeStatement elseJudgeStatement : _elseJudgeStatements) {
+          if (((this.expRuntime.toBoolean(elseJudgeStatement.getCondition())).booleanValue() && (!successKey))) {
+            successKey = true;
+            String _result_1 = result;
+            final Function1<Statement, String> _function_1 = (Statement it) -> {
+              FarmGenerator.Environment _environment = new FarmGenerator.Environment();
+              return this.generateTimetable(it, _environment);
+            };
+            String _join_1 = IterableExtensions.join(ListExtensions.<Statement, String>map(elseJudgeStatement.getElseJudgeStatements(), _function_1), "\n");
+            result = (_result_1 + _join_1);
+          }
+        }
+        if ((!successKey)) {
+          EList<ElseStatement> _elseStatement = judge.getElseStatement();
+          for (final ElseStatement elseStatement : _elseStatement) {
+            String _result_2 = result;
+            final Function1<Statement, String> _function_2 = (Statement it) -> {
+              FarmGenerator.Environment _environment = new FarmGenerator.Environment();
+              return this.generateTimetable(it, _environment);
+            };
+            String _join_2 = IterableExtensions.join(ListExtensions.<Statement, String>map(elseStatement.getElseStatements(), _function_2), "\n");
+            result = (_result_2 + _join_2);
+          }
+        }
+      }
+      _xblockexpression = result;
+    }
+    return _xblockexpression;
+  }
+  
+  protected String _generateTimetable(final ReportFunction func, final FarmGenerator.Environment env) {
+    StringConcatenation _builder = new StringConcatenation();
+    return _builder.toString();
+  }
+  
+  protected String _generateTimetable(final Statement stmt, final FarmGenerator.Environment env) {
+    StringConcatenation _builder = new StringConcatenation();
+    return _builder.toString();
+  }
+  
+  /**
+   * generateJavaStatement
+   */
+  protected String _generateJavaStatement(final Attribute attribute, final FarmGenerator.Environment env) {
+    StringConcatenation _builder = new StringConcatenation();
+    String _name = attribute.getName();
+    _builder.append(_name);
+    _builder.newLineIfNotEmpty();
+    return _builder.toString();
+  }
+  
+  protected String _generateJavaStatement(final ReportFunction func, final FarmGenerator.Environment env) {
+    StringConcatenation _builder = new StringConcatenation();
+    return _builder.toString();
+  }
+  
+  protected String _generateJavaStatement(final Crop stmt, final FarmGenerator.Environment env) {
+    StringConcatenation _builder = new StringConcatenation();
+    return _builder.toString();
+  }
+  
+  protected String _generateJavaStatement(final Field stmt, final FarmGenerator.Environment env) {
+    StringConcatenation _builder = new StringConcatenation();
+    return _builder.toString();
+  }
+  
+  protected String _generateJavaStatement(final Mission stmt, final FarmGenerator.Environment env) {
+    StringConcatenation _builder = new StringConcatenation();
+    return _builder.toString();
+  }
+  
+  protected String _generateJavaStatement(final Statement stmt, final FarmGenerator.Environment env) {
+    StringConcatenation _builder = new StringConcatenation();
+    return _builder.toString();
+  }
+  
+  public String generateTimetable(final EObject func, final FarmGenerator.Environment env) {
+    if (func instanceof ReportFunction) {
+      return _generateTimetable((ReportFunction)func, env);
+    } else if (func instanceof Assignment) {
+      return _generateTimetable((Assignment)func, env);
+    } else if (func instanceof Crop) {
+      return _generateTimetable((Crop)func, env);
+    } else if (func instanceof Field) {
+      return _generateTimetable((Field)func, env);
+    } else if (func instanceof JudgeStatement) {
+      return _generateTimetable((JudgeStatement)func, env);
+    } else if (func instanceof LoopStatement) {
+      return _generateTimetable((LoopStatement)func, env);
+    } else if (func instanceof Variable) {
+      return _generateTimetable((Variable)func, env);
+    } else if (func instanceof Attribute) {
+      return _generateTimetable((Attribute)func, env);
+    } else if (func instanceof Mission) {
+      return _generateTimetable((Mission)func, env);
+    } else if (func instanceof Statement) {
+      return _generateTimetable((Statement)func, env);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(func, env).toString());
+    }
+  }
+  
+  public String generateJavaStatement(final EObject func, final FarmGenerator.Environment env) {
+    if (func instanceof ReportFunction) {
+      return _generateJavaStatement((ReportFunction)func, env);
+    } else if (func instanceof Crop) {
+      return _generateJavaStatement((Crop)func, env);
+    } else if (func instanceof Field) {
+      return _generateJavaStatement((Field)func, env);
+    } else if (func instanceof Attribute) {
+      return _generateJavaStatement((Attribute)func, env);
+    } else if (func instanceof Mission) {
+      return _generateJavaStatement((Mission)func, env);
+    } else if (func instanceof Statement) {
+      return _generateJavaStatement((Statement)func, env);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(func, env).toString());
+    }
   }
 }

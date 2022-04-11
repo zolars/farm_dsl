@@ -13,7 +13,7 @@ package uk.ac.kcl.farm.farm;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.farm.farm.ReportFunction#getEntity <em>Entity</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.ReportFunction#getInstance <em>Instance</em>}</li>
  * </ul>
  *
  * @see uk.ac.kcl.farm.farm.FarmPackage#getReportFunction()
@@ -23,25 +23,25 @@ package uk.ac.kcl.farm.farm;
 public interface ReportFunction extends BuiltinFunction
 {
   /**
-   * Returns the value of the '<em><b>Entity</b></em>' reference.
+   * Returns the value of the '<em><b>Instance</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Entity</em>' reference.
-   * @see #setEntity(Entity)
-   * @see uk.ac.kcl.farm.farm.FarmPackage#getReportFunction_Entity()
+   * @return the value of the '<em>Instance</em>' reference.
+   * @see #setInstance(Instance)
+   * @see uk.ac.kcl.farm.farm.FarmPackage#getReportFunction_Instance()
    * @model
    * @generated
    */
-  Entity getEntity();
+  Instance getInstance();
 
   /**
-   * Sets the value of the '{@link uk.ac.kcl.farm.farm.ReportFunction#getEntity <em>Entity</em>}' reference.
+   * Sets the value of the '{@link uk.ac.kcl.farm.farm.ReportFunction#getInstance <em>Instance</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Entity</em>' reference.
-   * @see #getEntity()
+   * @param value the new value of the '<em>Instance</em>' reference.
+   * @see #getInstance()
    * @generated
    */
-  void setEntity(Entity value);
+  void setInstance(Instance value);
 
 } // ReportFunction

@@ -11,9 +11,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import uk.ac.kcl.farm.farm.Entity;
 import uk.ac.kcl.farm.farm.Expression;
 import uk.ac.kcl.farm.farm.FarmPackage;
+import uk.ac.kcl.farm.farm.Instance;
 import uk.ac.kcl.farm.farm.Variable;
 
 /**
@@ -258,11 +258,11 @@ public class VariableImpl extends StatementImpl implements Variable
   @Override
   public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
   {
-    if (baseClass == Entity.class)
+    if (baseClass == Instance.class)
     {
       switch (derivedFeatureID)
       {
-        case FarmPackage.VARIABLE__NAME: return FarmPackage.ENTITY__NAME;
+        case FarmPackage.VARIABLE__NAME: return FarmPackage.INSTANCE__NAME;
         default: return -1;
       }
     }
@@ -277,11 +277,11 @@ public class VariableImpl extends StatementImpl implements Variable
   @Override
   public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
   {
-    if (baseClass == Entity.class)
+    if (baseClass == Instance.class)
     {
       switch (baseFeatureID)
       {
-        case FarmPackage.ENTITY__NAME: return FarmPackage.VARIABLE__NAME;
+        case FarmPackage.INSTANCE__NAME: return FarmPackage.VARIABLE__NAME;
         default: return -1;
       }
     }

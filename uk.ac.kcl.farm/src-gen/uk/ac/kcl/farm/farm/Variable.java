@@ -20,7 +20,7 @@ package uk.ac.kcl.farm.farm;
  * @model
  * @generated
  */
-public interface Variable extends Statement, Entity
+public interface Variable extends Statement, Instance
 {
   /**
    * Returns the value of the '<em><b>Expression</b></em>' containment reference.

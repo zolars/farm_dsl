@@ -17,7 +17,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link uk.ac.kcl.farm.farm.JudgeStatement#getCondition <em>Condition</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.JudgeStatement#getJudgeStatements <em>Judge Statements</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.JudgeStatement#getElseJudgeStatements <em>Else Judge Statements</em>}</li>
- *   <li>{@link uk.ac.kcl.farm.farm.JudgeStatement#getElseStatements <em>Else Statements</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.JudgeStatement#getElseStatement <em>Else Statement</em>}</li>
  * </ul>
  *
  * @see uk.ac.kcl.farm.farm.FarmPackage#getJudgeStatement()
@@ -73,15 +73,15 @@ public interface JudgeStatement extends Statement
   EList<ElseJudgeStatement> getElseJudgeStatements();
 
   /**
-   * Returns the value of the '<em><b>Else Statements</b></em>' containment reference list.
+   * Returns the value of the '<em><b>Else Statement</b></em>' containment reference list.
    * The list contents are of type {@link uk.ac.kcl.farm.farm.ElseStatement}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Else Statements</em>' containment reference list.
-   * @see uk.ac.kcl.farm.farm.FarmPackage#getJudgeStatement_ElseStatements()
+   * @return the value of the '<em>Else Statement</em>' containment reference list.
+   * @see uk.ac.kcl.farm.farm.FarmPackage#getJudgeStatement_ElseStatement()
    * @model containment="true"
    * @generated
    */
-  EList<ElseStatement> getElseStatements();
+  EList<ElseStatement> getElseStatement();
 
 } // JudgeStatement

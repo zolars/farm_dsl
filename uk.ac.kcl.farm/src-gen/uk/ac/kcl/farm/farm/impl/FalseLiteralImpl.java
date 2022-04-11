@@ -9,50 +9,50 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import uk.ac.kcl.farm.farm.BoolLiteral;
+import uk.ac.kcl.farm.farm.FalseLiteral;
 import uk.ac.kcl.farm.farm.FarmPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Bool Literal</b></em>'.
+ * An implementation of the model object '<em><b>False Literal</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.farm.farm.impl.BoolLiteralImpl#isVal <em>Val</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.impl.FalseLiteralImpl#getValue <em>Value</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class BoolLiteralImpl extends BooleanLiteralImpl implements BoolLiteral
+public class FalseLiteralImpl extends LiteralImpl implements FalseLiteral
 {
   /**
-   * The default value of the '{@link #isVal() <em>Val</em>}' attribute.
+   * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isVal()
+   * @see #getValue()
    * @generated
    * @ordered
    */
-  protected static final boolean VAL_EDEFAULT = false;
+  protected static final String VALUE_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #isVal() <em>Val</em>}' attribute.
+   * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isVal()
+   * @see #getValue()
    * @generated
    * @ordered
    */
-  protected boolean val = VAL_EDEFAULT;
+  protected String value = VALUE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected BoolLiteralImpl()
+  protected FalseLiteralImpl()
   {
     super();
   }
@@ -65,7 +65,7 @@ public class BoolLiteralImpl extends BooleanLiteralImpl implements BoolLiteral
   @Override
   protected EClass eStaticClass()
   {
-    return FarmPackage.Literals.BOOL_LITERAL;
+    return FarmPackage.Literals.FALSE_LITERAL;
   }
 
   /**
@@ -74,9 +74,9 @@ public class BoolLiteralImpl extends BooleanLiteralImpl implements BoolLiteral
    * @generated
    */
   @Override
-  public boolean isVal()
+  public String getValue()
   {
-    return val;
+    return value;
   }
 
   /**
@@ -85,12 +85,12 @@ public class BoolLiteralImpl extends BooleanLiteralImpl implements BoolLiteral
    * @generated
    */
   @Override
-  public void setVal(boolean newVal)
+  public void setValue(String newValue)
   {
-    boolean oldVal = val;
-    val = newVal;
+    String oldValue = value;
+    value = newValue;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.BOOL_LITERAL__VAL, oldVal, val));
+      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.FALSE_LITERAL__VALUE, oldValue, value));
   }
 
   /**
@@ -103,8 +103,8 @@ public class BoolLiteralImpl extends BooleanLiteralImpl implements BoolLiteral
   {
     switch (featureID)
     {
-      case FarmPackage.BOOL_LITERAL__VAL:
-        return isVal();
+      case FarmPackage.FALSE_LITERAL__VALUE:
+        return getValue();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -119,8 +119,8 @@ public class BoolLiteralImpl extends BooleanLiteralImpl implements BoolLiteral
   {
     switch (featureID)
     {
-      case FarmPackage.BOOL_LITERAL__VAL:
-        setVal((Boolean)newValue);
+      case FarmPackage.FALSE_LITERAL__VALUE:
+        setValue((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -136,8 +136,8 @@ public class BoolLiteralImpl extends BooleanLiteralImpl implements BoolLiteral
   {
     switch (featureID)
     {
-      case FarmPackage.BOOL_LITERAL__VAL:
-        setVal(VAL_EDEFAULT);
+      case FarmPackage.FALSE_LITERAL__VALUE:
+        setValue(VALUE_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -153,8 +153,8 @@ public class BoolLiteralImpl extends BooleanLiteralImpl implements BoolLiteral
   {
     switch (featureID)
     {
-      case FarmPackage.BOOL_LITERAL__VAL:
-        return val != VAL_EDEFAULT;
+      case FarmPackage.FALSE_LITERAL__VALUE:
+        return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
     }
     return super.eIsSet(featureID);
   }
@@ -170,10 +170,10 @@ public class BoolLiteralImpl extends BooleanLiteralImpl implements BoolLiteral
     if (eIsProxy()) return super.toString();
 
     StringBuilder result = new StringBuilder(super.toString());
-    result.append(" (val: ");
-    result.append(val);
+    result.append(" (value: ");
+    result.append(value);
     result.append(')');
     return result.toString();
   }
 
-} //BoolLiteralImpl
+} //FalseLiteralImpl
