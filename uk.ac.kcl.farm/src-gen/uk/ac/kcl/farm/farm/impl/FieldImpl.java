@@ -18,9 +18,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import uk.ac.kcl.farm.farm.CallAttributes;
 import uk.ac.kcl.farm.farm.FarmPackage;
 import uk.ac.kcl.farm.farm.Field;
-import uk.ac.kcl.farm.farm.FieldMonitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,7 +34,7 @@ import uk.ac.kcl.farm.farm.FieldMonitor;
  *   <li>{@link uk.ac.kcl.farm.farm.impl.FieldImpl#getFieldIP <em>Field IP</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.impl.FieldImpl#getFieldType <em>Field Type</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.impl.FieldImpl#getFieldLight <em>Field Light</em>}</li>
- *   <li>{@link uk.ac.kcl.farm.farm.impl.FieldImpl#getFieldMonitors <em>Field Monitors</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.impl.FieldImpl#getAttributes <em>Attributes</em>}</li>
  * </ul>
  *
  * @generated
@@ -122,14 +122,14 @@ public class FieldImpl extends InstanceImpl implements Field
   protected String fieldLight = FIELD_LIGHT_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getFieldMonitors() <em>Field Monitors</em>}' containment reference list.
+   * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getFieldMonitors()
+   * @see #getAttributes()
    * @generated
    * @ordered
    */
-  protected EList<FieldMonitor> fieldMonitors;
+  protected EList<CallAttributes> attributes;
 
   /**
    * <!-- begin-user-doc -->
@@ -258,13 +258,13 @@ public class FieldImpl extends InstanceImpl implements Field
    * @generated
    */
   @Override
-  public EList<FieldMonitor> getFieldMonitors()
+  public EList<CallAttributes> getAttributes()
   {
-    if (fieldMonitors == null)
+    if (attributes == null)
     {
-      fieldMonitors = new EObjectContainmentEList<FieldMonitor>(FieldMonitor.class, this, FarmPackage.FIELD__FIELD_MONITORS);
+      attributes = new EObjectContainmentEList<CallAttributes>(CallAttributes.class, this, FarmPackage.FIELD__ATTRIBUTES);
     }
-    return fieldMonitors;
+    return attributes;
   }
 
   /**
@@ -277,8 +277,8 @@ public class FieldImpl extends InstanceImpl implements Field
   {
     switch (featureID)
     {
-      case FarmPackage.FIELD__FIELD_MONITORS:
-        return ((InternalEList<?>)getFieldMonitors()).basicRemove(otherEnd, msgs);
+      case FarmPackage.FIELD__ATTRIBUTES:
+        return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -301,8 +301,8 @@ public class FieldImpl extends InstanceImpl implements Field
         return getFieldType();
       case FarmPackage.FIELD__FIELD_LIGHT:
         return getFieldLight();
-      case FarmPackage.FIELD__FIELD_MONITORS:
-        return getFieldMonitors();
+      case FarmPackage.FIELD__ATTRIBUTES:
+        return getAttributes();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -330,9 +330,9 @@ public class FieldImpl extends InstanceImpl implements Field
       case FarmPackage.FIELD__FIELD_LIGHT:
         setFieldLight((String)newValue);
         return;
-      case FarmPackage.FIELD__FIELD_MONITORS:
-        getFieldMonitors().clear();
-        getFieldMonitors().addAll((Collection<? extends FieldMonitor>)newValue);
+      case FarmPackage.FIELD__ATTRIBUTES:
+        getAttributes().clear();
+        getAttributes().addAll((Collection<? extends CallAttributes>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -360,8 +360,8 @@ public class FieldImpl extends InstanceImpl implements Field
       case FarmPackage.FIELD__FIELD_LIGHT:
         setFieldLight(FIELD_LIGHT_EDEFAULT);
         return;
-      case FarmPackage.FIELD__FIELD_MONITORS:
-        getFieldMonitors().clear();
+      case FarmPackage.FIELD__ATTRIBUTES:
+        getAttributes().clear();
         return;
     }
     super.eUnset(featureID);
@@ -385,8 +385,8 @@ public class FieldImpl extends InstanceImpl implements Field
         return FIELD_TYPE_EDEFAULT == null ? fieldType != null : !FIELD_TYPE_EDEFAULT.equals(fieldType);
       case FarmPackage.FIELD__FIELD_LIGHT:
         return FIELD_LIGHT_EDEFAULT == null ? fieldLight != null : !FIELD_LIGHT_EDEFAULT.equals(fieldLight);
-      case FarmPackage.FIELD__FIELD_MONITORS:
-        return fieldMonitors != null && !fieldMonitors.isEmpty();
+      case FarmPackage.FIELD__ATTRIBUTES:
+        return attributes != null && !attributes.isEmpty();
     }
     return super.eIsSet(featureID);
   }

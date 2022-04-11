@@ -10,54 +10,55 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import uk.ac.kcl.farm.farm.Assignment;
-import uk.ac.kcl.farm.farm.ExpressionOrCall;
+import uk.ac.kcl.farm.farm.Attribute;
+import uk.ac.kcl.farm.farm.CallAttributes;
+import uk.ac.kcl.farm.farm.Expression;
 import uk.ac.kcl.farm.farm.FarmPackage;
-import uk.ac.kcl.farm.farm.Variable;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Assignment</b></em>'.
+ * An implementation of the model object '<em><b>Call Attributes</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.farm.farm.impl.AssignmentImpl#getVar <em>Var</em>}</li>
- *   <li>{@link uk.ac.kcl.farm.farm.impl.AssignmentImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.impl.CallAttributesImpl#getType <em>Type</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.impl.CallAttributesImpl#getValue <em>Value</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class AssignmentImpl extends StatementImpl implements Assignment
+public class CallAttributesImpl extends MinimalEObjectImpl.Container implements CallAttributes
 {
   /**
-   * The cached value of the '{@link #getVar() <em>Var</em>}' reference.
+   * The cached value of the '{@link #getType() <em>Type</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getVar()
+   * @see #getType()
    * @generated
    * @ordered
    */
-  protected Variable var;
+  protected Attribute type;
 
   /**
-   * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
+   * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getExpression()
+   * @see #getValue()
    * @generated
    * @ordered
    */
-  protected ExpressionOrCall expression;
+  protected Expression value;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected AssignmentImpl()
+  protected CallAttributesImpl()
   {
     super();
   }
@@ -70,7 +71,7 @@ public class AssignmentImpl extends StatementImpl implements Assignment
   @Override
   protected EClass eStaticClass()
   {
-    return FarmPackage.Literals.ASSIGNMENT;
+    return FarmPackage.Literals.CALL_ATTRIBUTES;
   }
 
   /**
@@ -79,19 +80,19 @@ public class AssignmentImpl extends StatementImpl implements Assignment
    * @generated
    */
   @Override
-  public Variable getVar()
+  public Attribute getType()
   {
-    if (var != null && var.eIsProxy())
+    if (type != null && type.eIsProxy())
     {
-      InternalEObject oldVar = (InternalEObject)var;
-      var = (Variable)eResolveProxy(oldVar);
-      if (var != oldVar)
+      InternalEObject oldType = (InternalEObject)type;
+      type = (Attribute)eResolveProxy(oldType);
+      if (type != oldType)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, FarmPackage.ASSIGNMENT__VAR, oldVar, var));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, FarmPackage.CALL_ATTRIBUTES__TYPE, oldType, type));
       }
     }
-    return var;
+    return type;
   }
 
   /**
@@ -99,9 +100,9 @@ public class AssignmentImpl extends StatementImpl implements Assignment
    * <!-- end-user-doc -->
    * @generated
    */
-  public Variable basicGetVar()
+  public Attribute basicGetType()
   {
-    return var;
+    return type;
   }
 
   /**
@@ -110,12 +111,12 @@ public class AssignmentImpl extends StatementImpl implements Assignment
    * @generated
    */
   @Override
-  public void setVar(Variable newVar)
+  public void setType(Attribute newType)
   {
-    Variable oldVar = var;
-    var = newVar;
+    Attribute oldType = type;
+    type = newType;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.ASSIGNMENT__VAR, oldVar, var));
+      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.CALL_ATTRIBUTES__TYPE, oldType, type));
   }
 
   /**
@@ -124,9 +125,9 @@ public class AssignmentImpl extends StatementImpl implements Assignment
    * @generated
    */
   @Override
-  public ExpressionOrCall getExpression()
+  public Expression getValue()
   {
-    return expression;
+    return value;
   }
 
   /**
@@ -134,13 +135,13 @@ public class AssignmentImpl extends StatementImpl implements Assignment
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetExpression(ExpressionOrCall newExpression, NotificationChain msgs)
+  public NotificationChain basicSetValue(Expression newValue, NotificationChain msgs)
   {
-    ExpressionOrCall oldExpression = expression;
-    expression = newExpression;
+    Expression oldValue = value;
+    value = newValue;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FarmPackage.ASSIGNMENT__EXPRESSION, oldExpression, newExpression);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FarmPackage.CALL_ATTRIBUTES__VALUE, oldValue, newValue);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -152,20 +153,20 @@ public class AssignmentImpl extends StatementImpl implements Assignment
    * @generated
    */
   @Override
-  public void setExpression(ExpressionOrCall newExpression)
+  public void setValue(Expression newValue)
   {
-    if (newExpression != expression)
+    if (newValue != value)
     {
       NotificationChain msgs = null;
-      if (expression != null)
-        msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FarmPackage.ASSIGNMENT__EXPRESSION, null, msgs);
-      if (newExpression != null)
-        msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FarmPackage.ASSIGNMENT__EXPRESSION, null, msgs);
-      msgs = basicSetExpression(newExpression, msgs);
+      if (value != null)
+        msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FarmPackage.CALL_ATTRIBUTES__VALUE, null, msgs);
+      if (newValue != null)
+        msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FarmPackage.CALL_ATTRIBUTES__VALUE, null, msgs);
+      msgs = basicSetValue(newValue, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.ASSIGNMENT__EXPRESSION, newExpression, newExpression));
+      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.CALL_ATTRIBUTES__VALUE, newValue, newValue));
   }
 
   /**
@@ -178,8 +179,8 @@ public class AssignmentImpl extends StatementImpl implements Assignment
   {
     switch (featureID)
     {
-      case FarmPackage.ASSIGNMENT__EXPRESSION:
-        return basicSetExpression(null, msgs);
+      case FarmPackage.CALL_ATTRIBUTES__VALUE:
+        return basicSetValue(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -194,11 +195,11 @@ public class AssignmentImpl extends StatementImpl implements Assignment
   {
     switch (featureID)
     {
-      case FarmPackage.ASSIGNMENT__VAR:
-        if (resolve) return getVar();
-        return basicGetVar();
-      case FarmPackage.ASSIGNMENT__EXPRESSION:
-        return getExpression();
+      case FarmPackage.CALL_ATTRIBUTES__TYPE:
+        if (resolve) return getType();
+        return basicGetType();
+      case FarmPackage.CALL_ATTRIBUTES__VALUE:
+        return getValue();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -213,11 +214,11 @@ public class AssignmentImpl extends StatementImpl implements Assignment
   {
     switch (featureID)
     {
-      case FarmPackage.ASSIGNMENT__VAR:
-        setVar((Variable)newValue);
+      case FarmPackage.CALL_ATTRIBUTES__TYPE:
+        setType((Attribute)newValue);
         return;
-      case FarmPackage.ASSIGNMENT__EXPRESSION:
-        setExpression((ExpressionOrCall)newValue);
+      case FarmPackage.CALL_ATTRIBUTES__VALUE:
+        setValue((Expression)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -233,11 +234,11 @@ public class AssignmentImpl extends StatementImpl implements Assignment
   {
     switch (featureID)
     {
-      case FarmPackage.ASSIGNMENT__VAR:
-        setVar((Variable)null);
+      case FarmPackage.CALL_ATTRIBUTES__TYPE:
+        setType((Attribute)null);
         return;
-      case FarmPackage.ASSIGNMENT__EXPRESSION:
-        setExpression((ExpressionOrCall)null);
+      case FarmPackage.CALL_ATTRIBUTES__VALUE:
+        setValue((Expression)null);
         return;
     }
     super.eUnset(featureID);
@@ -253,12 +254,12 @@ public class AssignmentImpl extends StatementImpl implements Assignment
   {
     switch (featureID)
     {
-      case FarmPackage.ASSIGNMENT__VAR:
-        return var != null;
-      case FarmPackage.ASSIGNMENT__EXPRESSION:
-        return expression != null;
+      case FarmPackage.CALL_ATTRIBUTES__TYPE:
+        return type != null;
+      case FarmPackage.CALL_ATTRIBUTES__VALUE:
+        return value != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //AssignmentImpl
+} //CallAttributesImpl

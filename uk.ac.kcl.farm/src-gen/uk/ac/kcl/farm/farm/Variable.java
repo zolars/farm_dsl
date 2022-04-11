@@ -27,12 +27,12 @@ public interface Variable extends Statement, Instance
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Expression</em>' containment reference.
-   * @see #setExpression(Expression)
+   * @see #setExpression(ExpressionOrCall)
    * @see uk.ac.kcl.farm.farm.FarmPackage#getVariable_Expression()
    * @model containment="true"
    * @generated
    */
-  Expression getExpression();
+  ExpressionOrCall getExpression();
 
   /**
    * Sets the value of the '{@link uk.ac.kcl.farm.farm.Variable#getExpression <em>Expression</em>}' containment reference.
@@ -42,6 +42,6 @@ public interface Variable extends Statement, Instance
    * @see #getExpression()
    * @generated
    */
-  void setExpression(Expression value);
+  void setExpression(ExpressionOrCall value);
 
 } // Variable

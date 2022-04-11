@@ -68,9 +68,11 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
       case FarmPackage.FARM_PROGRAM: return createFarmProgram();
       case FarmPackage.STATEMENT: return createStatement();
       case FarmPackage.ATTRIBUTE: return createAttribute();
+      case FarmPackage.EXPRESSION_OR_CALL: return createExpressionOrCall();
       case FarmPackage.VARIABLE: return createVariable();
       case FarmPackage.VAR_EXPRESSION: return createVarExpression();
       case FarmPackage.ASSIGNMENT: return createAssignment();
+      case FarmPackage.CALL: return createCall();
       case FarmPackage.LOOP_STATEMENT: return createLoopStatement();
       case FarmPackage.JUDGE_STATEMENT: return createJudgeStatement();
       case FarmPackage.ELSE_JUDGE_STATEMENT: return createElseJudgeStatement();
@@ -78,11 +80,12 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
       case FarmPackage.BUILTIN_FUNCTION: return createBuiltinFunction();
       case FarmPackage.INSTANCE: return createInstance();
       case FarmPackage.REPORT_FUNCTION: return createReportFunction();
-      case FarmPackage.COUNT_STAGE_FUNCTION: return createCountStageFunction();
-      case FarmPackage.SET_FIELD_VALUE_FUNCTION: return createSetFieldValueFunction();
-      case FarmPackage.PLANT_FUNCTION: return createPlantFunction();
       case FarmPackage.MOVE_FUNCTION: return createMoveFunction();
       case FarmPackage.WAIT_FUNCTION: return createWaitFunction();
+      case FarmPackage.CALL_FUNCTION: return createCallFunction();
+      case FarmPackage.GET_STAGE_FUNCTION: return createGetStageFunction();
+      case FarmPackage.FIELD_SET_FUNCTION: return createFieldSetFunction();
+      case FarmPackage.PLANT_FUNCTION: return createPlantFunction();
       case FarmPackage.EXPRESSION: return createExpression();
       case FarmPackage.NOT_BOOLEAN_EXPRESSION: return createNotBooleanExpression();
       case FarmPackage.LITERAL: return createLiteral();
@@ -92,9 +95,8 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
       case FarmPackage.CROP: return createCrop();
       case FarmPackage.CROP_STAGES: return createCropStages();
       case FarmPackage.CROP_STAGE: return createCropStage();
-      case FarmPackage.CROP_ATTRIBUTES: return createCropAttributes();
       case FarmPackage.FIELD: return createField();
-      case FarmPackage.FIELD_MONITOR: return createFieldMonitor();
+      case FarmPackage.CALL_ATTRIBUTES: return createCallAttributes();
       case FarmPackage.MISSION: return createMission();
       case FarmPackage.CONDITION_OR_EXPRESSION: return createConditionOrExpression();
       case FarmPackage.CONDITION_AND_EXPRESSION: return createConditionAndExpression();
@@ -156,6 +158,18 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
    * @generated
    */
   @Override
+  public ExpressionOrCall createExpressionOrCall()
+  {
+    ExpressionOrCallImpl expressionOrCall = new ExpressionOrCallImpl();
+    return expressionOrCall;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public Variable createVariable()
   {
     VariableImpl variable = new VariableImpl();
@@ -184,6 +198,18 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
   {
     AssignmentImpl assignment = new AssignmentImpl();
     return assignment;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Call createCall()
+  {
+    CallImpl call = new CallImpl();
+    return call;
   }
 
   /**
@@ -276,42 +302,6 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
    * @generated
    */
   @Override
-  public CountStageFunction createCountStageFunction()
-  {
-    CountStageFunctionImpl countStageFunction = new CountStageFunctionImpl();
-    return countStageFunction;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public SetFieldValueFunction createSetFieldValueFunction()
-  {
-    SetFieldValueFunctionImpl setFieldValueFunction = new SetFieldValueFunctionImpl();
-    return setFieldValueFunction;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public PlantFunction createPlantFunction()
-  {
-    PlantFunctionImpl plantFunction = new PlantFunctionImpl();
-    return plantFunction;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public MoveFunction createMoveFunction()
   {
     MoveFunctionImpl moveFunction = new MoveFunctionImpl();
@@ -328,6 +318,54 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
   {
     WaitFunctionImpl waitFunction = new WaitFunctionImpl();
     return waitFunction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public CallFunction createCallFunction()
+  {
+    CallFunctionImpl callFunction = new CallFunctionImpl();
+    return callFunction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public GetStageFunction createGetStageFunction()
+  {
+    GetStageFunctionImpl getStageFunction = new GetStageFunctionImpl();
+    return getStageFunction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public FieldSetFunction createFieldSetFunction()
+  {
+    FieldSetFunctionImpl fieldSetFunction = new FieldSetFunctionImpl();
+    return fieldSetFunction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public PlantFunction createPlantFunction()
+  {
+    PlantFunctionImpl plantFunction = new PlantFunctionImpl();
+    return plantFunction;
   }
 
   /**
@@ -444,18 +482,6 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
    * @generated
    */
   @Override
-  public CropAttributes createCropAttributes()
-  {
-    CropAttributesImpl cropAttributes = new CropAttributesImpl();
-    return cropAttributes;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
   public Field createField()
   {
     FieldImpl field = new FieldImpl();
@@ -468,10 +494,10 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
    * @generated
    */
   @Override
-  public FieldMonitor createFieldMonitor()
+  public CallAttributes createCallAttributes()
   {
-    FieldMonitorImpl fieldMonitor = new FieldMonitorImpl();
-    return fieldMonitor;
+    CallAttributesImpl callAttributes = new CallAttributesImpl();
+    return callAttributes;
   }
 
   /**

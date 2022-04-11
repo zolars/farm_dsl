@@ -2,8 +2,6 @@
 
 /*
 XPECT generated file text.farm.xt.txt ---
-Program contains:
-
 - 2 attribute declarations
     - Attribute `temperature` processed
     - Attribute `humidity` processed
@@ -51,45 +49,51 @@ crop crop_tomato {
 	stage : [
  		{
             name : "Sprout"
-            timeConsumed : 20.0
+            timeConsumed : 2.0
+            timeDanger : 10.0
 
-            temperature : 10.1 * 7.123
-            humidity : 90.0
+            temperature : 0.0
+            humidity : 0.0
         },
         {
             name : "Seedling"
-            timeConsumed : 1.0 + 2.2
+            timeConsumed : 1.0
+            timeDanger : 10.0
 
-            temperature : 21.0
-            humidity : 80.0
+            temperature : 1.0
+            humidity : 1.0
         },
         {
             name : "Vegetative"
-            timeConsumed : 20.0
+            timeConsumed : 2.0
+            timeDanger : 10.0
 
-            temperature : 26.0
-            humidity : 12.0
+            temperature : 2.0
+            humidity : 2.0
         },
         {
             name : "Budding"
-            timeConsumed : 5.0
+            timeConsumed : 3.0
+            timeDanger : 10.0
             
-            temperature : 26.0
-            humidity : 60.0
+            temperature : 3.0
+            humidity : 3.0
         },
         {
             name : "Flowering"
-            timeConsumed : 5.0
+            timeConsumed : 4.0
+            timeDanger : 10.0
             
-            temperature : 26.0
-            humidity : 60.0
+            temperature : 4.0
+            humidity : 4.0
         },
         {
             name : "Ripening"
-            timeConsumed : 10.0
+            timeConsumed : 5.0
+            timeDanger : 10.0
             
-            temperature : (12.0 + 45.0) * (1231.123 / 123.1234) + 456234.234 * 234.1
-            humidity : 30.0 + 67.1
+            temperature : 5.0
+            humidity : 5.0
         }
 	]
 }
@@ -99,7 +103,8 @@ field greenhouse_1 {
     ip: "192.128.0.1"
     type : outside
     light : sunlight
-    monitor: [humidity]
+	temperature : 26.0
+    humidity : 60.0
 }
 
 field greenhouse_2 {
@@ -107,7 +112,8 @@ field greenhouse_2 {
     ip: "192.128.0.2"
     type : inside
     light : LED
-    monitor: [humidity, temperature]
+    temperature : 26.0
+    humidity : 60.0
 }
 
 mission {
@@ -116,27 +122,43 @@ mission {
 	var realVar = (12.0 + 45.0)
 	report(realVar)
 	
-	var boolVar = 12.0 > 11.0
+	var result = 12.0
 	
-	var new = 12.1 * 2.8 + 23.0
-	var old = new
-
-	if (false) {
-		var a = 12.1 * 2.8 + 23.0
-	} elseif (false || true) {
-		var b = 12.0
-	} else {
-		var c = 109.2
-	}
+	result = greenhouse_1.humidity
+	result = crop_tomato.getStage(0).humidity
+	result = greenhouse_1.fieldSet(humidity,0.0)
+	result = greenhouse_1.fieldSet(temperature,0.0)
+	result = greenhouse_1.plant(crop_tomato)
+	
+	result = greenhouse_2.fieldSet(humidity,0.0)
+	result = greenhouse_2.fieldSet(temperature,0.0)
+	
+	move(greenhouse_1, greenhouse_2)
+	
+	report(greenhouse_1)
+	report(crop_tomato)
+	
+	wait(0.5)
+	
+//	var new = 12.1 * 2.8 + 23.0
+//	var old = new
+//
+//	if (false) {
+//		var a = 12.1 * 2.8 + 23.0
+//	} elseif (false || true) {
+//		var b = 12.0
+//	} else {
+//		var c = 109.2
+//	}
 	
 //	var call = greenhouse_1.light
 	
-	var loopvar = 11.0
-	while (loopvar > 0.0) {
-		loopvar = loopvar - 1.0
-		var newloopvar = loopvar
-		while (newloopvar > 0.0) {
-			newloopvar = newloopvar - 1.0
-		}
-	}
+//	var loopvar = 11.0
+//	while (loopvar > 0.0) {
+//		loopvar = loopvar - 1.0
+//		var newloopvar = loopvar
+//		while (newloopvar > 0.0) {
+//			newloopvar = newloopvar - 1.0
+//		}
+//	}
 }

@@ -13,7 +13,6 @@ package uk.ac.kcl.farm.farm;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.farm.farm.PlantFunction#getPlantInField <em>Plant In Field</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.PlantFunction#getPlantCrop <em>Plant Crop</em>}</li>
  * </ul>
  *
@@ -21,30 +20,8 @@ package uk.ac.kcl.farm.farm;
  * @model
  * @generated
  */
-public interface PlantFunction extends BuiltinFunction
+public interface PlantFunction extends CallFunction
 {
-  /**
-   * Returns the value of the '<em><b>Plant In Field</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Plant In Field</em>' reference.
-   * @see #setPlantInField(Field)
-   * @see uk.ac.kcl.farm.farm.FarmPackage#getPlantFunction_PlantInField()
-   * @model
-   * @generated
-   */
-  Field getPlantInField();
-
-  /**
-   * Sets the value of the '{@link uk.ac.kcl.farm.farm.PlantFunction#getPlantInField <em>Plant In Field</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Plant In Field</em>' reference.
-   * @see #getPlantInField()
-   * @generated
-   */
-  void setPlantInField(Field value);
-
   /**
    * Returns the value of the '<em><b>Plant Crop</b></em>' reference.
    * <!-- begin-user-doc -->

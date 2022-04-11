@@ -9,8 +9,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="Attribute">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpressionOrCall"/>
   <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="#//Statement #//Instance">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//ExpressionOrCall"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VarExpression" eSuperTypes="#//Expression">
@@ -18,8 +19,15 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Assignment" eSuperTypes="#//Statement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="var" eType="#//Variable"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//ExpressionOrCall"
         containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Call" eSuperTypes="#//ExpressionOrCall">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instance" eType="#//Instance"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="attributes" unique="false"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functions" upperBound="-1"
+        eType="#//CallFunction" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LoopStatement" eSuperTypes="#//Statement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="#//Expression"
@@ -54,19 +62,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="ReportFunction" eSuperTypes="#//BuiltinFunction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="instance" eType="#//Instance"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CountStageFunction" eSuperTypes="#//BuiltinFunction">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="countStageCrop" eType="#//Crop"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SetFieldValueFunction" eSuperTypes="#//BuiltinFunction">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="setValueField" eType="#//Field"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="setFieldAttribute" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="setFieldValue" eType="#//Expression"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PlantFunction" eSuperTypes="#//BuiltinFunction">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="plantInField" eType="#//Field"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="plantCrop" eType="#//Crop"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MoveFunction" eSuperTypes="#//BuiltinFunction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="moveFromField" eType="#//Field"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="moveToField" eType="#//Field"/>
@@ -75,7 +70,20 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Expression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CallFunction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GetStageFunction" eSuperTypes="#//CallFunction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="attribute" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FieldSetFunction" eSuperTypes="#//CallFunction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="#//Attribute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PlantFunction" eSuperTypes="#//CallFunction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="plantCrop" eType="#//Crop"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Expression" eSuperTypes="#//ExpressionOrCall"/>
   <eClassifiers xsi:type="ecore:EClass" name="NotBooleanExpression" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="exp" eType="#//Expression"
         containment="true"/>
@@ -103,24 +111,23 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="time" eType="#//Expression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
-        eType="#//CropAttributes" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CropAttributes">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Attribute"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Expression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="timeover" eType="#//Expression"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//CallAttributes" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Field" eSuperTypes="#//Instance">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fieldName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fieldIP" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fieldType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fieldLight" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="fieldMonitors" upperBound="-1"
-        eType="#//FieldMonitor" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//CallAttributes" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FieldMonitor">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="monitor" eType="#//Attribute"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CallAttributes">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Attribute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Expression"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Mission">
     <eStructuralFeatures xsi:type="ecore:EReference" name="missionStatements" upperBound="-1"

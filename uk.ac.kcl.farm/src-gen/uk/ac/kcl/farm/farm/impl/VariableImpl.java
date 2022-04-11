@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import uk.ac.kcl.farm.farm.Expression;
+import uk.ac.kcl.farm.farm.ExpressionOrCall;
 import uk.ac.kcl.farm.farm.FarmPackage;
 import uk.ac.kcl.farm.farm.Instance;
 import uk.ac.kcl.farm.farm.Variable;
@@ -60,7 +60,7 @@ public class VariableImpl extends StatementImpl implements Variable
    * @generated
    * @ordered
    */
-  protected Expression expression;
+  protected ExpressionOrCall expression;
 
   /**
    * <!-- begin-user-doc -->
@@ -114,7 +114,7 @@ public class VariableImpl extends StatementImpl implements Variable
    * @generated
    */
   @Override
-  public Expression getExpression()
+  public ExpressionOrCall getExpression()
   {
     return expression;
   }
@@ -124,9 +124,9 @@ public class VariableImpl extends StatementImpl implements Variable
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetExpression(Expression newExpression, NotificationChain msgs)
+  public NotificationChain basicSetExpression(ExpressionOrCall newExpression, NotificationChain msgs)
   {
-    Expression oldExpression = expression;
+    ExpressionOrCall oldExpression = expression;
     expression = newExpression;
     if (eNotificationRequired())
     {
@@ -142,7 +142,7 @@ public class VariableImpl extends StatementImpl implements Variable
    * @generated
    */
   @Override
-  public void setExpression(Expression newExpression)
+  public void setExpression(ExpressionOrCall newExpression)
   {
     if (newExpression != expression)
     {
@@ -206,7 +206,7 @@ public class VariableImpl extends StatementImpl implements Variable
         setName((String)newValue);
         return;
       case FarmPackage.VARIABLE__EXPRESSION:
-        setExpression((Expression)newValue);
+        setExpression((ExpressionOrCall)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -226,7 +226,7 @@ public class VariableImpl extends StatementImpl implements Variable
         setName(NAME_EDEFAULT);
         return;
       case FarmPackage.VARIABLE__EXPRESSION:
-        setExpression((Expression)null);
+        setExpression((ExpressionOrCall)null);
         return;
     }
     super.eUnset(featureID);

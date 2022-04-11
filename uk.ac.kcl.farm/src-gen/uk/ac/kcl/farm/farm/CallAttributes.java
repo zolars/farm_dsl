@@ -7,22 +7,22 @@ import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Crop Attributes</b></em>'.
+ * A representation of the model object '<em><b>Call Attributes</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.farm.farm.CropAttributes#getType <em>Type</em>}</li>
- *   <li>{@link uk.ac.kcl.farm.farm.CropAttributes#getValue <em>Value</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.CallAttributes#getType <em>Type</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.CallAttributes#getValue <em>Value</em>}</li>
  * </ul>
  *
- * @see uk.ac.kcl.farm.farm.FarmPackage#getCropAttributes()
+ * @see uk.ac.kcl.farm.farm.FarmPackage#getCallAttributes()
  * @model
  * @generated
  */
-public interface CropAttributes extends EObject
+public interface CallAttributes extends EObject
 {
   /**
    * Returns the value of the '<em><b>Type</b></em>' reference.
@@ -30,14 +30,14 @@ public interface CropAttributes extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Type</em>' reference.
    * @see #setType(Attribute)
-   * @see uk.ac.kcl.farm.farm.FarmPackage#getCropAttributes_Type()
+   * @see uk.ac.kcl.farm.farm.FarmPackage#getCallAttributes_Type()
    * @model
    * @generated
    */
   Attribute getType();
 
   /**
-   * Sets the value of the '{@link uk.ac.kcl.farm.farm.CropAttributes#getType <em>Type</em>}' reference.
+   * Sets the value of the '{@link uk.ac.kcl.farm.farm.CallAttributes#getType <em>Type</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Type</em>' reference.
@@ -52,14 +52,14 @@ public interface CropAttributes extends EObject
    * <!-- end-user-doc -->
    * @return the value of the '<em>Value</em>' containment reference.
    * @see #setValue(Expression)
-   * @see uk.ac.kcl.farm.farm.FarmPackage#getCropAttributes_Value()
+   * @see uk.ac.kcl.farm.farm.FarmPackage#getCallAttributes_Value()
    * @model containment="true"
    * @generated
    */
   Expression getValue();
 
   /**
-   * Sets the value of the '{@link uk.ac.kcl.farm.farm.CropAttributes#getValue <em>Value</em>}' containment reference.
+   * Sets the value of the '{@link uk.ac.kcl.farm.farm.CallAttributes#getValue <em>Value</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Value</em>' containment reference.
@@ -68,4 +68,4 @@ public interface CropAttributes extends EObject
    */
   void setValue(Expression value);
 
-} // CropAttributes
+} // CallAttributes

@@ -3,16 +3,19 @@
  */
 package uk.ac.kcl.farm.validation;
 
+import com.google.common.base.Objects;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import uk.ac.kcl.farm.farm.Attribute;
 import uk.ac.kcl.farm.farm.Crop;
+import uk.ac.kcl.farm.farm.CropStage;
 import uk.ac.kcl.farm.farm.FarmPackage;
 import uk.ac.kcl.farm.farm.FarmProgram;
 import uk.ac.kcl.farm.farm.Field;
 import uk.ac.kcl.farm.farm.Mission;
+import uk.ac.kcl.farm.farm.MoveFunction;
 import uk.ac.kcl.farm.farm.Variable;
 import uk.ac.kcl.farm.interpreter.Exp;
 
@@ -23,7 +26,9 @@ import uk.ac.kcl.farm.interpreter.Exp;
  */
 @SuppressWarnings("all")
 public class FarmValidator extends AbstractFarmValidator {
-  private Exp expRuntime = new Exp();
+  private uk.ac.kcl.farm.generator.Runtime runtime = new uk.ac.kcl.farm.generator.Runtime();
+  
+  private Exp expRuntime = new Exp(this.runtime);
   
   public static final String INVALID_ATTRIBUTE_NAME = "uk.ac.kcl.farm.farm.INVALID_ATTRIBUTE_NAME";
   
@@ -32,6 +37,10 @@ public class FarmValidator extends AbstractFarmValidator {
   public static final String INVALID_EXPRESSION = "uk.ac.kcl.farm.farm.INVALID_EXPRESSION";
   
   public static final String INVALID_IP_ADDRESS = "uk.ac.kcl.farm.farm.INVALID_IP_ADDRESS";
+  
+  public static final String INVALID_CROP_STAGE_TIME = "uk.ac.kcl.farm.farm.INVALID_CROP_STAGE_TIME";
+  
+  public static final String INVALID_FUNCTION = "uk.ac.kcl.farm.farm.INVALID_FUNCTION";
   
   @Check
   public void checkAttributeStartsWithLowerCase(final Attribute attribute) {
@@ -58,6 +67,17 @@ public class FarmValidator extends AbstractFarmValidator {
   public static boolean validateIPAddress(final String ip) {
     final String PATTERN = "^((0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)\\.){3}(0|1\\d?\\d?|2[0-4]?\\d?|25[0-5]?|[3-9]\\d?)$";
     return ip.matches(PATTERN);
+  }
+  
+  @Check
+  public void checkTimeConsumed(final CropStage stage) {
+    Float _float = this.expRuntime.toFloat(stage.getTime());
+    boolean _lessThan = ((_float).floatValue() < 0);
+    if (_lessThan) {
+      this.error("timeConsumed must be a Float bigger than 0", 
+        FarmPackage.Literals.CROP_STAGE__TIME, 
+        FarmValidator.INVALID_CROP_STAGE_TIME);
+    }
   }
   
   @Check
@@ -111,6 +131,18 @@ public class FarmValidator extends AbstractFarmValidator {
       this.error(("The farm program must have at least one of Crop, Field and Mission\n" + errorLog), 
         null, 
         FarmValidator.INVALID_VARIABLE_NAME);
+    }
+  }
+  
+  @Check
+  public void checkMoveFunctionParamsDifferent(final MoveFunction function) {
+    String _name = function.getMoveFromField().getName();
+    String _name_1 = function.getMoveToField().getName();
+    boolean _equals = Objects.equal(_name, _name_1);
+    if (_equals) {
+      this.warning("move function params cannot be the same", 
+        FarmPackage.Literals.MOVE_FUNCTION__MOVE_FROM_FIELD, 
+        FarmValidator.INVALID_FUNCTION);
     }
   }
 }

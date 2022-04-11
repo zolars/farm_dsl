@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import uk.ac.kcl.farm.farm.CropAttributes;
+import uk.ac.kcl.farm.farm.CallAttributes;
 import uk.ac.kcl.farm.farm.CropStage;
 import uk.ac.kcl.farm.farm.Expression;
 import uk.ac.kcl.farm.farm.FarmPackage;
@@ -34,6 +34,7 @@ import uk.ac.kcl.farm.farm.FarmPackage;
  * <ul>
  *   <li>{@link uk.ac.kcl.farm.farm.impl.CropStageImpl#getName <em>Name</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.impl.CropStageImpl#getTime <em>Time</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.impl.CropStageImpl#getTimeover <em>Timeover</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.impl.CropStageImpl#getAttributes <em>Attributes</em>}</li>
  * </ul>
  *
@@ -72,6 +73,16 @@ public class CropStageImpl extends MinimalEObjectImpl.Container implements CropS
   protected Expression time;
 
   /**
+   * The cached value of the '{@link #getTimeover() <em>Timeover</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getTimeover()
+   * @generated
+   * @ordered
+   */
+  protected Expression timeover;
+
+  /**
    * The cached value of the '{@link #getAttributes() <em>Attributes</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -79,7 +90,7 @@ public class CropStageImpl extends MinimalEObjectImpl.Container implements CropS
    * @generated
    * @ordered
    */
-  protected EList<CropAttributes> attributes;
+  protected EList<CallAttributes> attributes;
 
   /**
    * <!-- begin-user-doc -->
@@ -183,11 +194,61 @@ public class CropStageImpl extends MinimalEObjectImpl.Container implements CropS
    * @generated
    */
   @Override
-  public EList<CropAttributes> getAttributes()
+  public Expression getTimeover()
+  {
+    return timeover;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetTimeover(Expression newTimeover, NotificationChain msgs)
+  {
+    Expression oldTimeover = timeover;
+    timeover = newTimeover;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FarmPackage.CROP_STAGE__TIMEOVER, oldTimeover, newTimeover);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setTimeover(Expression newTimeover)
+  {
+    if (newTimeover != timeover)
+    {
+      NotificationChain msgs = null;
+      if (timeover != null)
+        msgs = ((InternalEObject)timeover).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FarmPackage.CROP_STAGE__TIMEOVER, null, msgs);
+      if (newTimeover != null)
+        msgs = ((InternalEObject)newTimeover).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FarmPackage.CROP_STAGE__TIMEOVER, null, msgs);
+      msgs = basicSetTimeover(newTimeover, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.CROP_STAGE__TIMEOVER, newTimeover, newTimeover));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EList<CallAttributes> getAttributes()
   {
     if (attributes == null)
     {
-      attributes = new EObjectContainmentEList<CropAttributes>(CropAttributes.class, this, FarmPackage.CROP_STAGE__ATTRIBUTES);
+      attributes = new EObjectContainmentEList<CallAttributes>(CallAttributes.class, this, FarmPackage.CROP_STAGE__ATTRIBUTES);
     }
     return attributes;
   }
@@ -204,6 +265,8 @@ public class CropStageImpl extends MinimalEObjectImpl.Container implements CropS
     {
       case FarmPackage.CROP_STAGE__TIME:
         return basicSetTime(null, msgs);
+      case FarmPackage.CROP_STAGE__TIMEOVER:
+        return basicSetTimeover(null, msgs);
       case FarmPackage.CROP_STAGE__ATTRIBUTES:
         return ((InternalEList<?>)getAttributes()).basicRemove(otherEnd, msgs);
     }
@@ -224,6 +287,8 @@ public class CropStageImpl extends MinimalEObjectImpl.Container implements CropS
         return getName();
       case FarmPackage.CROP_STAGE__TIME:
         return getTime();
+      case FarmPackage.CROP_STAGE__TIMEOVER:
+        return getTimeover();
       case FarmPackage.CROP_STAGE__ATTRIBUTES:
         return getAttributes();
     }
@@ -247,9 +312,12 @@ public class CropStageImpl extends MinimalEObjectImpl.Container implements CropS
       case FarmPackage.CROP_STAGE__TIME:
         setTime((Expression)newValue);
         return;
+      case FarmPackage.CROP_STAGE__TIMEOVER:
+        setTimeover((Expression)newValue);
+        return;
       case FarmPackage.CROP_STAGE__ATTRIBUTES:
         getAttributes().clear();
-        getAttributes().addAll((Collection<? extends CropAttributes>)newValue);
+        getAttributes().addAll((Collection<? extends CallAttributes>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -270,6 +338,9 @@ public class CropStageImpl extends MinimalEObjectImpl.Container implements CropS
         return;
       case FarmPackage.CROP_STAGE__TIME:
         setTime((Expression)null);
+        return;
+      case FarmPackage.CROP_STAGE__TIMEOVER:
+        setTimeover((Expression)null);
         return;
       case FarmPackage.CROP_STAGE__ATTRIBUTES:
         getAttributes().clear();
@@ -292,6 +363,8 @@ public class CropStageImpl extends MinimalEObjectImpl.Container implements CropS
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case FarmPackage.CROP_STAGE__TIME:
         return time != null;
+      case FarmPackage.CROP_STAGE__TIMEOVER:
+        return timeover != null;
       case FarmPackage.CROP_STAGE__ATTRIBUTES:
         return attributes != null && !attributes.isEmpty();
     }

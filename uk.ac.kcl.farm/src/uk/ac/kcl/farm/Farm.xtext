@@ -28,8 +28,12 @@ Attribute:
 	"define" name=ID
 ;
 
+ExpressionOrCall:
+	Expression | Call
+;
+
 Variable:
-	"var" name=ID "=" expression=Expression
+	"var" name=ID "=" expression=ExpressionOrCall
 ;
 
 VarExpression:
@@ -37,7 +41,12 @@ VarExpression:
 ;
 
 Assignment:
-	var=[Variable] "=" expression=Expression
+	var=[Variable] "=" expression=ExpressionOrCall
+;
+
+Call hidden():
+	instance=[Instance] (
+		("." attributes+=ID) | ("." functions+=CallFunction))+
 ;
 
 LoopStatement:
@@ -65,11 +74,12 @@ ElseStatement:
 	"else" "{" elseStatements += Statement* "}"
 ;
 
+/*
+ * Built-in Functions
+ */
+ 
 BuiltinFunction:
 	ReportFunction |
-	CountStageFunction |
-	SetFieldValueFunction |
-	PlantFunction | 
 	MoveFunction |
 	WaitFunction
 ;
@@ -84,18 +94,6 @@ ReportFunction:
 	"report(" instance=[Instance | ID] ")"
 ;
 
-CountStageFunction:
-	countStageCrop=[Crop] ".countStage(" ")"
-;
-
-SetFieldValueFunction:
-	setValueField=[Field] ".setFieldValue(" setFieldAttribute=STRING "," setFieldValue=AdditionExpression ")"
-;
-
-PlantFunction:
-	plantInField=[Field | ID] ".plant(" plantCrop=[Crop | ID] ")"
-;
-
 MoveFunction:
 	"move(" moveFromField=[Field | ID] ","  moveToField=[Field | ID] ")"
 ;
@@ -103,6 +101,32 @@ MoveFunction:
 WaitFunction:
 	"wait(" value=Expression ")"
 ;
+
+/*
+ * Call Functions
+ */
+
+CallFunction:
+	GetStageFunction |
+	FieldSetFunction |
+	PlantFunction
+;
+
+GetStageFunction hidden():
+	"getStage(" id=INT (")." attribute=(
+		"timeConsumed" |
+		ID
+	))
+;
+
+FieldSetFunction:
+	"fieldSet(" attribute=[Attribute] "," value=AdditionExpression ")"
+;
+
+PlantFunction:
+	"plant(" plantCrop=[Crop | ID] ")"
+;
+
 
 //Expressions
 
@@ -208,12 +232,9 @@ CropStage:
 	"{"	
 		"name" ":" name=STRING
 		"timeConsumed" ":" time=AdditionExpression
-		attributes += CropAttributes*
+		"timeDanger" ":" timeover=AdditionExpression
+		attributes += CallAttributes*
 	"}"
-;
-
-CropAttributes:
-	type=[Attribute | ID] ":" value=AdditionExpression
 ;
 
 // Field code block
@@ -223,12 +244,13 @@ Field:
 		"ip" ":" fieldIP=STRING
 		"type" ":" fieldType=("inside" | "outside")
 		"light" ":" fieldLight=("sunlight" | "LED")
-		"monitor" ":" "[" fieldMonitors+=FieldMonitor ("," fieldMonitors+=FieldMonitor)* "]"
+		attributes += CallAttributes*
 	"}"
 ;
 
-FieldMonitor:
-	monitor=[Attribute | ID]
+
+CallAttributes:
+	type=[Attribute | ID] ":" value=AdditionExpression
 ;
 
 // Main code block

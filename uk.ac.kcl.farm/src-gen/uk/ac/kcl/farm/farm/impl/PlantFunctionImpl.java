@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import uk.ac.kcl.farm.farm.Crop;
 import uk.ac.kcl.farm.farm.FarmPackage;
-import uk.ac.kcl.farm.farm.Field;
 import uk.ac.kcl.farm.farm.PlantFunction;
 
 /**
@@ -23,24 +22,13 @@ import uk.ac.kcl.farm.farm.PlantFunction;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.farm.farm.impl.PlantFunctionImpl#getPlantInField <em>Plant In Field</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.impl.PlantFunctionImpl#getPlantCrop <em>Plant Crop</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class PlantFunctionImpl extends BuiltinFunctionImpl implements PlantFunction
+public class PlantFunctionImpl extends CallFunctionImpl implements PlantFunction
 {
-  /**
-   * The cached value of the '{@link #getPlantInField() <em>Plant In Field</em>}' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getPlantInField()
-   * @generated
-   * @ordered
-   */
-  protected Field plantInField;
-
   /**
    * The cached value of the '{@link #getPlantCrop() <em>Plant Crop</em>}' reference.
    * <!-- begin-user-doc -->
@@ -70,51 +58,6 @@ public class PlantFunctionImpl extends BuiltinFunctionImpl implements PlantFunct
   protected EClass eStaticClass()
   {
     return FarmPackage.Literals.PLANT_FUNCTION;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Field getPlantInField()
-  {
-    if (plantInField != null && plantInField.eIsProxy())
-    {
-      InternalEObject oldPlantInField = (InternalEObject)plantInField;
-      plantInField = (Field)eResolveProxy(oldPlantInField);
-      if (plantInField != oldPlantInField)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, FarmPackage.PLANT_FUNCTION__PLANT_IN_FIELD, oldPlantInField, plantInField));
-      }
-    }
-    return plantInField;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Field basicGetPlantInField()
-  {
-    return plantInField;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public void setPlantInField(Field newPlantInField)
-  {
-    Field oldPlantInField = plantInField;
-    plantInField = newPlantInField;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.PLANT_FUNCTION__PLANT_IN_FIELD, oldPlantInField, plantInField));
   }
 
   /**
@@ -172,9 +115,6 @@ public class PlantFunctionImpl extends BuiltinFunctionImpl implements PlantFunct
   {
     switch (featureID)
     {
-      case FarmPackage.PLANT_FUNCTION__PLANT_IN_FIELD:
-        if (resolve) return getPlantInField();
-        return basicGetPlantInField();
       case FarmPackage.PLANT_FUNCTION__PLANT_CROP:
         if (resolve) return getPlantCrop();
         return basicGetPlantCrop();
@@ -192,9 +132,6 @@ public class PlantFunctionImpl extends BuiltinFunctionImpl implements PlantFunct
   {
     switch (featureID)
     {
-      case FarmPackage.PLANT_FUNCTION__PLANT_IN_FIELD:
-        setPlantInField((Field)newValue);
-        return;
       case FarmPackage.PLANT_FUNCTION__PLANT_CROP:
         setPlantCrop((Crop)newValue);
         return;
@@ -212,9 +149,6 @@ public class PlantFunctionImpl extends BuiltinFunctionImpl implements PlantFunct
   {
     switch (featureID)
     {
-      case FarmPackage.PLANT_FUNCTION__PLANT_IN_FIELD:
-        setPlantInField((Field)null);
-        return;
       case FarmPackage.PLANT_FUNCTION__PLANT_CROP:
         setPlantCrop((Crop)null);
         return;
@@ -232,8 +166,6 @@ public class PlantFunctionImpl extends BuiltinFunctionImpl implements PlantFunct
   {
     switch (featureID)
     {
-      case FarmPackage.PLANT_FUNCTION__PLANT_IN_FIELD:
-        return plantInField != null;
       case FarmPackage.PLANT_FUNCTION__PLANT_CROP:
         return plantCrop != null;
     }

@@ -18,7 +18,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link uk.ac.kcl.farm.farm.Field#getFieldIP <em>Field IP</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.Field#getFieldType <em>Field Type</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.Field#getFieldLight <em>Field Light</em>}</li>
- *   <li>{@link uk.ac.kcl.farm.farm.Field#getFieldMonitors <em>Field Monitors</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.Field#getAttributes <em>Attributes</em>}</li>
  * </ul>
  *
  * @see uk.ac.kcl.farm.farm.FarmPackage#getField()
@@ -116,15 +116,15 @@ public interface Field extends Instance
   void setFieldLight(String value);
 
   /**
-   * Returns the value of the '<em><b>Field Monitors</b></em>' containment reference list.
-   * The list contents are of type {@link uk.ac.kcl.farm.farm.FieldMonitor}.
+   * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
+   * The list contents are of type {@link uk.ac.kcl.farm.farm.CallAttributes}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Field Monitors</em>' containment reference list.
-   * @see uk.ac.kcl.farm.farm.FarmPackage#getField_FieldMonitors()
+   * @return the value of the '<em>Attributes</em>' containment reference list.
+   * @see uk.ac.kcl.farm.farm.FarmPackage#getField_Attributes()
    * @model containment="true"
    * @generated
    */
-  EList<FieldMonitor> getFieldMonitors();
+  EList<CallAttributes> getAttributes();
 
 } // Field

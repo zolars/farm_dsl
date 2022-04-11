@@ -5,24 +5,26 @@ package uk.ac.kcl.farm.farm.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import uk.ac.kcl.farm.farm.Expression;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
+import uk.ac.kcl.farm.farm.ExpressionOrCall;
 import uk.ac.kcl.farm.farm.FarmPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Expression</b></em>'.
+ * An implementation of the model object '<em><b>Expression Or Call</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class ExpressionImpl extends ExpressionOrCallImpl implements Expression
+public class ExpressionOrCallImpl extends MinimalEObjectImpl.Container implements ExpressionOrCall
 {
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ExpressionImpl()
+  protected ExpressionOrCallImpl()
   {
     super();
   }
@@ -35,7 +37,7 @@ public class ExpressionImpl extends ExpressionOrCallImpl implements Expression
   @Override
   protected EClass eStaticClass()
   {
-    return FarmPackage.Literals.EXPRESSION;
+    return FarmPackage.Literals.EXPRESSION_OR_CALL;
   }
 
-} //ExpressionImpl
+} //ExpressionOrCallImpl

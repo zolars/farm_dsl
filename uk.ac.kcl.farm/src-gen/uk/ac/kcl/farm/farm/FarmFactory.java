@@ -51,6 +51,15 @@ public interface FarmFactory extends EFactory
   Attribute createAttribute();
 
   /**
+   * Returns a new object of class '<em>Expression Or Call</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Expression Or Call</em>'.
+   * @generated
+   */
+  ExpressionOrCall createExpressionOrCall();
+
+  /**
    * Returns a new object of class '<em>Variable</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -76,6 +85,15 @@ public interface FarmFactory extends EFactory
    * @generated
    */
   Assignment createAssignment();
+
+  /**
+   * Returns a new object of class '<em>Call</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Call</em>'.
+   * @generated
+   */
+  Call createCall();
 
   /**
    * Returns a new object of class '<em>Loop Statement</em>'.
@@ -141,33 +159,6 @@ public interface FarmFactory extends EFactory
   ReportFunction createReportFunction();
 
   /**
-   * Returns a new object of class '<em>Count Stage Function</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Count Stage Function</em>'.
-   * @generated
-   */
-  CountStageFunction createCountStageFunction();
-
-  /**
-   * Returns a new object of class '<em>Set Field Value Function</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Set Field Value Function</em>'.
-   * @generated
-   */
-  SetFieldValueFunction createSetFieldValueFunction();
-
-  /**
-   * Returns a new object of class '<em>Plant Function</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Plant Function</em>'.
-   * @generated
-   */
-  PlantFunction createPlantFunction();
-
-  /**
    * Returns a new object of class '<em>Move Function</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -184,6 +175,42 @@ public interface FarmFactory extends EFactory
    * @generated
    */
   WaitFunction createWaitFunction();
+
+  /**
+   * Returns a new object of class '<em>Call Function</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Call Function</em>'.
+   * @generated
+   */
+  CallFunction createCallFunction();
+
+  /**
+   * Returns a new object of class '<em>Get Stage Function</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Get Stage Function</em>'.
+   * @generated
+   */
+  GetStageFunction createGetStageFunction();
+
+  /**
+   * Returns a new object of class '<em>Field Set Function</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Field Set Function</em>'.
+   * @generated
+   */
+  FieldSetFunction createFieldSetFunction();
+
+  /**
+   * Returns a new object of class '<em>Plant Function</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Plant Function</em>'.
+   * @generated
+   */
+  PlantFunction createPlantFunction();
 
   /**
    * Returns a new object of class '<em>Expression</em>'.
@@ -267,15 +294,6 @@ public interface FarmFactory extends EFactory
   CropStage createCropStage();
 
   /**
-   * Returns a new object of class '<em>Crop Attributes</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Crop Attributes</em>'.
-   * @generated
-   */
-  CropAttributes createCropAttributes();
-
-  /**
    * Returns a new object of class '<em>Field</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -285,13 +303,13 @@ public interface FarmFactory extends EFactory
   Field createField();
 
   /**
-   * Returns a new object of class '<em>Field Monitor</em>'.
+   * Returns a new object of class '<em>Call Attributes</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Field Monitor</em>'.
+   * @return a new object of class '<em>Call Attributes</em>'.
    * @generated
    */
-  FieldMonitor createFieldMonitor();
+  CallAttributes createCallAttributes();
 
   /**
    * Returns a new object of class '<em>Mission</em>'.

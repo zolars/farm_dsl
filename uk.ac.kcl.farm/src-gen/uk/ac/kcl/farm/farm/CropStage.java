@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link uk.ac.kcl.farm.farm.CropStage#getName <em>Name</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.CropStage#getTime <em>Time</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.CropStage#getTimeover <em>Timeover</em>}</li>
  *   <li>{@link uk.ac.kcl.farm.farm.CropStage#getAttributes <em>Attributes</em>}</li>
  * </ul>
  *
@@ -72,8 +73,30 @@ public interface CropStage extends EObject
   void setTime(Expression value);
 
   /**
+   * Returns the value of the '<em><b>Timeover</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Timeover</em>' containment reference.
+   * @see #setTimeover(Expression)
+   * @see uk.ac.kcl.farm.farm.FarmPackage#getCropStage_Timeover()
+   * @model containment="true"
+   * @generated
+   */
+  Expression getTimeover();
+
+  /**
+   * Sets the value of the '{@link uk.ac.kcl.farm.farm.CropStage#getTimeover <em>Timeover</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Timeover</em>' containment reference.
+   * @see #getTimeover()
+   * @generated
+   */
+  void setTimeover(Expression value);
+
+  /**
    * Returns the value of the '<em><b>Attributes</b></em>' containment reference list.
-   * The list contents are of type {@link uk.ac.kcl.farm.farm.CropAttributes}.
+   * The list contents are of type {@link uk.ac.kcl.farm.farm.CallAttributes}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the value of the '<em>Attributes</em>' containment reference list.
@@ -81,6 +104,6 @@ public interface CropStage extends EObject
    * @model containment="true"
    * @generated
    */
-  EList<CropAttributes> getAttributes();
+  EList<CallAttributes> getAttributes();
 
 } // CropStage

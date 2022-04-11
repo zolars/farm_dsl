@@ -10,38 +10,37 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import uk.ac.kcl.farm.farm.Attribute;
-import uk.ac.kcl.farm.farm.CropAttributes;
 import uk.ac.kcl.farm.farm.Expression;
 import uk.ac.kcl.farm.farm.FarmPackage;
+import uk.ac.kcl.farm.farm.FieldSetFunction;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Crop Attributes</b></em>'.
+ * An implementation of the model object '<em><b>Field Set Function</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link uk.ac.kcl.farm.farm.impl.CropAttributesImpl#getType <em>Type</em>}</li>
- *   <li>{@link uk.ac.kcl.farm.farm.impl.CropAttributesImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.impl.FieldSetFunctionImpl#getAttribute <em>Attribute</em>}</li>
+ *   <li>{@link uk.ac.kcl.farm.farm.impl.FieldSetFunctionImpl#getValue <em>Value</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class CropAttributesImpl extends MinimalEObjectImpl.Container implements CropAttributes
+public class FieldSetFunctionImpl extends CallFunctionImpl implements FieldSetFunction
 {
   /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+   * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getType()
+   * @see #getAttribute()
    * @generated
    * @ordered
    */
-  protected Attribute type;
+  protected Attribute attribute;
 
   /**
    * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
@@ -58,7 +57,7 @@ public class CropAttributesImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  protected CropAttributesImpl()
+  protected FieldSetFunctionImpl()
   {
     super();
   }
@@ -71,7 +70,7 @@ public class CropAttributesImpl extends MinimalEObjectImpl.Container implements 
   @Override
   protected EClass eStaticClass()
   {
-    return FarmPackage.Literals.CROP_ATTRIBUTES;
+    return FarmPackage.Literals.FIELD_SET_FUNCTION;
   }
 
   /**
@@ -80,19 +79,19 @@ public class CropAttributesImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
-  public Attribute getType()
+  public Attribute getAttribute()
   {
-    if (type != null && type.eIsProxy())
+    if (attribute != null && attribute.eIsProxy())
     {
-      InternalEObject oldType = (InternalEObject)type;
-      type = (Attribute)eResolveProxy(oldType);
-      if (type != oldType)
+      InternalEObject oldAttribute = (InternalEObject)attribute;
+      attribute = (Attribute)eResolveProxy(oldAttribute);
+      if (attribute != oldAttribute)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, FarmPackage.CROP_ATTRIBUTES__TYPE, oldType, type));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, FarmPackage.FIELD_SET_FUNCTION__ATTRIBUTE, oldAttribute, attribute));
       }
     }
-    return type;
+    return attribute;
   }
 
   /**
@@ -100,9 +99,9 @@ public class CropAttributesImpl extends MinimalEObjectImpl.Container implements 
    * <!-- end-user-doc -->
    * @generated
    */
-  public Attribute basicGetType()
+  public Attribute basicGetAttribute()
   {
-    return type;
+    return attribute;
   }
 
   /**
@@ -111,12 +110,12 @@ public class CropAttributesImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
-  public void setType(Attribute newType)
+  public void setAttribute(Attribute newAttribute)
   {
-    Attribute oldType = type;
-    type = newType;
+    Attribute oldAttribute = attribute;
+    attribute = newAttribute;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.CROP_ATTRIBUTES__TYPE, oldType, type));
+      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.FIELD_SET_FUNCTION__ATTRIBUTE, oldAttribute, attribute));
   }
 
   /**
@@ -141,7 +140,7 @@ public class CropAttributesImpl extends MinimalEObjectImpl.Container implements 
     value = newValue;
     if (eNotificationRequired())
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FarmPackage.CROP_ATTRIBUTES__VALUE, oldValue, newValue);
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, FarmPackage.FIELD_SET_FUNCTION__VALUE, oldValue, newValue);
       if (msgs == null) msgs = notification; else msgs.add(notification);
     }
     return msgs;
@@ -159,14 +158,14 @@ public class CropAttributesImpl extends MinimalEObjectImpl.Container implements 
     {
       NotificationChain msgs = null;
       if (value != null)
-        msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FarmPackage.CROP_ATTRIBUTES__VALUE, null, msgs);
+        msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - FarmPackage.FIELD_SET_FUNCTION__VALUE, null, msgs);
       if (newValue != null)
-        msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FarmPackage.CROP_ATTRIBUTES__VALUE, null, msgs);
+        msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - FarmPackage.FIELD_SET_FUNCTION__VALUE, null, msgs);
       msgs = basicSetValue(newValue, msgs);
       if (msgs != null) msgs.dispatch();
     }
     else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.CROP_ATTRIBUTES__VALUE, newValue, newValue));
+      eNotify(new ENotificationImpl(this, Notification.SET, FarmPackage.FIELD_SET_FUNCTION__VALUE, newValue, newValue));
   }
 
   /**
@@ -179,7 +178,7 @@ public class CropAttributesImpl extends MinimalEObjectImpl.Container implements 
   {
     switch (featureID)
     {
-      case FarmPackage.CROP_ATTRIBUTES__VALUE:
+      case FarmPackage.FIELD_SET_FUNCTION__VALUE:
         return basicSetValue(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -195,10 +194,10 @@ public class CropAttributesImpl extends MinimalEObjectImpl.Container implements 
   {
     switch (featureID)
     {
-      case FarmPackage.CROP_ATTRIBUTES__TYPE:
-        if (resolve) return getType();
-        return basicGetType();
-      case FarmPackage.CROP_ATTRIBUTES__VALUE:
+      case FarmPackage.FIELD_SET_FUNCTION__ATTRIBUTE:
+        if (resolve) return getAttribute();
+        return basicGetAttribute();
+      case FarmPackage.FIELD_SET_FUNCTION__VALUE:
         return getValue();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -214,10 +213,10 @@ public class CropAttributesImpl extends MinimalEObjectImpl.Container implements 
   {
     switch (featureID)
     {
-      case FarmPackage.CROP_ATTRIBUTES__TYPE:
-        setType((Attribute)newValue);
+      case FarmPackage.FIELD_SET_FUNCTION__ATTRIBUTE:
+        setAttribute((Attribute)newValue);
         return;
-      case FarmPackage.CROP_ATTRIBUTES__VALUE:
+      case FarmPackage.FIELD_SET_FUNCTION__VALUE:
         setValue((Expression)newValue);
         return;
     }
@@ -234,10 +233,10 @@ public class CropAttributesImpl extends MinimalEObjectImpl.Container implements 
   {
     switch (featureID)
     {
-      case FarmPackage.CROP_ATTRIBUTES__TYPE:
-        setType((Attribute)null);
+      case FarmPackage.FIELD_SET_FUNCTION__ATTRIBUTE:
+        setAttribute((Attribute)null);
         return;
-      case FarmPackage.CROP_ATTRIBUTES__VALUE:
+      case FarmPackage.FIELD_SET_FUNCTION__VALUE:
         setValue((Expression)null);
         return;
     }
@@ -254,12 +253,12 @@ public class CropAttributesImpl extends MinimalEObjectImpl.Container implements 
   {
     switch (featureID)
     {
-      case FarmPackage.CROP_ATTRIBUTES__TYPE:
-        return type != null;
-      case FarmPackage.CROP_ATTRIBUTES__VALUE:
+      case FarmPackage.FIELD_SET_FUNCTION__ATTRIBUTE:
+        return attribute != null;
+      case FarmPackage.FIELD_SET_FUNCTION__VALUE:
         return value != null;
     }
     return super.eIsSet(featureID);
   }
 
-} //CropAttributesImpl
+} //FieldSetFunctionImpl

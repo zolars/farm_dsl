@@ -91,6 +91,11 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
         return createAttributeAdapter();
       }
       @Override
+      public Adapter caseExpressionOrCall(ExpressionOrCall object)
+      {
+        return createExpressionOrCallAdapter();
+      }
+      @Override
       public Adapter caseVariable(Variable object)
       {
         return createVariableAdapter();
@@ -104,6 +109,11 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
       public Adapter caseAssignment(Assignment object)
       {
         return createAssignmentAdapter();
+      }
+      @Override
+      public Adapter caseCall(Call object)
+      {
+        return createCallAdapter();
       }
       @Override
       public Adapter caseLoopStatement(LoopStatement object)
@@ -141,21 +151,6 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
         return createReportFunctionAdapter();
       }
       @Override
-      public Adapter caseCountStageFunction(CountStageFunction object)
-      {
-        return createCountStageFunctionAdapter();
-      }
-      @Override
-      public Adapter caseSetFieldValueFunction(SetFieldValueFunction object)
-      {
-        return createSetFieldValueFunctionAdapter();
-      }
-      @Override
-      public Adapter casePlantFunction(PlantFunction object)
-      {
-        return createPlantFunctionAdapter();
-      }
-      @Override
       public Adapter caseMoveFunction(MoveFunction object)
       {
         return createMoveFunctionAdapter();
@@ -164,6 +159,26 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
       public Adapter caseWaitFunction(WaitFunction object)
       {
         return createWaitFunctionAdapter();
+      }
+      @Override
+      public Adapter caseCallFunction(CallFunction object)
+      {
+        return createCallFunctionAdapter();
+      }
+      @Override
+      public Adapter caseGetStageFunction(GetStageFunction object)
+      {
+        return createGetStageFunctionAdapter();
+      }
+      @Override
+      public Adapter caseFieldSetFunction(FieldSetFunction object)
+      {
+        return createFieldSetFunctionAdapter();
+      }
+      @Override
+      public Adapter casePlantFunction(PlantFunction object)
+      {
+        return createPlantFunctionAdapter();
       }
       @Override
       public Adapter caseExpression(Expression object)
@@ -211,19 +226,14 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
         return createCropStageAdapter();
       }
       @Override
-      public Adapter caseCropAttributes(CropAttributes object)
-      {
-        return createCropAttributesAdapter();
-      }
-      @Override
       public Adapter caseField(Field object)
       {
         return createFieldAdapter();
       }
       @Override
-      public Adapter caseFieldMonitor(FieldMonitor object)
+      public Adapter caseCallAttributes(CallAttributes object)
       {
-        return createFieldMonitorAdapter();
+        return createCallAttributesAdapter();
       }
       @Override
       public Adapter caseMission(Mission object)
@@ -363,6 +373,21 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.ExpressionOrCall <em>Expression Or Call</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see uk.ac.kcl.farm.farm.ExpressionOrCall
+   * @generated
+   */
+  public Adapter createExpressionOrCallAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.Variable <em>Variable</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -403,6 +428,21 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createAssignmentAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.Call <em>Call</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see uk.ac.kcl.farm.farm.Call
+   * @generated
+   */
+  public Adapter createCallAdapter()
   {
     return null;
   }
@@ -513,51 +553,6 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.CountStageFunction <em>Count Stage Function</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see uk.ac.kcl.farm.farm.CountStageFunction
-   * @generated
-   */
-  public Adapter createCountStageFunctionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.SetFieldValueFunction <em>Set Field Value Function</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see uk.ac.kcl.farm.farm.SetFieldValueFunction
-   * @generated
-   */
-  public Adapter createSetFieldValueFunctionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.PlantFunction <em>Plant Function</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see uk.ac.kcl.farm.farm.PlantFunction
-   * @generated
-   */
-  public Adapter createPlantFunctionAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.MoveFunction <em>Move Function</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -583,6 +578,66 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createWaitFunctionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.CallFunction <em>Call Function</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see uk.ac.kcl.farm.farm.CallFunction
+   * @generated
+   */
+  public Adapter createCallFunctionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.GetStageFunction <em>Get Stage Function</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see uk.ac.kcl.farm.farm.GetStageFunction
+   * @generated
+   */
+  public Adapter createGetStageFunctionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.FieldSetFunction <em>Field Set Function</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see uk.ac.kcl.farm.farm.FieldSetFunction
+   * @generated
+   */
+  public Adapter createFieldSetFunctionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.PlantFunction <em>Plant Function</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see uk.ac.kcl.farm.farm.PlantFunction
+   * @generated
+   */
+  public Adapter createPlantFunctionAdapter()
   {
     return null;
   }
@@ -723,21 +778,6 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.CropAttributes <em>Crop Attributes</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see uk.ac.kcl.farm.farm.CropAttributes
-   * @generated
-   */
-  public Adapter createCropAttributesAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.Field <em>Field</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -753,16 +793,16 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.FieldMonitor <em>Field Monitor</em>}'.
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.CallAttributes <em>Call Attributes</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see uk.ac.kcl.farm.farm.FieldMonitor
+   * @see uk.ac.kcl.farm.farm.CallAttributes
    * @generated
    */
-  public Adapter createFieldMonitorAdapter()
+  public Adapter createCallAttributesAdapter()
   {
     return null;
   }

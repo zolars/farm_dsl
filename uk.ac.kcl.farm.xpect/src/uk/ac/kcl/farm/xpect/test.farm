@@ -1,115 +1,122 @@
-define humidity
 define temperature
+define humidity
 
-crop crop_a {
+crop crop_tomato {
 	name : "tomato"
 	
 	stage : [
  		{
             name : "Sprout"
-            timeConsumed : 20.0
+            timeConsumed : 2.0
+            timeDanger : 10.0
 
-            temperature : 20.0
-            humidity : 90.0
+            temperature : 0.0
+            humidity : 0.0
         },
         {
-            name : "Seedling"
-            timeConsumed : 20.0
+            name : "Seedling" 
+            timeConsumed : 1.0
+            timeDanger : 10.0
 
-            temperature : 21.0
-            humidity : 80.0
+            temperature : 1.0
+            humidity : 1.0
         },
         {
             name : "Vegetative"
-            timeConsumed : 20.0
+            timeConsumed : 2.0
+            timeDanger : 10.0
 
-            temperature : 26.0
-            humidity : 12.0
+            temperature : 2.0
+            humidity : 2.0
         },
         {
             name : "Budding"
-            timeConsumed : 5.0
+            timeConsumed : 3.0
+            timeDanger : 10.0
             
-            temperature : 26.0
-            humidity : 60.0
+            temperature : 3.0
+            humidity : 3.0
         },
         {
             name : "Flowering"
-            timeConsumed : 5.0
+            timeConsumed : 4.0
+            timeDanger : 10.0
             
-            temperature : 26.0
-            humidity : 60.0
+            temperature : 4.0
+            humidity : 4.0
         },
         {
             name : "Ripening"
-            timeConsumed : 10.0
+            timeConsumed : 5.0
+            timeDanger : 10.0
             
-            temperature : 20.0
-            humidity : 30.0 + 67.1
+            temperature : 5.0
+            humidity : 5.0
         }
 	]
 }
 
 field greenhouse_1 {
     name : "Large Greenhouse No.1"
-    ip: 10.2.3.455
+    ip: "192.128.0.1"
     type : outside
     light : sunlight
-    monitor: [humidity]
+	temperature : 26.0
+    humidity : 60.0
 }
 
 field greenhouse_2 {
     name : "Large Greenhouse No.2"
-    ip: 10.2.3.456
+    ip: "192.128.0.2"
     type : inside
-    light : sunlight
-    monitor : [temperature, humidity]
+    light : LED
+    temperature : 26.0
+    humidity : 60.0
 }
 
-mission qwe {
-//	report(testParams.taskvar)
-	var loopCounter = 10.0
-
-	var condition = false
+mission {
+	report(crop_tomato)
+	report(greenhouse_1)
+	var realVar = (12.0 + 45.0)
+	report(realVar)
 	
-	report(greenhouse_2)
-	report(loopCounter)
+	var result = 12.0
 	
-	var try = 10.0 + loopCounter
-
+	result = greenhouse_1.humidity
+	result = crop_tomato.getStage(0).humidity
+	result = greenhouse_1.fieldSet(humidity,0.0)
+	result = greenhouse_1.fieldSet(temperature,0.0)
+	result = greenhouse_1.plant(crop_tomato)
 	
-	if (false) {
-		var ifvar = 1.0
-		var try = 10.0 + loopCounter
-		var try = 10.0 + ifvar
-	} elseif (true) {
-	} 
-//		report(ifvar)
+	result = greenhouse_2.fieldSet(humidity,0.0)
+	result = greenhouse_2.fieldSet(temperature,0.0)
 	
-	if (true) {} elseif (false && true) {
-		
-	} else {
-		
-	}
+	move(greenhouse_1, greenhouse_2)
 	
-	while (false && true || true) {
-		var a = 1.0
-		var b = 2.0
-		var c = false
-		while (false) {
-			var d = (11.0 + 13.0) * 23.0
-			var e = (false || true) && (true && c)
-			var loopvar = 1.0
-		}
-	}
+	report(greenhouse_1)
+	report(crop_tomato)
 	
-	while (false) {
-		var d = (11.0 + 13.0) * 23.0
-		var e = (false || true) && (true && c)
-		var loopvar = 1.0
-		report(e)
-	}
+	wait(1.4565656565)
 	
-	var try = 10.0 + e
-	report(e)
+	var new = 12.1 * 2.8 + 23.0
+	var old = new
+//
+//	if (false) {
+//		var a = 12.1 * 2.8 + 23.0
+//	} elseif (false || true) {
+//		var b = 12.0
+//	} else {
+//		var c = 109.2
+//	}
+	
+//	var call = greenhouse_1.light
+	
+//	var loopvar = 11.0
+//	while (loopvar > 0.0) {
+//		loopvar = loopvar - 1.0
+//		var newloopvar = loopvar
+//		while (newloopvar > 0.0) {
+//			newloopvar = newloopvar - 1.0
+//		}
+//	}
 }

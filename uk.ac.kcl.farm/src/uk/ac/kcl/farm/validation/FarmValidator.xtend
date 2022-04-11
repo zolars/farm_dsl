@@ -13,14 +13,14 @@ import uk.ac.kcl.farm.validation.AbstractFarmValidator
 import uk.ac.kcl.farm.farm.FarmPackage
 import uk.ac.kcl.farm.farm.FarmProgram
 import uk.ac.kcl.farm.farm.Crop
+import uk.ac.kcl.farm.farm.CropStage
 import uk.ac.kcl.farm.farm.Field
 import uk.ac.kcl.farm.farm.Mission
 import uk.ac.kcl.farm.farm.Attribute
 import uk.ac.kcl.farm.farm.Variable
-import uk.ac.kcl.farm.farm.Expression
-import uk.ac.kcl.farm.farm.ConditionOrExpression
-import uk.ac.kcl.farm.farm.LoopStatement
+import uk.ac.kcl.farm.farm.MoveFunction
 
+import uk.ac.kcl.farm.generator.*
 import uk.ac.kcl.farm.interpreter.Exp
 
 //import static extension org.eclipse.xtext.EcoreUtil2.*
@@ -32,12 +32,15 @@ import uk.ac.kcl.farm.interpreter.Exp
  */
 class FarmValidator extends AbstractFarmValidator {
 	
-	Exp expRuntime = new Exp()
+	Runtime runtime = new Runtime()
+	Exp expRuntime = new Exp(runtime)
 	
 	public static val INVALID_ATTRIBUTE_NAME = 'uk.ac.kcl.farm.farm.INVALID_ATTRIBUTE_NAME'
 	public static val INVALID_VARIABLE_NAME = 'uk.ac.kcl.farm.farm.INVALID_VARIABLE_NAME'
 	public static val INVALID_EXPRESSION = 'uk.ac.kcl.farm.farm.INVALID_EXPRESSION'
 	public static val INVALID_IP_ADDRESS = 'uk.ac.kcl.farm.farm.INVALID_IP_ADDRESS'
+	public static val INVALID_CROP_STAGE_TIME = 'uk.ac.kcl.farm.farm.INVALID_CROP_STAGE_TIME'
+	public static val INVALID_FUNCTION = 'uk.ac.kcl.farm.farm.INVALID_FUNCTION'
 
 	@Check
 	def checkAttributeStartsWithLowerCase(Attribute attribute) {
@@ -105,6 +108,16 @@ class FarmValidator extends AbstractFarmValidator {
 	}
 	
 	@Check
+	def checkTimeConsumed(CropStage stage) {
+		if (expRuntime.toFloat(stage.time) < 0) {
+			error('timeConsumed must be a Float bigger than 0', 
+					FarmPackage.Literals.CROP_STAGE__TIME,
+					INVALID_CROP_STAGE_TIME
+			)
+		}
+	}
+	
+	@Check
 	def checkIPAddressFormat(Field field) {
 		if (!validateIPAddress(field.fieldIP)) {
 			warning('IP Address format is wrong', 
@@ -154,6 +167,17 @@ class FarmValidator extends AbstractFarmValidator {
 			error('The farm program must have at least one of Crop, Field and Mission\n' + errorLog, 
 					null,
 					INVALID_VARIABLE_NAME
+			)
+		}
+	}
+	
+		
+	@Check
+	def checkMoveFunctionParamsDifferent(MoveFunction function) {
+		if (function.moveFromField.name == function.moveToField.name) {
+			warning('move function params cannot be the same', 
+					FarmPackage.Literals.MOVE_FUNCTION__MOVE_FROM_FIELD,
+					INVALID_FUNCTION
 			)
 		}
 	}

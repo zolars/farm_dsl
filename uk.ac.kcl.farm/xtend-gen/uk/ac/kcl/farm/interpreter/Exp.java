@@ -2,15 +2,25 @@ package uk.ac.kcl.farm.interpreter;
 
 import com.google.common.base.Objects;
 import java.util.Arrays;
-import java.util.HashMap;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import uk.ac.kcl.farm.farm.Attribute;
+import uk.ac.kcl.farm.farm.Call;
+import uk.ac.kcl.farm.farm.CallFunction;
 import uk.ac.kcl.farm.farm.ConditionAndExpression;
 import uk.ac.kcl.farm.farm.ConditionOrExpression;
+import uk.ac.kcl.farm.farm.Crop;
+import uk.ac.kcl.farm.farm.CropStage;
 import uk.ac.kcl.farm.farm.Divide;
 import uk.ac.kcl.farm.farm.Equal;
 import uk.ac.kcl.farm.farm.Expression;
+import uk.ac.kcl.farm.farm.ExpressionOrCall;
 import uk.ac.kcl.farm.farm.FalseLiteral;
+import uk.ac.kcl.farm.farm.Field;
+import uk.ac.kcl.farm.farm.FieldSetFunction;
+import uk.ac.kcl.farm.farm.GetStageFunction;
 import uk.ac.kcl.farm.farm.GreaterThan;
 import uk.ac.kcl.farm.farm.GreaterThanOrEqual;
 import uk.ac.kcl.farm.farm.LessThan;
@@ -19,18 +29,276 @@ import uk.ac.kcl.farm.farm.Minus;
 import uk.ac.kcl.farm.farm.Multiply;
 import uk.ac.kcl.farm.farm.NotBooleanExpression;
 import uk.ac.kcl.farm.farm.NotEqual;
+import uk.ac.kcl.farm.farm.PlantFunction;
 import uk.ac.kcl.farm.farm.Plus;
 import uk.ac.kcl.farm.farm.RealLiteral;
 import uk.ac.kcl.farm.farm.TrueLiteral;
 import uk.ac.kcl.farm.farm.UnaryExpression;
 import uk.ac.kcl.farm.farm.VarExpression;
+import uk.ac.kcl.farm.generator.GeneratedCrop;
+import uk.ac.kcl.farm.generator.GeneratedField;
+import uk.ac.kcl.farm.generator.GeneratedStage;
 
 /**
  * Expression Interpreter
  */
 @SuppressWarnings("all")
 public class Exp {
-  public HashMap<String, Object> variableMap = new HashMap<String, Object>();
+  private uk.ac.kcl.farm.generator.Runtime runtime = null;
+  
+  public Exp(final uk.ac.kcl.farm.generator.Runtime runtime) {
+    this.runtime = runtime;
+  }
+  
+  protected String _toString(final Call exp) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("(");
+    String _string = exp.toString();
+    _builder.append(_string);
+    _builder.append(")");
+    _builder.newLineIfNotEmpty();
+    return _builder.toString();
+  }
+  
+  protected Float _toFloat(final Call exp) {
+    Float _xifexpression = null;
+    int _size = exp.getFunctions().size();
+    boolean _equals = (_size == 0);
+    if (_equals) {
+      EList<String> _attributes = exp.getAttributes();
+      for (final String attribute : _attributes) {
+        return this.toFloat(exp.getInstance(), attribute);
+      }
+    } else {
+      EList<CallFunction> _functions = exp.getFunctions();
+      for (final CallFunction function : _functions) {
+        return this.toFloat(exp.getInstance(), function);
+      }
+    }
+    return _xifexpression;
+  }
+  
+  protected Boolean _toBoolean(final Call exp) {
+    try {
+      Boolean _xifexpression = null;
+      int _size = exp.getFunctions().size();
+      boolean _notEquals = (_size != 0);
+      if (_notEquals) {
+        EList<CallFunction> _functions = exp.getFunctions();
+        for (final CallFunction function : _functions) {
+          return this.toBoolean(exp.getInstance(), function);
+        }
+      } else {
+        throw new Exception("The function do not have attributes");
+      }
+      return _xifexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected String _toString(final CropStage exp, final String attribute) {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      Object _get = this.runtime.fieldMap.get(exp.getName()).getClass().getField(attribute).get(this.runtime.fieldMap.get(exp.getName()));
+      _builder.append(_get);
+      _builder.newLineIfNotEmpty();
+      return _builder.toString();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected Float _toFloat(final CropStage exp, final String attribute) {
+    try {
+      return Float.valueOf(this.runtime.fieldMap.get(exp.getName()).getClass().getField(attribute).get(this.runtime.fieldMap.get(exp.getName())).toString());
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected Boolean _toBoolean(final CropStage exp, final String attribute) {
+    try {
+      throw new Exception("Variable cannot be interpreted - TypeError");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected String _toString(final Field exp, final String attribute) {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      Object _get = this.runtime.fieldMap.get(exp.getName()).getClass().getField(attribute).get(this.runtime.fieldMap.get(exp.getName()));
+      _builder.append(_get);
+      _builder.newLineIfNotEmpty();
+      return _builder.toString();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected Float _toFloat(final Field exp, final String attribute) {
+    Float _xblockexpression = null;
+    {
+      GeneratedField field = this.runtime.fieldMap.get(exp.getName());
+      _xblockexpression = field.attributes.get(attribute);
+    }
+    return _xblockexpression;
+  }
+  
+  protected Boolean _toBoolean(final Field exp, final String attribute) {
+    try {
+      throw new Exception("Variable cannot be interpreted - TypeError");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected String _toString(final Crop exp, final GetStageFunction function) {
+    return "";
+  }
+  
+  protected Float _toFloat(final Crop exp, final GetStageFunction function) {
+    GeneratedCrop crop = this.runtime.cropMap.get(exp.getName());
+    GeneratedStage stage = crop.stage.get(function.getId());
+    String _attribute = function.getAttribute();
+    boolean _equals = Objects.equal(_attribute, "timeConsumed");
+    if (_equals) {
+      return Float.valueOf(stage.getTime());
+    } else {
+      return stage.getAttributes().get(function.getAttribute());
+    }
+  }
+  
+  protected Boolean _toBoolean(final Crop exp, final GetStageFunction function) {
+    try {
+      throw new Exception("Expected Float but received Boolean");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected String _toString(final Field exp, final FieldSetFunction function) {
+    return "";
+  }
+  
+  protected Float _toFloat(final Field exp, final FieldSetFunction function) {
+    try {
+      throw new Exception("Expected Boolean but received Float");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected Boolean _toBoolean(final Field exp, final FieldSetFunction function) {
+    try {
+      boolean _xblockexpression = false;
+      {
+        GeneratedField field = this.runtime.fieldMap.get(exp.getName());
+        boolean _xtrycatchfinallyexpression = false;
+        try {
+          boolean _xblockexpression_1 = false;
+          {
+            field.attributes.put(function.getAttribute().getName(), this.toFloat(function.getValue()));
+            _xblockexpression_1 = true;
+          }
+          _xtrycatchfinallyexpression = _xblockexpression_1;
+        } catch (final Throwable _t) {
+          if (_t instanceof Exception) {
+            StringConcatenation _builder = new StringConcatenation();
+            _builder.append("Value ");
+            Float _float = this.toFloat(function.getValue());
+            _builder.append(_float);
+            _builder.append(" cannot be given to ");
+            Attribute _attribute = function.getAttribute();
+            _builder.append(_attribute);
+            throw new Exception(_builder.toString());
+          } else {
+            throw Exceptions.sneakyThrow(_t);
+          }
+        }
+        _xblockexpression = _xtrycatchfinallyexpression;
+      }
+      return Boolean.valueOf(_xblockexpression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected String _toString(final Field exp, final PlantFunction function) {
+    return "";
+  }
+  
+  protected Float _toFloat(final Field exp, final PlantFunction function) {
+    try {
+      throw new Exception("Expected Boolean but received Float");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public Boolean judegeEnvironment(final GeneratedField field, final GeneratedStage stage) {
+    try {
+      boolean key = true;
+      for (final String attribute : this.runtime.attributeList) {
+        Float _get = field.attributes.get(attribute);
+        Float _get_1 = stage.getAttributes().get(attribute);
+        boolean _notEquals = (!Objects.equal(_get, _get_1));
+        if (_notEquals) {
+          key = false;
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("Crop cannot be plant in Field `");
+          _builder.append(field.name);
+          _builder.append("` because attribute `");
+          _builder.append(attribute);
+          _builder.append("` is not match");
+          throw new Exception(_builder.toString());
+        }
+      }
+      return Boolean.valueOf(key);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected Boolean _toBoolean(final Field exp, final PlantFunction function) {
+    try {
+      boolean _xblockexpression = false;
+      {
+        GeneratedField field = this.runtime.fieldMap.get(exp.getName());
+        GeneratedCrop crop = this.runtime.cropMap.get(function.getPlantCrop().getName());
+        boolean _xifexpression = false;
+        if (((field.crop != null) || (crop.field != null))) {
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("Crop `");
+          _builder.append(crop.name);
+          _builder.append("` have been plant in Field `");
+          _builder.append(field.name);
+          _builder.append("`");
+          throw new Exception(_builder.toString());
+        } else {
+          boolean _xifexpression_1 = false;
+          Boolean _judegeEnvironment = this.judegeEnvironment(field, crop.currentStage);
+          if ((_judegeEnvironment).booleanValue()) {
+            boolean _xblockexpression_1 = false;
+            {
+              field.crop = crop;
+              crop.field = field;
+              _xblockexpression_1 = true;
+            }
+            _xifexpression_1 = _xblockexpression_1;
+          } else {
+            _xifexpression_1 = false;
+          }
+          _xifexpression = _xifexpression_1;
+        }
+        _xblockexpression = _xifexpression;
+      }
+      return Boolean.valueOf(_xblockexpression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
   
   protected String _toString(final Expression exp) {
     StringConcatenation _builder = new StringConcatenation();
@@ -55,11 +323,11 @@ public class Exp {
   }
   
   protected Float _toFloat(final VarExpression exp) {
-    return Float.valueOf(this.variableMap.get(exp.getVar().getName()).toString());
+    return Float.valueOf(this.runtime.variableMap.get(exp.getVar().getName()).toString());
   }
   
   protected Boolean _toBoolean(final VarExpression exp) {
-    return Boolean.valueOf(this.variableMap.get(exp.getVar().getName()).toString());
+    return Boolean.valueOf(this.runtime.variableMap.get(exp.getVar().getName()).toString());
   }
   
   protected String _toString(final RealLiteral exp) {
@@ -72,7 +340,7 @@ public class Exp {
   
   protected Boolean _toBoolean(final RealLiteral exp) {
     try {
-      throw new Exception("Variable cannot be interpreted");
+      throw new Exception("Variable cannot be interpreted - TypeError");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -84,7 +352,7 @@ public class Exp {
   
   protected Float _toFloat(final TrueLiteral exp) {
     try {
-      throw new Exception("Variable cannot be interpreted");
+      throw new Exception("Variable cannot be interpreted - TypeError");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -100,7 +368,7 @@ public class Exp {
   
   protected Float _toFloat(final FalseLiteral exp) {
     try {
-      throw new Exception("Variable cannot be interpreted");
+      throw new Exception("Variable cannot be interpreted - TypeError");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -121,7 +389,7 @@ public class Exp {
   
   protected Float _toFloat(final NotBooleanExpression exp) {
     try {
-      throw new Exception("Variable cannot be interpreted");
+      throw new Exception("Variable cannot be interpreted - TypeError");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -148,7 +416,7 @@ public class Exp {
   
   protected Boolean _toBoolean(final UnaryExpression exp) {
     try {
-      throw new Exception("Variable cannot be interpreted");
+      throw new Exception("Variable cannot be interpreted - TypeError");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -167,7 +435,7 @@ public class Exp {
   
   protected Float _toFloat(final ConditionOrExpression exp) {
     try {
-      throw new Exception("Variable cannot be interpreted");
+      throw new Exception("Variable cannot be interpreted - TypeError");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -189,7 +457,7 @@ public class Exp {
   
   protected Float _toFloat(final ConditionAndExpression exp) {
     try {
-      throw new Exception("Variable cannot be interpreted");
+      throw new Exception("Variable cannot be interpreted - TypeError");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -239,7 +507,7 @@ public class Exp {
   
   protected Boolean _toBoolean(final Minus exp) {
     try {
-      throw new Exception("Variable cannot be interpreted");
+      throw new Exception("Variable cannot be interpreted - TypeError");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -285,7 +553,7 @@ public class Exp {
   
   protected Boolean _toBoolean(final Divide exp) {
     try {
-      throw new Exception("Variable cannot be interpreted");
+      throw new Exception("Variable cannot be interpreted - TypeError");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -304,7 +572,7 @@ public class Exp {
   
   protected Float _toFloat(final LessThanOrEqual exp) {
     try {
-      throw new Exception("Variable cannot be interpreted");
+      throw new Exception("Variable cannot be interpreted - TypeError");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -329,7 +597,7 @@ public class Exp {
   
   protected Float _toFloat(final LessThan exp) {
     try {
-      throw new Exception("Variable cannot be interpreted");
+      throw new Exception("Variable cannot be interpreted - TypeError");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -354,7 +622,7 @@ public class Exp {
   
   protected Float _toFloat(final GreaterThanOrEqual exp) {
     try {
-      throw new Exception("Variable cannot be interpreted");
+      throw new Exception("Variable cannot be interpreted - TypeError");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -379,7 +647,7 @@ public class Exp {
   
   protected Float _toFloat(final GreaterThan exp) {
     try {
-      throw new Exception("Variable cannot be interpreted");
+      throw new Exception("Variable cannot be interpreted - TypeError");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -404,7 +672,7 @@ public class Exp {
   
   protected Float _toFloat(final Equal exp) {
     try {
-      throw new Exception("Variable cannot be interpreted");
+      throw new Exception("Variable cannot be interpreted - TypeError");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -441,7 +709,7 @@ public class Exp {
   
   protected Float _toFloat(final NotEqual exp) {
     try {
-      throw new Exception("Variable cannot be interpreted");
+      throw new Exception("Variable cannot be interpreted - TypeError");
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -465,7 +733,7 @@ public class Exp {
     return Boolean.valueOf(_xtrycatchfinallyexpression);
   }
   
-  public String toString(final Expression exp) {
+  public String toString(final ExpressionOrCall exp) {
     if (exp instanceof FalseLiteral) {
       return _toString((FalseLiteral)exp);
     } else if (exp instanceof RealLiteral) {
@@ -502,15 +770,17 @@ public class Exp {
       return _toString((UnaryExpression)exp);
     } else if (exp instanceof VarExpression) {
       return _toString((VarExpression)exp);
-    } else if (exp != null) {
-      return _toString(exp);
+    } else if (exp instanceof Call) {
+      return _toString((Call)exp);
+    } else if (exp instanceof Expression) {
+      return _toString((Expression)exp);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(exp).toString());
     }
   }
   
-  public Float toFloat(final Expression exp) {
+  public Float toFloat(final ExpressionOrCall exp) {
     if (exp instanceof FalseLiteral) {
       return _toFloat((FalseLiteral)exp);
     } else if (exp instanceof RealLiteral) {
@@ -547,15 +817,17 @@ public class Exp {
       return _toFloat((UnaryExpression)exp);
     } else if (exp instanceof VarExpression) {
       return _toFloat((VarExpression)exp);
-    } else if (exp != null) {
-      return _toFloat(exp);
+    } else if (exp instanceof Call) {
+      return _toFloat((Call)exp);
+    } else if (exp instanceof Expression) {
+      return _toFloat((Expression)exp);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(exp).toString());
     }
   }
   
-  public Boolean toBoolean(final Expression exp) {
+  public Boolean toBoolean(final ExpressionOrCall exp) {
     if (exp instanceof FalseLiteral) {
       return _toBoolean((FalseLiteral)exp);
     } else if (exp instanceof RealLiteral) {
@@ -592,11 +864,79 @@ public class Exp {
       return _toBoolean((UnaryExpression)exp);
     } else if (exp instanceof VarExpression) {
       return _toBoolean((VarExpression)exp);
-    } else if (exp != null) {
-      return _toBoolean(exp);
+    } else if (exp instanceof Call) {
+      return _toBoolean((Call)exp);
+    } else if (exp instanceof Expression) {
+      return _toBoolean((Expression)exp);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(exp).toString());
+    }
+  }
+  
+  public String toString(final EObject exp, final Object function) {
+    if (exp instanceof Crop
+         && function instanceof GetStageFunction) {
+      return _toString((Crop)exp, (GetStageFunction)function);
+    } else if (exp instanceof Field
+         && function instanceof FieldSetFunction) {
+      return _toString((Field)exp, (FieldSetFunction)function);
+    } else if (exp instanceof Field
+         && function instanceof PlantFunction) {
+      return _toString((Field)exp, (PlantFunction)function);
+    } else if (exp instanceof Field
+         && function instanceof String) {
+      return _toString((Field)exp, (String)function);
+    } else if (exp instanceof CropStage
+         && function instanceof String) {
+      return _toString((CropStage)exp, (String)function);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(exp, function).toString());
+    }
+  }
+  
+  public Float toFloat(final EObject exp, final Object function) {
+    if (exp instanceof Crop
+         && function instanceof GetStageFunction) {
+      return _toFloat((Crop)exp, (GetStageFunction)function);
+    } else if (exp instanceof Field
+         && function instanceof FieldSetFunction) {
+      return _toFloat((Field)exp, (FieldSetFunction)function);
+    } else if (exp instanceof Field
+         && function instanceof PlantFunction) {
+      return _toFloat((Field)exp, (PlantFunction)function);
+    } else if (exp instanceof Field
+         && function instanceof String) {
+      return _toFloat((Field)exp, (String)function);
+    } else if (exp instanceof CropStage
+         && function instanceof String) {
+      return _toFloat((CropStage)exp, (String)function);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(exp, function).toString());
+    }
+  }
+  
+  public Boolean toBoolean(final EObject exp, final Object function) {
+    if (exp instanceof Crop
+         && function instanceof GetStageFunction) {
+      return _toBoolean((Crop)exp, (GetStageFunction)function);
+    } else if (exp instanceof Field
+         && function instanceof FieldSetFunction) {
+      return _toBoolean((Field)exp, (FieldSetFunction)function);
+    } else if (exp instanceof Field
+         && function instanceof PlantFunction) {
+      return _toBoolean((Field)exp, (PlantFunction)function);
+    } else if (exp instanceof Field
+         && function instanceof String) {
+      return _toBoolean((Field)exp, (String)function);
+    } else if (exp instanceof CropStage
+         && function instanceof String) {
+      return _toBoolean((CropStage)exp, (String)function);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(exp, function).toString());
     }
   }
 }

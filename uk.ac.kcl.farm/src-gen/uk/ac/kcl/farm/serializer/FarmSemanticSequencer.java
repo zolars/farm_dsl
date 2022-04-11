@@ -16,11 +16,11 @@ import org.eclipse.xtext.serializer.sequencer.AbstractDelegatingSemanticSequence
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import uk.ac.kcl.farm.farm.Assignment;
 import uk.ac.kcl.farm.farm.Attribute;
+import uk.ac.kcl.farm.farm.Call;
+import uk.ac.kcl.farm.farm.CallAttributes;
 import uk.ac.kcl.farm.farm.ConditionAndExpression;
 import uk.ac.kcl.farm.farm.ConditionOrExpression;
-import uk.ac.kcl.farm.farm.CountStageFunction;
 import uk.ac.kcl.farm.farm.Crop;
-import uk.ac.kcl.farm.farm.CropAttributes;
 import uk.ac.kcl.farm.farm.CropStage;
 import uk.ac.kcl.farm.farm.CropStages;
 import uk.ac.kcl.farm.farm.Divide;
@@ -31,7 +31,8 @@ import uk.ac.kcl.farm.farm.FalseLiteral;
 import uk.ac.kcl.farm.farm.FarmPackage;
 import uk.ac.kcl.farm.farm.FarmProgram;
 import uk.ac.kcl.farm.farm.Field;
-import uk.ac.kcl.farm.farm.FieldMonitor;
+import uk.ac.kcl.farm.farm.FieldSetFunction;
+import uk.ac.kcl.farm.farm.GetStageFunction;
 import uk.ac.kcl.farm.farm.GreaterThan;
 import uk.ac.kcl.farm.farm.GreaterThanOrEqual;
 import uk.ac.kcl.farm.farm.JudgeStatement;
@@ -48,7 +49,6 @@ import uk.ac.kcl.farm.farm.PlantFunction;
 import uk.ac.kcl.farm.farm.Plus;
 import uk.ac.kcl.farm.farm.RealLiteral;
 import uk.ac.kcl.farm.farm.ReportFunction;
-import uk.ac.kcl.farm.farm.SetFieldValueFunction;
 import uk.ac.kcl.farm.farm.TrueLiteral;
 import uk.ac.kcl.farm.farm.UnaryExpression;
 import uk.ac.kcl.farm.farm.VarExpression;
@@ -76,20 +76,20 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case FarmPackage.ATTRIBUTE:
 				sequence_Attribute(context, (Attribute) semanticObject); 
 				return; 
+			case FarmPackage.CALL:
+				sequence_Call(context, (Call) semanticObject); 
+				return; 
+			case FarmPackage.CALL_ATTRIBUTES:
+				sequence_CallAttributes(context, (CallAttributes) semanticObject); 
+				return; 
 			case FarmPackage.CONDITION_AND_EXPRESSION:
 				sequence_ConditionAndExpression(context, (ConditionAndExpression) semanticObject); 
 				return; 
 			case FarmPackage.CONDITION_OR_EXPRESSION:
 				sequence_ConditionOrExpression(context, (ConditionOrExpression) semanticObject); 
 				return; 
-			case FarmPackage.COUNT_STAGE_FUNCTION:
-				sequence_CountStageFunction(context, (CountStageFunction) semanticObject); 
-				return; 
 			case FarmPackage.CROP:
 				sequence_Crop(context, (Crop) semanticObject); 
-				return; 
-			case FarmPackage.CROP_ATTRIBUTES:
-				sequence_CropAttributes(context, (CropAttributes) semanticObject); 
 				return; 
 			case FarmPackage.CROP_STAGE:
 				sequence_CropStage(context, (CropStage) semanticObject); 
@@ -118,8 +118,11 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case FarmPackage.FIELD:
 				sequence_Field(context, (Field) semanticObject); 
 				return; 
-			case FarmPackage.FIELD_MONITOR:
-				sequence_FieldMonitor(context, (FieldMonitor) semanticObject); 
+			case FarmPackage.FIELD_SET_FUNCTION:
+				sequence_FieldSetFunction(context, (FieldSetFunction) semanticObject); 
+				return; 
+			case FarmPackage.GET_STAGE_FUNCTION:
+				sequence_GetStageFunction(context, (GetStageFunction) semanticObject); 
 				return; 
 			case FarmPackage.GREATER_THAN:
 				sequence_RelationOrExpression(context, (GreaterThan) semanticObject); 
@@ -169,9 +172,6 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case FarmPackage.REPORT_FUNCTION:
 				sequence_ReportFunction(context, (ReportFunction) semanticObject); 
 				return; 
-			case FarmPackage.SET_FIELD_VALUE_FUNCTION:
-				sequence_SetFieldValueFunction(context, (SetFieldValueFunction) semanticObject); 
-				return; 
 			case FarmPackage.TRUE_LITERAL:
 				sequence_TrueLiteral(context, (TrueLiteral) semanticObject); 
 				return; 
@@ -195,6 +195,7 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     ExpressionOrCall returns Minus
 	 *     Expression returns Minus
 	 *     ConditionOrExpression returns Minus
 	 *     ConditionOrExpression.ConditionOrExpression_1_0_0 returns Minus
@@ -238,6 +239,7 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     ExpressionOrCall returns Plus
 	 *     Expression returns Plus
 	 *     ConditionOrExpression returns Plus
 	 *     ConditionOrExpression.ConditionOrExpression_1_0_0 returns Plus
@@ -285,7 +287,7 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Assignment returns Assignment
 	 *
 	 * Constraint:
-	 *     (var=[Variable|ID] expression=Expression)
+	 *     (var=[Variable|ID] expression=ExpressionOrCall)
 	 * </pre>
 	 */
 	protected void sequence_Assignment(ISerializationContext context, Assignment semanticObject) {
@@ -297,7 +299,7 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getAssignmentAccess().getVarVariableIDTerminalRuleCall_0_0_1(), semanticObject.eGet(FarmPackage.Literals.ASSIGNMENT__VAR, false));
-		feeder.accept(grammarAccess.getAssignmentAccess().getExpressionExpressionParserRuleCall_2_0(), semanticObject.getExpression());
+		feeder.accept(grammarAccess.getAssignmentAccess().getExpressionExpressionOrCallParserRuleCall_2_0(), semanticObject.getExpression());
 		feeder.finish();
 	}
 	
@@ -325,6 +327,45 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     CallAttributes returns CallAttributes
+	 *
+	 * Constraint:
+	 *     (type=[Attribute|ID] value=AdditionExpression)
+	 * </pre>
+	 */
+	protected void sequence_CallAttributes(ISerializationContext context, CallAttributes semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.CALL_ATTRIBUTES__TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.CALL_ATTRIBUTES__TYPE));
+			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.CALL_ATTRIBUTES__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.CALL_ATTRIBUTES__VALUE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getCallAttributesAccess().getTypeAttributeIDTerminalRuleCall_0_0_1(), semanticObject.eGet(FarmPackage.Literals.CALL_ATTRIBUTES__TYPE, false));
+		feeder.accept(grammarAccess.getCallAttributesAccess().getValueAdditionExpressionParserRuleCall_2_0(), semanticObject.getValue());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     ExpressionOrCall returns Call
+	 *     Call returns Call
+	 *
+	 * Constraint:
+	 *     (instance=[Instance|ID] (attributes+=ID | functions+=CallFunction)+)
+	 * </pre>
+	 */
+	protected void sequence_Call(ISerializationContext context, Call semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     ExpressionOrCall returns ConditionAndExpression
 	 *     Expression returns ConditionAndExpression
 	 *     ConditionOrExpression returns ConditionAndExpression
 	 *     ConditionOrExpression.ConditionOrExpression_1_0_0 returns ConditionAndExpression
@@ -368,6 +409,7 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     ExpressionOrCall returns ConditionOrExpression
 	 *     Expression returns ConditionOrExpression
 	 *     ConditionOrExpression returns ConditionOrExpression
 	 *     ConditionOrExpression.ConditionOrExpression_1_0_0 returns ConditionOrExpression
@@ -411,55 +453,10 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Statement returns CountStageFunction
-	 *     BuiltinFunction returns CountStageFunction
-	 *     CountStageFunction returns CountStageFunction
-	 *
-	 * Constraint:
-	 *     countStageCrop=[Crop|ID]
-	 * </pre>
-	 */
-	protected void sequence_CountStageFunction(ISerializationContext context, CountStageFunction semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.COUNT_STAGE_FUNCTION__COUNT_STAGE_CROP) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.COUNT_STAGE_FUNCTION__COUNT_STAGE_CROP));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getCountStageFunctionAccess().getCountStageCropCropIDTerminalRuleCall_0_0_1(), semanticObject.eGet(FarmPackage.Literals.COUNT_STAGE_FUNCTION__COUNT_STAGE_CROP, false));
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     CropAttributes returns CropAttributes
-	 *
-	 * Constraint:
-	 *     (type=[Attribute|ID] value=AdditionExpression)
-	 * </pre>
-	 */
-	protected void sequence_CropAttributes(ISerializationContext context, CropAttributes semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.CROP_ATTRIBUTES__TYPE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.CROP_ATTRIBUTES__TYPE));
-			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.CROP_ATTRIBUTES__VALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.CROP_ATTRIBUTES__VALUE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getCropAttributesAccess().getTypeAttributeIDTerminalRuleCall_0_0_1(), semanticObject.eGet(FarmPackage.Literals.CROP_ATTRIBUTES__TYPE, false));
-		feeder.accept(grammarAccess.getCropAttributesAccess().getValueAdditionExpressionParserRuleCall_2_0(), semanticObject.getValue());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
 	 *     CropStage returns CropStage
 	 *
 	 * Constraint:
-	 *     (name=STRING time=AdditionExpression attributes+=CropAttributes*)
+	 *     (name=STRING time=AdditionExpression timeover=AdditionExpression attributes+=CallAttributes*)
 	 * </pre>
 	 */
 	protected void sequence_CropStage(ISerializationContext context, CropStage semanticObject) {
@@ -527,6 +524,7 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     ExpressionOrCall returns FalseLiteral
 	 *     Expression returns FalseLiteral
 	 *     ConditionOrExpression returns FalseLiteral
 	 *     ConditionOrExpression.ConditionOrExpression_1_0_0 returns FalseLiteral
@@ -583,19 +581,23 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     FieldMonitor returns FieldMonitor
+	 *     CallFunction returns FieldSetFunction
+	 *     FieldSetFunction returns FieldSetFunction
 	 *
 	 * Constraint:
-	 *     monitor=[Attribute|ID]
+	 *     (attribute=[Attribute|ID] value=AdditionExpression)
 	 * </pre>
 	 */
-	protected void sequence_FieldMonitor(ISerializationContext context, FieldMonitor semanticObject) {
+	protected void sequence_FieldSetFunction(ISerializationContext context, FieldSetFunction semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.FIELD_MONITOR__MONITOR) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.FIELD_MONITOR__MONITOR));
+			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.FIELD_SET_FUNCTION__ATTRIBUTE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.FIELD_SET_FUNCTION__ATTRIBUTE));
+			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.FIELD_SET_FUNCTION__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.FIELD_SET_FUNCTION__VALUE));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getFieldMonitorAccess().getMonitorAttributeIDTerminalRuleCall_0_1(), semanticObject.eGet(FarmPackage.Literals.FIELD_MONITOR__MONITOR, false));
+		feeder.accept(grammarAccess.getFieldSetFunctionAccess().getAttributeAttributeIDTerminalRuleCall_1_0_1(), semanticObject.eGet(FarmPackage.Literals.FIELD_SET_FUNCTION__ATTRIBUTE, false));
+		feeder.accept(grammarAccess.getFieldSetFunctionAccess().getValueAdditionExpressionParserRuleCall_3_0(), semanticObject.getValue());
 		feeder.finish();
 	}
 	
@@ -613,12 +615,26 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *         fieldIP=STRING 
 	 *         (fieldType='inside' | fieldType='outside') 
 	 *         (fieldLight='sunlight' | fieldLight='LED') 
-	 *         fieldMonitors+=FieldMonitor 
-	 *         fieldMonitors+=FieldMonitor*
+	 *         attributes+=CallAttributes*
 	 *     )
 	 * </pre>
 	 */
 	protected void sequence_Field(ISerializationContext context, Field semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     CallFunction returns GetStageFunction
+	 *     GetStageFunction returns GetStageFunction
+	 *
+	 * Constraint:
+	 *     (id=INT (attribute='timeConsumed' | attribute=ID))
+	 * </pre>
+	 */
+	protected void sequence_GetStageFunction(ISerializationContext context, GetStageFunction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -695,6 +711,7 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     ExpressionOrCall returns Divide
 	 *     Expression returns Divide
 	 *     ConditionOrExpression returns Divide
 	 *     ConditionOrExpression.ConditionOrExpression_1_0_0 returns Divide
@@ -738,6 +755,7 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     ExpressionOrCall returns Multiply
 	 *     Expression returns Multiply
 	 *     ConditionOrExpression returns Multiply
 	 *     ConditionOrExpression.ConditionOrExpression_1_0_0 returns Multiply
@@ -781,6 +799,7 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     ExpressionOrCall returns NotBooleanExpression
 	 *     Expression returns NotBooleanExpression
 	 *     ConditionOrExpression returns NotBooleanExpression
 	 *     ConditionOrExpression.ConditionOrExpression_1_0_0 returns NotBooleanExpression
@@ -822,24 +841,20 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Statement returns PlantFunction
-	 *     BuiltinFunction returns PlantFunction
+	 *     CallFunction returns PlantFunction
 	 *     PlantFunction returns PlantFunction
 	 *
 	 * Constraint:
-	 *     (plantInField=[Field|ID] plantCrop=[Crop|ID])
+	 *     plantCrop=[Crop|ID]
 	 * </pre>
 	 */
 	protected void sequence_PlantFunction(ISerializationContext context, PlantFunction semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.PLANT_FUNCTION__PLANT_IN_FIELD) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.PLANT_FUNCTION__PLANT_IN_FIELD));
 			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.PLANT_FUNCTION__PLANT_CROP) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.PLANT_FUNCTION__PLANT_CROP));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getPlantFunctionAccess().getPlantInFieldFieldIDTerminalRuleCall_0_0_1(), semanticObject.eGet(FarmPackage.Literals.PLANT_FUNCTION__PLANT_IN_FIELD, false));
-		feeder.accept(grammarAccess.getPlantFunctionAccess().getPlantCropCropIDTerminalRuleCall_2_0_1(), semanticObject.eGet(FarmPackage.Literals.PLANT_FUNCTION__PLANT_CROP, false));
+		feeder.accept(grammarAccess.getPlantFunctionAccess().getPlantCropCropIDTerminalRuleCall_1_0_1(), semanticObject.eGet(FarmPackage.Literals.PLANT_FUNCTION__PLANT_CROP, false));
 		feeder.finish();
 	}
 	
@@ -847,6 +862,7 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     ExpressionOrCall returns RealLiteral
 	 *     Expression returns RealLiteral
 	 *     ConditionOrExpression returns RealLiteral
 	 *     ConditionOrExpression.ConditionOrExpression_1_0_0 returns RealLiteral
@@ -889,6 +905,7 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     ExpressionOrCall returns Equal
 	 *     Expression returns Equal
 	 *     ConditionOrExpression returns Equal
 	 *     ConditionOrExpression.ConditionOrExpression_1_0_0 returns Equal
@@ -932,6 +949,7 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     ExpressionOrCall returns GreaterThan
 	 *     Expression returns GreaterThan
 	 *     ConditionOrExpression returns GreaterThan
 	 *     ConditionOrExpression.ConditionOrExpression_1_0_0 returns GreaterThan
@@ -975,6 +993,7 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     ExpressionOrCall returns GreaterThanOrEqual
 	 *     Expression returns GreaterThanOrEqual
 	 *     ConditionOrExpression returns GreaterThanOrEqual
 	 *     ConditionOrExpression.ConditionOrExpression_1_0_0 returns GreaterThanOrEqual
@@ -1018,6 +1037,7 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     ExpressionOrCall returns LessThan
 	 *     Expression returns LessThan
 	 *     ConditionOrExpression returns LessThan
 	 *     ConditionOrExpression.ConditionOrExpression_1_0_0 returns LessThan
@@ -1061,6 +1081,7 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     ExpressionOrCall returns LessThanOrEqual
 	 *     Expression returns LessThanOrEqual
 	 *     ConditionOrExpression returns LessThanOrEqual
 	 *     ConditionOrExpression.ConditionOrExpression_1_0_0 returns LessThanOrEqual
@@ -1104,6 +1125,7 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     ExpressionOrCall returns NotEqual
 	 *     Expression returns NotEqual
 	 *     ConditionOrExpression returns NotEqual
 	 *     ConditionOrExpression.ConditionOrExpression_1_0_0 returns NotEqual
@@ -1169,34 +1191,7 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Statement returns SetFieldValueFunction
-	 *     BuiltinFunction returns SetFieldValueFunction
-	 *     SetFieldValueFunction returns SetFieldValueFunction
-	 *
-	 * Constraint:
-	 *     (setValueField=[Field|ID] setFieldAttribute=STRING setFieldValue=AdditionExpression)
-	 * </pre>
-	 */
-	protected void sequence_SetFieldValueFunction(ISerializationContext context, SetFieldValueFunction semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.SET_FIELD_VALUE_FUNCTION__SET_VALUE_FIELD) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.SET_FIELD_VALUE_FUNCTION__SET_VALUE_FIELD));
-			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.SET_FIELD_VALUE_FUNCTION__SET_FIELD_ATTRIBUTE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.SET_FIELD_VALUE_FUNCTION__SET_FIELD_ATTRIBUTE));
-			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.SET_FIELD_VALUE_FUNCTION__SET_FIELD_VALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.SET_FIELD_VALUE_FUNCTION__SET_FIELD_VALUE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getSetFieldValueFunctionAccess().getSetValueFieldFieldIDTerminalRuleCall_0_0_1(), semanticObject.eGet(FarmPackage.Literals.SET_FIELD_VALUE_FUNCTION__SET_VALUE_FIELD, false));
-		feeder.accept(grammarAccess.getSetFieldValueFunctionAccess().getSetFieldAttributeSTRINGTerminalRuleCall_2_0(), semanticObject.getSetFieldAttribute());
-		feeder.accept(grammarAccess.getSetFieldValueFunctionAccess().getSetFieldValueAdditionExpressionParserRuleCall_4_0(), semanticObject.getSetFieldValue());
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
+	 *     ExpressionOrCall returns TrueLiteral
 	 *     Expression returns TrueLiteral
 	 *     ConditionOrExpression returns TrueLiteral
 	 *     ConditionOrExpression.ConditionOrExpression_1_0_0 returns TrueLiteral
@@ -1239,6 +1234,7 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     ExpressionOrCall returns UnaryExpression
 	 *     Expression returns UnaryExpression
 	 *     ConditionOrExpression returns UnaryExpression
 	 *     ConditionOrExpression.ConditionOrExpression_1_0_0 returns UnaryExpression
@@ -1279,6 +1275,7 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	/**
 	 * <pre>
 	 * Contexts:
+	 *     ExpressionOrCall returns VarExpression
 	 *     VarExpression returns VarExpression
 	 *     Expression returns VarExpression
 	 *     ConditionOrExpression returns VarExpression
@@ -1325,7 +1322,7 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 *     Instance returns Variable
 	 *
 	 * Constraint:
-	 *     (name=ID expression=Expression)
+	 *     (name=ID expression=ExpressionOrCall)
 	 * </pre>
 	 */
 	protected void sequence_Variable(ISerializationContext context, Variable semanticObject) {
@@ -1337,7 +1334,7 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
 		feeder.accept(grammarAccess.getVariableAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
-		feeder.accept(grammarAccess.getVariableAccess().getExpressionExpressionParserRuleCall_3_0(), semanticObject.getExpression());
+		feeder.accept(grammarAccess.getVariableAccess().getExpressionExpressionOrCallParserRuleCall_3_0(), semanticObject.getExpression());
 		feeder.finish();
 	}
 	

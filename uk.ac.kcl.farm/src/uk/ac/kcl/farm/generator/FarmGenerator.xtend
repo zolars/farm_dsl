@@ -4,6 +4,7 @@
 package uk.ac.kcl.farm.generator
 
 import java.util.List
+import java.util.Map
 import java.util.HashMap
 
 import org.eclipse.emf.ecore.resource.Resource
@@ -17,9 +18,8 @@ import uk.ac.kcl.farm.farm.Attribute
 import uk.ac.kcl.farm.farm.Crop
 import uk.ac.kcl.farm.farm.CropStages
 import uk.ac.kcl.farm.farm.CropStage
-import uk.ac.kcl.farm.farm.CropAttributes
 import uk.ac.kcl.farm.farm.Field
-import uk.ac.kcl.farm.farm.FieldMonitor
+import uk.ac.kcl.farm.farm.CallAttributes
 import uk.ac.kcl.farm.farm.Mission
 import uk.ac.kcl.farm.farm.Variable
 import uk.ac.kcl.farm.farm.VarExpression
@@ -29,7 +29,10 @@ import uk.ac.kcl.farm.farm.JudgeStatement
 import uk.ac.kcl.farm.farm.ElseJudgeStatement
 import uk.ac.kcl.farm.farm.ElseStatement
 import uk.ac.kcl.farm.farm.ReportFunction
+import uk.ac.kcl.farm.farm.MoveFunction
+import uk.ac.kcl.farm.farm.WaitFunction
 
+import uk.ac.kcl.farm.generator.*
 import uk.ac.kcl.farm.interpreter.Exp
 
 //import uk.ac.kcl.farm.farm.Expression
@@ -42,62 +45,10 @@ import uk.ac.kcl.farm.interpreter.Exp
  * See https://www.eclipse.org/Xtext/documentation/303_runtime_concepts.html#code-generation
  */
 
-@Data
-class GeneratedStage {
-	public String name
-	public Float time
-	public HashMap<String, Float> attributes
-}
-
-class GeneratedCrop {
-	String name
-	var List<GeneratedStage> stage = newArrayList()
-	
-	new(String name, List<GeneratedStage> stage) {
-		this.name = name
-		this.stage = stage
-	}
-}
-
-class GeneratedField {
-	String name
-	String ip
-	int type
-	int light
-	var List<String> monitor = newArrayList()
-	
-	new(
-		String name,
-		String ip,
-		String type,
-		String light,
-		List<String> monitor
-	) {
-		this.name = name
-		this.ip = ip
-		
-		if (type === "inside")
-			this.type = 0
-		else
-			this.type = 1
-			
-		if (type === "sunlight")
-			this.light = 0
-		else if (type === "LED")
-			this.light = 1
-		else
-			this.light = 2
-		
-		this.monitor = monitor
-	}
-}
- 
 class FarmGenerator extends AbstractGenerator {
 	
-	List<String> attributeList = newArrayList()
-	HashMap<String, GeneratedCrop> cropMap = new HashMap<String, GeneratedCrop>
-	HashMap<String, GeneratedField> fieldMap = new HashMap<String, GeneratedField>
-	Exp expRuntime = new Exp()
+	Runtime runtime = new Runtime()
+	Exp expRuntime = new Exp(runtime)
 	
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		val model = resource.contents.head as FarmProgram
@@ -119,18 +70,17 @@ class FarmGenerator extends AbstractGenerator {
 	
 	def String doGenerateStats(FarmProgram program) {
 		'''
-		Program contains:
-		
 		- «program.eAllContents.filter(Attribute).size» attribute declarations
 		«program.statements.filter(Attribute).map[generateTimetable(new Environment)].join('\n')»
-		- «this.attributeList.size» attribute processed
+		- «runtime.attributeList.size» attribute processed
+		
 		- «program.eAllContents.filter(Crop).size» crop declarations
 		«program.statements.filter(Crop).map[generateTimetable(new Environment)].join('\n')»
-		- «this.cropMap.size» crop processed
+		- «runtime.cropMap.size» crop processed
+		
 		- «program.eAllContents.filter(Field).size» field declarations
 		«program.statements.filter(Field).map[generateTimetable(new Environment)].join('\n')»
-		- «this.fieldMap.size» field processed
-		
+		- «runtime.fieldMap.size» field processed
 		
 		«program.statements.filter(Mission).map[generateTimetable(new Environment)].join('\n')»
 		'''
@@ -154,7 +104,7 @@ class FarmGenerator extends AbstractGenerator {
 				t.run();
 			}
 		}
-	'''
+//	'''
 	
 	private static class Environment {
 		var int counter = 0
@@ -169,7 +119,7 @@ class FarmGenerator extends AbstractGenerator {
 	 */
 	 
  	dispatch def String generateTimetable(Attribute attribute, Environment env) {
- 		this.attributeList.add(attribute.name)
+ 		runtime.attributeList.add(attribute.name)
  		
 		'''    - Attribute `«attribute.name»` processed'''
 	}
@@ -179,85 +129,94 @@ class FarmGenerator extends AbstractGenerator {
 		for (CropStages stages : crop.cropStages) {
 			for (CropStage stage : stages.elements) {
 				var attributes = new HashMap<String, Float>
-				for (CropAttributes attribute : stage.attributes) {
-					if (this.attributeList.contains(attribute.type.name)) {
+				for (CallAttributes attribute : stage.attributes) {
+					if (runtime.attributeList.contains(attribute.type.name)) {
 						attributes.put(attribute.type.name, expRuntime.toFloat(attribute.value))
 					} else {
 						throw new Exception('''
 							Undefined attribute «attribute.type.name» used in Crop: «crop.name»
-							Avaible attributes is as below: «this.attributeList»
+							Avaible attributes is as below: «runtime.attributeList»
 						''');
 					}
 				}
-				var newStage = new GeneratedStage(stage.name, expRuntime.toFloat(stage.time), attributes)
-				generatedStages.add(newStage)
+				
+				var time = expRuntime.toFloat(stage.time)
+				var timeover = expRuntime.toFloat(stage.timeover)
+				if (time >= 0) {
+					var newStage = new GeneratedStage(stage.name, time, timeover, attributes)
+					generatedStages.add(newStage)
+				} else {					
+					throw new Exception('''
+						At Crop `«crop.name»`, `timeConsumed` must be a Float bigger than 0
+					''');
+				}
 			}	
 		}
 		
 		var newCrop = new GeneratedCrop(crop.cropName, generatedStages)
-		this.cropMap.put(crop.name, newCrop)
+		runtime.cropMap.put(crop.name, newCrop)
 	
 		'''    - Crop `«crop.name»` processed'''
 	}
 
  	dispatch def String generateTimetable(Field field, Environment env) {
- 		var List<String> monitors = newArrayList()
+ 		var attributes = new HashMap<String, Float>
  		
- 		for (FieldMonitor monitor : field.fieldMonitors) { 
- 			if (this.attributeList.contains(monitor.monitor.name)) {
- 				monitors.add(monitor.monitor.name)
+ 		for (CallAttributes attribute : field.attributes) { 
+ 			if (runtime.attributeList.contains(attribute.type.name)) {
+ 				attributes.put(attribute.type.name, expRuntime.toFloat(attribute.value))
  			} else {
 				throw new Exception('''
-					Undefined attribute «monitor.monitor.name» used in Field: «field.name»
-					Avaible attributes is as below: «this.attributeList»
+					Undefined attribute «attribute.type.name» used in Field: «field.name»
+					Avaible attributes is as below: «runtime.attributeList»
 				''');
 			}
  		}
  		
- 		var newField = new GeneratedField(field.fieldName, field.fieldIP, field.fieldType, field.fieldLight, monitors)
-		this.fieldMap.put(field.name, newField)
+ 		var newField = new GeneratedField(field.fieldName, field.fieldIP, field.fieldType, field.fieldLight, attributes)
+		runtime.fieldMap.put(field.name, newField)
 		
  		'''    - Field `«field.name»` processed'''
 	}
 	
 	dispatch def String generateTimetable(Mission mission, Environment env) {
-		'''«mission.missionStatements.map[generateTimetable(new Environment)].join('\n')»'''
+		'''«mission.missionStatements.map[generateTimetable(new Environment)].join('')»'''
 	}
 	
 	dispatch def String generateTimetable(Variable variable, Environment env) {
 		var exp = variable.expression
 		try {
-			expRuntime.variableMap.put(variable.name, expRuntime.toFloat(exp))
+			runtime.variableMap.put(variable.name, expRuntime.toFloat(exp))
 		} catch (Exception e1) {
 			try {
-				expRuntime.variableMap.put(variable.name, expRuntime.toBoolean(exp))
+				runtime.variableMap.put(variable.name, expRuntime.toBoolean(exp))
 			} catch (Exception e2) {
-				throw new Exception("Variable cannot be interpreted")
+				throw e2
 			}
 		}
-		System.out.println('''- Variable `«variable.name» : «expRuntime.variableMap.get(variable.name)»` processed''')
+		println('''- Variable `«variable.name» : «runtime.variableMap.get(variable.name)»` processed''')
 		''''''
 	}
 	
 	dispatch def String generateTimetable(Assignment assignment, Environment env) {
 		var exp = assignment.expression
 		try {
-			expRuntime.variableMap.put(assignment.^var.name, expRuntime.toFloat(exp))
+			runtime.variableMap.put(assignment.^var.name, expRuntime.toFloat(exp))
 		} catch (Exception e1) {
 			try {
-				expRuntime.variableMap.put(assignment.^var.name, expRuntime.toBoolean(exp))
+				runtime.variableMap.put(assignment.^var.name, expRuntime.toBoolean(exp))
 			} catch (Exception e2) {
-				throw new Exception("Variable cannot be interpreted")
+				throw e2
 			}
 		}
-		System.out.println('''- Assignment `«assignment.^var.name» : «expRuntime.variableMap.get(assignment.^var.name)»` processed''')
+		println('''- Assignment `«assignment.^var.name» : «runtime.variableMap.get(assignment.^var.name)»` processed''')
 		''''''
 	}
 	
 	dispatch def String generateTimetable(LoopStatement loop, Environment env) {
 		var result = ""
 		while (expRuntime.toBoolean(loop.condition)) {
-			result += loop.loopStatements.map[generateTimetable(new Environment)].join('\n')
+			result += loop.loopStatements.map[generateTimetable(new Environment)].join('')
 		}
 		result
 	}
@@ -265,26 +224,94 @@ class FarmGenerator extends AbstractGenerator {
 	dispatch def String generateTimetable(JudgeStatement judge, Environment env) {
 		var result = ""
 		if (expRuntime.toBoolean(judge.condition)) {
-			result += judge.judgeStatements.map[generateTimetable(new Environment)].join('\n')
+			result += judge.judgeStatements.map[generateTimetable(new Environment)].join('')
 		} else {
 			var successKey = false
 			for (ElseJudgeStatement elseJudgeStatement : judge.elseJudgeStatements) {
 				 if (expRuntime.toBoolean(elseJudgeStatement.condition) && !successKey) {
 				 	successKey = true
-				 	result += elseJudgeStatement.elseJudgeStatements.map[generateTimetable(new Environment)].join('\n')
+				 	result += elseJudgeStatement.elseJudgeStatements.map[generateTimetable(new Environment)].join('')
 				 }
 			}
 			if (!successKey) {
 				for (ElseStatement elseStatement : judge.elseStatement) {
-					result += elseStatement.elseStatements.map[generateTimetable(new Environment)].join('\n')
+					result += elseStatement.elseStatements.map[generateTimetable(new Environment)].join('')
 				}
 			}
 		}
 		result
 	}
 	
-	dispatch def String generateTimetable(ReportFunction func, Environment env) {
+	dispatch def String generateTimetable(ReportFunction function, Environment env) {
+		println(function.instance.toString)
 		''''''
+	}
+	
+	dispatch def String generateTimetable(MoveFunction function, Environment env) {
+		var moveFromField = runtime.fieldMap.get(function.moveFromField.name)
+		var moveToField = runtime.fieldMap.get(function.moveToField.name)
+		
+		
+		if (moveFromField.crop === null) {
+			throw new Exception('''Field `«moveFromField.name»` is empty''')
+		} else if (moveToField.crop !== null) {
+			throw new Exception('''Field `«moveToField.name»` is not empty''')
+		} else if (expRuntime.judegeEnvironment(moveToField, moveFromField.crop.currentStage)) {
+			moveToField.crop = moveFromField.crop
+			moveFromField.crop = null
+			moveToField.crop.field = moveToField
+		}
+		
+		''''''
+	}
+	
+	dispatch def String generateTimetable(WaitFunction function, Environment env) {
+		var result = ""
+		
+		runtime.time += expRuntime.toFloat(function.value)
+		
+		
+		for (e : runtime.cropMap.entrySet) {
+			var crop = e.value
+			if (crop.field !== null) {
+				crop.time += expRuntime.toFloat(function.value)
+				
+				var float timeNeeded = 0
+				
+				for (i : 0..crop.currentStageID) {
+					timeNeeded += crop.stage.get(i).time
+					
+				}
+				
+				var float timeOverflow = timeNeeded + crop.currentStage.timeover
+				
+				var float timeExised = expRuntime.toFloat(function.value) + crop.time
+				
+				if (timeExised < timeNeeded) {
+					
+					result += '''
+Crop `«crop.name»` is growing in Field `«crop.field.name»`.
+	Stage is still in `«crop.currentStage.name»`.
+	Need «timeNeeded - timeExised» days to step into the next stage.
+					'''
+					
+				} else if (timeExised >= timeNeeded && timeExised < timeOverflow) {
+					
+					crop.currentStageID += 1
+					crop.currentStage = crop.stage.get(crop.currentStageID)
+					result += '''
+Crop `«crop.name»` is growing in Field `«crop.field.name»`.
+	Stage is changed to `«crop.currentStage.name»`.
+	You need to handle the crop in «timeOverflow - timeExised» days otherwise it will die.
+					'''
+		
+				} else if (timeExised >= timeOverflow) {
+					throw new Exception('''Crop `«crop.name»` is died because time exceeded''')
+				}
+			}
+		}
+		
+		result
 	}
 	
 	dispatch def String generateTimetable(Statement stmt, Environment env) ''''''
