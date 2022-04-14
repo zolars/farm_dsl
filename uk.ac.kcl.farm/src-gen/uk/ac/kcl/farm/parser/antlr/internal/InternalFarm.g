@@ -896,6 +896,15 @@ ruleBuiltinFunction returns [EObject current=null]
 			$current = $this_WaitFunction_2.current;
 			afterParserOrEnumRuleCall();
 		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getBuiltinFunctionAccess().getHarvestFunctionParserRuleCall_3());
+		}
+		this_HarvestFunction_3=ruleHarvestFunction
+		{
+			$current = $this_HarvestFunction_3.current;
+			afterParserOrEnumRuleCall();
+		}
 	)
 ;
 
@@ -1042,6 +1051,46 @@ ruleWaitFunction returns [EObject current=null]
 	)
 ;
 
+// Entry rule entryRuleHarvestFunction
+entryRuleHarvestFunction returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getHarvestFunctionRule()); }
+	iv_ruleHarvestFunction=ruleHarvestFunction
+	{ $current=$iv_ruleHarvestFunction.current; }
+	EOF;
+
+// Rule HarvestFunction
+ruleHarvestFunction returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='harvest('
+		{
+			newLeafNode(otherlv_0, grammarAccess.getHarvestFunctionAccess().getHarvestKeyword_0());
+		}
+		(
+			(
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getHarvestFunctionRule());
+					}
+				}
+				otherlv_1=RULE_ID
+				{
+					newLeafNode(otherlv_1, grammarAccess.getHarvestFunctionAccess().getCropCropCrossReference_1_0());
+				}
+			)
+		)
+		otherlv_2=')'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getHarvestFunctionAccess().getRightParenthesisKeyword_2());
+		}
+	)
+;
+
 // Entry rule entryRuleCallFunction
 entryRuleCallFunction returns [EObject current=null]:
 	{ newCompositeNode(grammarAccess.getCallFunctionRule()); }
@@ -1082,6 +1131,15 @@ ruleCallFunction returns [EObject current=null]
 		this_PlantFunction_2=rulePlantFunction
 		{
 			$current = $this_PlantFunction_2.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getCallFunctionAccess().getIsEmptyFunctionParserRuleCall_3());
+		}
+		this_IsEmptyFunction_3=ruleIsEmptyFunction
+		{
+			$current = $this_IsEmptyFunction_3.current;
 			afterParserOrEnumRuleCall();
 		}
 	)
@@ -1273,6 +1331,47 @@ rulePlantFunction returns [EObject current=null]
 		otherlv_2=')'
 		{
 			newLeafNode(otherlv_2, grammarAccess.getPlantFunctionAccess().getRightParenthesisKeyword_2());
+		}
+	)
+;
+
+// Entry rule entryRuleIsEmptyFunction
+entryRuleIsEmptyFunction returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getIsEmptyFunctionRule()); }
+	iv_ruleIsEmptyFunction=ruleIsEmptyFunction
+	{ $current=$iv_ruleIsEmptyFunction.current; }
+	EOF;
+
+// Rule IsEmptyFunction
+ruleIsEmptyFunction returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		otherlv_0='isEmpty'
+		{
+			newLeafNode(otherlv_0, grammarAccess.getIsEmptyFunctionAccess().getIsEmptyKeyword_0());
+		}
+		(
+			(
+				lv_left_1_0='('
+				{
+					newLeafNode(lv_left_1_0, grammarAccess.getIsEmptyFunctionAccess().getLeftLeftParenthesisKeyword_1_0());
+				}
+				{
+					if ($current==null) {
+						$current = createModelElement(grammarAccess.getIsEmptyFunctionRule());
+					}
+					setWithLastConsumed($current, "left", lv_left_1_0, "(");
+				}
+			)
+		)
+		otherlv_2=')'
+		{
+			newLeafNode(otherlv_2, grammarAccess.getIsEmptyFunctionAccess().getRightParenthesisKeyword_2());
 		}
 	)
 ;

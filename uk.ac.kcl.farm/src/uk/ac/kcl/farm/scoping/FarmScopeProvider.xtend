@@ -29,12 +29,10 @@ import static org.eclipse.xtext.scoping.Scopes.*
 class FarmScopeProvider extends AbstractDeclarativeScopeProvider {
 	
 	def IScope scope_ReportFunction_var(ReportFunction context, EReference ref) {
-		System.out.println(context);
       	context.visibleVariablesScope
 	}
 
 	def IScope scope_Expression_expression(Expression context) {
-		System.out.println(context);
       	context.visibleVariablesScope
 	}
 	
@@ -66,12 +64,10 @@ class FarmScopeProvider extends AbstractDeclarativeScopeProvider {
 //	}
 
 	dispatch def IScope internalVisibleVariablesScope(Mission context) {
-		System.out.println(context.missionStatements);
 		scopeFor(context.missionStatements.filter(Variable))
 	}
 	
 	dispatch def IScope internalVisibleVariablesScope(LoopStatement context) {
-		System.out.println(context.condition);
 		scopeFor(context.loopStatements.filter(Variable), context.eContainer.internalVisibleVariablesScope)
 	}
 

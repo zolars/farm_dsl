@@ -82,10 +82,12 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
       case FarmPackage.REPORT_FUNCTION: return createReportFunction();
       case FarmPackage.MOVE_FUNCTION: return createMoveFunction();
       case FarmPackage.WAIT_FUNCTION: return createWaitFunction();
+      case FarmPackage.HARVEST_FUNCTION: return createHarvestFunction();
       case FarmPackage.CALL_FUNCTION: return createCallFunction();
       case FarmPackage.GET_STAGE_FUNCTION: return createGetStageFunction();
       case FarmPackage.FIELD_SET_FUNCTION: return createFieldSetFunction();
       case FarmPackage.PLANT_FUNCTION: return createPlantFunction();
+      case FarmPackage.IS_EMPTY_FUNCTION: return createIsEmptyFunction();
       case FarmPackage.EXPRESSION: return createExpression();
       case FarmPackage.NOT_BOOLEAN_EXPRESSION: return createNotBooleanExpression();
       case FarmPackage.LITERAL: return createLiteral();
@@ -326,6 +328,18 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
    * @generated
    */
   @Override
+  public HarvestFunction createHarvestFunction()
+  {
+    HarvestFunctionImpl harvestFunction = new HarvestFunctionImpl();
+    return harvestFunction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public CallFunction createCallFunction()
   {
     CallFunctionImpl callFunction = new CallFunctionImpl();
@@ -366,6 +380,18 @@ public class FarmFactoryImpl extends EFactoryImpl implements FarmFactory
   {
     PlantFunctionImpl plantFunction = new PlantFunctionImpl();
     return plantFunction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public IsEmptyFunction createIsEmptyFunction()
+  {
+    IsEmptyFunctionImpl isEmptyFunction = new IsEmptyFunctionImpl();
+    return isEmptyFunction;
   }
 
   /**

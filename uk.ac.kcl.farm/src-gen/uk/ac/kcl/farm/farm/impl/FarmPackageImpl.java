@@ -36,7 +36,9 @@ import uk.ac.kcl.farm.farm.FieldSetFunction;
 import uk.ac.kcl.farm.farm.GetStageFunction;
 import uk.ac.kcl.farm.farm.GreaterThan;
 import uk.ac.kcl.farm.farm.GreaterThanOrEqual;
+import uk.ac.kcl.farm.farm.HarvestFunction;
 import uk.ac.kcl.farm.farm.Instance;
+import uk.ac.kcl.farm.farm.IsEmptyFunction;
 import uk.ac.kcl.farm.farm.JudgeStatement;
 import uk.ac.kcl.farm.farm.LessThan;
 import uk.ac.kcl.farm.farm.LessThanOrEqual;
@@ -191,6 +193,13 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass harvestFunctionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass callFunctionEClass = null;
 
   /**
@@ -213,6 +222,13 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   private EClass plantFunctionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass isEmptyFunctionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -898,6 +914,28 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
    * @generated
    */
   @Override
+  public EClass getHarvestFunction()
+  {
+    return harvestFunctionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getHarvestFunction_Crop()
+  {
+    return (EReference)harvestFunctionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EClass getCallFunction()
   {
     return callFunctionEClass;
@@ -989,6 +1027,28 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
   public EReference getPlantFunction_PlantCrop()
   {
     return (EReference)plantFunctionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getIsEmptyFunction()
+  {
+    return isEmptyFunctionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getIsEmptyFunction_Left()
+  {
+    return (EAttribute)isEmptyFunctionEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1838,6 +1898,9 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
     waitFunctionEClass = createEClass(WAIT_FUNCTION);
     createEReference(waitFunctionEClass, WAIT_FUNCTION__VALUE);
 
+    harvestFunctionEClass = createEClass(HARVEST_FUNCTION);
+    createEReference(harvestFunctionEClass, HARVEST_FUNCTION__CROP);
+
     callFunctionEClass = createEClass(CALL_FUNCTION);
 
     getStageFunctionEClass = createEClass(GET_STAGE_FUNCTION);
@@ -1850,6 +1913,9 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
 
     plantFunctionEClass = createEClass(PLANT_FUNCTION);
     createEReference(plantFunctionEClass, PLANT_FUNCTION__PLANT_CROP);
+
+    isEmptyFunctionEClass = createEClass(IS_EMPTY_FUNCTION);
+    createEAttribute(isEmptyFunctionEClass, IS_EMPTY_FUNCTION__LEFT);
 
     expressionEClass = createEClass(EXPRESSION);
 
@@ -1986,9 +2052,11 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
     reportFunctionEClass.getESuperTypes().add(this.getBuiltinFunction());
     moveFunctionEClass.getESuperTypes().add(this.getBuiltinFunction());
     waitFunctionEClass.getESuperTypes().add(this.getBuiltinFunction());
+    harvestFunctionEClass.getESuperTypes().add(this.getBuiltinFunction());
     getStageFunctionEClass.getESuperTypes().add(this.getCallFunction());
     fieldSetFunctionEClass.getESuperTypes().add(this.getCallFunction());
     plantFunctionEClass.getESuperTypes().add(this.getCallFunction());
+    isEmptyFunctionEClass.getESuperTypes().add(this.getCallFunction());
     expressionEClass.getESuperTypes().add(this.getExpressionOrCall());
     notBooleanExpressionEClass.getESuperTypes().add(this.getExpression());
     literalEClass.getESuperTypes().add(this.getExpression());
@@ -2069,6 +2137,9 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
     initEClass(waitFunctionEClass, WaitFunction.class, "WaitFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getWaitFunction_Value(), this.getExpression(), null, "value", null, 0, 1, WaitFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(harvestFunctionEClass, HarvestFunction.class, "HarvestFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getHarvestFunction_Crop(), this.getCrop(), null, "crop", null, 0, 1, HarvestFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(callFunctionEClass, CallFunction.class, "CallFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(getStageFunctionEClass, GetStageFunction.class, "GetStageFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2081,6 +2152,9 @@ public class FarmPackageImpl extends EPackageImpl implements FarmPackage
 
     initEClass(plantFunctionEClass, PlantFunction.class, "PlantFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getPlantFunction_PlantCrop(), this.getCrop(), null, "plantCrop", null, 0, 1, PlantFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(isEmptyFunctionEClass, IsEmptyFunction.class, "IsEmptyFunction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getIsEmptyFunction_Left(), ecorePackage.getEString(), "left", null, 0, 1, IsEmptyFunction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

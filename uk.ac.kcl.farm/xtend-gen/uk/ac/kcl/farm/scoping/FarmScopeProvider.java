@@ -25,21 +25,11 @@ import uk.ac.kcl.farm.farm.Variable;
 @SuppressWarnings("all")
 public class FarmScopeProvider extends AbstractDeclarativeScopeProvider {
   public IScope scope_ReportFunction_var(final ReportFunction context, final EReference ref) {
-    IScope _xblockexpression = null;
-    {
-      System.out.println(context);
-      _xblockexpression = this.visibleVariablesScope(context);
-    }
-    return _xblockexpression;
+    return this.visibleVariablesScope(context);
   }
   
   public IScope scope_Expression_expression(final Expression context) {
-    IScope _xblockexpression = null;
-    {
-      System.out.println(context);
-      _xblockexpression = this.visibleVariablesScope(context);
-    }
-    return _xblockexpression;
+    return this.visibleVariablesScope(context);
   }
   
   protected IScope _visibleVariablesScope(final Mission context) {
@@ -51,21 +41,11 @@ public class FarmScopeProvider extends AbstractDeclarativeScopeProvider {
   }
   
   protected IScope _internalVisibleVariablesScope(final Mission context) {
-    IScope _xblockexpression = null;
-    {
-      System.out.println(context.getMissionStatements());
-      _xblockexpression = Scopes.scopeFor(Iterables.<Variable>filter(context.getMissionStatements(), Variable.class));
-    }
-    return _xblockexpression;
+    return Scopes.scopeFor(Iterables.<Variable>filter(context.getMissionStatements(), Variable.class));
   }
   
   protected IScope _internalVisibleVariablesScope(final LoopStatement context) {
-    IScope _xblockexpression = null;
-    {
-      System.out.println(context.getCondition());
-      _xblockexpression = Scopes.scopeFor(Iterables.<Variable>filter(context.getLoopStatements(), Variable.class), this.internalVisibleVariablesScope(context.eContainer()));
-    }
-    return _xblockexpression;
+    return Scopes.scopeFor(Iterables.<Variable>filter(context.getLoopStatements(), Variable.class), this.internalVisibleVariablesScope(context.eContainer()));
   }
   
   public IScope visibleVariablesScope(final EObject context) {

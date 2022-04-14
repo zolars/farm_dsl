@@ -161,6 +161,11 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
         return createWaitFunctionAdapter();
       }
       @Override
+      public Adapter caseHarvestFunction(HarvestFunction object)
+      {
+        return createHarvestFunctionAdapter();
+      }
+      @Override
       public Adapter caseCallFunction(CallFunction object)
       {
         return createCallFunctionAdapter();
@@ -179,6 +184,11 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
       public Adapter casePlantFunction(PlantFunction object)
       {
         return createPlantFunctionAdapter();
+      }
+      @Override
+      public Adapter caseIsEmptyFunction(IsEmptyFunction object)
+      {
+        return createIsEmptyFunctionAdapter();
       }
       @Override
       public Adapter caseExpression(Expression object)
@@ -583,6 +593,21 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.HarvestFunction <em>Harvest Function</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see uk.ac.kcl.farm.farm.HarvestFunction
+   * @generated
+   */
+  public Adapter createHarvestFunctionAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.CallFunction <em>Call Function</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -638,6 +663,21 @@ public class FarmAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createPlantFunctionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link uk.ac.kcl.farm.farm.IsEmptyFunction <em>Is Empty Function</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see uk.ac.kcl.farm.farm.IsEmptyFunction
+   * @generated
+   */
+  public Adapter createIsEmptyFunctionAdapter()
   {
     return null;
   }

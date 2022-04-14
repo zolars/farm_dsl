@@ -1,0 +1,172 @@
+define temperature
+define humidity
+
+/* The three-field system is a regime of crop rotation in 
+ * which a field is planted with one set of crops one year, 
+ * a different set in the second year, and left fallow only once every three years.
+*/
+
+
+crop wheat {
+	name : "Winter wheat"
+	
+	stage : [
+ 		{
+            name : "Foundation phase"
+            timeConsumed : 180.0
+            timeDanger : 1.0
+
+            temperature : 16.0
+            humidity : 10.0 
+        },
+        {
+            name : "Construction phase" 
+            timeConsumed : 60.0
+            timeDanger : 0.0 
+
+            temperature : 20.0
+            humidity : 10.0 
+        },
+        {
+            name : "Production phase" 
+            timeConsumed : 60.0
+            timeDanger : 0.0 
+
+            temperature : 25.0
+            humidity : 10.0 
+        }
+    ]
+}
+
+crop barley {
+	name : "Barley"
+	
+	stage : [
+ 		{
+            name : "Tillering"
+            timeConsumed : 150.0
+            timeDanger : 30.0
+
+            temperature : 16.0
+            humidity : 10.0 
+        },
+        {
+            name : "Stem elongation" 
+            timeConsumed : 30.0
+            timeDanger : 30.0 
+
+            temperature : 28.0
+            humidity : 10.0 
+        },
+        {
+            name : "Flowering" 
+            timeConsumed : 30.0
+            timeDanger : 30.0 
+
+            temperature : 26.0
+            humidity : 10.0 
+        },
+        {
+            name : "Grain filling" 
+            timeConsumed : 60.0
+            timeDanger : 10.0 
+
+            temperature : 26.0
+            humidity : 10.0 
+        },
+        {
+            name : "Ripening" 
+            timeConsumed : 30.0
+            timeDanger : 30.0 
+
+            temperature : 26.0
+            humidity : 10.0 
+        }
+    ]
+}
+
+field greenhouse {
+    name : "Large Greenhouse"
+    ip: "192.128.1.1"
+    type : inside
+    light : sunlight
+    
+	temperature : 16.0
+    humidity : 10.0
+}
+
+mission {
+	report(wheat)
+	report(barley)
+	
+	var success = true
+	
+	var looptime = 30.0
+	var currentEmptyField = 0.0
+	
+	while (looptime > 0.0) {
+		var empty = greenhouse.isEmpty()
+			
+		if (!empty) {		
+			report(greenhouse)
+		}
+		
+		looptime = looptime - 1.0
+		
+		currentEmptyField = currentEmptyField + 1.0
+		if (currentEmptyField == 1.0) {
+			
+			success = greenhouse.fieldSet(temperature,16.0)
+			
+			success = greenhouse.plant(wheat)
+			
+			wait(180.0)
+			
+			success = greenhouse.fieldSet(temperature,20.0)
+			
+			wait(60.0)
+			
+			success = greenhouse.fieldSet(temperature,25.0)
+			
+			wait(60.0)
+			
+			report(wheat)
+			
+			harvest(wheat) 
+			
+		} elseif (currentEmptyField == 2.0) {
+			
+			success = greenhouse.fieldSet(temperature,16.0)
+			
+			success = greenhouse.plant(barley)
+			
+			wait(150.0)
+			
+			success = greenhouse.fieldSet(temperature,28.0)
+			
+			wait(30.0)
+			
+			success = greenhouse.fieldSet(temperature,26.0)
+			
+			wait(30.0)
+			
+			wait(60.0)
+			
+			wait(30.0)
+			
+			report(barley)
+			
+			harvest(barley)
+			
+		} else {
+			currentEmptyField = 0.0
+			
+			report(wheat)
+			report(barley)
+			
+			wait(300.0)
+		}
+		
+		
+	}
+}

@@ -532,6 +532,7 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		private final RuleCall cReportFunctionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cMoveFunctionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cWaitFunctionParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cHarvestFunctionParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		///*
 		// * Built-in Functions
@@ -539,13 +540,15 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//BuiltinFunction:
 		//    ReportFunction |
 		//    MoveFunction |
-		//    WaitFunction
+		//    WaitFunction |
+		//    HarvestFunction
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//ReportFunction |
 		//MoveFunction |
-		//WaitFunction
+		//WaitFunction |
+		//HarvestFunction
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//ReportFunction
@@ -556,6 +559,9 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		
 		//WaitFunction
 		public RuleCall getWaitFunctionParserRuleCall_2() { return cWaitFunctionParserRuleCall_2; }
+		
+		//HarvestFunction
+		public RuleCall getHarvestFunctionParserRuleCall_3() { return cHarvestFunctionParserRuleCall_3; }
 	}
 	public class InstanceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.Instance");
@@ -693,12 +699,45 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//")"
 		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
 	}
+	public class HarvestFunctionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.HarvestFunction");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cHarvestKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cCropAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cCropCropCrossReference_1_0 = (CrossReference)cCropAssignment_1.eContents().get(0);
+		private final RuleCall cCropCropIDTerminalRuleCall_1_0_1 = (RuleCall)cCropCropCrossReference_1_0.eContents().get(1);
+		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		
+		//HarvestFunction:
+		//    "harvest(" crop=[Crop | ID] ")"
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//"harvest(" crop=[Crop | ID] ")"
+		public Group getGroup() { return cGroup; }
+		
+		//"harvest("
+		public Keyword getHarvestKeyword_0() { return cHarvestKeyword_0; }
+		
+		//crop=[Crop | ID]
+		public Assignment getCropAssignment_1() { return cCropAssignment_1; }
+		
+		//[Crop | ID]
+		public CrossReference getCropCropCrossReference_1_0() { return cCropCropCrossReference_1_0; }
+		
+		//ID
+		public RuleCall getCropCropIDTerminalRuleCall_1_0_1() { return cCropCropIDTerminalRuleCall_1_0_1; }
+		
+		//")"
+		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
+	}
 	public class CallFunctionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.CallFunction");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cGetStageFunctionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cFieldSetFunctionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cPlantFunctionParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cIsEmptyFunctionParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		///*
 		// * Call Functions
@@ -706,13 +745,15 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		//CallFunction:
 		//    GetStageFunction |
 		//    FieldSetFunction |
-		//    PlantFunction
+		//    PlantFunction |
+		//    IsEmptyFunction
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
 		//GetStageFunction |
 		//FieldSetFunction |
-		//PlantFunction
+		//PlantFunction |
+		//IsEmptyFunction
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//GetStageFunction
@@ -723,6 +764,9 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		
 		//PlantFunction
 		public RuleCall getPlantFunctionParserRuleCall_2() { return cPlantFunctionParserRuleCall_2; }
+		
+		//IsEmptyFunction
+		public RuleCall getIsEmptyFunctionParserRuleCall_3() { return cIsEmptyFunctionParserRuleCall_3; }
 	}
 	public class GetStageFunctionElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.GetStageFunction");
@@ -859,6 +903,34 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		
 		//ID
 		public RuleCall getPlantCropCropIDTerminalRuleCall_1_0_1() { return cPlantCropCropIDTerminalRuleCall_1_0_1; }
+		
+		//")"
+		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
+	}
+	public class IsEmptyFunctionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "uk.ac.kcl.farm.Farm.IsEmptyFunction");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cIsEmptyKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cLeftAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final Keyword cLeftLeftParenthesisKeyword_1_0 = (Keyword)cLeftAssignment_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		
+		//IsEmptyFunction:
+		//    "isEmpty" left="("  ")"
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//"isEmpty" left="("  ")"
+		public Group getGroup() { return cGroup; }
+		
+		//"isEmpty"
+		public Keyword getIsEmptyKeyword_0() { return cIsEmptyKeyword_0; }
+		
+		//left="("
+		public Assignment getLeftAssignment_1() { return cLeftAssignment_1; }
+		
+		//"("
+		public Keyword getLeftLeftParenthesisKeyword_1_0() { return cLeftLeftParenthesisKeyword_1_0; }
 		
 		//")"
 		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
@@ -1931,10 +2003,12 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	private final ReportFunctionElements pReportFunction;
 	private final MoveFunctionElements pMoveFunction;
 	private final WaitFunctionElements pWaitFunction;
+	private final HarvestFunctionElements pHarvestFunction;
 	private final CallFunctionElements pCallFunction;
 	private final GetStageFunctionElements pGetStageFunction;
 	private final FieldSetFunctionElements pFieldSetFunction;
 	private final PlantFunctionElements pPlantFunction;
+	private final IsEmptyFunctionElements pIsEmptyFunction;
 	private final ExpressionElements pExpression;
 	private final ConditionOrExpressionElements pConditionOrExpression;
 	private final ConditionAndExpressionElements pConditionAndExpression;
@@ -1983,10 +2057,12 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		this.pReportFunction = new ReportFunctionElements();
 		this.pMoveFunction = new MoveFunctionElements();
 		this.pWaitFunction = new WaitFunctionElements();
+		this.pHarvestFunction = new HarvestFunctionElements();
 		this.pCallFunction = new CallFunctionElements();
 		this.pGetStageFunction = new GetStageFunctionElements();
 		this.pFieldSetFunction = new FieldSetFunctionElements();
 		this.pPlantFunction = new PlantFunctionElements();
+		this.pIsEmptyFunction = new IsEmptyFunctionElements();
 		this.pExpression = new ExpressionElements();
 		this.pConditionOrExpression = new ConditionOrExpressionElements();
 		this.pConditionAndExpression = new ConditionAndExpressionElements();
@@ -2196,7 +2272,8 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	//BuiltinFunction:
 	//    ReportFunction |
 	//    MoveFunction |
-	//    WaitFunction
+	//    WaitFunction |
+	//    HarvestFunction
 	//;
 	public BuiltinFunctionElements getBuiltinFunctionAccess() {
 		return pBuiltinFunction;
@@ -2252,13 +2329,25 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 		return getWaitFunctionAccess().getRule();
 	}
 	
+	//HarvestFunction:
+	//    "harvest(" crop=[Crop | ID] ")"
+	//;
+	public HarvestFunctionElements getHarvestFunctionAccess() {
+		return pHarvestFunction;
+	}
+	
+	public ParserRule getHarvestFunctionRule() {
+		return getHarvestFunctionAccess().getRule();
+	}
+	
 	///*
 	// * Call Functions
 	// */
 	//CallFunction:
 	//    GetStageFunction |
 	//    FieldSetFunction |
-	//    PlantFunction
+	//    PlantFunction |
+	//    IsEmptyFunction
 	//;
 	public CallFunctionElements getCallFunctionAccess() {
 		return pCallFunction;
@@ -2302,6 +2391,17 @@ public class FarmGrammarAccess extends AbstractElementFinder.AbstractGrammarElem
 	
 	public ParserRule getPlantFunctionRule() {
 		return getPlantFunctionAccess().getRule();
+	}
+	
+	//IsEmptyFunction:
+	//    "isEmpty" left="("  ")"
+	//;
+	public IsEmptyFunctionElements getIsEmptyFunctionAccess() {
+		return pIsEmptyFunction;
+	}
+	
+	public ParserRule getIsEmptyFunctionRule() {
+		return getIsEmptyFunctionAccess().getRule();
 	}
 	
 	////Expressions

@@ -34,9 +34,13 @@ import uk.ac.kcl.farm.farm.CropStage;
 import uk.ac.kcl.farm.farm.CropStages;
 import uk.ac.kcl.farm.farm.ElseJudgeStatement;
 import uk.ac.kcl.farm.farm.ElseStatement;
+import uk.ac.kcl.farm.farm.Expression;
 import uk.ac.kcl.farm.farm.ExpressionOrCall;
 import uk.ac.kcl.farm.farm.FarmProgram;
 import uk.ac.kcl.farm.farm.Field;
+import uk.ac.kcl.farm.farm.FieldSetFunction;
+import uk.ac.kcl.farm.farm.HarvestFunction;
+import uk.ac.kcl.farm.farm.Instance;
 import uk.ac.kcl.farm.farm.JudgeStatement;
 import uk.ac.kcl.farm.farm.LoopStatement;
 import uk.ac.kcl.farm.farm.Mission;
@@ -70,17 +74,15 @@ public class FarmGenerator extends AbstractGenerator {
     }
   }
   
-  private uk.ac.kcl.farm.generator.Runtime runtime = new uk.ac.kcl.farm.generator.Runtime();
+  private uk.ac.kcl.farm.generator.Runtime runtime;
   
-  private Exp expRuntime = new Exp(this.runtime);
+  private Exp expRuntime;
   
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     EObject _head = IterableExtensions.<EObject>head(resource.getContents());
     final FarmProgram model = ((FarmProgram) _head);
     fsa.generateFile(this.deriveStatsTargetFileNameFor(resource), this.doGenerateStats(model));
-    final String className = this.deriveClassNameFor(resource);
-    fsa.generateFile((className + ".java"), this.doGenerateClass(model, className));
   }
   
   public String deriveStatsTargetFileNameFor(final Resource resource) {
@@ -98,69 +100,101 @@ public class FarmGenerator extends AbstractGenerator {
   }
   
   public String doGenerateStats(final FarmProgram program) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("- ");
-    int _size = IteratorExtensions.size(Iterators.<Attribute>filter(program.eAllContents(), Attribute.class));
-    _builder.append(_size);
-    _builder.append(" attribute declarations");
-    _builder.newLineIfNotEmpty();
-    final Function1<Attribute, String> _function = (Attribute it) -> {
-      FarmGenerator.Environment _environment = new FarmGenerator.Environment();
-      return this.generateTimetable(it, _environment);
-    };
-    String _join = IterableExtensions.join(IterableExtensions.<Attribute, String>map(Iterables.<Attribute>filter(program.getStatements(), Attribute.class), _function), "\n");
-    _builder.append(_join);
-    _builder.newLineIfNotEmpty();
-    _builder.append("- ");
-    int _size_1 = this.runtime.attributeList.size();
-    _builder.append(_size_1);
-    _builder.append(" attribute processed");
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    _builder.append("- ");
-    int _size_2 = IteratorExtensions.size(Iterators.<Crop>filter(program.eAllContents(), Crop.class));
-    _builder.append(_size_2);
-    _builder.append(" crop declarations");
-    _builder.newLineIfNotEmpty();
-    final Function1<Crop, String> _function_1 = (Crop it) -> {
-      FarmGenerator.Environment _environment = new FarmGenerator.Environment();
-      return this.generateTimetable(it, _environment);
-    };
-    String _join_1 = IterableExtensions.join(IterableExtensions.<Crop, String>map(Iterables.<Crop>filter(program.getStatements(), Crop.class), _function_1), "\n");
-    _builder.append(_join_1);
-    _builder.newLineIfNotEmpty();
-    _builder.append("- ");
-    int _size_3 = this.runtime.cropMap.size();
-    _builder.append(_size_3);
-    _builder.append(" crop processed");
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    _builder.append("- ");
-    int _size_4 = IteratorExtensions.size(Iterators.<Field>filter(program.eAllContents(), Field.class));
-    _builder.append(_size_4);
-    _builder.append(" field declarations");
-    _builder.newLineIfNotEmpty();
-    final Function1<Field, String> _function_2 = (Field it) -> {
-      FarmGenerator.Environment _environment = new FarmGenerator.Environment();
-      return this.generateTimetable(it, _environment);
-    };
-    String _join_2 = IterableExtensions.join(IterableExtensions.<Field, String>map(Iterables.<Field>filter(program.getStatements(), Field.class), _function_2), "\n");
-    _builder.append(_join_2);
-    _builder.newLineIfNotEmpty();
-    _builder.append("- ");
-    int _size_5 = this.runtime.fieldMap.size();
-    _builder.append(_size_5);
-    _builder.append(" field processed");
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    final Function1<Mission, String> _function_3 = (Mission it) -> {
-      FarmGenerator.Environment _environment = new FarmGenerator.Environment();
-      return this.generateTimetable(it, _environment);
-    };
-    String _join_3 = IterableExtensions.join(IterableExtensions.<Mission, String>map(Iterables.<Mission>filter(program.getStatements(), Mission.class), _function_3), "\n");
-    _builder.append(_join_3);
-    _builder.newLineIfNotEmpty();
-    return _builder.toString();
+    String _xblockexpression = null;
+    {
+      uk.ac.kcl.farm.generator.Runtime _runtime = new uk.ac.kcl.farm.generator.Runtime();
+      this.runtime = _runtime;
+      Exp _exp = new Exp(this.runtime);
+      this.expRuntime = _exp;
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("- ");
+      int _size = IteratorExtensions.size(Iterators.<Attribute>filter(program.eAllContents(), Attribute.class));
+      _builder.append(_size);
+      _builder.append(" attribute declarations");
+      _builder.newLineIfNotEmpty();
+      final Function1<Attribute, String> _function = (Attribute it) -> {
+        FarmGenerator.Environment _environment = new FarmGenerator.Environment();
+        return this.generateTimetable(it, _environment);
+      };
+      String _join = IterableExtensions.join(IterableExtensions.<Attribute, String>map(Iterables.<Attribute>filter(program.getStatements(), Attribute.class), _function), "\n");
+      _builder.append(_join);
+      _builder.newLineIfNotEmpty();
+      _builder.append("- ");
+      String _xifexpression = null;
+      int _size_1 = this.runtime.attributeList.size();
+      int _size_2 = IteratorExtensions.size(Iterators.<Attribute>filter(program.eAllContents(), Attribute.class));
+      boolean _equals = (_size_1 == _size_2);
+      if (_equals) {
+        _xifexpression = "All";
+      } else {
+        _xifexpression = "Not all";
+      }
+      _builder.append(_xifexpression);
+      _builder.append(" attribute processed");
+      _builder.newLineIfNotEmpty();
+      _builder.newLine();
+      _builder.append("- ");
+      int _size_3 = IteratorExtensions.size(Iterators.<Crop>filter(program.eAllContents(), Crop.class));
+      _builder.append(_size_3);
+      _builder.append(" crop declarations");
+      _builder.newLineIfNotEmpty();
+      final Function1<Crop, String> _function_1 = (Crop it) -> {
+        FarmGenerator.Environment _environment = new FarmGenerator.Environment();
+        return this.generateTimetable(it, _environment);
+      };
+      String _join_1 = IterableExtensions.join(IterableExtensions.<Crop, String>map(Iterables.<Crop>filter(program.getStatements(), Crop.class), _function_1), "\n");
+      _builder.append(_join_1);
+      _builder.newLineIfNotEmpty();
+      _builder.append("- ");
+      String _xifexpression_1 = null;
+      int _size_4 = this.runtime.cropMap.size();
+      int _size_5 = IteratorExtensions.size(Iterators.<Crop>filter(program.eAllContents(), Crop.class));
+      boolean _equals_1 = (_size_4 == _size_5);
+      if (_equals_1) {
+        _xifexpression_1 = "All";
+      } else {
+        _xifexpression_1 = "Not all";
+      }
+      _builder.append(_xifexpression_1);
+      _builder.append(" crop processed");
+      _builder.newLineIfNotEmpty();
+      _builder.newLine();
+      _builder.append("- ");
+      int _size_6 = IteratorExtensions.size(Iterators.<Field>filter(program.eAllContents(), Field.class));
+      _builder.append(_size_6);
+      _builder.append(" field declarations");
+      _builder.newLineIfNotEmpty();
+      final Function1<Field, String> _function_2 = (Field it) -> {
+        FarmGenerator.Environment _environment = new FarmGenerator.Environment();
+        return this.generateTimetable(it, _environment);
+      };
+      String _join_2 = IterableExtensions.join(IterableExtensions.<Field, String>map(Iterables.<Field>filter(program.getStatements(), Field.class), _function_2), "\n");
+      _builder.append(_join_2);
+      _builder.newLineIfNotEmpty();
+      _builder.append("- ");
+      String _xifexpression_2 = null;
+      int _size_7 = this.runtime.fieldMap.size();
+      int _size_8 = IteratorExtensions.size(Iterators.<Field>filter(program.eAllContents(), Field.class));
+      boolean _equals_2 = (_size_7 == _size_8);
+      if (_equals_2) {
+        _xifexpression_2 = "All";
+      } else {
+        _xifexpression_2 = "Not all";
+      }
+      _builder.append(_xifexpression_2);
+      _builder.append(" field processed");
+      _builder.newLineIfNotEmpty();
+      _builder.newLine();
+      final Function1<Mission, String> _function_3 = (Mission it) -> {
+        FarmGenerator.Environment _environment = new FarmGenerator.Environment();
+        return this.generateTimetable(it, _environment);
+      };
+      String _join_3 = IterableExtensions.join(IterableExtensions.<Mission, String>map(Iterables.<Mission>filter(program.getStatements(), Mission.class), _function_3), "\n\n");
+      _builder.append(_join_3);
+      _builder.newLineIfNotEmpty();
+      _xblockexpression = _builder.toString();
+    }
+    return _xblockexpression;
   }
   
   public String doGenerateClass(final FarmProgram program, final String className) {
@@ -289,14 +323,15 @@ public class FarmGenerator extends AbstractGenerator {
             }
           }
         }
+        String _name = crop.getName();
         String _cropName = crop.getCropName();
-        GeneratedCrop newCrop = new GeneratedCrop(_cropName, generatedStages);
+        GeneratedCrop newCrop = new GeneratedCrop(_name, _cropName, generatedStages);
         this.runtime.cropMap.put(crop.getName(), newCrop);
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("    ");
         _builder.append("- Crop `");
-        String _name = crop.getName();
-        _builder.append(_name, "    ");
+        String _name_1 = crop.getName();
+        _builder.append(_name_1, "    ");
         _builder.append("` processed");
         _xblockexpression = _builder.toString();
       }
@@ -386,16 +421,7 @@ public class FarmGenerator extends AbstractGenerator {
           }
         }
         StringConcatenation _builder = new StringConcatenation();
-        _builder.append("- Variable `");
-        String _name = variable.getName();
-        _builder.append(_name);
-        _builder.append(" : ");
-        Object _get = this.runtime.variableMap.get(variable.getName());
-        _builder.append(_get);
-        _builder.append("` processed");
-        InputOutput.<String>println(_builder.toString());
-        StringConcatenation _builder_1 = new StringConcatenation();
-        _xblockexpression = _builder_1.toString();
+        _xblockexpression = _builder.toString();
       }
       return _xblockexpression;
     } catch (Throwable _e) {
@@ -508,12 +534,303 @@ public class FarmGenerator extends AbstractGenerator {
     return _xblockexpression;
   }
   
+  public String reportAll() {
+    String result = "    Crops:";
+    Set<Map.Entry<String, GeneratedCrop>> _entrySet = this.runtime.cropMap.entrySet();
+    for (final Map.Entry<String, GeneratedCrop> i : _entrySet) {
+      {
+        GeneratedCrop crop = i.getValue();
+        String _result = result;
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("  ");
+        String _string = crop.toString();
+        _builder.append(_string, "  ");
+        String _plus = (_builder.toString() + "\n");
+        result = (_result + _plus);
+        String _result_1 = result;
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("            ");
+        _builder_1.append("ID: ");
+        _builder_1.append(crop.ID, "            ");
+        String _plus_1 = (_builder_1.toString() + "\n");
+        result = (_result_1 + _plus_1);
+        String _result_2 = result;
+        StringConcatenation _builder_2 = new StringConcatenation();
+        _builder_2.append("            ");
+        _builder_2.append("name: ");
+        _builder_2.append(crop.name, "            ");
+        String _plus_2 = (_builder_2.toString() + "\n");
+        result = (_result_2 + _plus_2);
+        String _result_3 = result;
+        StringConcatenation _builder_3 = new StringConcatenation();
+        _builder_3.append("            ");
+        _builder_3.append("time: ");
+        _builder_3.append(crop.time, "            ");
+        String _plus_3 = (_builder_3.toString() + "\n");
+        result = (_result_3 + _plus_3);
+        String _result_4 = result;
+        StringConcatenation _builder_4 = new StringConcatenation();
+        _builder_4.append("            ");
+        _builder_4.append("currentStage: ");
+        String _name = crop.currentStage.getName();
+        _builder_4.append(_name, "            ");
+        String _plus_4 = (_builder_4.toString() + "\n");
+        result = (_result_4 + _plus_4);
+        String _result_5 = result;
+        StringConcatenation _builder_5 = new StringConcatenation();
+        _builder_5.append("            ");
+        _builder_5.append("currentStageID: ");
+        _builder_5.append(crop.currentStageID, "            ");
+        String _plus_5 = (_builder_5.toString() + "\n");
+        result = (_result_5 + _plus_5);
+        try {
+          String _result_6 = result;
+          StringConcatenation _builder_6 = new StringConcatenation();
+          _builder_6.append("            ");
+          _builder_6.append("field: ");
+          _builder_6.append(crop.field.name, "            ");
+          String _plus_6 = (_builder_6.toString() + "\n\n");
+          result = (_result_6 + _plus_6);
+        } catch (final Throwable _t) {
+          if (_t instanceof Exception) {
+            String _result_7 = result;
+            result = (_result_7 + ("            field: No Field" + "\n"));
+          } else {
+            throw Exceptions.sneakyThrow(_t);
+          }
+        }
+      }
+    }
+    String _result = result;
+    result = (_result + ("    Fields:" + "\n"));
+    Set<Map.Entry<String, GeneratedField>> _entrySet_1 = this.runtime.fieldMap.entrySet();
+    for (final Map.Entry<String, GeneratedField> i_1 : _entrySet_1) {
+      {
+        GeneratedField field = i_1.getValue();
+        String _result_1 = result;
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("        ");
+        String _string = field.toString();
+        _builder.append(_string, "        ");
+        String _plus = (_builder.toString() + "\n");
+        result = (_result_1 + _plus);
+        String _result_2 = result;
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("            ");
+        _builder_1.append("name: ");
+        _builder_1.append(field.name, "            ");
+        String _plus_1 = (_builder_1.toString() + "\n");
+        result = (_result_2 + _plus_1);
+        String _result_3 = result;
+        StringConcatenation _builder_2 = new StringConcatenation();
+        _builder_2.append("            ");
+        _builder_2.append("ip: ");
+        _builder_2.append(field.ip, "            ");
+        String _plus_2 = (_builder_2.toString() + "\n");
+        result = (_result_3 + _plus_2);
+        String _result_4 = result;
+        StringConcatenation _builder_3 = new StringConcatenation();
+        _builder_3.append("            ");
+        _builder_3.append("type: ");
+        _builder_3.append(field.type, "            ");
+        String _plus_3 = (_builder_3.toString() + "\n");
+        result = (_result_4 + _plus_3);
+        String _result_5 = result;
+        StringConcatenation _builder_4 = new StringConcatenation();
+        _builder_4.append("            ");
+        _builder_4.append("light: ");
+        _builder_4.append(field.light, "            ");
+        String _plus_4 = (_builder_4.toString() + "\n");
+        result = (_result_5 + _plus_4);
+        try {
+          String _result_6 = result;
+          StringConcatenation _builder_5 = new StringConcatenation();
+          _builder_5.append("            ");
+          _builder_5.append("crop: ");
+          _builder_5.append(this.runtime.cropMap.get(field.crop.ID).name, "            ");
+          String _plus_5 = (_builder_5.toString() + "\n");
+          result = (_result_6 + _plus_5);
+          String _result_7 = result;
+          StringConcatenation _builder_6 = new StringConcatenation();
+          _builder_6.append("            ");
+          _builder_6.append("cropStage: ");
+          String _name = this.runtime.cropMap.get(field.crop.ID).currentStage.getName();
+          _builder_6.append(_name, "            ");
+          String _plus_6 = (_builder_6.toString() + "\n\n");
+          result = (_result_7 + _plus_6);
+        } catch (final Throwable _t) {
+          if (_t instanceof Exception) {
+            String _result_8 = result;
+            result = (_result_8 + ("            crop: No Crop" + "\n"));
+          } else {
+            throw Exceptions.sneakyThrow(_t);
+          }
+        }
+      }
+    }
+    return result;
+  }
+  
+  protected String _report(final Crop tempCrop) {
+    String result = ("    Crops:" + "\n");
+    GeneratedCrop crop = this.runtime.cropMap.get(tempCrop.getName());
+    String _result = result;
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("        ");
+    String _string = crop.toString();
+    _builder.append(_string, "        ");
+    String _plus = (_builder.toString() + "\n");
+    result = (_result + _plus);
+    String _result_1 = result;
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("            ");
+    _builder_1.append("ID: ");
+    _builder_1.append(crop.ID, "            ");
+    String _plus_1 = (_builder_1.toString() + "\n");
+    result = (_result_1 + _plus_1);
+    String _result_2 = result;
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("            ");
+    _builder_2.append("name: ");
+    _builder_2.append(crop.name, "            ");
+    String _plus_2 = (_builder_2.toString() + "\n");
+    result = (_result_2 + _plus_2);
+    String _result_3 = result;
+    StringConcatenation _builder_3 = new StringConcatenation();
+    _builder_3.append("            ");
+    _builder_3.append("time: ");
+    _builder_3.append(crop.time, "            ");
+    String _plus_3 = (_builder_3.toString() + "\n");
+    result = (_result_3 + _plus_3);
+    String _result_4 = result;
+    StringConcatenation _builder_4 = new StringConcatenation();
+    _builder_4.append("            ");
+    _builder_4.append("currentStage: ");
+    String _name = crop.currentStage.getName();
+    _builder_4.append(_name, "            ");
+    String _plus_4 = (_builder_4.toString() + "\n");
+    result = (_result_4 + _plus_4);
+    String _result_5 = result;
+    StringConcatenation _builder_5 = new StringConcatenation();
+    _builder_5.append("            ");
+    _builder_5.append("currentStageID: ");
+    _builder_5.append(crop.currentStageID, "            ");
+    String _plus_5 = (_builder_5.toString() + "\n");
+    result = (_result_5 + _plus_5);
+    try {
+      String _result_6 = result;
+      StringConcatenation _builder_6 = new StringConcatenation();
+      _builder_6.append("            ");
+      _builder_6.append("field: ");
+      _builder_6.append(crop.field.name, "            ");
+      String _plus_6 = (_builder_6.toString() + "\n");
+      result = (_result_6 + _plus_6);
+    } catch (final Throwable _t) {
+      if (_t instanceof Exception) {
+        String _result_7 = result;
+        result = (_result_7 + ("            field: No Field" + "\n"));
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
+    return result;
+  }
+  
+  protected String _report(final Field tempField) {
+    String result = ("    Fields:" + "\n");
+    GeneratedField field = this.runtime.fieldMap.get(tempField.getName());
+    String _result = result;
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("        ");
+    String _string = field.toString();
+    _builder.append(_string, "        ");
+    String _plus = (_builder.toString() + "\n");
+    result = (_result + _plus);
+    String _result_1 = result;
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("            ");
+    _builder_1.append("name: ");
+    _builder_1.append(field.name, "            ");
+    String _plus_1 = (_builder_1.toString() + "\n");
+    result = (_result_1 + _plus_1);
+    String _result_2 = result;
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("            ");
+    _builder_2.append("ip: ");
+    _builder_2.append(field.ip, "            ");
+    String _plus_2 = (_builder_2.toString() + "\n");
+    result = (_result_2 + _plus_2);
+    String _result_3 = result;
+    StringConcatenation _builder_3 = new StringConcatenation();
+    _builder_3.append("            ");
+    _builder_3.append("type: ");
+    _builder_3.append(field.type, "            ");
+    String _plus_3 = (_builder_3.toString() + "\n");
+    result = (_result_3 + _plus_3);
+    String _result_4 = result;
+    StringConcatenation _builder_4 = new StringConcatenation();
+    _builder_4.append("            ");
+    _builder_4.append("light: ");
+    _builder_4.append(field.light, "            ");
+    String _plus_4 = (_builder_4.toString() + "\n");
+    result = (_result_4 + _plus_4);
+    try {
+      String _result_5 = result;
+      StringConcatenation _builder_5 = new StringConcatenation();
+      _builder_5.append("            ");
+      _builder_5.append("crop: ");
+      _builder_5.append(this.runtime.cropMap.get(field.crop.ID).name, "            ");
+      String _plus_5 = (_builder_5.toString() + "\n");
+      result = (_result_5 + _plus_5);
+      String _result_6 = result;
+      StringConcatenation _builder_6 = new StringConcatenation();
+      _builder_6.append("            ");
+      _builder_6.append("cropStage: ");
+      String _name = this.runtime.cropMap.get(field.crop.ID).currentStage.getName();
+      _builder_6.append(_name, "            ");
+      String _plus_6 = (_builder_6.toString() + "\n");
+      result = (_result_6 + _plus_6);
+    } catch (final Throwable _t) {
+      if (_t instanceof Exception) {
+        String _result_7 = result;
+        result = (_result_7 + ("            crop: No Crop" + "\n"));
+      } else {
+        throw Exceptions.sneakyThrow(_t);
+      }
+    }
+    return result;
+  }
+  
+  protected String _generateTimetable(final FieldSetFunction function, final FarmGenerator.Environment env) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("Time ");
+    _builder.append(this.runtime.time);
+    _builder.append(":");
+    _builder.newLineIfNotEmpty();
+    _builder.append("    ");
+    _builder.append("Field attribute `");
+    Attribute _attribute = function.getAttribute();
+    _builder.append(_attribute, "    ");
+    _builder.append("` has been set to ");
+    Expression _value = function.getValue();
+    _builder.append(_value, "    ");
+    _builder.newLineIfNotEmpty();
+    return ("\n" + _builder);
+  }
+  
   protected String _generateTimetable(final ReportFunction function, final FarmGenerator.Environment env) {
     String _xblockexpression = null;
     {
-      InputOutput.<String>println(function.getInstance().toString());
+      InputOutput.<String>println(this.reportAll());
       StringConcatenation _builder = new StringConcatenation();
-      _xblockexpression = _builder.toString();
+      _builder.append("Time ");
+      _builder.append(this.runtime.time);
+      _builder.append(": Report");
+      _builder.newLineIfNotEmpty();
+      String _report = this.report(function.getInstance());
+      _builder.append(_report);
+      _builder.newLineIfNotEmpty();
+      _xblockexpression = ("\n" + _builder);
     }
     return _xblockexpression;
   }
@@ -524,6 +841,7 @@ public class FarmGenerator extends AbstractGenerator {
       {
         GeneratedField moveFromField = this.runtime.fieldMap.get(function.getMoveFromField().getName());
         GeneratedField moveToField = this.runtime.fieldMap.get(function.getMoveToField().getName());
+        InputOutput.<String>println(this.reportAll());
         if ((moveFromField.crop == null)) {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("Field `");
@@ -538,7 +856,7 @@ public class FarmGenerator extends AbstractGenerator {
             _builder_1.append("` is not empty");
             throw new Exception(_builder_1.toString());
           } else {
-            Boolean _judegeEnvironment = this.expRuntime.judegeEnvironment(moveToField, moveFromField.crop.currentStage);
+            Boolean _judegeEnvironment = this.expRuntime.judegeEnvironment(moveToField, this.runtime.cropMap.get(moveFromField.crop.ID).currentStage);
             if ((_judegeEnvironment).booleanValue()) {
               moveToField.crop = moveFromField.crop;
               moveFromField.crop = null;
@@ -559,18 +877,30 @@ public class FarmGenerator extends AbstractGenerator {
     try {
       String _xblockexpression = null;
       {
-        String result = "";
+        float waitTime = (this.expRuntime.toFloat(function.getValue())).floatValue();
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("Time ");
+        _builder.append(this.runtime.time);
+        _builder.append(":");
+        _builder.newLineIfNotEmpty();
+        _builder.append("    ");
+        _builder.append("Wait for ");
+        _builder.append(waitTime, "    ");
+        _builder.append(" days");
+        _builder.newLineIfNotEmpty();
+        _builder.append("    ");
+        _builder.newLine();
+        String result = ("\n" + _builder);
         float _time = this.runtime.time;
-        Float _float = this.expRuntime.toFloat(function.getValue());
-        this.runtime.time = (_time + (_float).floatValue());
+        this.runtime.time = (_time + waitTime);
+        List<String> changeStageKeys = CollectionLiterals.<String>newArrayList();
         Set<Map.Entry<String, GeneratedCrop>> _entrySet = this.runtime.cropMap.entrySet();
         for (final Map.Entry<String, GeneratedCrop> e : _entrySet) {
           {
             GeneratedCrop crop = e.getValue();
             if ((crop.field != null)) {
               float _time_1 = crop.time;
-              Float _float_1 = this.expRuntime.toFloat(function.getValue());
-              crop.time = (_time_1 + (_float_1).floatValue());
+              crop.time = (_time_1 + waitTime);
               float timeNeeded = 0;
               IntegerRange _upTo = new IntegerRange(0, crop.currentStageID);
               for (final Integer i : _upTo) {
@@ -580,68 +910,161 @@ public class FarmGenerator extends AbstractGenerator {
               }
               float _timeover = crop.currentStage.getTimeover();
               float timeOverflow = (timeNeeded + _timeover);
-              Float _float_2 = this.expRuntime.toFloat(function.getValue());
-              float timeExised = ((_float_2).floatValue() + crop.time);
-              if ((timeExised < timeNeeded)) {
+              if ((crop.time < timeNeeded)) {
                 String _result = result;
-                StringConcatenation _builder = new StringConcatenation();
-                _builder.append("Crop `");
-                _builder.append(crop.name);
-                _builder.append("` is growing in Field `");
-                _builder.append(crop.field.name);
-                _builder.append("`.");
-                _builder.newLineIfNotEmpty();
-                _builder.append("\t");
-                _builder.append("Stage is still in `");
+                StringConcatenation _builder_1 = new StringConcatenation();
+                _builder_1.append("Time ");
+                _builder_1.append((this.runtime.time + waitTime));
+                _builder_1.append(":");
+                _builder_1.newLineIfNotEmpty();
+                _builder_1.append("\t\t\t\t        ");
+                _builder_1.append("Crop `");
+                _builder_1.append(crop.name, "\t\t\t\t        ");
+                _builder_1.append("` is growing in Field `");
+                _builder_1.append(crop.field.name, "\t\t\t\t        ");
+                _builder_1.append("`.");
+                _builder_1.newLineIfNotEmpty();
+                _builder_1.append("\t    ");
+                _builder_1.append("Stage is still in `");
                 String _name = crop.currentStage.getName();
-                _builder.append(_name, "\t");
-                _builder.append("`.");
-                _builder.newLineIfNotEmpty();
-                _builder.append("\t");
-                _builder.append("Need ");
-                _builder.append((timeNeeded - timeExised), "\t");
-                _builder.append(" days to step into the next stage.");
-                _builder.newLineIfNotEmpty();
-                result = (_result + _builder);
+                _builder_1.append(_name, "\t    ");
+                _builder_1.append("`.");
+                _builder_1.newLineIfNotEmpty();
+                _builder_1.append("\t    ");
+                _builder_1.append("Need ");
+                _builder_1.append((timeNeeded - crop.time), "\t    ");
+                _builder_1.append(" days to step into the next stage.");
+                String _plus = ("\n" + _builder_1);
+                result = (_result + _plus);
               } else {
-                if (((timeExised >= timeNeeded) && (timeExised < timeOverflow))) {
-                  int _currentStageID = crop.currentStageID;
-                  crop.currentStageID = (_currentStageID + 1);
-                  crop.currentStage = crop.stage.get(crop.currentStageID);
+                if (((crop.time >= timeNeeded) && (crop.time <= timeOverflow))) {
+                  InputOutput.<String>println(crop.ID);
+                  changeStageKeys.add(crop.ID);
                   String _result_1 = result;
-                  StringConcatenation _builder_1 = new StringConcatenation();
-                  _builder_1.append("Crop `");
-                  _builder_1.append(crop.name);
-                  _builder_1.append("` is growing in Field `");
-                  _builder_1.append(crop.field.name);
-                  _builder_1.append("`.");
-                  _builder_1.newLineIfNotEmpty();
-                  _builder_1.append("\t");
-                  _builder_1.append("Stage is changed to `");
+                  StringConcatenation _builder_2 = new StringConcatenation();
+                  _builder_2.append("Time ");
+                  _builder_2.append((this.runtime.time + waitTime));
+                  _builder_2.append(":");
+                  _builder_2.newLineIfNotEmpty();
+                  _builder_2.append("\t\t\t\t\t    ");
+                  _builder_2.append("Crop `");
+                  _builder_2.append(crop.name, "\t\t\t\t\t    ");
+                  _builder_2.append("` is growing in Field `");
+                  _builder_2.append(crop.field.name, "\t\t\t\t\t    ");
+                  _builder_2.append("`.");
+                  _builder_2.newLineIfNotEmpty();
+                  _builder_2.append("\t    ");
+                  _builder_2.append("Stage is changed to `");
                   String _name_1 = crop.currentStage.getName();
-                  _builder_1.append(_name_1, "\t");
-                  _builder_1.append("`.");
-                  _builder_1.newLineIfNotEmpty();
-                  _builder_1.append("\t");
-                  _builder_1.append("You need to handle the crop in ");
-                  _builder_1.append((timeOverflow - timeExised), "\t");
-                  _builder_1.append(" days otherwise it will die.");
-                  _builder_1.newLineIfNotEmpty();
-                  result = (_result_1 + _builder_1);
+                  _builder_2.append(_name_1, "\t    ");
+                  _builder_2.append("`.");
+                  _builder_2.newLineIfNotEmpty();
+                  _builder_2.append("\t    ");
+                  _builder_2.append("You need to handle the crop in ");
+                  _builder_2.append((timeOverflow - crop.time), "\t    ");
+                  _builder_2.append(" days otherwise it will die.");
+                  _builder_2.newLineIfNotEmpty();
+                  String _plus_1 = ("\n" + _builder_2);
+                  result = (_result_1 + _plus_1);
                 } else {
-                  if ((timeExised >= timeOverflow)) {
-                    StringConcatenation _builder_2 = new StringConcatenation();
-                    _builder_2.append("Crop `");
-                    _builder_2.append(crop.name);
-                    _builder_2.append("` is died because time exceeded");
-                    throw new Exception(_builder_2.toString());
+                  if ((crop.time > timeOverflow)) {
+                    StringConcatenation _builder_3 = new StringConcatenation();
+                    _builder_3.append("Time ");
+                    _builder_3.append((this.runtime.time + waitTime));
+                    _builder_3.append(":");
+                    _builder_3.newLineIfNotEmpty();
+                    _builder_3.append("                        ");
+                    _builder_3.append("Crop `");
+                    _builder_3.append(crop.name, "                        ");
+                    _builder_3.append("` is died because time ");
+                    _builder_3.append(crop.time, "                        ");
+                    _builder_3.append(" exceeded ");
+                    _builder_3.append((crop.time - timeOverflow), "                        ");
+                    _builder_3.append(" for days");
+                    String _plus_2 = ("\n" + _builder_3);
+                    throw new Exception(_plus_2);
                   }
                 }
               }
+              this.runtime.cropMap.get(crop.ID).field.crop = crop;
             }
           }
         }
+        for (final String ID : changeStageKeys) {
+          this.runtime.cropMap.get(ID).addStage();
+        }
         _xblockexpression = result;
+      }
+      return _xblockexpression;
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected String _generateTimetable(final HarvestFunction function, final FarmGenerator.Environment env) {
+    try {
+      String _xblockexpression = null;
+      {
+        GeneratedCrop crop = this.runtime.cropMap.get(function.getCrop().getName());
+        String _xifexpression = null;
+        int _size = crop.stage.size();
+        boolean _equals = (crop.currentStageID == _size);
+        if (_equals) {
+          String _xblockexpression_1 = null;
+          {
+            float timeNeeded = 0;
+            int _size_1 = crop.stage.size();
+            int _minus = (_size_1 - 1);
+            IntegerRange _upTo = new IntegerRange(0, _minus);
+            for (final Integer i : _upTo) {
+              float _timeNeeded = timeNeeded;
+              float _time = crop.stage.get((i).intValue()).getTime();
+              timeNeeded = (_timeNeeded + _time);
+            }
+            float _timeover = crop.currentStage.getTimeover();
+            float timeOverflow = (timeNeeded + _timeover);
+            String _xifexpression_1 = null;
+            if ((crop.time <= timeOverflow)) {
+              String _xblockexpression_2 = null;
+              {
+                crop.field.crop = null;
+                crop.refresh();
+                StringConcatenation _builder = new StringConcatenation();
+                _builder.append("Time ");
+                _builder.append(this.runtime.time);
+                _builder.append(": Harvest ");
+                _builder.append(crop.name);
+                _builder.newLineIfNotEmpty();
+                _builder.append("    ");
+                _builder.append("Crop `");
+                _builder.append(crop.name, "    ");
+                _builder.append("` has been successfully harvested!");
+                String _plus = ("\n" + _builder);
+                _xblockexpression_2 = (_plus + "\n");
+              }
+              _xifexpression_1 = _xblockexpression_2;
+            } else {
+              StringConcatenation _builder = new StringConcatenation();
+              _builder.append("Crop `");
+              _builder.append(crop.name);
+              _builder.append("` is died because time ");
+              _builder.append(crop.time);
+              _builder.append(" exceeded ");
+              _builder.append((crop.time - timeOverflow));
+              _builder.append(" for days");
+              throw new Exception(_builder.toString());
+            }
+            _xblockexpression_1 = _xifexpression_1;
+          }
+          _xifexpression = _xblockexpression_1;
+        } else {
+          StringConcatenation _builder = new StringConcatenation();
+          _builder.append("Crop `");
+          _builder.append(crop.name);
+          _builder.append("` cannot be harvested because it is not in the final stage");
+          throw new Exception(_builder.toString());
+        }
+        _xblockexpression = _xifexpression;
       }
       return _xblockexpression;
     } catch (Throwable _e) {
@@ -691,7 +1114,9 @@ public class FarmGenerator extends AbstractGenerator {
   }
   
   public String generateTimetable(final EObject function, final FarmGenerator.Environment env) {
-    if (function instanceof MoveFunction) {
+    if (function instanceof HarvestFunction) {
+      return _generateTimetable((HarvestFunction)function, env);
+    } else if (function instanceof MoveFunction) {
       return _generateTimetable((MoveFunction)function, env);
     } else if (function instanceof ReportFunction) {
       return _generateTimetable((ReportFunction)function, env);
@@ -703,6 +1128,8 @@ public class FarmGenerator extends AbstractGenerator {
       return _generateTimetable((Crop)function, env);
     } else if (function instanceof Field) {
       return _generateTimetable((Field)function, env);
+    } else if (function instanceof FieldSetFunction) {
+      return _generateTimetable((FieldSetFunction)function, env);
     } else if (function instanceof JudgeStatement) {
       return _generateTimetable((JudgeStatement)function, env);
     } else if (function instanceof LoopStatement) {
@@ -718,6 +1145,17 @@ public class FarmGenerator extends AbstractGenerator {
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(function, env).toString());
+    }
+  }
+  
+  public String report(final Instance tempCrop) {
+    if (tempCrop instanceof Crop) {
+      return _report((Crop)tempCrop);
+    } else if (tempCrop instanceof Field) {
+      return _report((Field)tempCrop);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(tempCrop).toString());
     }
   }
   

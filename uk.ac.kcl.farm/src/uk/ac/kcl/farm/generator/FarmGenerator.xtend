@@ -22,7 +22,7 @@ import uk.ac.kcl.farm.farm.Field
 import uk.ac.kcl.farm.farm.CallAttributes
 import uk.ac.kcl.farm.farm.Mission
 import uk.ac.kcl.farm.farm.Variable
-import uk.ac.kcl.farm.farm.VarExpression
+import uk.ac.kcl.farm.farm.FieldSetFunction
 import uk.ac.kcl.farm.farm.Assignment
 import uk.ac.kcl.farm.farm.LoopStatement
 import uk.ac.kcl.farm.farm.JudgeStatement
@@ -31,6 +31,7 @@ import uk.ac.kcl.farm.farm.ElseStatement
 import uk.ac.kcl.farm.farm.ReportFunction
 import uk.ac.kcl.farm.farm.MoveFunction
 import uk.ac.kcl.farm.farm.WaitFunction
+import uk.ac.kcl.farm.farm.HarvestFunction
 
 import uk.ac.kcl.farm.generator.*
 import uk.ac.kcl.farm.interpreter.Exp
@@ -47,15 +48,15 @@ import uk.ac.kcl.farm.interpreter.Exp
 
 class FarmGenerator extends AbstractGenerator {
 	
-	Runtime runtime = new Runtime()
-	Exp expRuntime = new Exp(runtime)
+	Runtime runtime;
+	Exp expRuntime;
 	
 	override void doGenerate(Resource resource, IFileSystemAccess2 fsa, IGeneratorContext context) {
 		val model = resource.contents.head as FarmProgram
 		fsa.generateFile(resource.deriveStatsTargetFileNameFor, model.doGenerateStats)
 		
-		val className = resource.deriveClassNameFor
-		fsa.generateFile(className + '.java', model.doGenerateClass(className))
+//		val className = resource.deriveClassNameFor
+//		fsa.generateFile(className + '.java', model.doGenerateClass(className))
 	}
 	
 	def deriveStatsTargetFileNameFor(Resource resource) {
@@ -69,20 +70,23 @@ class FarmGenerator extends AbstractGenerator {
 	}
 	
 	def String doGenerateStats(FarmProgram program) {
+		this.runtime = new Runtime()
+		this.expRuntime = new Exp(this.runtime)
+		
 		'''
 		- «program.eAllContents.filter(Attribute).size» attribute declarations
 		«program.statements.filter(Attribute).map[generateTimetable(new Environment)].join('\n')»
-		- «runtime.attributeList.size» attribute processed
+		- «if (runtime.attributeList.size == program.eAllContents.filter(Attribute).size) {"All"} else {"Not all"}» attribute processed
 		
 		- «program.eAllContents.filter(Crop).size» crop declarations
 		«program.statements.filter(Crop).map[generateTimetable(new Environment)].join('\n')»
-		- «runtime.cropMap.size» crop processed
+		- «if (runtime.cropMap.size == program.eAllContents.filter(Crop).size) {"All"} else {"Not all"}» crop processed
 		
 		- «program.eAllContents.filter(Field).size» field declarations
 		«program.statements.filter(Field).map[generateTimetable(new Environment)].join('\n')»
-		- «runtime.fieldMap.size» field processed
+		- «if (runtime.fieldMap.size == program.eAllContents.filter(Field).size) {"All"} else {"Not all"}» field processed
 		
-		«program.statements.filter(Mission).map[generateTimetable(new Environment)].join('\n')»
+		«program.statements.filter(Mission).map[generateTimetable(new Environment)].join('\n\n')»
 		'''
 	}
 	
@@ -153,7 +157,7 @@ class FarmGenerator extends AbstractGenerator {
 			}	
 		}
 		
-		var newCrop = new GeneratedCrop(crop.cropName, generatedStages)
+		var newCrop = new GeneratedCrop(crop.name, crop.cropName, generatedStages)
 		runtime.cropMap.put(crop.name, newCrop)
 	
 		'''    - Crop `«crop.name»` processed'''
@@ -194,7 +198,7 @@ class FarmGenerator extends AbstractGenerator {
 				throw e2
 			}
 		}
-		println('''- Variable `«variable.name» : «runtime.variableMap.get(variable.name)»` processed''')
+		// println('''- Variable `«variable.name» : «runtime.variableMap.get(variable.name)»` processed''')
 		''''''
 	}
 	
@@ -209,7 +213,7 @@ class FarmGenerator extends AbstractGenerator {
 				throw e2
 			}
 		}
-		println('''- Assignment `«assignment.^var.name» : «runtime.variableMap.get(assignment.^var.name)»` processed''')
+		 println('''- Assignment `«assignment.^var.name» : «runtime.variableMap.get(assignment.^var.name)»` processed''')
 		''''''
 	}
 	
@@ -242,21 +246,102 @@ class FarmGenerator extends AbstractGenerator {
 		result
 	}
 	
-	dispatch def String generateTimetable(ReportFunction function, Environment env) {
-		println(function.instance.toString)
-		''''''
+	def String reportAll() {
+		var result = "    Crops:"
+		for (i : runtime.cropMap.entrySet) {
+			var crop = i.value
+			result += '''  «crop.toString()»''' + "\n"
+			result += '''            ID: «crop.ID»''' + "\n"
+			result += '''            name: «crop.name»''' + "\n"
+			result += '''            time: «crop.time»''' + "\n"
+			result += '''            currentStage: «crop.currentStage.name»''' + "\n"
+			result += '''            currentStageID: «crop.currentStageID»''' + "\n"
+			try {
+				result += '''            field: «crop.field.name»''' + "\n\n"
+			} catch (Exception e) {
+				result += "            field: No Field" + "\n"
+			}
+		}
+		result += "    Fields:" + "\n"
+		for (i : runtime.fieldMap.entrySet) {
+			var field = i.value
+			result += '''        «field.toString()»''' + "\n"
+			result += '''            name: «field.name»''' + "\n"
+			result += '''            ip: «field.ip»''' + "\n"
+			result += '''            type: «field.type»''' + "\n"
+			result += '''            light: «field.light»''' + "\n"
+			try {				
+				result += '''            crop: «runtime.cropMap.get(field.crop.ID).name»''' + "\n"
+				result += '''            cropStage: «runtime.cropMap.get(field.crop.ID).currentStage.name»''' + "\n\n"
+			} catch (Exception e) {
+				result += "            crop: No Crop" + "\n"
+			}
+
+		}
+		return result
 	}
+	
+	def dispatch String report(Crop tempCrop) {
+		var result = "    Crops:" + "\n"
+		var crop = runtime.cropMap.get(tempCrop.name)
+		result += '''        «crop.toString()»''' + "\n"
+		result += '''            ID: «crop.ID»''' + "\n"
+		result += '''            name: «crop.name»''' + "\n"
+		result += '''            time: «crop.time»''' + "\n"
+		result += '''            currentStage: «crop.currentStage.name»''' + "\n"
+		result += '''            currentStageID: «crop.currentStageID»''' + "\n"
+		try {
+			result += '''            field: «crop.field.name»''' + "\n"
+		} catch (Exception e) {
+			result += "            field: No Field" + "\n"
+		}
+		
+		return result
+	}
+	
+	def dispatch String report(Field tempField) {
+		var result = "    Fields:" + "\n"
+		var field = runtime.fieldMap.get(tempField.name)
+		result += '''        «field.toString()»''' + "\n"
+		result += '''            name: «field.name»''' + "\n"
+		result += '''            ip: «field.ip»''' + "\n"
+		result += '''            type: «field.type»''' + "\n"
+		result += '''            light: «field.light»''' + "\n"
+		try {				
+			result += '''            crop: «runtime.cropMap.get(field.crop.ID).name»''' + "\n"
+			result += '''            cropStage: «runtime.cropMap.get(field.crop.ID).currentStage.name»''' + "\n"
+		} catch (Exception e) {
+			result += "            crop: No Crop" + "\n"
+		}
+
+		return result
+	}
+	
+ 	dispatch def String generateTimetable(FieldSetFunction function, Environment env) {
+		"\n" + '''Time «runtime.time»:
+    Field attribute `«function.attribute»` has been set to «function.value»
+    	'''
+	}
+	
+	dispatch def String generateTimetable(ReportFunction function, Environment env) {
+		 println(reportAll())
+		"\n" + '''Time «runtime.time»: Report
+«report(function.instance)»
+		'''
+	}
+
 	
 	dispatch def String generateTimetable(MoveFunction function, Environment env) {
 		var moveFromField = runtime.fieldMap.get(function.moveFromField.name)
 		var moveToField = runtime.fieldMap.get(function.moveToField.name)
-		
-		
+			
+		println(reportAll())		
+	
 		if (moveFromField.crop === null) {
 			throw new Exception('''Field `«moveFromField.name»` is empty''')
 		} else if (moveToField.crop !== null) {
 			throw new Exception('''Field `«moveToField.name»` is not empty''')
-		} else if (expRuntime.judegeEnvironment(moveToField, moveFromField.crop.currentStage)) {
+		} else if (expRuntime.judegeEnvironment(moveToField, runtime.cropMap.get(moveFromField.crop.ID).currentStage)) {
 			moveToField.crop = moveFromField.crop
 			moveFromField.crop = null
 			moveToField.crop.field = moveToField
@@ -265,53 +350,92 @@ class FarmGenerator extends AbstractGenerator {
 		''''''
 	}
 	
-	dispatch def String generateTimetable(WaitFunction function, Environment env) {
-		var result = ""
+	dispatch def String generateTimetable(WaitFunction function, Environment env) {	
+		var float waitTime = expRuntime.toFloat(function.value)
+		var result = "\n" + '''Time «runtime.time»:
+    Wait for «waitTime» days
+    
+'''
 		
-		runtime.time += expRuntime.toFloat(function.value)
+		runtime.time += waitTime
 		
+		var List<String> changeStageKeys = newArrayList()
 		
 		for (e : runtime.cropMap.entrySet) {
 			var crop = e.value
 			if (crop.field !== null) {
-				crop.time += expRuntime.toFloat(function.value)
+				crop.time += waitTime
 				
 				var float timeNeeded = 0
 				
 				for (i : 0..crop.currentStageID) {
 					timeNeeded += crop.stage.get(i).time
-					
 				}
 				
 				var float timeOverflow = timeNeeded + crop.currentStage.timeover
 				
-				var float timeExised = expRuntime.toFloat(function.value) + crop.time
-				
-				if (timeExised < timeNeeded) {
+				if (crop.time < timeNeeded) {
 					
-					result += '''
-Crop `«crop.name»` is growing in Field `«crop.field.name»`.
-	Stage is still in `«crop.currentStage.name»`.
-	Need «timeNeeded - timeExised» days to step into the next stage.
-					'''
+				    result += "\n" + '''Time «runtime.time + waitTime»:
+				        Crop `«crop.name»` is growing in Field `«crop.field.name»`.
+	    Stage is still in `«crop.currentStage.name»`.
+	    Need «timeNeeded - crop.time» days to step into the next stage.'''
+		
+				} else if (crop.time >= timeNeeded && crop.time <= timeOverflow) {
 					
-				} else if (timeExised >= timeNeeded && timeExised < timeOverflow) {
+					println(crop.ID)
+					changeStageKeys.add(crop.ID)
 					
-					crop.currentStageID += 1
-					crop.currentStage = crop.stage.get(crop.currentStageID)
-					result += '''
-Crop `«crop.name»` is growing in Field `«crop.field.name»`.
-	Stage is changed to `«crop.currentStage.name»`.
-	You need to handle the crop in «timeOverflow - timeExised» days otherwise it will die.
+					result += "\n" + '''Time «runtime.time + waitTime»:
+					    Crop `«crop.name»` is growing in Field `«crop.field.name»`.
+	    Stage is changed to `«crop.currentStage.name»`.
+	    You need to handle the crop in «timeOverflow - crop.time» days otherwise it will die.
 					'''
 		
-				} else if (timeExised >= timeOverflow) {
-					throw new Exception('''Crop `«crop.name»` is died because time exceeded''')
+				} else if (crop.time > timeOverflow) {
+					throw new Exception("\n" + '''Time «runtime.time + waitTime»:
+                        Crop `«crop.name»` is died because time «crop.time» exceeded «crop.time - timeOverflow» for days''')
 				}
+				
+				runtime.cropMap.get(crop.ID).field.crop = crop
 			}
 		}
 		
+		for (String ID : changeStageKeys) {
+			
+			runtime.cropMap.get(ID).addStage()
+			
+		}
+		
 		result
+	}
+	
+	dispatch def String generateTimetable(HarvestFunction function, Environment env) {
+		var crop = runtime.cropMap.get(function.crop.name)
+		
+		if (crop.currentStageID == crop.stage.size) {
+			var float timeNeeded = 0
+		
+			for (i : 0..(crop.stage.size - 1)) {
+				timeNeeded += crop.stage.get(i).time
+			}
+					
+			var float timeOverflow = timeNeeded + crop.currentStage.timeover
+			if (crop.time <= timeOverflow) {
+    			crop.field.crop = null
+    			crop.refresh()
+    			
+				"\n" + '''Time «runtime.time»: Harvest «crop.name»
+    Crop `«crop.name»` has been successfully harvested!''' + "\n"
+		
+			} else {
+				throw new Exception('''Crop `«crop.name»` is died because time «crop.time» exceeded «crop.time - timeOverflow» for days''')
+			}
+		} else {
+			throw new Exception('''Crop `«crop.name»` cannot be harvested because it is not in the final stage''')
+		}
+		
+		
 	}
 	
 	dispatch def String generateTimetable(Statement stmt, Environment env) ''''''

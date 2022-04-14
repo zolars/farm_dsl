@@ -49,53 +49,21 @@ crop crop_tomato {
 	stage : [
  		{
             name : "Sprout"
-            timeConsumed : 2.0
-            timeDanger : 10.0
+            timeConsumed : 10.0
+            timeDanger : 1.0
 
             temperature : 0.0
             humidity : 0.0
         },
         {
-            name : "Seedling"
-            timeConsumed : 1.0
-            timeDanger : 10.0
+            name : "Seedling" 
+            timeConsumed : 20.0
+            timeDanger : 0.0 
 
             temperature : 1.0
-            humidity : 1.0
-        },
-        {
-            name : "Vegetative"
-            timeConsumed : 2.0
-            timeDanger : 10.0
-
-            temperature : 2.0
-            humidity : 2.0
-        },
-        {
-            name : "Budding"
-            timeConsumed : 3.0
-            timeDanger : 10.0
-            
-            temperature : 3.0
-            humidity : 3.0
-        },
-        {
-            name : "Flowering"
-            timeConsumed : 4.0
-            timeDanger : 10.0
-            
-            temperature : 4.0
-            humidity : 4.0
-        },
-        {
-            name : "Ripening"
-            timeConsumed : 5.0
-            timeDanger : 10.0
-            
-            temperature : 5.0
-            humidity : 5.0
+            humidity : 1.0 
         }
-	]
+    ]
 }
 
 field greenhouse_1 {
@@ -118,47 +86,22 @@ field greenhouse_2 {
 
 mission {
 	report(crop_tomato)
-	report(greenhouse_1)
-	var realVar = (12.0 + 45.0)
-	report(realVar)
-	
-	var result = 12.0
-	
-	result = greenhouse_1.humidity
-	result = crop_tomato.getStage(0).humidity
+
+	var result = greenhouse_1.humidity
+//	var a = crop_tomato.getStage(0).humidity
 	result = greenhouse_1.fieldSet(humidity,0.0)
 	result = greenhouse_1.fieldSet(temperature,0.0)
+	result = greenhouse_2.fieldSet(temperature,1.0) 
+	result = greenhouse_2.fieldSet(humidity,1.0)
+	
 	result = greenhouse_1.plant(crop_tomato)
-	
-	result = greenhouse_2.fieldSet(humidity,0.0)
-	result = greenhouse_2.fieldSet(temperature,0.0)
-	
-	move(greenhouse_1, greenhouse_2)
-	
-	report(greenhouse_1)
+	wait(10.0)
 	report(crop_tomato)
 	
-	wait(0.5)
-	
-//	var new = 12.1 * 2.8 + 23.0
-//	var old = new
-//
-//	if (false) {
-//		var a = 12.1 * 2.8 + 23.0
-//	} elseif (false || true) {
-//		var b = 12.0
-//	} else {
-//		var c = 109.2
-//	}
-	
-//	var call = greenhouse_1.light
-	
-//	var loopvar = 11.0
-//	while (loopvar > 0.0) {
-//		loopvar = loopvar - 1.0
-//		var newloopvar = loopvar
-//		while (newloopvar > 0.0) {
-//			newloopvar = newloopvar - 1.0
-//		}
-//	}
+	move(greenhouse_1, greenhouse_2) 
+	report(crop_tomato)
+//	
+	wait(20.0)
+	report(crop_tomato)
+	harvest(crop_tomato)
 }

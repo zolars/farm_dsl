@@ -81,7 +81,8 @@ ElseStatement:
 BuiltinFunction:
 	ReportFunction |
 	MoveFunction |
-	WaitFunction
+	WaitFunction |
+	HarvestFunction
 ;
 
 Instance:
@@ -102,6 +103,10 @@ WaitFunction:
 	"wait(" value=Expression ")"
 ;
 
+HarvestFunction:
+	"harvest(" crop=[Crop | ID] ")"
+;
+
 /*
  * Call Functions
  */
@@ -109,7 +114,8 @@ WaitFunction:
 CallFunction:
 	GetStageFunction |
 	FieldSetFunction |
-	PlantFunction
+	PlantFunction |
+	IsEmptyFunction
 ;
 
 GetStageFunction hidden():
@@ -127,6 +133,9 @@ PlantFunction:
 	"plant(" plantCrop=[Crop | ID] ")"
 ;
 
+IsEmptyFunction:
+	"isEmpty" left="("  ")"
+;
 
 //Expressions
 

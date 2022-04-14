@@ -23,6 +23,7 @@ import uk.ac.kcl.farm.farm.FieldSetFunction;
 import uk.ac.kcl.farm.farm.GetStageFunction;
 import uk.ac.kcl.farm.farm.GreaterThan;
 import uk.ac.kcl.farm.farm.GreaterThanOrEqual;
+import uk.ac.kcl.farm.farm.IsEmptyFunction;
 import uk.ac.kcl.farm.farm.LessThan;
 import uk.ac.kcl.farm.farm.LessThanOrEqual;
 import uk.ac.kcl.farm.farm.Minus;
@@ -225,6 +226,48 @@ public class Exp {
     }
   }
   
+  protected String _toString(final Field exp, final IsEmptyFunction function) {
+    return "";
+  }
+  
+  protected Float _toFloat(final Field exp, final IsEmptyFunction function) {
+    try {
+      throw new Exception("Expected Boolean but received Float");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected Boolean _toBoolean(final Field exp, final IsEmptyFunction function) {
+    try {
+      boolean _xblockexpression = false;
+      {
+        GeneratedField field = this.runtime.fieldMap.get(exp.getName());
+        boolean _xifexpression = false;
+        String _left = function.getLeft();
+        boolean _equals = Objects.equal(_left, "(");
+        if (_equals) {
+          try {
+            return Boolean.valueOf((field.crop == null));
+          } catch (final Throwable _t) {
+            if (_t instanceof Exception) {
+              StringConcatenation _builder = new StringConcatenation();
+              throw new Exception(_builder.toString());
+            } else {
+              throw Exceptions.sneakyThrow(_t);
+            }
+          }
+        } else {
+          _xifexpression = false;
+        }
+        _xblockexpression = _xifexpression;
+      }
+      return Boolean.valueOf(_xblockexpression);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   protected String _toString(final Field exp, final PlantFunction function) {
     return "";
   }
@@ -251,7 +294,13 @@ public class Exp {
           _builder.append(field.name);
           _builder.append("` because attribute `");
           _builder.append(attribute);
-          _builder.append("` is not match");
+          _builder.append("` (expected ");
+          Float _get_2 = stage.getAttributes().get(attribute);
+          _builder.append(_get_2);
+          _builder.append(" but got ");
+          Float _get_3 = field.attributes.get(attribute);
+          _builder.append(_get_3);
+          _builder.append(")");
           throw new Exception(_builder.toString());
         }
       }
@@ -284,6 +333,8 @@ public class Exp {
             {
               field.crop = crop;
               crop.field = field;
+              crop.time = 0;
+              crop.currentStageID = 0;
               _xblockexpression_1 = true;
             }
             _xifexpression_1 = _xblockexpression_1;
@@ -882,6 +933,9 @@ public class Exp {
          && function instanceof FieldSetFunction) {
       return _toString((Field)exp, (FieldSetFunction)function);
     } else if (exp instanceof Field
+         && function instanceof IsEmptyFunction) {
+      return _toString((Field)exp, (IsEmptyFunction)function);
+    } else if (exp instanceof Field
          && function instanceof PlantFunction) {
       return _toString((Field)exp, (PlantFunction)function);
     } else if (exp instanceof Field
@@ -904,6 +958,9 @@ public class Exp {
          && function instanceof FieldSetFunction) {
       return _toFloat((Field)exp, (FieldSetFunction)function);
     } else if (exp instanceof Field
+         && function instanceof IsEmptyFunction) {
+      return _toFloat((Field)exp, (IsEmptyFunction)function);
+    } else if (exp instanceof Field
          && function instanceof PlantFunction) {
       return _toFloat((Field)exp, (PlantFunction)function);
     } else if (exp instanceof Field
@@ -925,6 +982,9 @@ public class Exp {
     } else if (exp instanceof Field
          && function instanceof FieldSetFunction) {
       return _toBoolean((Field)exp, (FieldSetFunction)function);
+    } else if (exp instanceof Field
+         && function instanceof IsEmptyFunction) {
+      return _toBoolean((Field)exp, (IsEmptyFunction)function);
     } else if (exp instanceof Field
          && function instanceof PlantFunction) {
       return _toBoolean((Field)exp, (PlantFunction)function);

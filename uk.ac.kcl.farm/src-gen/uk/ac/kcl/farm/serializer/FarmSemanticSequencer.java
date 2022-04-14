@@ -35,6 +35,8 @@ import uk.ac.kcl.farm.farm.FieldSetFunction;
 import uk.ac.kcl.farm.farm.GetStageFunction;
 import uk.ac.kcl.farm.farm.GreaterThan;
 import uk.ac.kcl.farm.farm.GreaterThanOrEqual;
+import uk.ac.kcl.farm.farm.HarvestFunction;
+import uk.ac.kcl.farm.farm.IsEmptyFunction;
 import uk.ac.kcl.farm.farm.JudgeStatement;
 import uk.ac.kcl.farm.farm.LessThan;
 import uk.ac.kcl.farm.farm.LessThanOrEqual;
@@ -129,6 +131,12 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 				return; 
 			case FarmPackage.GREATER_THAN_OR_EQUAL:
 				sequence_RelationOrExpression(context, (GreaterThanOrEqual) semanticObject); 
+				return; 
+			case FarmPackage.HARVEST_FUNCTION:
+				sequence_HarvestFunction(context, (HarvestFunction) semanticObject); 
+				return; 
+			case FarmPackage.IS_EMPTY_FUNCTION:
+				sequence_IsEmptyFunction(context, (IsEmptyFunction) semanticObject); 
 				return; 
 			case FarmPackage.JUDGE_STATEMENT:
 				sequence_JudgeStatement(context, (JudgeStatement) semanticObject); 
@@ -636,6 +644,49 @@ public class FarmSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 	 */
 	protected void sequence_GetStageFunction(ISerializationContext context, GetStageFunction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Statement returns HarvestFunction
+	 *     BuiltinFunction returns HarvestFunction
+	 *     HarvestFunction returns HarvestFunction
+	 *
+	 * Constraint:
+	 *     crop=[Crop|ID]
+	 * </pre>
+	 */
+	protected void sequence_HarvestFunction(ISerializationContext context, HarvestFunction semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.HARVEST_FUNCTION__CROP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.HARVEST_FUNCTION__CROP));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getHarvestFunctionAccess().getCropCropIDTerminalRuleCall_1_0_1(), semanticObject.eGet(FarmPackage.Literals.HARVEST_FUNCTION__CROP, false));
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     CallFunction returns IsEmptyFunction
+	 *     IsEmptyFunction returns IsEmptyFunction
+	 *
+	 * Constraint:
+	 *     left='('
+	 * </pre>
+	 */
+	protected void sequence_IsEmptyFunction(ISerializationContext context, IsEmptyFunction semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, FarmPackage.Literals.IS_EMPTY_FUNCTION__LEFT) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, FarmPackage.Literals.IS_EMPTY_FUNCTION__LEFT));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getIsEmptyFunctionAccess().getLeftLeftParenthesisKeyword_1_0(), semanticObject.getLeft());
+		feeder.finish();
 	}
 	
 	

@@ -16,6 +16,7 @@ class GeneratedStage {
 }
 
 class GeneratedCrop {
+	public String ID
 	public String name
 	public var List<GeneratedStage> stage = newArrayList()
 		
@@ -25,10 +26,27 @@ class GeneratedCrop {
 	
 	public GeneratedField field
 	
-	new(String name, List<GeneratedStage> stage) {
+	new(String ID, String name, List<GeneratedStage> stage) {
+		this.ID = ID
 		this.name = name
 		this.stage = stage
 		
+		this.time = 0
+		this.currentStage = this.stage.get(0)
+		this.currentStageID = 0
+		
+		this.field = null
+	}
+	
+	def addStage() {
+		this.currentStageID += 1
+		if (this.currentStageID  < this.stage.size) {
+			this.currentStage = this.stage.get(this.currentStageID)
+		}
+	}
+	
+	def refresh() {
+		this.field.crop = null
 		this.time = 0
 		this.currentStage = this.stage.get(0)
 		this.currentStageID = 0

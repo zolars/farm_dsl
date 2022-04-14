@@ -177,6 +177,15 @@ public interface FarmFactory extends EFactory
   WaitFunction createWaitFunction();
 
   /**
+   * Returns a new object of class '<em>Harvest Function</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Harvest Function</em>'.
+   * @generated
+   */
+  HarvestFunction createHarvestFunction();
+
+  /**
    * Returns a new object of class '<em>Call Function</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -211,6 +220,15 @@ public interface FarmFactory extends EFactory
    * @generated
    */
   PlantFunction createPlantFunction();
+
+  /**
+   * Returns a new object of class '<em>Is Empty Function</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Is Empty Function</em>'.
+   * @generated
+   */
+  IsEmptyFunction createIsEmptyFunction();
 
   /**
    * Returns a new object of class '<em>Expression</em>'.

@@ -70,6 +70,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Expression"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HarvestFunction" eSuperTypes="#//BuiltinFunction">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="crop" eType="#//Crop"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CallFunction"/>
   <eClassifiers xsi:type="ecore:EClass" name="GetStageFunction" eSuperTypes="#//CallFunction">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
@@ -82,6 +85,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PlantFunction" eSuperTypes="#//CallFunction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="plantCrop" eType="#//Crop"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IsEmptyFunction" eSuperTypes="#//CallFunction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="left" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Expression" eSuperTypes="#//ExpressionOrCall"/>
   <eClassifiers xsi:type="ecore:EClass" name="NotBooleanExpression" eSuperTypes="#//Expression">

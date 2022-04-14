@@ -61,10 +61,12 @@ public class FarmParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getReportFunctionAccess().getGroup(), "rule__ReportFunction__Group__0");
 			builder.put(grammarAccess.getMoveFunctionAccess().getGroup(), "rule__MoveFunction__Group__0");
 			builder.put(grammarAccess.getWaitFunctionAccess().getGroup(), "rule__WaitFunction__Group__0");
+			builder.put(grammarAccess.getHarvestFunctionAccess().getGroup(), "rule__HarvestFunction__Group__0");
 			builder.put(grammarAccess.getGetStageFunctionAccess().getGroup(), "rule__GetStageFunction__Group__0");
 			builder.put(grammarAccess.getGetStageFunctionAccess().getGroup_2(), "rule__GetStageFunction__Group_2__0");
 			builder.put(grammarAccess.getFieldSetFunctionAccess().getGroup(), "rule__FieldSetFunction__Group__0");
 			builder.put(grammarAccess.getPlantFunctionAccess().getGroup(), "rule__PlantFunction__Group__0");
+			builder.put(grammarAccess.getIsEmptyFunctionAccess().getGroup(), "rule__IsEmptyFunction__Group__0");
 			builder.put(grammarAccess.getConditionOrExpressionAccess().getGroup(), "rule__ConditionOrExpression__Group__0");
 			builder.put(grammarAccess.getConditionOrExpressionAccess().getGroup_1(), "rule__ConditionOrExpression__Group_1__0");
 			builder.put(grammarAccess.getConditionOrExpressionAccess().getGroup_1_0(), "rule__ConditionOrExpression__Group_1_0__0");
@@ -127,11 +129,13 @@ public class FarmParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getMoveFunctionAccess().getMoveFromFieldAssignment_1(), "rule__MoveFunction__MoveFromFieldAssignment_1");
 			builder.put(grammarAccess.getMoveFunctionAccess().getMoveToFieldAssignment_3(), "rule__MoveFunction__MoveToFieldAssignment_3");
 			builder.put(grammarAccess.getWaitFunctionAccess().getValueAssignment_1(), "rule__WaitFunction__ValueAssignment_1");
+			builder.put(grammarAccess.getHarvestFunctionAccess().getCropAssignment_1(), "rule__HarvestFunction__CropAssignment_1");
 			builder.put(grammarAccess.getGetStageFunctionAccess().getIdAssignment_1(), "rule__GetStageFunction__IdAssignment_1");
 			builder.put(grammarAccess.getGetStageFunctionAccess().getAttributeAssignment_2_1(), "rule__GetStageFunction__AttributeAssignment_2_1");
 			builder.put(grammarAccess.getFieldSetFunctionAccess().getAttributeAssignment_1(), "rule__FieldSetFunction__AttributeAssignment_1");
 			builder.put(grammarAccess.getFieldSetFunctionAccess().getValueAssignment_3(), "rule__FieldSetFunction__ValueAssignment_3");
 			builder.put(grammarAccess.getPlantFunctionAccess().getPlantCropAssignment_1(), "rule__PlantFunction__PlantCropAssignment_1");
+			builder.put(grammarAccess.getIsEmptyFunctionAccess().getLeftAssignment_1(), "rule__IsEmptyFunction__LeftAssignment_1");
 			builder.put(grammarAccess.getConditionOrExpressionAccess().getRightAssignment_1_0_2(), "rule__ConditionOrExpression__RightAssignment_1_0_2");
 			builder.put(grammarAccess.getConditionAndExpressionAccess().getRightAssignment_1_0_2(), "rule__ConditionAndExpression__RightAssignment_1_0_2");
 			builder.put(grammarAccess.getRelationOrExpressionAccess().getRightAssignment_1_1(), "rule__RelationOrExpression__RightAssignment_1_1");

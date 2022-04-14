@@ -10,6 +10,7 @@ import uk.ac.kcl.farm.farm.Call
 import uk.ac.kcl.farm.farm.CallFunction
 import uk.ac.kcl.farm.farm.GetStageFunction
 import uk.ac.kcl.farm.farm.FieldSetFunction
+import uk.ac.kcl.farm.farm.IsEmptyFunction
 import uk.ac.kcl.farm.farm.PlantFunction
 import uk.ac.kcl.farm.farm.Expression
 import uk.ac.kcl.farm.farm.ConditionOrExpression
@@ -132,6 +133,29 @@ class Exp {
     	}
     }
     
+    dispatch def String toString(Field exp, IsEmptyFunction function) {
+    	""
+    }
+    
+    dispatch def Float toFloat(Field exp, IsEmptyFunction function) {
+		throw new Exception("Expected Boolean but received Float")
+	}
+    
+    dispatch def Boolean toBoolean(Field exp, IsEmptyFunction function) {
+    	var field = runtime.fieldMap.get(exp.name)
+    	if (function.left == "(") {
+    		try {
+	    		return field.crop === null 
+	    	} catch (Exception e) {
+	    		throw new Exception('''''')
+	    	}
+    	} else {
+    		false
+    	}
+
+    }
+    
+    
     dispatch def String toString(Field exp, PlantFunction function) {
     	""	
 	}
@@ -146,7 +170,7 @@ class Exp {
     	for (String attribute : runtime.attributeList) {
     		if (field.attributes.get(attribute) != stage.attributes.get(attribute)) {
     			key = false
-    			throw new Exception('''Crop cannot be plant in Field `«field.name»` because attribute `«attribute»` is not match''')
+    			throw new Exception('''Crop cannot be plant in Field `«field.name»` because attribute `«attribute»` (expected «stage.attributes.get(attribute)» but got «field.attributes.get(attribute)»)''')
     		}
     	}
     	return key
@@ -161,6 +185,8 @@ class Exp {
 		} else if (judegeEnvironment(field, crop.currentStage)) {
 			field.crop = crop
 			crop.field = field
+			crop.time = 0
+			crop.currentStageID = 0
 			true
 		} else {
 			false

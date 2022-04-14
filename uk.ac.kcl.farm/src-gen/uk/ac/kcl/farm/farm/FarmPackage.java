@@ -196,7 +196,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getExpression()
    * @generated
    */
-  int EXPRESSION = 21;
+  int EXPRESSION = 23;
 
   /**
    * The number of structural features of the '<em>Expression</em>' class.
@@ -616,6 +616,34 @@ public interface FarmPackage extends EPackage
   int WAIT_FUNCTION_FEATURE_COUNT = BUILTIN_FUNCTION_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.HarvestFunctionImpl <em>Harvest Function</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see uk.ac.kcl.farm.farm.impl.HarvestFunctionImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getHarvestFunction()
+   * @generated
+   */
+  int HARVEST_FUNCTION = 17;
+
+  /**
+   * The feature id for the '<em><b>Crop</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int HARVEST_FUNCTION__CROP = BUILTIN_FUNCTION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Harvest Function</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int HARVEST_FUNCTION_FEATURE_COUNT = BUILTIN_FUNCTION_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.CallFunctionImpl <em>Call Function</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -623,7 +651,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getCallFunction()
    * @generated
    */
-  int CALL_FUNCTION = 17;
+  int CALL_FUNCTION = 18;
 
   /**
    * The number of structural features of the '<em>Call Function</em>' class.
@@ -642,7 +670,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getGetStageFunction()
    * @generated
    */
-  int GET_STAGE_FUNCTION = 18;
+  int GET_STAGE_FUNCTION = 19;
 
   /**
    * The feature id for the '<em><b>Id</b></em>' attribute.
@@ -679,7 +707,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getFieldSetFunction()
    * @generated
    */
-  int FIELD_SET_FUNCTION = 19;
+  int FIELD_SET_FUNCTION = 20;
 
   /**
    * The feature id for the '<em><b>Attribute</b></em>' reference.
@@ -716,7 +744,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getPlantFunction()
    * @generated
    */
-  int PLANT_FUNCTION = 20;
+  int PLANT_FUNCTION = 21;
 
   /**
    * The feature id for the '<em><b>Plant Crop</b></em>' reference.
@@ -737,6 +765,34 @@ public interface FarmPackage extends EPackage
   int PLANT_FUNCTION_FEATURE_COUNT = CALL_FUNCTION_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.IsEmptyFunctionImpl <em>Is Empty Function</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see uk.ac.kcl.farm.farm.impl.IsEmptyFunctionImpl
+   * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getIsEmptyFunction()
+   * @generated
+   */
+  int IS_EMPTY_FUNCTION = 22;
+
+  /**
+   * The feature id for the '<em><b>Left</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IS_EMPTY_FUNCTION__LEFT = CALL_FUNCTION_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Is Empty Function</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IS_EMPTY_FUNCTION_FEATURE_COUNT = CALL_FUNCTION_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link uk.ac.kcl.farm.farm.impl.NotBooleanExpressionImpl <em>Not Boolean Expression</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -744,7 +800,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getNotBooleanExpression()
    * @generated
    */
-  int NOT_BOOLEAN_EXPRESSION = 22;
+  int NOT_BOOLEAN_EXPRESSION = 24;
 
   /**
    * The feature id for the '<em><b>Exp</b></em>' containment reference.
@@ -772,7 +828,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getLiteral()
    * @generated
    */
-  int LITERAL = 23;
+  int LITERAL = 25;
 
   /**
    * The number of structural features of the '<em>Literal</em>' class.
@@ -791,7 +847,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getTrueLiteral()
    * @generated
    */
-  int TRUE_LITERAL = 24;
+  int TRUE_LITERAL = 26;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -819,7 +875,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getFalseLiteral()
    * @generated
    */
-  int FALSE_LITERAL = 25;
+  int FALSE_LITERAL = 27;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -847,7 +903,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getRealLiteral()
    * @generated
    */
-  int REAL_LITERAL = 26;
+  int REAL_LITERAL = 28;
 
   /**
    * The feature id for the '<em><b>Num</b></em>' attribute.
@@ -875,7 +931,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getCrop()
    * @generated
    */
-  int CROP = 27;
+  int CROP = 29;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -921,7 +977,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getCropStages()
    * @generated
    */
-  int CROP_STAGES = 28;
+  int CROP_STAGES = 30;
 
   /**
    * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -949,7 +1005,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getCropStage()
    * @generated
    */
-  int CROP_STAGE = 29;
+  int CROP_STAGE = 31;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1004,7 +1060,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getField()
    * @generated
    */
-  int FIELD = 30;
+  int FIELD = 32;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1077,7 +1133,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getCallAttributes()
    * @generated
    */
-  int CALL_ATTRIBUTES = 31;
+  int CALL_ATTRIBUTES = 33;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' reference.
@@ -1114,7 +1170,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getMission()
    * @generated
    */
-  int MISSION = 32;
+  int MISSION = 34;
 
   /**
    * The feature id for the '<em><b>Mission Statements</b></em>' containment reference list.
@@ -1142,7 +1198,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getConditionOrExpression()
    * @generated
    */
-  int CONDITION_OR_EXPRESSION = 33;
+  int CONDITION_OR_EXPRESSION = 35;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1179,7 +1235,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getConditionAndExpression()
    * @generated
    */
-  int CONDITION_AND_EXPRESSION = 34;
+  int CONDITION_AND_EXPRESSION = 36;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1216,7 +1272,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getLessThanOrEqual()
    * @generated
    */
-  int LESS_THAN_OR_EQUAL = 35;
+  int LESS_THAN_OR_EQUAL = 37;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1253,7 +1309,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getLessThan()
    * @generated
    */
-  int LESS_THAN = 36;
+  int LESS_THAN = 38;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1290,7 +1346,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getGreaterThanOrEqual()
    * @generated
    */
-  int GREATER_THAN_OR_EQUAL = 37;
+  int GREATER_THAN_OR_EQUAL = 39;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1327,7 +1383,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getGreaterThan()
    * @generated
    */
-  int GREATER_THAN = 38;
+  int GREATER_THAN = 40;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1364,7 +1420,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getEqual()
    * @generated
    */
-  int EQUAL = 39;
+  int EQUAL = 41;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1401,7 +1457,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getNotEqual()
    * @generated
    */
-  int NOT_EQUAL = 40;
+  int NOT_EQUAL = 42;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1438,7 +1494,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getPlus()
    * @generated
    */
-  int PLUS = 41;
+  int PLUS = 43;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1475,7 +1531,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getMinus()
    * @generated
    */
-  int MINUS = 42;
+  int MINUS = 44;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1512,7 +1568,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getMultiply()
    * @generated
    */
-  int MULTIPLY = 43;
+  int MULTIPLY = 45;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1549,7 +1605,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getDivide()
    * @generated
    */
-  int DIVIDE = 44;
+  int DIVIDE = 46;
 
   /**
    * The feature id for the '<em><b>Left</b></em>' containment reference.
@@ -1586,7 +1642,7 @@ public interface FarmPackage extends EPackage
    * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getUnaryExpression()
    * @generated
    */
-  int UNARY_EXPRESSION = 45;
+  int UNARY_EXPRESSION = 47;
 
   /**
    * The feature id for the '<em><b>Exp</b></em>' containment reference.
@@ -2031,6 +2087,27 @@ public interface FarmPackage extends EPackage
   EReference getWaitFunction_Value();
 
   /**
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.HarvestFunction <em>Harvest Function</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Harvest Function</em>'.
+   * @see uk.ac.kcl.farm.farm.HarvestFunction
+   * @generated
+   */
+  EClass getHarvestFunction();
+
+  /**
+   * Returns the meta object for the reference '{@link uk.ac.kcl.farm.farm.HarvestFunction#getCrop <em>Crop</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Crop</em>'.
+   * @see uk.ac.kcl.farm.farm.HarvestFunction#getCrop()
+   * @see #getHarvestFunction()
+   * @generated
+   */
+  EReference getHarvestFunction_Crop();
+
+  /**
    * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.CallFunction <em>Call Function</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2124,6 +2201,27 @@ public interface FarmPackage extends EPackage
    * @generated
    */
   EReference getPlantFunction_PlantCrop();
+
+  /**
+   * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.IsEmptyFunction <em>Is Empty Function</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Is Empty Function</em>'.
+   * @see uk.ac.kcl.farm.farm.IsEmptyFunction
+   * @generated
+   */
+  EClass getIsEmptyFunction();
+
+  /**
+   * Returns the meta object for the attribute '{@link uk.ac.kcl.farm.farm.IsEmptyFunction#getLeft <em>Left</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Left</em>'.
+   * @see uk.ac.kcl.farm.farm.IsEmptyFunction#getLeft()
+   * @see #getIsEmptyFunction()
+   * @generated
+   */
+  EAttribute getIsEmptyFunction_Left();
 
   /**
    * Returns the meta object for class '{@link uk.ac.kcl.farm.farm.Expression <em>Expression</em>}'.
@@ -3237,6 +3335,24 @@ public interface FarmPackage extends EPackage
     EReference WAIT_FUNCTION__VALUE = eINSTANCE.getWaitFunction_Value();
 
     /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.HarvestFunctionImpl <em>Harvest Function</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.HarvestFunctionImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getHarvestFunction()
+     * @generated
+     */
+    EClass HARVEST_FUNCTION = eINSTANCE.getHarvestFunction();
+
+    /**
+     * The meta object literal for the '<em><b>Crop</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference HARVEST_FUNCTION__CROP = eINSTANCE.getHarvestFunction_Crop();
+
+    /**
      * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.CallFunctionImpl <em>Call Function</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -3315,6 +3431,24 @@ public interface FarmPackage extends EPackage
      * @generated
      */
     EReference PLANT_FUNCTION__PLANT_CROP = eINSTANCE.getPlantFunction_PlantCrop();
+
+    /**
+     * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.IsEmptyFunctionImpl <em>Is Empty Function</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see uk.ac.kcl.farm.farm.impl.IsEmptyFunctionImpl
+     * @see uk.ac.kcl.farm.farm.impl.FarmPackageImpl#getIsEmptyFunction()
+     * @generated
+     */
+    EClass IS_EMPTY_FUNCTION = eINSTANCE.getIsEmptyFunction();
+
+    /**
+     * The meta object literal for the '<em><b>Left</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute IS_EMPTY_FUNCTION__LEFT = eINSTANCE.getIsEmptyFunction_Left();
 
     /**
      * The meta object literal for the '{@link uk.ac.kcl.farm.farm.impl.ExpressionImpl <em>Expression</em>}' class.

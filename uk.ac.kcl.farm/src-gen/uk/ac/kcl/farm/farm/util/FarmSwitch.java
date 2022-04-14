@@ -207,6 +207,15 @@ public class FarmSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case FarmPackage.HARVEST_FUNCTION:
+      {
+        HarvestFunction harvestFunction = (HarvestFunction)theEObject;
+        T result = caseHarvestFunction(harvestFunction);
+        if (result == null) result = caseBuiltinFunction(harvestFunction);
+        if (result == null) result = caseStatement(harvestFunction);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case FarmPackage.CALL_FUNCTION:
       {
         CallFunction callFunction = (CallFunction)theEObject;
@@ -235,6 +244,14 @@ public class FarmSwitch<T> extends Switch<T>
         PlantFunction plantFunction = (PlantFunction)theEObject;
         T result = casePlantFunction(plantFunction);
         if (result == null) result = caseCallFunction(plantFunction);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case FarmPackage.IS_EMPTY_FUNCTION:
+      {
+        IsEmptyFunction isEmptyFunction = (IsEmptyFunction)theEObject;
+        T result = caseIsEmptyFunction(isEmptyFunction);
+        if (result == null) result = caseCallFunction(isEmptyFunction);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -732,6 +749,22 @@ public class FarmSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Harvest Function</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Harvest Function</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseHarvestFunction(HarvestFunction object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Call Function</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -791,6 +824,22 @@ public class FarmSwitch<T> extends Switch<T>
    * @generated
    */
   public T casePlantFunction(PlantFunction object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Is Empty Function</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Is Empty Function</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseIsEmptyFunction(IsEmptyFunction object)
   {
     return null;
   }
