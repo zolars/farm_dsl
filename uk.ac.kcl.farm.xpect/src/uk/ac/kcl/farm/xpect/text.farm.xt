@@ -17,29 +17,6 @@ XPECT generated file text.farm.xt.txt ---
 ---
 */
 
-/*
-XPECT generated file TextFarm.java ---
-import uk.ac.kcl.farm.library.*
-
-public class TextFarm {
-
-	public static void main (String[] args) {
-		FarmFrame tf = new FarmFrame();
-		
-		Farm t = new Farm(tf) {
-			@Override
-			protected void run() {
-				temperature
-				humidity
-			}
-		};
-		
-		t.run();
-	}
-}
----
-*/
-
 define temperature
 define humidity
 
@@ -85,22 +62,11 @@ field greenhouse_2 {
 }
 
 mission {
-	report(crop_tomato)
-
 	var result = greenhouse_1.humidity
-//	var a = crop_tomato.getStage(0).humidity
-	result = greenhouse_1.fieldSet(humidity,0.0)
-	result = greenhouse_1.fieldSet(temperature,0.0)
-	result = greenhouse_2.fieldSet(temperature,1.0) 
-	result = greenhouse_2.fieldSet(humidity,1.0)
-	
+	result = greenhouse_1.fieldSet(temperature,20.0)
 	result = greenhouse_1.plant(crop_tomato)
 	wait(10.0)
-	report(crop_tomato)
-	
 	move(greenhouse_1, greenhouse_2) 
-	report(crop_tomato)
-//	
 	wait(20.0)
 	report(crop_tomato)
 	harvest(crop_tomato)
